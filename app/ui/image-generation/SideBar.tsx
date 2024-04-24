@@ -12,6 +12,7 @@ import {
   TOOLTIP_TEXT,
 } from "./definitions";
 import SectionWithOptionsGrid from "../components/SectionWithOptionsGrid";
+import RangeSlider from "../components/RangeSlider";
 
 export default function SideBar() {
   const { settings, setSetting } = useSettings();
@@ -64,6 +65,8 @@ export default function SideBar() {
         options={dimensionOptions}
         columns={COLUMN_OPTIONS.TWO}
       />
+      <RangeSlider value={settings.aspectRatioHeight} setValue={(x) => setSetting("aspectRatioHeight", x)} max={1536} />
+      <RangeSlider value={settings.aspectRatioWidth} setValue={(x) => setSetting("aspectRatioWidth", x)} max={1536} />
     </div>
   );
 }

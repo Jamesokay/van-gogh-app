@@ -11,7 +11,9 @@ const defaultState: SettingsState = {
   alchemy: false,
   transparency: false,
   publicImages: false,
-  inputDimensions: '768 x 512'
+  inputDimensions: '768 x 512',
+  aspectRatioHeight: 576,
+  aspectRatioWidth: 1024
 };
 
 const SettingsContext = createContext<SettingsContextProps>({

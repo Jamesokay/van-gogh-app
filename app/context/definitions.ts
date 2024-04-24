@@ -7,6 +7,8 @@ export interface SettingsState {
   transparency: boolean;
   publicImages: boolean;
   inputDimensions: string;
+  aspectRatioHeight: number;
+  aspectRatioWidth: number;
 }
 
 export interface SettingsContextProps {
