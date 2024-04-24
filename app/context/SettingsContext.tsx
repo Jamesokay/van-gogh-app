@@ -1,26 +1,17 @@
 'use client'
 
 import { createContext, useContext, useState, ReactNode } from 'react';
+import { SettingsContextProps, SettingsProviderProps, SettingsState } from './definitions';
 
-interface SettingsState {
-  photoReal: boolean;
-  alchemy: boolean;
-  promptMagic: boolean;
-  transparency: boolean;
-  publicImages: boolean;
-}
 
-interface SettingsContextProps {
-  settings: SettingsState;
-  setSetting: (settingKey: keyof SettingsState, value: boolean) => void;
-}
 
 const defaultState: SettingsState = {
+  numberOfImages: '4',
   photoReal: false,
   alchemy: false,
-  promptMagic: false,
   transparency: false,
   publicImages: false,
+  inputDimensions: '768 x 512'
 };
 
 const SettingsContext = createContext<SettingsContextProps>({
@@ -30,14 +21,10 @@ const SettingsContext = createContext<SettingsContextProps>({
 
 export const useSettings = () => useContext(SettingsContext);
 
-interface SettingsProviderProps {
-  children: ReactNode;
-}
-
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
   const [settings, setSettings] = useState<SettingsState>(defaultState);
 
-  const setSetting = (settingKey: keyof SettingsState, value: boolean) => {
+  const setSetting = <K extends keyof SettingsState>(settingKey: K, value: SettingsState[K]): void => {
     setSettings((prevSettings) => ({
       ...prevSettings,
       [settingKey]: value,

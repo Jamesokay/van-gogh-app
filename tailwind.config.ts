@@ -6,6 +6,10 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    'grid-cols-2',
+    'grid-cols-4'
+  ],
   theme: {
     extend: {
       backgroundImage: {
@@ -14,12 +18,14 @@ const config: Config = {
         'purple-gradient': "linear-gradient(81.02deg, rgb(250, 85, 96) -23.47%, rgb(177, 75, 244) 45.52%, rgb(77, 145, 255) 114.8%)"
       },
       borderRadius: {
+        'corners-xs': '0.312rem',
         'corners-s': '0.375rem'
       },
       colors: {
         'van-gogh-white-16': 'rgba(255, 255, 255, 0.16)',
         'van-gogh-grey-d': 'rgb(81, 81, 81)',
-        'van-gogh-grey-blue': '#242C3E'
+        'van-gogh-grey-blue': '#242C3E',
+        'van-gogh-purple': 'rgb(114, 88, 242)'
       },
       width: {
         'sidebar-width': '17rem'
@@ -46,6 +52,8 @@ const config: Config = {
         'spacing-1px': '1px',
         'spacing-xs': '0.25rem',
         'spacing-m': '0.75rem',
+        'spacing-ml': '1.25rem',
+        'grid-row-gap': '0.625rem',
         'switch-track-width': 'calc(1rem * 2.625)',
         'switch-track-height': 'calc(1rem * 1.25)',
         'switch-track-x-enable': 'calc(1rem * 2.625 - 1rem * 1.25 - 0.125rem)',
