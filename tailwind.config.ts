@@ -21,9 +21,11 @@ const config: Config = {
       borderRadius: {
         "corners-xs": "0.312rem",
         "corners-s": "0.375rem",
+        "corners-l": "1.875rem"
       },
       colors: {
         "van-gogh-white-16": "rgba(255, 255, 255, 0.16)",
+        "van-gogh-border-grey": "rgb(36, 44, 62)",
         "van-gogh-grey-d": "rgb(81, 81, 81)",
         "van-gogh-grey-m": "rgb(144, 148, 166)",
         "van-gogh-grey-blue": "#242C3E",
@@ -55,6 +57,7 @@ const config: Config = {
         "van-gogh-9xl": "8rem",
       },
       borderWidth: {
+        thinner: "0.063rem",
         thin: "0.125rem",
       },
       spacing: {

@@ -17,6 +17,7 @@ import DimensionInput from "../components/DimensionInput";
 import { parseDimension, transformDimensions } from "../actions";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import Image from "next/image";
+import CoinsIcon from "../svg/CoinsIcon";
 
 export default function SideBar() {
   const { settings, setSetting } = useSettings();
@@ -32,14 +33,24 @@ export default function SideBar() {
   };
 
   return (
-    <div className="flex flex-col w-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient p-5">
-      <div className="flex flex-col items-center my-5 gap-2">
+    <div className="flex flex-col w-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5">
+      <div className="flex flex-col items-center my-5 gap-3.5">
         <Image
           src="/leonardo-logo-text.svg"
           alt="Leonardo Logo"
           width={117}
           height={34}
         />
+        <div className="flex gap-2 items-center justify-center px-3 py-1.5 border border-w-thinner border-van-gogh-border-grey rounded-corners-l">
+          <div className="flex items-center text-van-gogh-xs">
+            <CoinsIcon />
+            150
+          </div>
+          <QuestionMarkIcon />
+          <button className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-xs rounded-corners-l">
+            Upgrade
+          </button>
+        </div>
       </div>
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <SectionWithOptionsGrid
@@ -149,7 +160,7 @@ export default function SideBar() {
       <OptionWithSwitch
         title={OPTION_TITLE.TILING}
         tooltipText={TOOLTIP_TEXT.TILING}
-        enabled={settings.publicImages}
+        enabled={settings.tiling}
         toggle={() => setSetting("tiling", !settings.tiling)}
       />
     </div>
