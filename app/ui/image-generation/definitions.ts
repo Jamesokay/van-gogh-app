@@ -1,8 +1,8 @@
-import { SettingsState } from "@/app/context/definitions";
-
 export const enum SECTION_TITLE {
   NUMBER_OF_IMAGES = "Number of Images",
   INPUT_DIMENSIONS = "Input Dimensions",
+  ADVANCED_CONTROLS = "Advanced Controls",
+  GUIDANCE_SCALE = "Guidance Scale"
 }
 
 export const enum OPTION_TITLE {
@@ -10,6 +10,7 @@ export const enum OPTION_TITLE {
   ALCHEMY = "Alchemy",
   TRANSPARENCY = "Transparency",
   PUBLIC_IMAGES = "Public Images",
+  TILING = "Tiling"
 }
 
 export const enum BADGE_TEXT {
@@ -21,7 +22,9 @@ export const enum TOOLTIP_TEXT {
   PHOTOREAL = "Enhanced photorealism.",
   ALCHEMY = "Stylize images with AI.",
   TRANSPARENCY = "Adds transparency to the generated images.",
-  PUBLIC_IMAGES = "Send your generations to the community feed",
+  PUBLIC_IMAGES = "Send your generations to the community feed.",
+  INPUT_DIMENSIONS = "This is the input resolution into Alchemy.",
+  TILING = "Ideal for repeating textures or backgrounds."
 }
 
 export const enum COLUMN_OPTIONS {
@@ -47,13 +50,11 @@ export type OptionWithSwitchProps = {
   toggle: (value: boolean) => void;
 };
 
-type StringKeys<T> = {
-  [K in keyof T]: T[K] extends string ? K : never;
-}[keyof T];
-
 export type SectionWithOptionsGridProps = {
   title: SECTION_TITLE;
-  optionName: StringKeys<SettingsState>;
+  value: string;
+  setValue: (value: string) => void;
   options: string[];
   columns: COLUMN_OPTIONS;
+  tooltipText?: string;
 };

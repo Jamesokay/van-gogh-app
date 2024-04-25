@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { SettingsContextProps, SettingsProviderProps, SettingsState } from './definitions';
 
 
@@ -11,9 +11,10 @@ const defaultState: SettingsState = {
   alchemy: false,
   transparency: false,
   publicImages: false,
-  inputDimensions: '768 x 512',
   aspectRatioHeight: 576,
-  aspectRatioWidth: 1024
+  aspectRatioWidth: 1024,
+  guidanceScale: 7,
+  tiling: false
 };
 
 const SettingsContext = createContext<SettingsContextProps>({

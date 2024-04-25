@@ -6,9 +6,10 @@ export interface SettingsState {
   alchemy: boolean;
   transparency: boolean;
   publicImages: boolean;
-  inputDimensions: string;
   aspectRatioHeight: number;
   aspectRatioWidth: number;
+  guidanceScale: number;
+  tiling: boolean;
 }
 
 export interface SettingsContextProps {

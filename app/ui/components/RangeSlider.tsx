@@ -1,34 +1,59 @@
 "use client";
 
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef } from "react";
 
 type RangeSliderProps = {
   value: number;
   setValue: (value: number) => void;
   max: number;
+  min: number;
 };
 
-const RangeSlider: FC<RangeSliderProps> = ({ value, setValue, max }) => {
+const RangeSlider: FC<RangeSliderProps> = ({ value, setValue, max, min }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const filledWidth = `${(value / max) * 100}%`;
-  const thumbPosition = `calc(${(value / max) * 100}% - 0.5rem)`;
+  const range = max - min;
+  const filledWidthPercentage = ((value - min) / (max - min)) * 100;
+  const clampedFilledWidthPercentage = Math.max(0, Math.min(filledWidthPercentage, 100));
+  const filledWidth = `${clampedFilledWidthPercentage}%`;
+  const thumbPositionPercentage = ((value - min) / (max - min)) * 100;
+  const clampedThumbPositionPercentage = Math.max(0, Math.min(thumbPositionPercentage, 100));
+  const thumbPosition = `calc(${clampedThumbPositionPercentage}% - 0.5rem)`;
 
-  const handleMouseEvent = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (event: MouseEvent) => {
     if (!sliderRef.current) return;
     const rect = sliderRef.current.getBoundingClientRect();
-    const newValue = ((event.clientX - rect.left) / rect.width) * max;
-    setValue(Math.min(Math.max(newValue, 0), max));
+    const newValue =
+      min + Math.round(((event.clientX - rect.left) / rect.width) * range);
+    setValue(Math.min(Math.max(newValue, min), max));
   };
+
+  const handleMouseUp = () => {
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  };
+
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    handleMouseMove(event.nativeEvent);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
+
+  useEffect(() => {
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, []);
 
   return (
     <div
-      className="range-slider w-full relative"
+      className="range-slider w-full relative cursor-pointer"
       ref={sliderRef}
-      onMouseDown={handleMouseEvent}
+      onMouseDown={handleMouseDown}
     >
       <div className="slider-track h-4 w-full bg-van-gogh-grey-d rounded-full overflow-hidden">
         <div
-          className="slider-track-filled h-full bg-purple-gradient"
+          className="slider-track-filled h-full bg-blue-gradient"
           style={{ width: filledWidth }}
         />
       </div>
