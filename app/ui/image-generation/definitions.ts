@@ -24,6 +24,7 @@ export const enum TOOLTIP_TEXT {
   TRANSPARENCY = "Adds transparency to the generated images.",
   PUBLIC_IMAGES = "Send your generations to the community feed.",
   INPUT_DIMENSIONS = "This is the input resolution into Alchemy.",
+  GUIDANCE_SCALE = "How strongly your prompt is weighted",
   TILING = "Ideal for repeating textures or backgrounds.",
 }
 
@@ -65,7 +66,9 @@ export const defaultAspectRatioConversion = {
   "2.39:1": { width: 1224, height: 512 }
 };
 
-export type AspectRatioKey = keyof typeof defaultAspectRatioConversion; 
+export type AspectRatioKey = keyof typeof defaultAspectRatioConversion;
+
+export type InputDimension = 'aspectRatioHeight' | 'aspectRatioWidth';
 
 export type OptionWithSwitchProps = {
   title: OPTION_TITLE;

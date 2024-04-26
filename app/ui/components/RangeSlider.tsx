@@ -51,7 +51,7 @@ const RangeSlider: FC<RangeSliderProps> = ({ value, setValue, max, min }) => {
       ref={sliderRef}
       onMouseDown={handleMouseDown}
     >
-      <div className="slider-track h-4 w-full bg-van-gogh-grey-d rounded-full overflow-hidden">
+      <div className="slider-track h-4 w-full bg-van-gogh-grey-xd rounded-full overflow-hidden">
         <div
           className="slider-track-filled h-full bg-blue-gradient"
           style={{ width: filledWidth }}

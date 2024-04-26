@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { OptionWithSwitchProps } from "../image-generation/definitions";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
+import { Tooltip } from "@chakra-ui/react";
 
 const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
   title,
@@ -21,7 +22,11 @@ const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
           {badgeText}
         </div>
       )}
-      <QuestionMarkIcon />
+      <Tooltip label={tooltipText}>
+        <span>
+          <QuestionMarkIcon />
+        </span>
+      </Tooltip>
       <div
         role="checkbox"
         aria-checked={enabled}

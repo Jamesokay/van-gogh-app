@@ -2,16 +2,21 @@ import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 
-type DropdownMenuProps = {
-  options: string[];
-  value: string;
-  setValue: (value: string) => void;
+type DropdownMenuProps<T extends string = string> = {
+  options: T[];
+  value: T;
+  setValue: (value: T) => void;
 };
 
-const DropdownMenu: React.FC<DropdownMenuProps> = ({ options, value, setValue }) => {
+const DropdownMenu = <T extends string = string>({
+  options,
+  value,
+  setValue,
+}: DropdownMenuProps<T>) => {
   return (
     <Menu>
       <MenuButton
+        w="100%"
         bg="vanGoghBlue.900"
         border="1px"
         borderColor="vanGoghGrey.400"

@@ -58,3 +58,15 @@ export function findApproximateAspectRatio(dimensions: Dimension): string {
 
   return nearestRatio;
 }
+
+export function calculateProportionalHeight(ratio: string, width: number): number {
+  const [numerator, denominator] = ratio.split(':').map(Number);
+  return Math.round((denominator / numerator) * width);
+}
+
+export function calculateProportionalWidth(ratio: string, height: number): number {
+  const [numerator, denominator] = ratio.split(':').map(Number);
+  return Math.round((numerator / denominator) * height);
+}
+
+
