@@ -1,3 +1,5 @@
+import { defaultAspectRatioConversion } from "./image-generation/definitions";
+
 type Dimension = {
   width: number;
   height: number;
@@ -23,4 +25,36 @@ export function parseDimension(input: string): Dimension {
     width: parseInt(parts[0].trim(), 10),
     height: parseInt(parts[1].trim(), 10),
   };
+}
+
+export function findApproximateAspectRatio(dimensions: Dimension): string {
+  // Helper function to calculate the numerical value of an aspect ratio from a string
+  const parseAspectRatio = (ratio: string): number => {
+    const [w, h] = ratio.split(":").map(Number);
+    return w / h;
+  };
+
+  // Calculate the base aspect ratio
+  const baseRatio = dimensions.width / dimensions.height;
+
+  // Define the tolerance based on the ±50px margin
+  const tolerance = 50 / dimensions.height; // Adjusting the width tolerance relative to height
+
+  let nearestRatio = "Aspect Ratio"; // Default fallback
+  let smallestDifference = Infinity;
+
+  // Iterate over all aspect ratios and find the one within the smallest difference that fits within the tolerance
+  Object.entries(defaultAspectRatioConversion).forEach(
+    ([aspectRatio, size]) => {
+      const definedRatio = parseAspectRatio(aspectRatio);
+      const difference = Math.abs(definedRatio - baseRatio);
+
+      if (difference < smallestDifference && difference <= tolerance) {
+        smallestDifference = difference;
+        nearestRatio = aspectRatio;
+      }
+    }
+  );
+
+  return nearestRatio;
 }

@@ -3,8 +3,11 @@
 import { useSettings } from "@/app/context/SettingsContext";
 import OptionWithSwitch from "../components/OptionWithSwitch";
 import {
+    AspectRatioKey,
+  aspectRatioOptions,
   BADGE_TEXT,
   COLUMN_OPTIONS,
+  defaultAspectRatioConversion,
   dimensionOptions,
   numberOfImagesOptions,
   OPTION_TITLE,
@@ -14,13 +17,22 @@ import {
 import SectionWithOptionsGrid from "../components/SectionWithOptionsGrid";
 import RangeSlider from "../components/RangeSlider";
 import DimensionInput from "../components/DimensionInput";
-import { parseDimension, transformDimensions } from "../actions";
+import {
+    findApproximateAspectRatio,
+  parseDimension,
+  transformDimensions,
+} from "../actions";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import Image from "next/image";
 import CoinsIcon from "../svg/CoinsIcon";
+import DropdownMenu from "../components/DropdownMenu";
 
 export default function SideBar() {
   const { settings, setSetting } = useSettings();
+  const aspectRatioValue = findApproximateAspectRatio({
+    width: settings.aspectRatioWidth,
+    height: settings.aspectRatioHeight,
+  });
   const outputDimensions = transformDimensions({
     width: settings.aspectRatioWidth,
     height: settings.aspectRatioHeight,
@@ -32,8 +44,15 @@ export default function SideBar() {
     setSetting("aspectRatioHeight", dimensions.height);
   };
 
+  const handleAspectRatioOptionClick = (option: AspectRatioKey) => {
+    const result = defaultAspectRatioConversion[option];
+    if (!result) return;
+    setSetting("aspectRatioWidth", result.width);
+    setSetting("aspectRatioHeight", result.height);
+  };
+
   return (
-    <div className="flex flex-col w-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5">
+    <div className="flex flex-col w-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 overflow-y-auto">
       <div className="flex flex-col items-center my-5 gap-3.5">
         <Image
           src="/leonardo-logo-text.svg"
@@ -107,6 +126,11 @@ export default function SideBar() {
       <p className="text-van-gogh-sm font-light mb-spacing-m">
         {SECTION_TITLE.ADVANCED_CONTROLS}
       </p>
+      <DropdownMenu
+        value={aspectRatioValue}
+        options={aspectRatioOptions}
+        setValue={(x) => handleAspectRatioOptionClick(x)}
+      />
       <div className="flex items-center gap-spacing-m mb-2">
         <RangeSlider
           value={settings.aspectRatioWidth}

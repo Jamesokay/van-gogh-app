@@ -8,11 +8,11 @@ import { SettingsContextProps, SettingsProviderProps, SettingsState } from './de
 const defaultState: SettingsState = {
   numberOfImages: '4',
   photoReal: false,
-  alchemy: false,
+  alchemy: true,
   transparency: false,
   publicImages: false,
-  aspectRatioHeight: 576,
-  aspectRatioWidth: 1024,
+  aspectRatioWidth: 768,
+  aspectRatioHeight: 512,
   guidanceScale: 7,
   tiling: false
 };
