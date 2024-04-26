@@ -9,7 +9,7 @@
 - Will review Tailwind config once UI is fully built, make variable names adhere to defined structure
 - Definitions for types can most likely be combined into a single file for consistency (currently spread across 2 files, and occasionally defined at component level)
 
-### Next Steps:**
+### Next Steps:
 
 - Finish off SideBar
 - Implement ImageGenerationHeader
