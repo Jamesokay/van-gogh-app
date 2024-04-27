@@ -37,7 +37,7 @@ const config: Config = {
         "input-width": "100px",
       },
       width: {
-        "sidebar-width": "17rem",
+        "van-gogh-sidebar-width": "17rem",
       },
       fontSize: {
         "van-gogh-4xs": "0.45rem",
@@ -62,10 +62,10 @@ const config: Config = {
         thin: "0.125rem",
       },
       spacing: {
-        "spacing-1px": "1px",
-        "spacing-xs": "0.25rem",
-        "spacing-m": "0.75rem",
-        "spacing-ml": "0.875rem",
+        "van-gogh-spacing-1px": "1px",
+        "van-gogh-spacing-xs": "0.25rem",
+        "van-gogh-spacing-m": "0.75rem",
+        "van-gogh-spacing-ml": "0.875rem",
         "grid-row-gap": "0.625rem",
         "switch-track-width": "calc(1rem * 2.625)",
         "switch-track-height": "calc(1rem * 1.25)",

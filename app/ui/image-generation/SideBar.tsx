@@ -2,20 +2,19 @@
 
 import { useSettings } from "@/app/context/SettingsContext";
 import OptionWithSwitch from "../components/OptionWithSwitch";
+import { AspectRatioKey, InputDimension } from "../../lib/definitions";
 import {
-  AspectRatioKey,
   aspectRatioOptions,
   BADGE_TEXT,
   BUTTON_TEXT,
   COLUMN_OPTIONS,
   defaultAspectRatioConversion,
   dimensionOptions,
-  InputDimension,
   numberOfImagesOptions,
   OPTION_TITLE,
   SECTION_TITLE,
   TOOLTIP_TEXT,
-} from "./definitions";
+} from "../../lib/constants";
 import SectionWithOptionsGrid from "../components/SectionWithOptionsGrid";
 import RangeSlider from "../components/RangeSlider";
 import DimensionInput from "../components/DimensionInput";
@@ -24,7 +23,7 @@ import {
   findApproximateAspectRatio,
   parseDimension,
   transformDimensions,
-} from "../actions";
+} from "../../lib/actions";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import Image from "next/image";
 import CoinsIcon from "../svg/CoinsIcon";
@@ -60,7 +59,6 @@ export default function SideBar() {
     : dimensionOptions.default;
 
   // Functions for handling interdependent updates to dimensions/aspectRatio
-
   const handleDimensionOption = (option: string) => {
     if (aspectRatioLocked) setAspectRatioLocked(false);
     const dimensions = parseDimension(option);
@@ -107,7 +105,6 @@ export default function SideBar() {
   };
 
   // Functions for updating interdependent states (photoReal, alchemy, promptMagic)
-
   const enablePhotoRealWithCoupledState = () => {
     if (!settings.alchemy) setSetting("alchemy", true);
     if (settings.promptMagic) setSetting("promptMagic", false);
@@ -135,14 +132,13 @@ export default function SideBar() {
   };
 
   // Reset SideBar state
-
   const handleReset = () => {
     setAspectRatioLocked(false);
     resetSettings();
   };
 
   return (
-    <div className="flex flex-col w-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-spacing-m overflow-y-auto">
+    <div className="flex flex-col w-van-gogh-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto">
       <div className="flex flex-col items-center my-5 gap-3.5">
         <div className="flex gap-2 items-center w-full">
           <BackArrowIcon />
@@ -188,7 +184,7 @@ export default function SideBar() {
         enabled={settings.alchemy}
         toggle={() => handleAlchemy(!settings.alchemy)}
       />
-      <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-corners-xs bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-spacing-m">
+      <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-corners-xs bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-van-gogh-spacing-m">
         <span className="text-van-gogh-grey-m">Output Resolution</span>
         <span>{`${outputDimensions.width} x ${outputDimensions.height}`}</span>
       </div>
@@ -215,7 +211,7 @@ export default function SideBar() {
         enabled={settings.publicImages}
         toggle={() => setSetting("publicImages", !settings.publicImages)}
       />
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-spacing-ml" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-van-gogh-spacing-ml" />
       <SectionWithOptionsGrid
         title={SECTION_TITLE.INPUT_DIMENSIONS}
         options={dimensionOptionsArray}
@@ -224,10 +220,10 @@ export default function SideBar() {
         value={`${settings.aspectRatioWidth} x ${settings.aspectRatioHeight}`}
         setValue={(x) => handleDimensionOption(x)}
       />
-      <p className="text-van-gogh-sm font-light mb-spacing-m">
+      <p className="text-van-gogh-sm font-light mb-van-gogh-spacing-m">
         {SECTION_TITLE.ADVANCED_CONTROLS}
       </p>
-      <div className="flex gap-2 mb-spacing-ml">
+      <div className="flex gap-2 mb-van-gogh-spacing-ml">
         <button
           className={`flex justify-center items-center border h-10 min-w-10 rounded-corners-xs bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue ${
             aspectRatioLocked ? "border-van-gogh-purple" : ""
@@ -245,7 +241,7 @@ export default function SideBar() {
           align="center"
         />
       </div>
-      <div className="flex items-center gap-spacing-m mb-2">
+      <div className="flex items-center gap-van-gogh-spacing-m mb-2">
         <RangeSlider
           value={settings.aspectRatioWidth}
           setValue={(x) => handleAspectRatioChange("aspectRatioWidth", x)}
@@ -261,7 +257,7 @@ export default function SideBar() {
           unit="px"
         />
       </div>
-      <div className="flex items-center gap-spacing-m mb-2">
+      <div className="flex items-center gap-van-gogh-spacing-m mb-2">
         <RangeSlider
           value={settings.aspectRatioHeight}
           setValue={(x) => handleAspectRatioChange("aspectRatioHeight", x)}
@@ -277,7 +273,7 @@ export default function SideBar() {
           unit="px"
         />
       </div>
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-spacing-m" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-van-gogh-spacing-m" />
       <div className="flex gap-2 items-center mb-1">
         <p className="text-van-gogh-md font-semibold">
           {SECTION_TITLE.GUIDANCE_SCALE}

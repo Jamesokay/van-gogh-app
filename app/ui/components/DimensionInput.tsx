@@ -1,13 +1,5 @@
+import { DimensionInputProps } from "@/app/lib/definitions";
 import { FC } from "react";
-
-type DimensionInputProps = {
-  dimension: string;
-  value: number;
-  setValue: (value: number) => void;
-  max: number;
-  min: number;
-  unit: string;
-};
 
 const DimensionInput: FC<DimensionInputProps> = ({
   dimension,

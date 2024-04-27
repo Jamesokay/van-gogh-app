@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { OptionWithSwitchProps } from "../image-generation/definitions";
+import { OptionWithSwitchProps } from "../../lib/definitions";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import { Tooltip } from "@chakra-ui/react";
 
@@ -16,10 +16,10 @@ const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
   };
 
   return (
-    <div className={hidden ? "hidden" : "flex items-center gap-2 py-spacing-m"}>
+    <div className={hidden ? "hidden" : "flex items-center gap-2 py-van-gogh-spacing-m"}>
       <span className="text-van-gogh-md font-semibold">{title}</span>
       {badgeText && (
-        <div className="flex items-center bg-purple-gradient text-van-gogh-2xs py-spacing-1px px-spacing-xs rounded-corners-s">
+        <div className="flex items-center bg-purple-gradient text-van-gogh-2xs py-van-gogh-spacing-1px px-van-gogh-spacing-xs rounded-corners-s">
           {badgeText}
         </div>
       )}

@@ -90,25 +90,3 @@ export const defaultAspectRatioConversion = {
   "16:9": { width: 960, height: 536 },
   "2.39:1": { width: 1224, height: 512 },
 };
-
-export type AspectRatioKey = keyof typeof defaultAspectRatioConversion;
-
-export type InputDimension = "aspectRatioHeight" | "aspectRatioWidth";
-
-export type OptionWithSwitchProps = {
-  title: OPTION_TITLE;
-  badgeText?: BADGE_TEXT;
-  tooltipText: TOOLTIP_TEXT;
-  enabled: boolean;
-  toggle: (value: boolean) => void;
-  hidden?: boolean;
-};
-
-export type SectionWithOptionsGridProps = {
-  title: SECTION_TITLE;
-  value: string;
-  setValue: (value: string) => void;
-  options: string[];
-  columns: COLUMN_OPTIONS;
-  tooltipText?: string;
-};

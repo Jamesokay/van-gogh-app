@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { SectionWithOptionsGridProps } from "../image-generation/definitions";
+import { SectionWithOptionsGridProps } from "../../lib/definitions";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import { Tooltip } from "@chakra-ui/react";
 
@@ -12,8 +12,8 @@ const SectionWithOptionsGrid: FC<SectionWithOptionsGridProps> = ({
   setValue,
 }) => {
   return (
-    <div className="flex flex-col py-spacing-m">
-      <div className="flex gap-2 items-center mb-spacing-m">
+    <div className="flex flex-col py-van-gogh-spacing-m">
+      <div className="flex gap-2 items-center mb-van-gogh-spacing-m">
         <p className="text-van-gogh-md font-semibold">{title}</p>
         {tooltipText && (
           <Tooltip label={tooltipText}>

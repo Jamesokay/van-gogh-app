@@ -1,9 +1,6 @@
-import { defaultAspectRatioConversion } from "./image-generation/definitions";
+import { defaultAspectRatioConversion } from "./constants";
+import { Dimension } from "./definitions";
 
-type Dimension = {
-  width: number;
-  height: number;
-};
 export function transformDimensions(input: Dimension): Dimension {
   const scalingFactor = 1.75;
   const transformedWidth = Math.round(input.width * scalingFactor);

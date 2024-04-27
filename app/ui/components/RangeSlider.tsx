@@ -1,13 +1,7 @@
 "use client";
 
+import { RangeSliderProps } from "@/app/lib/definitions";
 import { FC, useEffect, useRef } from "react";
-
-type RangeSliderProps = {
-  value: number;
-  setValue: (value: number) => void;
-  max: number;
-  min: number;
-};
 
 const RangeSlider: FC<RangeSliderProps> = ({ value, setValue, max, min }) => {
   const sliderRef = useRef<HTMLDivElement>(null);

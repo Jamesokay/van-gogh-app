@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState } from 'react';
-import { SettingsContextProps, SettingsProviderProps, SettingsState } from './definitions';
+import { SettingsContextProps, SettingsProviderProps, SettingsState } from '../lib/definitions';
 
 const defaultState: SettingsState = {
   numberOfImages: "4",
