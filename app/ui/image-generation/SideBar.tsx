@@ -6,6 +6,7 @@ import {
   AspectRatioKey,
   aspectRatioOptions,
   BADGE_TEXT,
+  BUTTON_TEXT,
   COLUMN_OPTIONS,
   defaultAspectRatioConversion,
   dimensionOptions,
@@ -31,10 +32,19 @@ import DropdownMenu from "../components/DropdownMenu";
 import { useState } from "react";
 import { LockIcon, UnlockIcon } from "@chakra-ui/icons";
 import BackArrowIcon from "../svg/BackArrowIcon";
-import { Tooltip } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Tooltip,
+} from "@chakra-ui/react";
+import RefreshIcon from "../svg/RefreshIcon";
 
 export default function SideBar() {
-  const { settings, setSetting } = useSettings();
+  const { settings, setSetting, resetSettings } = useSettings();
   const [aspectRatioLocked, setAspectRatioLocked] = useState(false);
   const [aspectRatio, setAspectRatio] = useState<AspectRatioKey>("3:2");
   const aspectRatioValue = findApproximateAspectRatio({
@@ -45,6 +55,11 @@ export default function SideBar() {
     width: settings.aspectRatioWidth,
     height: settings.aspectRatioHeight,
   });
+  const dimensionOptionsArray = settings.alchemy
+    ? dimensionOptions.alchemy
+    : dimensionOptions.default;
+
+  // Functions for handling interdependent updates to dimensions/aspectRatio
 
   const handleDimensionOption = (option: string) => {
     if (aspectRatioLocked) setAspectRatioLocked(false);
@@ -91,10 +106,45 @@ export default function SideBar() {
     else setSetting(dimension, value);
   };
 
+  // Functions for updating interdependent states (photoReal, alchemy, promptMagic)
+
+  const enablePhotoRealWithCoupledState = () => {
+    if (!settings.alchemy) setSetting("alchemy", true);
+    if (settings.promptMagic) setSetting("promptMagic", false);
+    setSetting("photoReal", true);
+  };
+
+  const disableAlchemyWithCoupledState = () => {
+    if (settings.photoReal) setSetting("photoReal", false);
+    setSetting("alchemy", false);
+  };
+
+  const enableAlchemyWithCoupledState = () => {
+    if (settings.promptMagic) setSetting("promptMagic", false);
+    setSetting("alchemy", true);
+  };
+
+  const handleAlchemy = (toggleOn: boolean) => {
+    if (toggleOn) enableAlchemyWithCoupledState();
+    else disableAlchemyWithCoupledState();
+  };
+
+  const handlePhotoReal = (toggleOn: boolean) => {
+    if (toggleOn) enablePhotoRealWithCoupledState();
+    else setSetting("photoReal", false);
+  };
+
+  // Reset SideBar state
+
+  const handleReset = () => {
+    setAspectRatioLocked(false);
+    resetSettings();
+  };
+
   return (
     <div className="flex flex-col w-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-spacing-m overflow-y-auto">
       <div className="flex flex-col items-center my-5 gap-3.5">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center w-full">
           <BackArrowIcon />
           <Image
             src="/leonardo-logo-text.svg"
@@ -103,14 +153,14 @@ export default function SideBar() {
             height={34}
           />
         </div>
-        <div className="flex gap-2 items-center justify-center px-3 py-1.5 border border-w-thinner border-van-gogh-border-grey rounded-corners-l">
+        <div className="flex gap-2 items-center justify-center px-3 py-2 border border-w-thinner border-van-gogh-border-grey rounded-corners-l">
           <div className="flex items-center text-van-gogh-xs">
             <CoinsIcon />
             150
           </div>
           <QuestionMarkIcon />
           <button className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-xs rounded-corners-l">
-            Upgrade
+            {BUTTON_TEXT.UPGRADE}
           </button>
         </div>
       </div>
@@ -128,7 +178,7 @@ export default function SideBar() {
         badgeText={BADGE_TEXT.V2}
         tooltipText={TOOLTIP_TEXT.PHOTOREAL}
         enabled={settings.photoReal}
-        toggle={() => setSetting("photoReal", !settings.photoReal)}
+        toggle={() => handlePhotoReal(!settings.photoReal)}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
@@ -136,12 +186,20 @@ export default function SideBar() {
         badgeText={BADGE_TEXT.V2}
         tooltipText={TOOLTIP_TEXT.ALCHEMY}
         enabled={settings.alchemy}
-        toggle={() => setSetting("alchemy", !settings.alchemy)}
+        toggle={() => handleAlchemy(!settings.alchemy)}
       />
       <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-corners-xs bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-spacing-m">
         <span className="text-van-gogh-grey-m">Output Resolution</span>
         <span>{`${outputDimensions.width} x ${outputDimensions.height}`}</span>
       </div>
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
+      <OptionWithSwitch
+        title={OPTION_TITLE.PROMPT_MAGIC}
+        tooltipText={TOOLTIP_TEXT.PROMPT_MAGIC}
+        enabled={settings.promptMagic}
+        toggle={() => setSetting("promptMagic", !settings.promptMagic)}
+        hidden={settings.alchemy}
+      />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
         title={OPTION_TITLE.TRANSPARENCY}
@@ -157,10 +215,10 @@ export default function SideBar() {
         enabled={settings.publicImages}
         toggle={() => setSetting("publicImages", !settings.publicImages)}
       />
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-spacing-ml" />
       <SectionWithOptionsGrid
         title={SECTION_TITLE.INPUT_DIMENSIONS}
-        options={dimensionOptions}
+        options={dimensionOptionsArray}
         columns={COLUMN_OPTIONS.TWO}
         tooltipText={TOOLTIP_TEXT.INPUT_DIMENSIONS}
         value={`${settings.aspectRatioWidth} x ${settings.aspectRatioHeight}`}
@@ -169,7 +227,7 @@ export default function SideBar() {
       <p className="text-van-gogh-sm font-light mb-spacing-m">
         {SECTION_TITLE.ADVANCED_CONTROLS}
       </p>
-      <div className="flex gap-2">
+      <div className="flex gap-2 mb-spacing-ml">
         <button
           className={`flex justify-center items-center border h-10 min-w-10 rounded-corners-xs bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue ${
             aspectRatioLocked ? "border-van-gogh-purple" : ""
@@ -183,6 +241,8 @@ export default function SideBar() {
           value={aspectRatioValue}
           options={aspectRatioOptions}
           setValue={(x) => handleAspectRatioOptionClick(x as AspectRatioKey)}
+          isDisabled={false}
+          align="center"
         />
       </div>
       <div className="flex items-center gap-spacing-m mb-2">
@@ -219,7 +279,7 @@ export default function SideBar() {
       </div>
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-spacing-m" />
       <div className="flex gap-2 items-center mb-1">
-        <p className="text-van-gogh-md font-medium">
+        <p className="text-van-gogh-md font-semibold">
           {SECTION_TITLE.GUIDANCE_SCALE}
         </p>
         <Tooltip label={TOOLTIP_TEXT.GUIDANCE_SCALE}>
@@ -245,6 +305,73 @@ export default function SideBar() {
         enabled={settings.tiling}
         toggle={() => setSetting("tiling", !settings.tiling)}
       />
+      <Accordion allowToggle>
+        <AccordionItem border="none">
+          <h2>
+            <AccordionButton>
+              <Box
+                as="div"
+                flex="1"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                fontSize="0.75rem"
+                fontWeight={600}
+              >
+                {SECTION_TITLE.SHOW_ADVANCED_SETTINGS}
+                <AccordionIcon />
+              </Box>
+            </AccordionButton>
+          </h2>
+          <AccordionPanel p={0}>
+            <OptionWithSwitch
+              title={OPTION_TITLE.RECOMMENDED_SIZES}
+              tooltipText={TOOLTIP_TEXT.RECOMMENDED_SIZES}
+              enabled={settings.recommendedSizes}
+              toggle={() =>
+                setSetting("recommendedSizes", !settings.recommendedSizes)
+              }
+            />
+            <OptionWithSwitch
+              title={OPTION_TITLE.USE_FIXED_SEED}
+              tooltipText={TOOLTIP_TEXT.USE_FIXED_SEED}
+              enabled={settings.useFixedSeed}
+              toggle={() => setSetting("useFixedSeed", !settings.useFixedSeed)}
+            />
+            <input
+              type="number"
+              className="input-number appearance-none bg-transparent rounded-corners-xs border border-thin border-van-gogh-grey-blue hover:border-van-gogh-grey-d focus:border-van-gogh-purple outline-none h-10 w-full min-w-input-width text-van-gogh-sm p-4 mb-4"
+              value={settings?.fixedSeed}
+              onChange={(e) => setSetting("fixedSeed", e.target.value)}
+              maxLength={10}
+            />
+            <div className="flex gap-2 items-center mb-1">
+              <p className="text-van-gogh-md font-semibold">
+                {SECTION_TITLE.SCHEDULER}
+              </p>
+              <Tooltip label={TOOLTIP_TEXT.SCHEDULER}>
+                <span>
+                  <QuestionMarkIcon />
+                </span>
+              </Tooltip>
+            </div>
+            <DropdownMenu
+              value="Leonardo"
+              options={[]}
+              setValue={() => {}}
+              isDisabled={true}
+              align="left"
+            />
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+      <button
+        className="flex items-center justify-center gap-1 rounded-corners-xs border border-thin border-van-gogh-grey-blue hover:border-van-gogh-grey-d text-van-gogh-xs h-8 mt-20 mb-4"
+        onClick={() => handleReset()}
+      >
+        <RefreshIcon />
+        {BUTTON_TEXT.RESET}
+      </button>
     </div>
   );
 }

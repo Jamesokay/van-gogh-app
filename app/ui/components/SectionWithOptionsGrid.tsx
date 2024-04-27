@@ -14,7 +14,7 @@ const SectionWithOptionsGrid: FC<SectionWithOptionsGridProps> = ({
   return (
     <div className="flex flex-col py-spacing-m">
       <div className="flex gap-2 items-center mb-spacing-m">
-        <p className="text-van-gogh-md font-medium">{title}</p>
+        <p className="text-van-gogh-md font-semibold">{title}</p>
         {tooltipText && (
           <Tooltip label={tooltipText}>
             <span>

@@ -65,7 +65,7 @@ const config: Config = {
         "spacing-1px": "1px",
         "spacing-xs": "0.25rem",
         "spacing-m": "0.75rem",
-        "spacing-ml": "1.25rem",
+        "spacing-ml": "0.875rem",
         "grid-row-gap": "0.625rem",
         "switch-track-width": "calc(1rem * 2.625)",
         "switch-track-height": "calc(1rem * 1.25)",
