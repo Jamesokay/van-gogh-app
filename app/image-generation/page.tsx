@@ -8,7 +8,7 @@ const Page = () => {
     <SettingsProvider>
       <main className="flex min-h-screen">
         <SideBar />
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <ImageGenerationHeader />
           <GenerationOptions />
         </div>
