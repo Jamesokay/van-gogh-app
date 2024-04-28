@@ -30,9 +30,17 @@
 - Will also need to implement model and imageStyle states in SettingsContext
 - Also contemplating whether a custom hook/controller might be a better option than Context API here. Will need to research further.
 
+## Day 6 (28/04/2024) (later on):
+
+<img width="1511" alt="Screenshot 2024-04-28 at 8 54 06 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/9c262d6f-8539-49db-b78e-5c9893dea6f2">
+
+- Added links
+- Lifted elements from page to layout level
+
 ### Next Steps:
 
 - Continue implementation of ImageGenerationHeader
 - Implement GenerationOptions
 - Mobile responsiveness
+- Clean-up
 - Implement services for Leonardo API
