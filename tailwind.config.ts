@@ -45,6 +45,7 @@ const config: Config = {
         "van-gogh-grey-blue": "#242C3E",
         "van-gogh-purple": "rgb(114, 88, 242)",
         "van-gogh-dark-blue": "rgb(16, 22, 34)",
+        "van-gogh-dark-blue-hover": "rgb(22, 29, 45)",
       },
       maxHeight: {
         "input-height": "50px",

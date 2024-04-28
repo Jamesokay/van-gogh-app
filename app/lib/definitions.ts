@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 import {
   BADGE_TEXT,
   COLUMN_OPTIONS,
@@ -76,6 +76,8 @@ export type DropdownMenuProps<T extends string = string> = {
   setValue: (value: T) => void;
   isDisabled: boolean;
   align: "center" | "left";
+  leftIcon?: ReactElement;
+  darkerTheme: boolean;
 };
 
 export type RangeSliderProps = {

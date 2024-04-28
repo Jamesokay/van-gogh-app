@@ -8,31 +8,46 @@ const DropdownMenu = <T extends string = string>({
   value,
   setValue,
   isDisabled,
-  align
+  align,
+  leftIcon,
+  darkerTheme,
 }: DropdownMenuProps<T>) => {
   return (
     <Menu>
       <MenuButton
         isDisabled={isDisabled}
         w="100%"
+        h="100%"
         bg="vanGoghBlue.900"
         border="1px"
-        borderColor="vanGoghGrey.400"
+        borderColor={darkerTheme ? "transparent" : "vanGoghGrey.400"}
         color="white"
-        fontSize="0.75rem"
+        fontSize={darkerTheme? "0.875rem" : "0.75rem"}
+        fontWeight={500}
         textAlign={align}
-        _hover={{ borderColor: isDisabled ? "vanGoghGrey.400" : "vanGoghPurple.400" }}
+        _hover={{
+          borderColor: isDisabled ? "vanGoghGrey.400" : "vanGoghPurple.400",
+        }}
         _active={{ bg: "vanGoghBlue.900", borderColor: "vanGoghPurple.400" }}
         as={Button}
         rightIcon={<TriangleDownIcon w={2.5} />}
+        leftIcon={leftIcon}
       >
         {value}
       </MenuButton>
-      <MenuList>
+      <MenuList padding="0" borderWidth="0.0625rem" overflow="hidden">
         {options.map((option) => (
           <MenuItem
             key={option}
             onClick={() => setValue(option)}
+            bg={darkerTheme ? "rgb(11, 15, 23)" : ""}
+            h={darkerTheme ? "2.5rem" : ""}
+            fontSize={darkerTheme ? "0.875rem" : "0.75rem"}
+            _hover={
+              darkerTheme
+                ? { bg: "rgb(22, 23, 27)" }
+                : { bg: "vanGoghGrey.400" }
+            }
           >
             {option}
           </MenuItem>

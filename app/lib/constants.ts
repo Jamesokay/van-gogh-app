@@ -95,7 +95,7 @@ export const defaultAspectRatioConversion = {
 
 export const modelData: ImageGenModel[] = [
   {
-    modelId: '1',
+    modelId: "1",
     modelName: "Leonardo Lightning XL",
     ModelType: "Finetuned Model",
     dimensions: "1024x768",
@@ -104,7 +104,7 @@ export const modelData: ImageGenModel[] = [
     img: "https://cdn.leonardo.ai/users/384ab5c8-55d8-47a1-be22-6a274913c324/generations/334022a8-7cea-43f9-a8a0-b9c2d232f32f/Default_an_ageing_astronaut_piloting_an_old_spaceship_0.jpg",
   },
   {
-    modelId: '2',
+    modelId: "2",
     modelName: "Leonardo Anime XL",
     ModelType: "Finetuned Model",
     dimensions: "1024x768",
@@ -113,7 +113,7 @@ export const modelData: ImageGenModel[] = [
     img: "https://cdn.leonardo.ai/users/384ab5c8-55d8-47a1-be22-6a274913c324/generations/16cbffcc-8672-47d6-8738-d22167dcea3f/Default_A_lush_vibrant_anime_hero_figure_emerges_from_the_shad_0.jpg",
   },
   {
-    modelId: '3',
+    modelId: "3",
     modelName: "Leonardo Diffusion XL",
     ModelType: "Finetuned Model",
     dimensions: "1024x768",
@@ -122,7 +122,7 @@ export const modelData: ImageGenModel[] = [
     img: "https://cdn.leonardo.ai/users/384ab5c8-55d8-47a1-be22-6a274913c324/generations/16cbffcc-8672-47d6-8738-d22167dcea3f/Default_A_lush_vibrant_anime_hero_figure_emerges_from_the_shad_0.jpg",
   },
   {
-    modelId: '4',
+    modelId: "4",
     modelName: "Leonardo Kino XL",
     ModelType: "Finetuned Model",
     dimensions: "1024x576",
@@ -131,7 +131,7 @@ export const modelData: ImageGenModel[] = [
     img: "https://cdn.leonardo.ai/users/384ab5c8-55d8-47a1-be22-6a274913c324/generations/38c684e6-702f-446a-b99b-649462d6a3d6/Leonardo_Kino_XL_cinematic_photo_of_a_surreal_adventurer_on_a_2.jpg",
   },
   {
-    modelId: '5',
+    modelId: "5",
     modelName: "Leonardo Vision XL",
     ModelType: "Finetuned Model",
     dimensions: "1024x768",
@@ -139,4 +139,21 @@ export const modelData: ImageGenModel[] = [
     alchemy: true,
     img: "https://cdn.leonardo.ai/users/384ab5c8-55d8-47a1-be22-6a274913c324/generations/bc0a7117-ad5e-4754-8648-6412cc554478/Leonardo_Vision_XL_A_gritty_unedited_photograph_perfectly_capt_2.jpg",
   },
+];
+
+export const imageStyles = [
+  "Anime",
+  "Cinematic",
+  "Creative",
+  "Dynamic",
+  "Environment",
+  "General",
+  "Illustration",
+  "Photography",
+  "Raytraced",
+  "3D Render",
+  "Sketch B/W",
+  "Sketch Color",
+  "Vibrant",
+  "None",
 ];

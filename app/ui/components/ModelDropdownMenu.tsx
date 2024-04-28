@@ -24,12 +24,13 @@ const ModelDropdownMenu: FC<{
         paddingRight="0.5rem"
         paddingLeft="0.75rem"
         color="white"
-        _hover={{ borderColor: "vanGoghPurple.400" }}
+        _hover={{ bg: "vanGoghBlue.900" }}
         _active={{
           bg: "vanGoghBlue.900",
           borderColor: "vanGoghPurple.400",
         }}
         as={Button}
+        
       >
         <div className="flex items-center">
           <Image

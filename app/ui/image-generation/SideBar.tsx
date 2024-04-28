@@ -239,6 +239,7 @@ export default function SideBar() {
           setValue={(x) => handleAspectRatioOptionClick(x as AspectRatioKey)}
           isDisabled={false}
           align="center"
+          darkerTheme={false}
         />
       </div>
       <div className="flex items-center gap-van-gogh-spacing-m mb-2">
@@ -357,6 +358,7 @@ export default function SideBar() {
               setValue={() => {}}
               isDisabled={true}
               align="left"
+              darkerTheme={false}
             />
           </AccordionPanel>
         </AccordionItem>

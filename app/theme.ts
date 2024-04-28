@@ -15,9 +15,6 @@ const baseMenuStyle = definePartsStyle({
   item: {
     bg: "vanGoghBlue.900",
     fontSize: "0.75rem",
-    _hover: {
-      bg: "vanGoghGrey.400",
-    },
   },
 });
 
