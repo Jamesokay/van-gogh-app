@@ -18,6 +18,18 @@
 - Added pgae header and prompt input field
 - Partial clean-up
 
+### Day 6 (28/04/2024):
+
+<img width="1511" alt="Screenshot 2024-04-28 at 2 51 36 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/d5ad2e9a-ab8b-4144-8626-797ce9c299e9">
+
+- First pass at ImageGenerationHeader
+- Negative prompt input and visibility state
+- Placeholder states for model and imageStyle
+- Styles for Model Selection drop down menu
+- Plenty of clean-up and standardisation to be done vis-a-vis styles (currently a mash-up of Chakra UI inline, theme object & tailwind utils)
+- Will also need to implement model and imageStyle states in SettingsContext
+- Also contemplating whether a custom hook/controller might be a better option than Context API here. Will need to research further.
+
 ### Next Steps:
 
 - Continue implementation of ImageGenerationHeader
