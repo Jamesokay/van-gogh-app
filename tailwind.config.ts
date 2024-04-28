@@ -39,6 +39,7 @@ const config: Config = {
         "van-gogh-white-16": "rgba(255, 255, 255, 0.16)",
         "van-gogh-border-grey": "rgb(36, 44, 62)",
         "van-gogh-black-opal": "rgba(0, 0, 0, 0.34)",
+        "van-gogh-grey-2xd": "rgb(32, 33, 37)",
         "van-gogh-grey-xd": "rgb(40, 40, 40)",
         "van-gogh-grey-d": "rgb(81, 81, 81)",
         "van-gogh-grey-m": "rgb(144, 148, 166)",

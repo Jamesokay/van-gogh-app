@@ -61,6 +61,19 @@ body {
   font-weight: 500;
 }
 
+.van-gogh-header-link {
+  border-bottom: calc(0.125rem) solid rgb(114, 88, 242);
+  border-top-style: solid;
+  border-top-color: transparent;
+  border-image-source: linear-gradient(
+    81.02deg,
+    rgb(250, 85, 96) -23.47%,
+    rgb(177, 75, 244) 45.52%,
+    rgb(77, 145, 255) 114.8%
+  );
+  border-image-slice: 1;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

@@ -48,8 +48,6 @@ const outline = defineStyle({
   },
 });
 
-// "input-number appearance-none bg-transparent rounded-corners-xs border border-thin border-van-gogh-grey-blue hover:border-van-gogh-grey-d focus:border-van-gogh-purple outline-none h-10 w-full min-w-input-width text-van-gogh-sm p-4 mb-4"
-
 const textareaTheme = defineStyleConfig({
   variants: { outline },
 });

@@ -77,7 +77,7 @@ export type DropdownMenuProps<T extends string = string> = {
   isDisabled: boolean;
   align: "center" | "left";
   leftIcon?: ReactElement;
-  darkerTheme: boolean;
+  headerTheme: boolean;
 };
 
 export type RangeSliderProps = {

@@ -10,6 +10,9 @@ import DropdownMenu from "../components/DropdownMenu";
 import FlaskIcon from "../svg/FlaskIcon";
 import AtomicIcon from "../svg/AtomicIcon";
 import CirclePlusIcon from "../svg/CirclePlusIcon";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import CoinsIcon from "../svg/CoinsIcon";
 
 export default function ImageGenerationHeader() {
   const [showNegativePrompt, setShowNegativePrompt] = useState(false);
@@ -17,10 +20,11 @@ export default function ImageGenerationHeader() {
     modelData[0]
   );
   const [selectedStyle, setSelectedStyle] = useState("Dynamic");
+  const pathname = usePathname();
 
   return (
     <div className="flex flex-col w-full px-8">
-      <div className="mt-10 mb-4">
+      <div className="mt-10 mb-2">
         <Heading
           as="h1"
           fontSize="1.5rem"
@@ -35,8 +39,10 @@ export default function ImageGenerationHeader() {
           <DiceIcon />
         </button>
         <Textarea placeholder="Type a prompt..."></Textarea>
-        <button className="bg-purple-gradient px-12 rounded-lg ml-4 text-van-gogh-lg font-medium">
-          Generate
+        <button className="flex items-center bg-purple-gradient px-12 rounded-lg ml-4 text-van-gogh-lg font-medium">
+          <span className="mr-3">Generate</span>
+          <CoinsIcon white={true} />
+          <span className="text-van-gogh-sm ml-1">15</span>
         </button>
       </div>
       <div
@@ -61,7 +67,7 @@ export default function ImageGenerationHeader() {
             align="left"
             isDisabled={false}
             leftIcon={<FlaskIcon />}
-            darkerTheme={true}
+            headerTheme={true}
           />
         </div>
         <div className="flex items-center gap-2.5 px-3.5 rounded-corners-s bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover">
@@ -94,6 +100,40 @@ export default function ImageGenerationHeader() {
               } inline-block w-switch-track-height h-switch-track-height transform bg-white rounded-full transition-transform`}
             />
           </div>
+        </div>
+      </div>
+      <div className="mt-5 ">
+        <div className="flex">
+          <Link
+            href="/image-generation"
+            className={`van-gogh-header-link mr-4 py-2 font-medium ${
+              pathname !== "/image-generation"
+                ? "text-van-gogh-grey-m hover:text-white"
+                : ""
+            }`}
+          >
+            Generation History
+          </Link>
+          <Link
+            href="/image-generation/image-guidance"
+            className={`van-gogh-header-link mx-4 py-2 font-medium ${
+              pathname !== "/image-generation/image-guidance"
+                ? "text-van-gogh-grey-m hover:text-white"
+                : ""
+            }`}
+          >
+            Image Guidance
+          </Link>
+          <Link
+            href="/image-generation/prompt-generation"
+            className={`van-gogh-header-link mx-4 py-2 font-medium ${
+              pathname !== "/image-generation/prompt-generation"
+                ? "text-van-gogh-grey-m hover:text-white"
+                : ""
+            }`}
+          >
+            Prompt Generation
+          </Link>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ const DropdownMenu = <T extends string = string>({
   isDisabled,
   align,
   leftIcon,
-  darkerTheme,
+  headerTheme,
 }: DropdownMenuProps<T>) => {
   return (
     <Menu>
@@ -20,9 +20,9 @@ const DropdownMenu = <T extends string = string>({
         h="100%"
         bg="vanGoghBlue.900"
         border="1px"
-        borderColor={darkerTheme ? "transparent" : "vanGoghGrey.400"}
+        borderColor={headerTheme ? "transparent" : "vanGoghGrey.400"}
         color="white"
-        fontSize={darkerTheme? "0.875rem" : "0.75rem"}
+        fontSize={headerTheme? "0.875rem" : "0.75rem"}
         fontWeight={500}
         textAlign={align}
         _hover={{
@@ -40,11 +40,11 @@ const DropdownMenu = <T extends string = string>({
           <MenuItem
             key={option}
             onClick={() => setValue(option)}
-            bg={darkerTheme ? "rgb(11, 15, 23)" : ""}
-            h={darkerTheme ? "2.5rem" : ""}
-            fontSize={darkerTheme ? "0.875rem" : "0.75rem"}
+            bg={headerTheme ? "rgb(11, 15, 23)" : ""}
+            h={headerTheme ? "2.5rem" : ""}
+            fontSize={headerTheme ? "0.875rem" : "0.75rem"}
             _hover={
-              darkerTheme
+              headerTheme
                 ? { bg: "rgb(22, 23, 27)" }
                 : { bg: "vanGoghGrey.400" }
             }

@@ -239,7 +239,7 @@ export default function SideBar() {
           setValue={(x) => handleAspectRatioOptionClick(x as AspectRatioKey)}
           isDisabled={false}
           align="center"
-          darkerTheme={false}
+          headerTheme={false}
         />
       </div>
       <div className="flex items-center gap-van-gogh-spacing-m mb-2">
@@ -358,13 +358,13 @@ export default function SideBar() {
               setValue={() => {}}
               isDisabled={true}
               align="left"
-              darkerTheme={false}
+              headerTheme={false}
             />
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
       <button
-        className="flex items-center justify-center gap-1 rounded-corners-xs border border-thin border-van-gogh-grey-blue hover:border-van-gogh-grey-d text-van-gogh-xs h-8 mt-20 mb-4"
+        className="flex items-center justify-center gap-1 rounded-corners-xs border border-thin border-van-gogh-grey-blue hover:border-van-gogh-grey-d text-van-gogh-xs min-h-8 mt-20 mb-4"
         onClick={() => handleReset()}
       >
         <RefreshIcon />
