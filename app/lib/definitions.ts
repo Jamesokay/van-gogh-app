@@ -1,5 +1,12 @@
 import { ReactNode } from "react";
-import { BADGE_TEXT, COLUMN_OPTIONS, defaultAspectRatioConversion, OPTION_TITLE, SECTION_TITLE, TOOLTIP_TEXT } from "./constants";
+import {
+  BADGE_TEXT,
+  COLUMN_OPTIONS,
+  defaultAspectRatioConversion,
+  OPTION_TITLE,
+  SECTION_TITLE,
+  TOOLTIP_TEXT,
+} from "./constants";
 
 // SettingsContext type definitions
 export interface SettingsState {
@@ -76,6 +83,16 @@ export type RangeSliderProps = {
   setValue: (value: number) => void;
   max: number;
   min: number;
+};
+
+export type ImageGenModel = {
+  modelId: string;
+  modelName: string;
+  ModelType: string;
+  dimensions: string;
+  lightning: boolean;
+  alchemy: boolean;
+  img: string;
 };
 
 // Action type definitions

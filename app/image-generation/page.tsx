@@ -6,7 +6,7 @@ import SideBar from "../ui/image-generation/SideBar";
 const Page = () => {
   return (
     <SettingsProvider>
-      <main className="flex min-h-screen">
+      <main className="flex h-full">
         <SideBar />
         <div className="flex flex-col flex-1 w-full">
           <ImageGenerationHeader />

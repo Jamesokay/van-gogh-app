@@ -6,7 +6,18 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: ["grid-cols-2", "grid-cols-4"],
+  safelist: [
+    "grid-cols-2",
+    "grid-cols-4",
+    "max-h-0",
+    "max-h-input-height",
+    "opacity-0",
+    "opacity-100",
+    "mb-0",
+    "mb-4",
+    "bg-van-gogh-black-opal",
+    "rounded-corners-m",
+  ],
   theme: {
     extend: {
       backgroundImage: {
@@ -21,17 +32,22 @@ const config: Config = {
       borderRadius: {
         "corners-xs": "0.312rem",
         "corners-s": "0.375rem",
-        "corners-l": "1.875rem"
+        "corners-m": "1.25rem",
+        "corners-l": "1.875rem",
       },
       colors: {
         "van-gogh-white-16": "rgba(255, 255, 255, 0.16)",
         "van-gogh-border-grey": "rgb(36, 44, 62)",
+        "van-gogh-black-opal": "rgba(0, 0, 0, 0.34)",
         "van-gogh-grey-xd": "rgb(40, 40, 40)",
         "van-gogh-grey-d": "rgb(81, 81, 81)",
         "van-gogh-grey-m": "rgb(144, 148, 166)",
         "van-gogh-grey-blue": "#242C3E",
         "van-gogh-purple": "rgb(114, 88, 242)",
-        "van-gogh-dark-blue": "rgb(16, 22, 34)"
+        "van-gogh-dark-blue": "rgb(16, 22, 34)",
+      },
+      maxHeight: {
+        "input-height": "50px",
       },
       minWidth: {
         "input-width": "100px",
