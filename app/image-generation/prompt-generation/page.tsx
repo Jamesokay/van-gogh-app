@@ -1,5 +1,5 @@
 const Page = () => {
-  return <div>Generation history</div>;
+  return <div>Prompt Generation</div>;
 };
 
 export default Page;

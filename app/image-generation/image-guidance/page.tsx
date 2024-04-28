@@ -1,5 +1,5 @@
 const Page = () => {
-  return <div>Generation history</div>;
+  return <div>Image Guidance</div>;
 };
 
 export default Page;
