@@ -30,9 +30,13 @@ const config: Config = {
         "pink-gradient":
           "linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), linear-gradient(81.02deg, rgb(250, 85, 96) -23.47%, rgb(177, 75, 244) 45.52%, rgb(77, 145, 255) 114.8%)",
       },
+      boxShadow: {
+        "purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)"
+      },
       colors: {
         "van-gogh-border-grey": "rgb(36, 44, 62)",
         "van-gogh-black-opal": "rgba(0, 0, 0, 0.34)",
+        "van-gogh-white-opal": "rgba(255, 255, 255, 0.06)",
         "van-gogh-grey-2xd": "rgb(32, 33, 37)",
         "van-gogh-grey-xd": "rgb(40, 40, 40)",
         "van-gogh-grey-d": "rgb(81, 81, 81)",
@@ -43,7 +47,8 @@ const config: Config = {
         "van-gogh-dark-blue-alt": "#0B0F17",
         "van-gogh-dark-blue-hover": "rgb(22, 29, 45)",
         "van-gogh-badge-grey": "rgb(38, 39, 44)",
-        "van-gogh-text-grey": "rgb(151, 151, 151)"
+        "van-gogh-text-grey": "rgb(151, 151, 151)",
+        "van-gogh-input-grey": "rgb(23, 23, 23)"
       },
       gridTemplateColumns: {
         'auto-fit-minmax': 'repeat(auto-fit, minmax(calc(35.75rem), 1fr))',
