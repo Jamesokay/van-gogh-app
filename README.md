@@ -30,17 +30,26 @@
 - Will also need to implement model and imageStyle states in SettingsContext
 - Also contemplating whether a custom hook/controller might be a better option than Context API here. Will need to research further.
 
-## Day 6 (28/04/2024) (later on):
+### Day 6 (28/04/2024) (later on):
 
 <img width="1511" alt="Screenshot 2024-04-28 at 8 54 06 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/9c262d6f-8539-49db-b78e-5c9893dea6f2">
 
 - Added links
 - Lifted elements from page to layout level
 
+### Day 7 (29/04/2024):
+
+<img width="1512" alt="Screenshot 2024-04-29 at 10 55 05 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/db5cec80-6488-436d-9522-15748dc9c06d">
+<img width="1511" alt="Screenshot 2024-04-29 at 10 54 57 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/a8f29db9-ded0-46de-80d6-20f01a497d80">
+
+- Basic implementation of Image Guidance UI
+- Basic implementation of Generation History UI (empty state)
+
 ### Next Steps:
 
-- Continue implementation of ImageGenerationHeader
-- Implement GenerationOptions
+- Implement Prompt Generation page
 - Mobile responsiveness
-- Clean-up
+- Clean-up of styles
+- Integrate page states into SettingsContext
+- Define necessary actions for pages
 - Implement services for Leonardo API
