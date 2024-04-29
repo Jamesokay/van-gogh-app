@@ -45,9 +45,16 @@
 - Basic implementation of Image Guidance UI
 - Basic implementation of Generation History UI (empty state)
 
+### Day 7 (29/04/2024) (later):
+
+<img width="1512" alt="Screenshot 2024-04-29 at 3 43 44 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/c8aec195-f605-4238-849a-c624f65c0dca">
+
+- Basic implementation of Prompt Generation UI
+- Styling is still messy at this point, page state needs to be integrated into SettingsContext
+- Will proceed with major clean-up tomorrow, removing redundant code and moving strings into the constants file
+
 ### Next Steps:
 
-- Implement Prompt Generation page
 - Mobile responsiveness
 - Clean-up of styles
 - Integrate page states into SettingsContext
