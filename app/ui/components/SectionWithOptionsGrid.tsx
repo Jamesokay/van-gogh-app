@@ -32,7 +32,7 @@ const SectionWithOptionsGrid: FC<SectionWithOptionsGridProps> = ({
           >
             <input className="absolute h-px w-px m-[-1px]" type="radio" />
             <div
-              className={`border text-center text-van-gogh-xs py-2 rounded-corners-xs bg-van-gogh-dark-blue hover:border-van-gogh-purple ${
+              className={`border text-center text-van-gogh-xs py-2 rounded-md bg-van-gogh-dark-blue hover:border-van-gogh-purple ${
                 value === option
                   ? "border-van-gogh-purple"
                   : "border-van-gogh-grey-blue"

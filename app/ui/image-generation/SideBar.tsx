@@ -149,13 +149,13 @@ export default function SideBar() {
             height={34}
           />
         </div>
-        <div className="flex gap-2 items-center justify-center px-3 py-2 border border-w-thinner border-van-gogh-border-grey rounded-corners-l">
+        <div className="flex gap-2 items-center justify-center px-3 py-2 border border-w-thin border-van-gogh-border-grey rounded-full">
           <div className="flex items-center text-van-gogh-xs">
             <CoinsIcon />
             150
           </div>
           <QuestionMarkIcon />
-          <button className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-xs rounded-corners-l">
+          <button className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-xs rounded-full">
             {BUTTON_TEXT.UPGRADE}
           </button>
         </div>
@@ -184,7 +184,7 @@ export default function SideBar() {
         enabled={settings.alchemy}
         toggle={() => handleAlchemy(!settings.alchemy)}
       />
-      <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-corners-xs bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-van-gogh-spacing-m">
+      <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-md bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-van-gogh-spacing-m">
         <span className="text-van-gogh-grey-m">Output Resolution</span>
         <span>{`${outputDimensions.width} x ${outputDimensions.height}`}</span>
       </div>
@@ -225,7 +225,7 @@ export default function SideBar() {
       </p>
       <div className="flex gap-2 mb-van-gogh-spacing-ml">
         <button
-          className={`flex justify-center items-center border h-10 min-w-10 rounded-corners-xs bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue ${
+          className={`flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue ${
             aspectRatioLocked ? "border-van-gogh-purple" : ""
           }`}
           onClick={() => setAspectRatioLocked(!aspectRatioLocked)}
@@ -337,7 +337,7 @@ export default function SideBar() {
             />
             <input
               type="number"
-              className="input-number appearance-none bg-transparent rounded-corners-xs border border-thin border-van-gogh-grey-blue hover:border-van-gogh-grey-d focus:border-van-gogh-purple outline-none h-10 w-full min-w-input-width text-van-gogh-sm p-4 mb-4"
+              className="input-number appearance-none bg-transparent rounded-md border border-van-gogh-grey-blue hover:border-van-gogh-grey-d focus:border-van-gogh-purple outline-none h-10 w-full min-w-input-width text-van-gogh-sm p-4 mb-4"
               value={settings?.fixedSeed}
               onChange={(e) => setSetting("fixedSeed", e.target.value)}
               maxLength={10}
@@ -352,19 +352,21 @@ export default function SideBar() {
                 </span>
               </Tooltip>
             </div>
-            <DropdownMenu
-              value="Leonardo"
-              options={[]}
-              setValue={() => {}}
-              isDisabled={true}
-              align="left"
-              headerTheme={false}
-            />
+            <div className="h-10">
+              <DropdownMenu
+                value="Leonardo"
+                options={[]}
+                setValue={() => {}}
+                isDisabled={true}
+                align="left"
+                headerTheme={false}
+              />
+            </div>
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
       <button
-        className="flex items-center justify-center gap-1 rounded-corners-xs border border-thin border-van-gogh-grey-blue hover:border-van-gogh-grey-d text-van-gogh-xs min-h-8 mt-20 mb-4"
+        className="flex items-center justify-center gap-1 rounded-md border border-van-gogh-grey-blue hover:border-van-gogh-grey-d text-van-gogh-xs min-h-8 mt-20 mb-4"
         onClick={() => handleReset()}
       >
         <RefreshIcon />

@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { OptionWithSwitchProps } from "../../lib/definitions";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import { Tooltip } from "@chakra-ui/react";
+import Switch from "./Switch";
 
 const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
   title,
@@ -9,17 +10,21 @@ const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
   tooltipText,
   enabled,
   toggle,
-  hidden = false
+  hidden = false,
 }) => {
   const handleToggle = () => {
     toggle(!enabled);
   };
 
   return (
-    <div className={hidden ? "hidden" : "flex items-center gap-2 py-van-gogh-spacing-m"}>
+    <div
+      className={
+        hidden ? "hidden" : "flex items-center gap-2 py-van-gogh-spacing-m"
+      }
+    >
       <span className="text-van-gogh-md font-semibold">{title}</span>
       {badgeText && (
-        <div className="flex items-center bg-purple-gradient text-van-gogh-2xs py-van-gogh-spacing-1px px-van-gogh-spacing-xs rounded-corners-s">
+        <div className="flex items-center bg-purple-gradient text-van-gogh-2xs py-van-gogh-spacing-1px px-van-gogh-spacing-xs rounded-md">
           {badgeText}
         </div>
       )}
@@ -28,24 +33,7 @@ const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
           <QuestionMarkIcon />
         </span>
       </Tooltip>
-      <div
-        role="checkbox"
-        aria-checked={enabled}
-        tabIndex={0}
-        onClick={handleToggle}
-        onKeyDown={(e) => e.key === "Enter" && handleToggle()}
-        className={`${
-          enabled ? "bg-purple-gradient" : "bg-van-gogh-grey-d"
-        } ml-auto relative inline-flex items-center h-6 rounded-full w-switch-track-width cursor-pointer transition-colors focus:outline-none`}
-      >
-        <span
-          className={`${
-            enabled
-              ? "translate-x-switch-track-x-enable"
-              : "translate-x-switch-track-x-disable"
-          } inline-block w-switch-track-height h-switch-track-height transform bg-white rounded-full transition-transform`}
-        />
-      </div>
+      <Switch enabled={enabled} handleToggle={handleToggle} />
     </div>
   );
 };

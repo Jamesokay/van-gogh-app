@@ -15,8 +15,7 @@ const config: Config = {
     "opacity-100",
     "mb-0",
     "mb-4",
-    "bg-van-gogh-black-opal",
-    "rounded-corners-m",
+    "bg-van-gogh-black-opal"
   ],
   theme: {
     extend: {
@@ -28,15 +27,10 @@ const config: Config = {
           "linear-gradient(81.02deg, rgb(250, 85, 96) -23.47%, rgb(177, 75, 244) 45.52%, rgb(77, 145, 255) 114.8%)",
         "blue-gradient":
           "linear-gradient(90.04deg, rgb(177, 75, 244) -7.94%, rgb(77, 145, 255) 110%)",
-      },
-      borderRadius: {
-        "corners-xs": "0.312rem",
-        "corners-s": "0.375rem",
-        "corners-m": "1.25rem",
-        "corners-l": "1.875rem",
+        "pink-gradient":
+          "linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), linear-gradient(81.02deg, rgb(250, 85, 96) -23.47%, rgb(177, 75, 244) 45.52%, rgb(77, 145, 255) 114.8%)",
       },
       colors: {
-        "van-gogh-white-16": "rgba(255, 255, 255, 0.16)",
         "van-gogh-border-grey": "rgb(36, 44, 62)",
         "van-gogh-black-opal": "rgba(0, 0, 0, 0.34)",
         "van-gogh-grey-2xd": "rgb(32, 33, 37)",
@@ -46,7 +40,13 @@ const config: Config = {
         "van-gogh-grey-blue": "#242C3E",
         "van-gogh-purple": "rgb(114, 88, 242)",
         "van-gogh-dark-blue": "rgb(16, 22, 34)",
+        "van-gogh-dark-blue-alt": "#0B0F17",
         "van-gogh-dark-blue-hover": "rgb(22, 29, 45)",
+        "van-gogh-badge-grey": "rgb(38, 39, 44)",
+        "van-gogh-text-grey": "rgb(151, 151, 151)"
+      },
+      gridTemplateColumns: {
+        'auto-fit-minmax': 'repeat(auto-fit, minmax(calc(35.75rem), 1fr))',
       },
       maxHeight: {
         "input-height": "50px",
@@ -74,10 +74,6 @@ const config: Config = {
         "van-gogh-7xl": "4.5rem",
         "van-gogh-8xl": "6rem",
         "van-gogh-9xl": "8rem",
-      },
-      borderWidth: {
-        thinner: "0.063rem",
-        thin: "0.125rem",
       },
       spacing: {
         "van-gogh-spacing-1px": "1px",

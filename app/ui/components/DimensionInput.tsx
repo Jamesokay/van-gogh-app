@@ -23,7 +23,7 @@ const DimensionInput: FC<DimensionInputProps> = ({
           {dimension}
         </div>
         <input
-          className="input-number appearance-none bg-transparent rounded-corners-xs border border-thin border-transparent focus:border-van-gogh-purple outline-none text-center h-full w-full min-w-input-width text-van-gogh-sm py-4 px-8"
+          className="input-number appearance-none bg-transparent rounded-md border border-transparent focus:border-van-gogh-purple outline-none text-center h-full w-full min-w-input-width text-van-gogh-sm py-4 px-8"
           type="number"
           max={max}
           min={min}

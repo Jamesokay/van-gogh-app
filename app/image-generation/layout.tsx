@@ -9,7 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <SideBar />
         <div className="flex flex-col flex-1 w-full">
           <ImageGenerationHeader />
-          <div className="flex w-full border-t border-van-gogh-grey-2xd">
+          <div className="flex w-full border-t border-van-gogh-grey-2xd px-8">
             {children}
           </div>
         </div>

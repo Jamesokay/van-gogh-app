@@ -13,6 +13,7 @@ import CirclePlusIcon from "../svg/CirclePlusIcon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CoinsIcon from "../svg/CoinsIcon";
+import Switch from "../components/Switch";
 
 export default function ImageGenerationHeader() {
   const [showNegativePrompt, setShowNegativePrompt] = useState(false);
@@ -35,7 +36,7 @@ export default function ImageGenerationHeader() {
         </Heading>
       </div>
       <div className="flex w-full mt-5 mb-4">
-        <button className="flex items-center px-2 bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-corners-s mr-2">
+        <button className="flex items-center px-2 bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
           <DiceIcon />
         </button>
         <Textarea placeholder="Type a prompt..."></Textarea>
@@ -70,66 +71,53 @@ export default function ImageGenerationHeader() {
             headerTheme={true}
           />
         </div>
-        <div className="flex items-center gap-2.5 px-3.5 rounded-corners-s bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover">
+        <div className="flex items-center gap-2.5 px-3.5 rounded-md bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover">
           <AtomicIcon />
           <p className="text-van-gogh-sm font-medium">Add Elements</p>
           <CirclePlusIcon />
-          <div className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-sm rounded-corners-l">
+          <div className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-sm rounded-full">
             New
           </div>
         </div>
         <div className="flex gap-2 items-center">
+          <Switch
+            enabled={showNegativePrompt}
+            handleToggle={() => setShowNegativePrompt(!showNegativePrompt)}
+          />
           Add negative prompt
-          <div
-            role="checkbox"
-            aria-checked={showNegativePrompt}
-            tabIndex={0}
-            onClick={() => setShowNegativePrompt(!showNegativePrompt)}
-            onKeyDown={(e) =>
-              e.key === "Enter" && setShowNegativePrompt(!showNegativePrompt)
-            }
-            className={`${
-              showNegativePrompt ? "bg-purple-gradient" : "bg-van-gogh-grey-d"
-            } ml-auto relative inline-flex items-center h-6 rounded-full w-switch-track-width cursor-pointer transition-colors focus:outline-none`}
-          >
-            <span
-              className={`${
-                showNegativePrompt
-                  ? "translate-x-switch-track-x-enable"
-                  : "translate-x-switch-track-x-disable"
-              } inline-block w-switch-track-height h-switch-track-height transform bg-white rounded-full transition-transform`}
-            />
-          </div>
         </div>
       </div>
       <div className="mt-5 ">
         <div className="flex">
           <Link
             href="/image-generation"
-            className={`van-gogh-header-link mr-4 py-2 font-medium ${
+            className={`mr-4 py-2 font-medium ${
               pathname !== "/image-generation"
                 ? "text-van-gogh-grey-m hover:text-white"
-                : ""
+                : "van-gogh-header-link"
             }`}
           >
             Generation History
           </Link>
           <Link
             href="/image-generation/image-guidance"
-            className={`van-gogh-header-link mx-4 py-2 font-medium ${
+            className={`flex mx-4 py-2 font-medium gap-1.5 ${
               pathname !== "/image-generation/image-guidance"
                 ? "text-van-gogh-grey-m hover:text-white"
-                : ""
+                : "van-gogh-header-link"
             }`}
           >
             Image Guidance
+            <span className="bg-van-gogh-badge-grey py-1 px-1.5 text-van-gogh-3xs rounded-md">
+              OFF
+            </span>
           </Link>
           <Link
             href="/image-generation/prompt-generation"
-            className={`van-gogh-header-link mx-4 py-2 font-medium ${
+            className={`mx-4 py-2 font-medium ${
               pathname !== "/image-generation/prompt-generation"
                 ? "text-van-gogh-grey-m hover:text-white"
-                : ""
+                : "van-gogh-header-link"
             }`}
           >
             Prompt Generation

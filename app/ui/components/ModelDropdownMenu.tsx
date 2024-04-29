@@ -38,7 +38,7 @@ const ModelDropdownMenu: FC<{
             width={30}
             src={value.img}
             alt={`Image for ${value.modelName}`}
-            className="mr-2 min-h-[30px] rounded-corners-s"
+            className="object-cover mr-2 min-h-[30px] rounded-md"
           />
           <div className="flex flex-col w-full items-start gap-1">
             <div className="flex justify-between w-full text-van-gogh-xs text-van-gogh-grey-m">
@@ -77,7 +77,7 @@ const ModelDropdownMenu: FC<{
                 <div
                   className={
                     model.alchemy
-                      ? "flex ml-2 bg-van-gogh-black-opal rounded-corners-m py-1 px-2.5"
+                      ? "flex ml-2 bg-van-gogh-black-opal rounded-full py-1 px-2.5"
                       : "hidden"
                   }
                 >

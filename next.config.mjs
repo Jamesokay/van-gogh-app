@@ -8,6 +8,12 @@ const nextConfig = {
             port: '',
             pathname: '/users/**',
           },
+          {
+            protocol: 'https',
+            hostname: 'app.leonardo.ai',
+            port: '',
+            pathname: '/_next/**',
+          },
         ],
       },
 };
