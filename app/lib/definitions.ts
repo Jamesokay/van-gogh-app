@@ -1,14 +1,7 @@
 import { ReactElement, ReactNode } from "react";
-import {
-  BADGE_TEXT,
-  COLUMN_OPTIONS,
-  defaultAspectRatioConversion,
-  OPTION_TITLE,
-  SECTION_TITLE,
-  TOOLTIP_TEXT,
-} from "./constants";
+import { defaultAspectRatioConversion } from "./dataConstants";
 
-// SettingsContext type definitions
+// Settings definitions
 export interface SettingsState {
   numberOfImages: string;
   photoReal: boolean;
@@ -25,35 +18,61 @@ export interface SettingsState {
   fixedSeed: string;
 }
 
-export interface SettingsContextProps {
+export interface SettingsProviderProps {
+  children: ReactNode;
+}
+
+export type SettingsContextProps = {
   settings: SettingsState;
   setSetting: <K extends keyof SettingsState>(
     settingKey: K,
     value: SettingsState[K]
   ) => void;
-  resetSettings: () => void;
+  handlePhotoReal: (toggleOn: boolean) => void;
+  handleAlchemy: (toggleOn: boolean) => void;
+  handleAspectRatioChange: (dimension: InputDimension, value: number) => void;
+  handleDimensionOption: (option: string) => void;
+  handleAspectRatioOptionClick: (option: AspectRatioKey) => void;
+  handleReset: () => void;
+  aspectRatioLocked: boolean;
+  setAspectRatioLocked: (value: boolean) => void;
+};
+
+// TODO: use these in SideBar function calls instead of straight strings
+export const enum SETTINGS_KEY {
+  NUMBER_OF_IMAGES = "numberOfImages",
+  PHOTO_REAL = "photoReal",
+  ALCHEMY = "alchemy",
+  PROMPT_MAGIC = "promptMagic",
+  TRANSPARENCY = "transparency",
+  PUBLIC_IMAGES = "publicImages",
+  ASPECT_RATIO_WIDTH = "aspectRatioWidth",
+  ASPECT_RATIO_HEIGHT = "aspectRatioHeight",
+  GUIDANCE_SCALE = "guidanceScale",
+  TILING = "tiling",
+  RECOMMENDED_SIZES = "recommendedSizes",
+  USE_FIXED_SEED = "useFixedSeed",
+  FIXED_SEED = "fixedSeed",
 }
 
-export interface SettingsProviderProps {
-  children: ReactNode;
-}
 
-// Component type definitions
+// Component definitions
+
 export type AspectRatioKey = keyof typeof defaultAspectRatioConversion;
 
 export type InputDimension = "aspectRatioHeight" | "aspectRatioWidth";
 
 export type OptionWithSwitchProps = {
-  title: OPTION_TITLE;
-  badgeText?: BADGE_TEXT;
-  tooltipText: TOOLTIP_TEXT;
+  title: string;
+  badgeText?: string;
+  tooltipText: string;
   enabled: boolean;
   toggle: (value: boolean) => void;
   hidden?: boolean;
 };
 
 export type SectionWithOptionsGridProps = {
-  title: SECTION_TITLE;
+  title: string;
   value: string;
   setValue: (value: string) => void;
   options: string[];
@@ -102,3 +121,8 @@ export type Dimension = {
   width: number;
   height: number;
 };
+
+export const enum COLUMN_OPTIONS {
+  TWO = "2",
+  FOUR = "4",
+}

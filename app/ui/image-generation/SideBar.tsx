@@ -1,34 +1,23 @@
 "use client";
 
-import { useSettings } from "@/app/context/SettingsContext";
 import OptionWithSwitch from "../components/OptionWithSwitch";
-import { AspectRatioKey, InputDimension } from "../../lib/definitions";
+import {
+  AspectRatioKey,
+  COLUMN_OPTIONS,
+} from "../../lib/definitions";
 import {
   aspectRatioOptions,
-  BADGE_TEXT,
-  BUTTON_TEXT,
-  COLUMN_OPTIONS,
-  defaultAspectRatioConversion,
   dimensionOptions,
   numberOfImagesOptions,
-  OPTION_TITLE,
-  SECTION_TITLE,
-  TOOLTIP_TEXT,
-} from "../../lib/constants";
+} from "../../lib/dataConstants";
 import SectionWithOptionsGrid from "../components/SectionWithOptionsGrid";
 import RangeSlider from "../components/RangeSlider";
 import DimensionInput from "../components/DimensionInput";
-import {
-  calculateProportionalHeight,
-  findApproximateAspectRatio,
-  parseDimension,
-  transformDimensions,
-} from "../../lib/actions";
+
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import Image from "next/image";
 import CoinsIcon from "../svg/CoinsIcon";
 import DropdownMenu from "../components/DropdownMenu";
-import { useState } from "react";
 import { LockIcon, UnlockIcon } from "@chakra-ui/icons";
 import BackArrowIcon from "../svg/BackArrowIcon";
 import {
@@ -41,11 +30,30 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import RefreshIcon from "../svg/RefreshIcon";
+import {
+  badgeText,
+  sideBarStrings,
+  tooltipText,
+} from "@/app/lib/stringConstants";
+import {
+  findApproximateAspectRatio,
+  transformDimensions,
+} from "@/app/lib/actions";
+import { useSettings } from "@/app/context/SettingsContext";
 
-export default function SideBar() {
-  const { settings, setSetting, resetSettings } = useSettings();
-  const [aspectRatioLocked, setAspectRatioLocked] = useState(false);
-  const [aspectRatio, setAspectRatio] = useState<AspectRatioKey>("3:2");
+const SideBar = () => {
+  const {
+    settings,
+    setSetting,
+    handlePhotoReal,
+    handleAlchemy,
+    handleAspectRatioChange,
+    handleDimensionOption,
+    handleAspectRatioOptionClick,
+    handleReset,
+    aspectRatioLocked,
+    setAspectRatioLocked,
+  } = useSettings();
   const aspectRatioValue = findApproximateAspectRatio({
     width: settings.aspectRatioWidth,
     height: settings.aspectRatioHeight,
@@ -57,85 +65,6 @@ export default function SideBar() {
   const dimensionOptionsArray = settings.alchemy
     ? dimensionOptions.alchemy
     : dimensionOptions.default;
-
-  // Functions for handling interdependent updates to dimensions/aspectRatio
-  const handleDimensionOption = (option: string) => {
-    if (aspectRatioLocked) setAspectRatioLocked(false);
-    const dimensions = parseDimension(option);
-    if (!dimensions?.width || !dimensions?.height) return;
-    setSetting("aspectRatioWidth", dimensions.width);
-    setSetting("aspectRatioHeight", dimensions.height);
-  };
-
-  const handleAspectRatioOptionClick = (option: AspectRatioKey) => {
-    const result = defaultAspectRatioConversion[option];
-    if (!result) return;
-    setAspectRatio(option);
-    setSetting("aspectRatioWidth", result.width);
-    setSetting("aspectRatioHeight", result.height);
-  };
-
-  const handleLockedAspectRatio = (
-    dimension: InputDimension,
-    value: number
-  ) => {
-    if (dimension === "aspectRatioWidth") {
-      const correspondingHeight = calculateProportionalHeight(
-        aspectRatio,
-        value
-      );
-      setSetting("aspectRatioWidth", value);
-      setSetting("aspectRatioHeight", correspondingHeight);
-    } else {
-      const correspondingWidth = calculateProportionalHeight(
-        aspectRatio,
-        value
-      );
-      setSetting("aspectRatioHeight", value);
-      setSetting("aspectRatioWidth", correspondingWidth);
-    }
-  };
-
-  const handleAspectRatioChange = (
-    dimension: InputDimension,
-    value: number
-  ) => {
-    if (aspectRatioLocked) handleLockedAspectRatio(dimension, value);
-    else setSetting(dimension, value);
-  };
-
-  // Functions for updating interdependent states (photoReal, alchemy, promptMagic)
-  const enablePhotoRealWithCoupledState = () => {
-    if (!settings.alchemy) setSetting("alchemy", true);
-    if (settings.promptMagic) setSetting("promptMagic", false);
-    setSetting("photoReal", true);
-  };
-
-  const disableAlchemyWithCoupledState = () => {
-    if (settings.photoReal) setSetting("photoReal", false);
-    setSetting("alchemy", false);
-  };
-
-  const enableAlchemyWithCoupledState = () => {
-    if (settings.promptMagic) setSetting("promptMagic", false);
-    setSetting("alchemy", true);
-  };
-
-  const handleAlchemy = (toggleOn: boolean) => {
-    if (toggleOn) enableAlchemyWithCoupledState();
-    else disableAlchemyWithCoupledState();
-  };
-
-  const handlePhotoReal = (toggleOn: boolean) => {
-    if (toggleOn) enablePhotoRealWithCoupledState();
-    else setSetting("photoReal", false);
-  };
-
-  // Reset SideBar state
-  const handleReset = () => {
-    setAspectRatioLocked(false);
-    resetSettings();
-  };
 
   return (
     <div className="flex flex-col w-van-gogh-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto">
@@ -156,13 +85,13 @@ export default function SideBar() {
           </div>
           <QuestionMarkIcon />
           <button className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-xs rounded-full">
-            {BUTTON_TEXT.UPGRADE}
+            {sideBarStrings.upgrade}
           </button>
         </div>
       </div>
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <SectionWithOptionsGrid
-        title={SECTION_TITLE.NUMBER_OF_IMAGES}
+        title={sideBarStrings.numberOfImages}
         options={numberOfImagesOptions}
         columns={COLUMN_OPTIONS.FOUR}
         value={settings.numberOfImages}
@@ -170,58 +99,60 @@ export default function SideBar() {
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
-        title={OPTION_TITLE.PHOTOREAL}
-        badgeText={BADGE_TEXT.V2}
-        tooltipText={TOOLTIP_TEXT.PHOTOREAL}
+        title={sideBarStrings.photoReal}
+        badgeText={badgeText.v2}
+        tooltipText={tooltipText.photoReal}
         enabled={settings.photoReal}
         toggle={() => handlePhotoReal(!settings.photoReal)}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
-        title={OPTION_TITLE.ALCHEMY}
-        badgeText={BADGE_TEXT.V2}
-        tooltipText={TOOLTIP_TEXT.ALCHEMY}
+        title={sideBarStrings.alchemy}
+        badgeText={badgeText.v2}
+        tooltipText={tooltipText.alchemy}
         enabled={settings.alchemy}
         toggle={() => handleAlchemy(!settings.alchemy)}
       />
       <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-md bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-van-gogh-spacing-m">
-        <span className="text-van-gogh-grey-m">Output Resolution</span>
+        <span className="text-van-gogh-grey-m">
+          {sideBarStrings.outputResolution}
+        </span>
         <span>{`${outputDimensions.width} x ${outputDimensions.height}`}</span>
       </div>
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
-        title={OPTION_TITLE.PROMPT_MAGIC}
-        tooltipText={TOOLTIP_TEXT.PROMPT_MAGIC}
+        title={sideBarStrings.promptMagic}
+        tooltipText={tooltipText.promptMagic}
         enabled={settings.promptMagic}
         toggle={() => setSetting("promptMagic", !settings.promptMagic)}
         hidden={settings.alchemy}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
-        title={OPTION_TITLE.TRANSPARENCY}
-        badgeText={BADGE_TEXT.BETA}
-        tooltipText={TOOLTIP_TEXT.TRANSPARENCY}
+        title={sideBarStrings.transparency}
+        badgeText={badgeText.beta}
+        tooltipText={tooltipText.transparency}
         enabled={settings.transparency}
         toggle={() => setSetting("transparency", !settings.transparency)}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
-        title={OPTION_TITLE.PUBLIC_IMAGES}
-        tooltipText={TOOLTIP_TEXT.PUBLIC_IMAGES}
+        title={sideBarStrings.publicImages}
+        tooltipText={tooltipText.publicImages}
         enabled={settings.publicImages}
         toggle={() => setSetting("publicImages", !settings.publicImages)}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-van-gogh-spacing-ml" />
       <SectionWithOptionsGrid
-        title={SECTION_TITLE.INPUT_DIMENSIONS}
+        title={sideBarStrings.inputDimensions}
         options={dimensionOptionsArray}
         columns={COLUMN_OPTIONS.TWO}
-        tooltipText={TOOLTIP_TEXT.INPUT_DIMENSIONS}
+        tooltipText={tooltipText.inputDimensions}
         value={`${settings.aspectRatioWidth} x ${settings.aspectRatioHeight}`}
         setValue={(x) => handleDimensionOption(x)}
       />
       <p className="text-van-gogh-sm font-light mb-van-gogh-spacing-m">
-        {SECTION_TITLE.ADVANCED_CONTROLS}
+        {sideBarStrings.advancedControls}
       </p>
       <div className="flex gap-2 mb-van-gogh-spacing-ml">
         <button
@@ -277,9 +208,9 @@ export default function SideBar() {
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-van-gogh-spacing-m" />
       <div className="flex gap-2 items-center mb-1">
         <p className="text-van-gogh-md font-semibold">
-          {SECTION_TITLE.GUIDANCE_SCALE}
+          {sideBarStrings.guidanceScale}
         </p>
-        <Tooltip label={TOOLTIP_TEXT.GUIDANCE_SCALE}>
+        <Tooltip label={tooltipText.guidanceScale}>
           <span>
             <QuestionMarkIcon />
           </span>
@@ -297,8 +228,8 @@ export default function SideBar() {
         </div>
       </div>
       <OptionWithSwitch
-        title={OPTION_TITLE.TILING}
-        tooltipText={TOOLTIP_TEXT.TILING}
+        title={sideBarStrings.tiling}
+        tooltipText={tooltipText.tiling}
         enabled={settings.tiling}
         toggle={() => setSetting("tiling", !settings.tiling)}
       />
@@ -315,23 +246,23 @@ export default function SideBar() {
                 fontSize="0.75rem"
                 fontWeight={600}
               >
-                {SECTION_TITLE.SHOW_ADVANCED_SETTINGS}
+                {sideBarStrings.showAdvancedSettings}
                 <AccordionIcon />
               </Box>
             </AccordionButton>
           </h2>
           <AccordionPanel p={0}>
             <OptionWithSwitch
-              title={OPTION_TITLE.RECOMMENDED_SIZES}
-              tooltipText={TOOLTIP_TEXT.RECOMMENDED_SIZES}
+              title={sideBarStrings.recommendedSizes}
+              tooltipText={tooltipText.recommendedSizes}
               enabled={settings.recommendedSizes}
               toggle={() =>
                 setSetting("recommendedSizes", !settings.recommendedSizes)
               }
             />
             <OptionWithSwitch
-              title={OPTION_TITLE.USE_FIXED_SEED}
-              tooltipText={TOOLTIP_TEXT.USE_FIXED_SEED}
+              title={sideBarStrings.useFixedSeed}
+              tooltipText={tooltipText.useFixedSeed}
               enabled={settings.useFixedSeed}
               toggle={() => setSetting("useFixedSeed", !settings.useFixedSeed)}
             />
@@ -344,9 +275,9 @@ export default function SideBar() {
             />
             <div className="flex gap-2 items-center mb-1">
               <p className="text-van-gogh-md font-semibold">
-                {SECTION_TITLE.SCHEDULER}
+                {sideBarStrings.scheduler}
               </p>
-              <Tooltip label={TOOLTIP_TEXT.SCHEDULER}>
+              <Tooltip label={tooltipText.scheduler}>
                 <span>
                   <QuestionMarkIcon />
                 </span>
@@ -370,8 +301,10 @@ export default function SideBar() {
         onClick={() => handleReset()}
       >
         <RefreshIcon />
-        {BUTTON_TEXT.RESET}
+        {sideBarStrings.reset}
       </button>
     </div>
   );
-}
+};
+
+export default SideBar;

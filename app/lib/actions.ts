@@ -1,4 +1,4 @@
-import { defaultAspectRatioConversion } from "./constants";
+import { defaultAspectRatioConversion } from "./dataConstants";
 import { Dimension } from "./definitions";
 
 export function transformDimensions(input: Dimension): Dimension {

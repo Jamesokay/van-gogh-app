@@ -1,53 +1,10 @@
 import { ImageGenModel } from "./definitions";
 
-export const enum SECTION_TITLE {
-  NUMBER_OF_IMAGES = "Number of Images",
-  INPUT_DIMENSIONS = "Input Dimensions",
-  ADVANCED_CONTROLS = "Advanced Controls",
-  GUIDANCE_SCALE = "Guidance Scale",
-  SHOW_ADVANCED_SETTINGS = "Show Advanced Settings",
-  SCHEDULER = "Scheduler",
-}
-
-export const enum OPTION_TITLE {
-  PHOTOREAL = "PhotoReal",
-  ALCHEMY = "Alchemy",
-  PROMPT_MAGIC = "Prompt Magic",
-  TRANSPARENCY = "Transparency",
-  PUBLIC_IMAGES = "Public Images",
-  TILING = "Tiling",
-  RECOMMENDED_SIZES = "Recommended Sizes",
-  USE_FIXED_SEED = "Use Fixed Seed",
-}
-
-export const enum BADGE_TEXT {
-  V2 = "V2",
-  BETA = "Beta",
-}
-
-export const enum BUTTON_TEXT {
-  UPGRADE = "Upgrade",
-  RESET = "Reset to defaults",
-}
-
-export const enum TOOLTIP_TEXT {
-  PHOTOREAL = "Enhanced photorealism.",
-  ALCHEMY = "Stylize images with AI.",
-  PROMPT_MAGIC = "Prompt Magic tooltip text",
-  TRANSPARENCY = "Adds transparency to the generated images.",
-  PUBLIC_IMAGES = "Send your generations to the community feed.",
-  INPUT_DIMENSIONS = "This is the input resolution into Alchemy.",
-  GUIDANCE_SCALE = "How strongly your prompt is weighted",
-  TILING = "Ideal for repeating textures or backgrounds.",
-  RECOMMENDED_SIZES = "Automatically set dimensions to best fit for your model.",
-  USE_FIXED_SEED = "The deterministic number for the random number generator.",
-  SCHEDULER = "Defines how noise affects the generation.",
-}
-
-export const enum COLUMN_OPTIONS {
-  TWO = "2",
-  FOUR = "4",
-}
+export const routes = [
+  { title: "Generation History", path: "/image-generation" },
+  { title: "Image Guidance", path: "/image-generation/image-guidance" },
+  { title: "Prompt Generation", path: "/image-generation/prompt-generation" },
+];
 
 export const numberOfImagesOptions = ["1", "2", "3", "4", "5", "6", "7", "8"];
 export const dimensionOptions = {
@@ -157,3 +114,5 @@ export const imageStyles = [
   "Vibrant",
   "None",
 ];
+
+export const numberOfPromptsOptions = [2, 4, 6, 8];
