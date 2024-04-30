@@ -26,6 +26,12 @@ const defaultState: SettingsState = {
   recommendedSizes: true,
   useFixedSeed: false,
   fixedSeed: "",
+  prompt: "",
+  enableNegativePrompt: false,
+  negativePrompt: "",
+  modelId: "0",
+  imageStyle: "Dynamic",
+  imageGuidance: false,
 };
 
 const SettingsContext = createContext<SettingsContextProps>({

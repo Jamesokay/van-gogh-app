@@ -10,7 +10,7 @@ import LightningIcon from "../svg/LightningIcon";
 const ModelDropdownMenu: FC<{
   options: ImageGenModel[];
   value: ImageGenModel;
-  setValue: (value: ImageGenModel) => void;
+  setValue: (modelId: string) => void;
 }> = ({ options, value, setValue }) => {
   return (
     <Menu>
@@ -60,7 +60,7 @@ const ModelDropdownMenu: FC<{
         {options.map((model) => (
           <MenuItem
             key={model.modelId}
-            onClick={() => setValue(model)}
+            onClick={() => setValue(model.modelId)}
             fontSize="0.875rem"
             borderBottom="0.03rem solid"
             borderColor="rgb(36, 44, 62)"

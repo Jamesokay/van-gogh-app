@@ -1,8 +1,6 @@
 "use client";
 
-import {
-  numberOfPromptsOptions
-} from "@/app/lib/dataConstants";
+import { numberOfPromptsOptions } from "@/app/lib/dataConstants";
 import { promptGenerationStrings } from "@/app/lib/stringConstants";
 import LightBulbIcon from "@/app/ui/svg/LightBulbIcon";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
@@ -10,6 +8,7 @@ import { useState } from "react";
 
 const Page = () => {
   const [numberOfPrompts, setNumberOfPrompts] = useState(4);
+  const [prompt, setPrompt] = useState("");
   const remainingPrompts = 100;
   const text = promptGenerationStrings;
 
@@ -42,6 +41,8 @@ const Page = () => {
           className="outline-none border-none w-full bg-van-gogh-input-grey van-gogh-sm px-4 h-10 rounded-md"
           type="text"
           placeholder={text.inputPlaceHolder}
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
         />
         <button className="relative flex text-van-gogh-sm h-10 bg-pink-gradient p-[1px] rounded-lg hover:shadow-purple-glow">
           <p className="absolute text-center w-full pb-1 bottom-full text-van-gogh-2xs text-van-gogh-text-grey">

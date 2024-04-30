@@ -16,6 +16,12 @@ export interface SettingsState {
   recommendedSizes: boolean;
   useFixedSeed: boolean;
   fixedSeed: string;
+  prompt: string;
+  enableNegativePrompt: boolean;
+  negativePrompt: string;
+  modelId: string;
+  imageStyle: string;
+  imageGuidance: boolean;
 }
 
 export interface SettingsProviderProps {
@@ -38,7 +44,6 @@ export type SettingsContextProps = {
   setAspectRatioLocked: (value: boolean) => void;
 };
 
-// TODO: use these in SideBar function calls instead of straight strings
 export const enum SETTINGS_KEY {
   NUMBER_OF_IMAGES = "numberOfImages",
   PHOTO_REAL = "photoReal",
@@ -53,8 +58,13 @@ export const enum SETTINGS_KEY {
   RECOMMENDED_SIZES = "recommendedSizes",
   USE_FIXED_SEED = "useFixedSeed",
   FIXED_SEED = "fixedSeed",
+  PROMPT = "prompt",
+  ENABLE_NEGATIVE_PROMPT = "enableNegativePrompt",
+  NEGATIVE_PROMPT = "negativePrompt",
+  IMAGE_STYLE = "imageStyle",
+  MODEL_ID = "modelId",
+  IMAGE_GUIDANCE = "imageGuidance",
 }
-
 
 // Component definitions
 

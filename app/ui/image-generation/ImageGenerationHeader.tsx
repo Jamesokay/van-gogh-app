@@ -2,9 +2,8 @@
 
 import { Heading, Textarea } from "@chakra-ui/react";
 import DiceIcon from "../svg/DiceIcon";
-import { useState } from "react";
 import { imageStyles, modelData, routes } from "@/app/lib/dataConstants";
-import { ImageGenModel } from "@/app/lib/definitions";
+import { SETTINGS_KEY } from "@/app/lib/definitions";
 import ModelDropdownMenu from "../components/ModelDropdownMenu";
 import DropdownMenu from "../components/DropdownMenu";
 import FlaskIcon from "../svg/FlaskIcon";
@@ -14,26 +13,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import CoinsIcon from "../svg/CoinsIcon";
 import Switch from "../components/Switch";
-import { badgeText, imageGenerationHeaderStrings } from "@/app/lib/stringConstants";
+import {
+  badgeText,
+  imageGenerationHeaderStrings,
+} from "@/app/lib/stringConstants";
+import { useSettings } from "@/app/context/SettingsContext";
 
 export default function ImageGenerationHeader() {
-  const [showNegativePrompt, setShowNegativePrompt] = useState(false);
-  const [selectedModel, setSelectedModel] = useState<ImageGenModel>(
-    modelData[0]
-  );
-  const [selectedStyle, setSelectedStyle] = useState("Dynamic");
+  const { settings, setSetting } = useSettings();
   const pathname = usePathname();
+  const selectedModel =
+    modelData.find((x) => x.modelId === settings.modelId) || modelData[0];
   const text = imageGenerationHeaderStrings;
 
   return (
     <div className="flex flex-col w-full px-8">
       <div className="mt-10 mb-2">
-        <Heading
-          as="h1"
-          fontSize="1.5rem"
-          fontWeight={500}
-          onClick={() => setShowNegativePrompt(!showNegativePrompt)}
-        >
+        <Heading as="h1" fontSize="1.5rem" fontWeight={500}>
           {text.title}
         </Heading>
       </div>
@@ -41,7 +37,10 @@ export default function ImageGenerationHeader() {
         <button className="flex items-center px-2 bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
           <DiceIcon />
         </button>
-        <Textarea placeholder={text.promptInputPlaceholder}></Textarea>
+        <Textarea
+          placeholder={text.promptInputPlaceholder}
+          onChange={(e) => setSetting(SETTINGS_KEY.PROMPT, e.target.value)}
+        ></Textarea>
         <button className="flex items-center bg-purple-gradient px-12 rounded-lg ml-4 text-van-gogh-lg font-medium">
           <span className="mr-3">{text.buttonText}</span>
           <CoinsIcon white={true} />
@@ -50,30 +49,35 @@ export default function ImageGenerationHeader() {
       </div>
       <div
         className={`overflow-hidden max-h-${
-          showNegativePrompt ? "input-height" : "0"
-        } opacity-${showNegativePrompt ? "100" : "0"}
-        mb-${showNegativePrompt ? "4" : "0"} transition-all`}
+          settings.enableNegativePrompt ? "input-height" : "0"
+        } opacity-${settings.enableNegativePrompt ? "100" : "0"}
+        mb-${settings.enableNegativePrompt ? "4" : "0"} transition-all`}
       >
-        <Textarea placeholder={text.negPromptInputPlaceholder}></Textarea>
+        <Textarea
+          placeholder={text.negPromptInputPlaceholder}
+          onChange={(e) =>
+            setSetting(SETTINGS_KEY.NEGATIVE_PROMPT, e.target.value)
+          }
+        ></Textarea>
       </div>
       <div className="flex gap-4">
         <ModelDropdownMenu
           options={modelData}
           value={selectedModel}
-          setValue={setSelectedModel}
+          setValue={(x) => setSetting(SETTINGS_KEY.MODEL_ID, x)}
         />
         <div className="min-w-[10rem]">
           <DropdownMenu
             options={imageStyles}
-            value={selectedStyle}
-            setValue={setSelectedStyle}
+            value={settings.imageStyle}
+            setValue={(x) => setSetting(SETTINGS_KEY.IMAGE_STYLE, x)}
             align="left"
             isDisabled={false}
             leftIcon={<FlaskIcon />}
             headerTheme={true}
           />
         </div>
-        <div className="flex items-center gap-2.5 px-3.5 rounded-md bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover">
+        <div className="flex items-center gap-2.5 px-3.5 rounded-md bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover cursor-pointer">
           <AtomicIcon />
           <p className="text-van-gogh-sm font-medium">{text.addElements}</p>
           <CirclePlusIcon />
@@ -83,8 +87,13 @@ export default function ImageGenerationHeader() {
         </div>
         <div className="flex gap-2 items-center">
           <Switch
-            enabled={showNegativePrompt}
-            handleToggle={() => setShowNegativePrompt(!showNegativePrompt)}
+            enabled={settings.enableNegativePrompt}
+            handleToggle={() =>
+              setSetting(
+                SETTINGS_KEY.ENABLE_NEGATIVE_PROMPT,
+                !settings.enableNegativePrompt
+              )
+            }
           />
           {text.addNegPrompt}
         </div>

@@ -2,8 +2,11 @@ import UploadIcon from "../svg/UploadIcon";
 import DropdownMenu from "../components/DropdownMenu";
 import Switch from "../components/Switch";
 import { imageGuidanceStrings } from "@/app/lib/stringConstants";
+import { useSettings } from "@/app/context/SettingsContext";
+import { SETTINGS_KEY } from "@/app/lib/definitions";
 
 const ImageGuidanceUpload = () => {
+  const { settings, setSetting } = useSettings();
   const text = imageGuidanceStrings.uploadStrings;
   return (
     <div className="flex flex-col h-full bg-van-gogh-dark-blue-alt rounded-lg">
@@ -14,7 +17,12 @@ const ImageGuidanceUpload = () => {
           </div>
           <p className="font-medium">{text.title}</p>
         </div>
-        <Switch enabled={false} handleToggle={() => {}} />
+        <Switch
+          enabled={settings.imageGuidance}
+          handleToggle={() =>
+            setSetting(SETTINGS_KEY.IMAGE_GUIDANCE, !settings.imageGuidance)
+          }
+        />
       </div>
       <div className="flex flex-col gap-1.5 py-2.5 px-4">
         <p className="text-van-gogh-xs font-medium">{text.description}</p>
