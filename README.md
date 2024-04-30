@@ -53,10 +53,17 @@
 - Styling is still messy at this point, page state needs to be integrated into SettingsContext
 - Will proceed with major clean-up tomorrow, removing redundant code and moving strings into the constants file
 
+### Day 8 (30/04/2024):
+
+- Reworked file structure
+- Moved all display strings to dedicated file
+- Broke SideBar down into sub-components
+- Broke ImageGenerationHeader down into sub-components
+- Lifted state out of ImageGenerationHeader into SettingsContext
+- General tidy-up and removal of repetetive/redundant code
+
 ### Next Steps:
 
 - Mobile responsiveness
 - Clean-up of styles
-- Integrate page states into SettingsContext
-- Define necessary actions for pages
 - Implement services for Leonardo API
