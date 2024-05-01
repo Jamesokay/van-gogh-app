@@ -60,9 +60,9 @@ const DiceIcon = () => {
           y2="9.24026"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-2-:rcf:"
@@ -72,9 +72,9 @@ const DiceIcon = () => {
           y2="15.7934"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-3-:rcf:"
@@ -84,9 +84,9 @@ const DiceIcon = () => {
           y2="15.7934"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-4-:rcf:"
@@ -96,9 +96,9 @@ const DiceIcon = () => {
           y2="24.3147"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-5-:rcf:"
@@ -108,9 +108,9 @@ const DiceIcon = () => {
           y2="24.3147"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-6-:rcf:"
@@ -120,9 +120,9 @@ const DiceIcon = () => {
           y2="-4.22538"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-7-:rcf:"
@@ -132,9 +132,9 @@ const DiceIcon = () => {
           y2="6.48495"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-8-:rcf:"
@@ -144,9 +144,9 @@ const DiceIcon = () => {
           y2="3.68295"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-9-:rcf:"
@@ -156,9 +156,9 @@ const DiceIcon = () => {
           y2="14.5322"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-10-:rcf:"
@@ -168,9 +168,9 @@ const DiceIcon = () => {
           y2="20.3128"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="dice-gradient-icon-11-:rcf:"
@@ -180,9 +180,9 @@ const DiceIcon = () => {
           y2="11.7302"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
       </defs>
     </svg>

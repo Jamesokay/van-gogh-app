@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   AspectRatioKey,
   InputDimension,
@@ -71,16 +71,22 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     if (aspectRatioLocked) setAspectRatioLocked(false);
     const dimensions = parseDimension(option);
     if (!dimensions?.width || !dimensions?.height) return;
-    setSetting(SETTINGS_KEY.ASPECT_RATIO_WIDTH, dimensions.width);
-    setSetting(SETTINGS_KEY.ASPECT_RATIO_HEIGHT, dimensions.height);
+    setSettings((prev) => ({
+      ...prev,
+      [SETTINGS_KEY.ASPECT_RATIO_WIDTH]: dimensions.width,
+      [SETTINGS_KEY.ASPECT_RATIO_HEIGHT]: dimensions.height,
+    }));
   };
 
   const handleAspectRatioOptionClick = (option: AspectRatioKey) => {
     const result = defaultAspectRatioConversion[option];
     if (!result) return;
     setAspectRatio(option);
-    setSetting(SETTINGS_KEY.ASPECT_RATIO_WIDTH, result.width);
-    setSetting(SETTINGS_KEY.ASPECT_RATIO_HEIGHT, result.height);
+    setSettings((prev) => ({
+      ...prev,
+      [SETTINGS_KEY.ASPECT_RATIO_WIDTH]: result.width,
+      [SETTINGS_KEY.ASPECT_RATIO_HEIGHT]: result.height,
+    }));
   };
 
   const handleLockedAspectRatio = (
@@ -92,15 +98,21 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
         aspectRatio,
         value
       );
-      setSetting(SETTINGS_KEY.ASPECT_RATIO_WIDTH, value);
-      setSetting(SETTINGS_KEY.ASPECT_RATIO_HEIGHT, correspondingHeight);
+      setSettings((prev) => ({
+        ...prev,
+        [SETTINGS_KEY.ASPECT_RATIO_WIDTH]: value,
+        [SETTINGS_KEY.ASPECT_RATIO_HEIGHT]: correspondingHeight,
+      }));
     } else {
       const correspondingWidth = calculateProportionalHeight(
         aspectRatio,
         value
       );
-      setSetting(SETTINGS_KEY.ASPECT_RATIO_HEIGHT, value);
-      setSetting(SETTINGS_KEY.ASPECT_RATIO_WIDTH, correspondingWidth);
+      setSettings((prev) => ({
+        ...prev,
+        [SETTINGS_KEY.ASPECT_RATIO_HEIGHT]: value,
+        [SETTINGS_KEY.ASPECT_RATIO_WIDTH]: correspondingWidth,
+      }));
     }
   };
 
@@ -113,30 +125,23 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   };
 
   // Functions for updating interdependent states (photoReal, alchemy, promptMagic)
-  const enablePhotoRealWithCoupledState = () => {
-    if (!settings.alchemy) setSetting(SETTINGS_KEY.ALCHEMY, true);
-    if (settings.promptMagic) setSetting(SETTINGS_KEY.PROMPT_MAGIC, false);
-    setSetting(SETTINGS_KEY.PHOTO_REAL, true);
-  };
-
-  const disableAlchemyWithCoupledState = () => {
-    if (settings.photoReal) setSetting(SETTINGS_KEY.PHOTO_REAL, false);
-    setSetting(SETTINGS_KEY.ALCHEMY, false);
-  };
-
-  const enableAlchemyWithCoupledState = () => {
-    if (settings.promptMagic) setSetting(SETTINGS_KEY.PROMPT_MAGIC, false);
-    setSetting(SETTINGS_KEY.ALCHEMY, true);
-  };
 
   const handleAlchemy = (toggleOn: boolean) => {
-    if (toggleOn) enableAlchemyWithCoupledState();
-    else disableAlchemyWithCoupledState();
+    if (toggleOn) {
+      if (settings.promptMagic) setSetting(SETTINGS_KEY.PROMPT_MAGIC, false);
+      setSetting(SETTINGS_KEY.ALCHEMY, true);
+    } else {
+      if (settings.photoReal) setSetting(SETTINGS_KEY.PHOTO_REAL, false);
+      setSetting(SETTINGS_KEY.ALCHEMY, false);
+    }
   };
 
   const handlePhotoReal = (toggleOn: boolean) => {
-    if (toggleOn) enablePhotoRealWithCoupledState();
-    else setSetting(SETTINGS_KEY.PHOTO_REAL, false);
+    if (toggleOn) {
+      if (!settings.alchemy) setSetting(SETTINGS_KEY.ALCHEMY, true);
+      if (settings.promptMagic) setSetting(SETTINGS_KEY.PROMPT_MAGIC, false);
+      setSetting(SETTINGS_KEY.PHOTO_REAL, true);
+    } else setSetting(SETTINGS_KEY.PHOTO_REAL, false);
   };
 
   // Reset SideBar state

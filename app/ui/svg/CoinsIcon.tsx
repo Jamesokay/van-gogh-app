@@ -21,9 +21,9 @@ const CoinsIcon:FC<{ white?: boolean }> = ({ white }) => {
           y2="-0.962706"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FA5560"></stop>
-          <stop offset="0.5" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#FA5560"></stop>
+          <stop offset="0.5" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
       </defs>
     </svg>

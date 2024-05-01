@@ -35,9 +35,9 @@ const AtomicIcon = () => {
           y2="13.3458"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="linear-gradient-2-exclamation-circle-outline-icon-:r66:"
@@ -47,9 +47,9 @@ const AtomicIcon = () => {
           y2="20.1066"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="linear-gradient-3-exclamation-circle-outline-icon-:r66:"
@@ -59,9 +59,9 @@ const AtomicIcon = () => {
           y2="-7.55817"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="linear-gradient-4-exclamation-circle-outline-icon-:r66:"
@@ -71,9 +71,9 @@ const AtomicIcon = () => {
           y2="26.2999"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="linear-gradient-5-exclamation-circle-outline-icon-:r66:"
@@ -83,9 +83,9 @@ const AtomicIcon = () => {
           y2="-0.0496909"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
       </defs>
     </svg>

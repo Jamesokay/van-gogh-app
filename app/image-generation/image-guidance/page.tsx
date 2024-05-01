@@ -10,9 +10,7 @@ const Page = () => {
       <ImageGuidanceBanner />
       <div className="grid grid-cols-auto-fit-minmax gap-6">
         <ImageGuidanceUpload />
-        <div className="empty-selections-bg flex justify-center">
-          <ImageGuidanceCTA />
-        </div>
+        <ImageGuidanceCTA />
       </div>
     </div>
   );
