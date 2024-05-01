@@ -62,6 +62,12 @@
 - Lifted state out of ImageGenerationHeader into SettingsContext
 - General tidy-up and removal of repetetive/redundant code
 
+### Day 9 (01/05/2024):
+
+- Fixed up console errors related to casing issue
+- Basic implementation of image file upload
+- Wireframe version of UploadedImageComponent
+
 ### Next Steps:
 
 - Mobile responsiveness
