@@ -36,7 +36,11 @@ const ImageGuidanceUpload = () => {
 
   return (
     <div className="flex flex-col h-full bg-van-gogh-dark-blue-alt rounded-lg">
-      <div className="flex justify-between py-3.5 px-4 border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue">
+      <div
+        className={`flex justify-between py-3.5 px-4 border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue ${
+          settings.imageGuidance ? "bg-darkblue-to-purple-gradient" : ""
+        }`}
+      >
         <div className="flex gap-3.5 text-van-gogh-sm">
           <div className="flex items-center justify-center w-5 h-5 bg-van-gogh-dark-blue rounded-md text-van-gogh-3xs">
             1

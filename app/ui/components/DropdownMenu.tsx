@@ -11,6 +11,7 @@ const DropdownMenu = <T extends string = string>({
   align,
   leftIcon,
   headerTheme,
+  large
 }: DropdownMenuProps<T>) => {
   return (
     <Menu>
@@ -41,7 +42,7 @@ const DropdownMenu = <T extends string = string>({
             key={option}
             onClick={() => setValue(option)}
             bg={headerTheme ? "rgb(11, 15, 23)" : ""}
-            h={headerTheme ? "2.5rem" : ""}
+            h={large ? "2.5rem" : ""}
             fontSize={headerTheme ? "0.875rem" : "0.75rem"}
             _hover={
               headerTheme

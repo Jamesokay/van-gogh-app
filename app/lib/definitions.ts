@@ -114,6 +114,7 @@ export type DropdownMenuProps<T extends string = string> = {
   align: "center" | "left";
   leftIcon?: ReactElement;
   headerTheme: boolean;
+  large: boolean;
 };
 
 export type RangeSliderProps = {

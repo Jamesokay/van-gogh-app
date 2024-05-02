@@ -75,6 +75,7 @@ export default function ImageGenerationHeader() {
             isDisabled={false}
             leftIcon={<FlaskIcon />}
             headerTheme={true}
+            large={true}
           />
         </div>
         <div className="flex items-center gap-2.5 px-3.5 rounded-md bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover cursor-pointer">
@@ -119,7 +120,7 @@ export default function ImageGenerationHeader() {
                       : "bg-van-gogh-badge-grey"
                   }`}
                 >
-                  {settings.imageGuidance ? "ON" : "OFF"}
+                  <span className="text-white">{settings.imageGuidance ? "ON" : "OFF"}</span>
                 </div>
               )}
             </Link>

@@ -40,6 +40,7 @@ const ImageUploadInput: FC<{
           isDisabled={false}
           align="left"
           headerTheme={false}
+          large={true}
         />
       </div>
     </div>

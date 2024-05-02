@@ -18,6 +18,7 @@ const config: Config = {
     "bg-van-gogh-black-opal",
     "bg-van-gogh-badge-grey",
     "bg-green-gradient",
+    "bg-darkblue-to-purple-gradient"
   ],
   theme: {
     extend: {
@@ -25,6 +26,7 @@ const config: Config = {
         "body-gradient": "linear-gradient(112deg, #020305 0%, #070A0F 100%)",
         "darkblue-to-darkerblue-gradient":
           "linear-gradient(90deg, rgb(6, 8, 13) 0%, rgb(13, 18, 28) 100%)",
+          'darkblue-to-purple-gradient': "linear-gradient(270deg, rgba(202, 79, 194, 0.20) -0.11%, rgba(178, 76, 243, 0.00) 50.06%)",
         "purple-gradient":
           "linear-gradient(81.02deg, rgb(250, 85, 96) -23.47%, rgb(177, 75, 244) 45.52%, rgb(77, 145, 255) 114.8%)",
         "blue-gradient":
@@ -52,7 +54,7 @@ const config: Config = {
         "van-gogh-dark-blue-hover": "rgb(22, 29, 45)",
         "van-gogh-badge-grey": "rgb(38, 39, 44)",
         "van-gogh-text-grey": "rgb(151, 151, 151)",
-        "van-gogh-input-grey": "rgb(23, 23, 23)"
+        "van-gogh-input-grey": "rgb(23, 23, 23)",
       },
       flex: {
         "1-1-0": "1 1 0%",

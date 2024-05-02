@@ -68,7 +68,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           {settings.imageGuidanceSrc && (
             <div>
               <img
-                className="h-60 w-full"
+                className="h-60 w-full object-contain"
                 src={settings.imageGuidanceSrc}
                 alt=""
                 onLoad={handleImageLoaded}
@@ -133,6 +133,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
               align="left"
               isDisabled={false}
               headerTheme={false}
+              large={true}
             />
           </div>
         </div>
