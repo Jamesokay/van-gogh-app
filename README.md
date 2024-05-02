@@ -68,6 +68,17 @@
 - Basic implementation of image file upload
 - Wireframe version of UploadedImageComponent
 
+### Day 10 (02/05/2024):
+
+<img width="1512" alt="Screenshot 2024-05-02 at 1 05 46 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/011d8bf2-06da-4abe-abec-10f56d5ecb95">
+
+- Implemented context state for image upload
+- Implemented ImageUploadInput component
+- Implemented UploadedImageComponent
+- Functions for uploading and deleting uploaded images
+- Functions for comparing uploaded aspect ratio with selected aspect ratio
+- Still need to correctly style dropdown menu and tidy up
+
 ### Next Steps:
 
 - Build ImageUploadedComponent
