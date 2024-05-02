@@ -22,6 +22,9 @@ export interface SettingsState {
   modelId: string;
   imageStyle: string;
   imageGuidance: boolean;
+  imageGuidanceSrc: string;
+  imageGuidanceType: string;
+  imageGuidanceStrength: number;
 }
 
 export interface SettingsProviderProps {
@@ -42,6 +45,7 @@ export type SettingsContextProps = {
   handleReset: () => void;
   aspectRatioLocked: boolean;
   setAspectRatioLocked: (value: boolean) => void;
+  clearImageGuidance: () => void;
 };
 
 export const enum SETTINGS_KEY {
@@ -64,6 +68,9 @@ export const enum SETTINGS_KEY {
   IMAGE_STYLE = "imageStyle",
   MODEL_ID = "modelId",
   IMAGE_GUIDANCE = "imageGuidance",
+  IMAGE_GUIDANCE_SRC = "imageGuidanceSrc",
+  IMAGE_GUIDANCE_TYPE = "imageGuidanceType",
+  IMAGE_GUIDANCE_STRENGTH = "imageGuidanceStrength",
 }
 
 // Component definitions

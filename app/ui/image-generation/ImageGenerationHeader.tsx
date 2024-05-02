@@ -104,13 +104,24 @@ export default function ImageGenerationHeader() {
             <Link
               key={route.path}
               href={route.path}
-              className={`mr-8 py-2 font-medium ${
+              className={`flex gap-1 items-center mr-8 py-2 font-medium ${
                 pathname !== route.path
                   ? "text-van-gogh-grey-m hover:text-white"
                   : "van-gogh-header-link"
               }`}
             >
               {route.title}
+              {route.title === "Image Guidance" && (
+                <div
+                  className={`flex justify-center min-w-8 px-1.5 py-1 text-van-gogh-3xs rounded-md ${
+                    settings.imageGuidance
+                      ? "bg-green-gradient"
+                      : "bg-van-gogh-badge-grey"
+                  }`}
+                >
+                  {settings.imageGuidance ? "ON" : "OFF"}
+                </div>
+              )}
             </Link>
           ))}
         </div>

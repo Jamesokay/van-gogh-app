@@ -32,6 +32,14 @@ const defaultState: SettingsState = {
   modelId: "0",
   imageStyle: "Dynamic",
   imageGuidance: false,
+  // Note: imageGuidanceSrc will be a base64 encoded string.
+  // Unsure of whether keeping this in Context is a performance concern,
+  // but just rolling with it for now.
+  // Once db is implemented, can probably add some auto-upload on image selection,
+  // then just use the hosted src here instead.
+  imageGuidanceSrc: "",
+  imageGuidanceType: "Image to Image",
+  imageGuidanceStrength: 30,
 };
 
 const SettingsContext = createContext<SettingsContextProps>({
@@ -45,6 +53,7 @@ const SettingsContext = createContext<SettingsContextProps>({
   handleReset: () => {},
   aspectRatioLocked: false,
   setAspectRatioLocked: () => {},
+  clearImageGuidance: () => {}
 });
 
 export const useSettings = () => useContext(SettingsContext);
@@ -144,6 +153,14 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     } else setSetting(SETTINGS_KEY.PHOTO_REAL, false);
   };
 
+  const clearImageGuidance = () => {
+    setSettings((prev) => ({
+      ...prev,
+      [SETTINGS_KEY.IMAGE_GUIDANCE_SRC]: "",
+      [SETTINGS_KEY.IMAGE_GUIDANCE_STRENGTH]: 30,
+    }));
+  };
+
   // Reset SideBar state
   const handleReset = () => {
     setAspectRatioLocked(false);
@@ -161,6 +178,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     handleReset,
     aspectRatioLocked,
     setAspectRatioLocked,
+    clearImageGuidance
   };
 
   return (

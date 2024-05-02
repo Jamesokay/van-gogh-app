@@ -15,7 +15,9 @@ const config: Config = {
     "opacity-100",
     "mb-0",
     "mb-4",
-    "bg-van-gogh-black-opal"
+    "bg-van-gogh-black-opal",
+    "bg-van-gogh-badge-grey",
+    "bg-green-gradient",
   ],
   theme: {
     extend: {
@@ -29,9 +31,11 @@ const config: Config = {
           "linear-gradient(90.04deg, rgb(177, 75, 244) -7.94%, rgb(77, 145, 255) 110%)",
         "pink-gradient":
           "linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), linear-gradient(81.02deg, rgb(250, 85, 96) -23.47%, rgb(177, 75, 244) 45.52%, rgb(77, 145, 255) 114.8%)",
+        "green-gradient":
+          "linear-gradient(90deg, rgb(0, 194, 119) 0%, rgb(0, 121, 78) 100%)",
       },
       boxShadow: {
-        "purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)"
+        "purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)",
       },
       colors: {
         "van-gogh-border-grey": "rgb(36, 44, 62)",
@@ -50,8 +54,11 @@ const config: Config = {
         "van-gogh-text-grey": "rgb(151, 151, 151)",
         "van-gogh-input-grey": "rgb(23, 23, 23)"
       },
+      flex: {
+        "1-1-0": "1 1 0%",
+      },
       gridTemplateColumns: {
-        'auto-fit-minmax': 'repeat(auto-fit, minmax(calc(35.75rem), 1fr))',
+        "auto-fit-minmax": "repeat(auto-fit, minmax(calc(35.75rem), 1fr))",
       },
       maxHeight: {
         "input-height": "50px",

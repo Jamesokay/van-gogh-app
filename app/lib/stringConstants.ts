@@ -15,7 +15,7 @@ export const sideBarStrings = {
   useFixedSeed: "Use Fixed Seed",
   upgrade: "Upgrade",
   reset: "Reset to defaults",
-  outputResolution: "Output Resolution"
+  outputResolution: "Output Resolution",
 };
 
 export const imageGenerationHeaderStrings = {
@@ -38,6 +38,14 @@ export const imageGuidanceStrings = {
     title: "Image Input",
     description: "Add an image to get started",
     formatAndSize: "PNG, JPG or WEBP up to 5MB",
+  },
+  uploadedStrings: {
+    titleLeft: "Image Source",
+    titleRight: "Type",
+    midSectionTitle: "Description",
+    midSectionBody:
+      "Detects the color pattern, and the overall entire look view of an input image, and will use this to guide your image generations",
+    strength: "Strength",
   },
 };
 
@@ -62,6 +70,11 @@ export const tooltipText = {
   recommendedSizes: "Automatically set dimensions to best fit for your model.",
   useFixedSeed: "The deterministic number for the random number generator.",
   scheduler: "Defines how noise affects the generation.",
+  setAspectRatio: "Set aspect ratio",
+  uploadInput: "Upload image input",
+  deleteInput: "Delete image input",
+  mismatchedAspectRatio:
+    "Selected aspect ratio does not match dimensions of the image. Match output ratio for best results.",
 };
 
 export const badgeText = {

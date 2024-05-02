@@ -1,8 +1,10 @@
-const UploadIcon = () => {
+import { FC } from "react";
+
+const UploadIcon:FC<{ size: string}> = ({ size }) => {
   return (
     <svg
-      width="calc(1rem * 2.875)"
-      height="calc(1rem * 2.875)"
+      width={size}
+      height={size}
       viewBox="0 0 46 46"
       xmlns="http://www.w3.org/2000/svg"
     >
