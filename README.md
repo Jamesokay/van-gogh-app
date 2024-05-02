@@ -81,10 +81,7 @@
 
 ### Next Steps:
 
-- Build ImageUploadedComponent
-- Logic for displaying ImageUploadedComponent
-- Add UI variants for when Image Guidance is enabled
-- Update state to accomodate image data and various Image Guidance variables
+- Add further UI elements for when Image Guidance is enabled
 - Generation History page when generated images exist
 - Modal for displaying generated image on select
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
