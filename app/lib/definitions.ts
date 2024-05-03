@@ -134,6 +134,16 @@ export type ImageGenModel = {
   img: string;
 };
 
+export type GenerationHistoryProps = {
+  id: string;
+  prompt: string;
+  images: string[];
+  modelId: string;
+  style: string;
+  width: number;
+  height: number;
+};
+
 // Action type definitions
 export type Dimension = {
   width: number;

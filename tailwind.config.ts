@@ -18,7 +18,7 @@ const config: Config = {
     "bg-van-gogh-black-opal",
     "bg-van-gogh-badge-grey",
     "bg-green-gradient",
-    "bg-darkblue-to-purple-gradient"
+    "bg-darkblue-to-purple-gradient",
   ],
   theme: {
     extend: {
@@ -26,7 +26,8 @@ const config: Config = {
         "body-gradient": "linear-gradient(112deg, #020305 0%, #070A0F 100%)",
         "darkblue-to-darkerblue-gradient":
           "linear-gradient(90deg, rgb(6, 8, 13) 0%, rgb(13, 18, 28) 100%)",
-          'darkblue-to-purple-gradient': "linear-gradient(270deg, rgba(202, 79, 194, 0.20) -0.11%, rgba(178, 76, 243, 0.00) 50.06%)",
+        "darkblue-to-purple-gradient":
+          "linear-gradient(270deg, rgba(202, 79, 194, 0.20) -0.11%, rgba(178, 76, 243, 0.00) 50.06%)",
         "purple-gradient":
           "linear-gradient(81.02deg, rgb(250, 85, 96) -23.47%, rgb(177, 75, 244) 45.52%, rgb(77, 145, 255) 114.8%)",
         "blue-gradient":
@@ -43,6 +44,7 @@ const config: Config = {
         "van-gogh-border-grey": "rgb(36, 44, 62)",
         "van-gogh-black-opal": "rgba(0, 0, 0, 0.34)",
         "van-gogh-white-opal": "rgba(255, 255, 255, 0.06)",
+        "van-gogh-white-opal-hover": "rgba(255, 255, 255, 0.16)",
         "van-gogh-grey-2xd": "rgb(32, 33, 37)",
         "van-gogh-grey-xd": "rgb(40, 40, 40)",
         "van-gogh-grey-d": "rgb(81, 81, 81)",
@@ -53,6 +55,7 @@ const config: Config = {
         "van-gogh-dark-blue-alt": "#0B0F17",
         "van-gogh-dark-blue-hover": "rgb(22, 29, 45)",
         "van-gogh-badge-grey": "rgb(38, 39, 44)",
+        "van-gogh-grey-subdued": "#494E5B",
         "van-gogh-text-grey": "rgb(151, 151, 151)",
         "van-gogh-input-grey": "rgb(23, 23, 23)",
       },
@@ -60,7 +63,8 @@ const config: Config = {
         "1-1-0": "1 1 0%",
       },
       gridTemplateColumns: {
-        "auto-fit-minmax": "repeat(auto-fit, minmax(calc(35.75rem), 1fr))",
+        "auto-fit-minmax-35": "repeat(auto-fit, minmax(calc(35.75rem), 1fr))",
+        "auto-fit-minmax-16": "repeat(auto-fit, minmax(calc(16rem), 1fr))",
       },
       maxHeight: {
         "input-height": "50px",
@@ -70,6 +74,10 @@ const config: Config = {
       },
       width: {
         "van-gogh-sidebar-width": "17rem",
+        "4.5": "1.125rem",
+      },
+      height: {
+        "4.5": "1.125rem",
       },
       fontSize: {
         "van-gogh-4xs": "0.45rem",

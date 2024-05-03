@@ -1,4 +1,4 @@
-import { ImageGenModel } from "./definitions";
+import { GenerationHistoryProps, ImageGenModel } from "./definitions";
 
 export const routes = [
   { title: "Generation History", path: "/image-generation" },
@@ -122,6 +122,21 @@ export const imageGuidanceTypes = [
   "Edge to Image",
   "Pose to Image",
   "Text Image Input",
+];
+
+export const sampleGenerationHistoryArray: GenerationHistoryProps[] = [
+  {
+    id: "xyz123",
+    prompt: "Architectural wonders",
+    images: [
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/ef61be8e-3f80-4c3e-9e59-57305bd119fc/Default_architectural_wonders_1.jpg?w=512",
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/ef61be8e-3f80-4c3e-9e59-57305bd119fc/Default_architectural_wonders_0.jpg?w=512",
+    ],
+    modelId: "0",
+    style: "Dynamic",
+    width: 768,
+    height: 1360,
+  },
 ];
 
 export const numberOfPromptsOptions = [2, 4, 6, 8];
