@@ -78,11 +78,18 @@
 - Functions for uploading and deleting uploaded images
 - Functions for comparing uploaded aspect ratio with selected aspect ratio
 
-### Next Steps:
+### Day 11 (03/05/2024):
 
-- Add further UI elements for when Image Guidance is enabled
-- Generation History page when generated images exist
+<img width="1511" alt="Screenshot 2024-05-03 at 10 00 50 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/86f85a95-2605-42d0-a885-a299cc075f3c">
+
+- Base implementation of component for rendering generated images
+- Need to add hover states for cards with necessary buttons
+- Need to build out functionality
+
+### To Do:
+
 - Modal for displaying generated image on select
+- Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Mobile responsiveness
 - Clean-up of styles
