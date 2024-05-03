@@ -10,6 +10,7 @@ import ArrowUpIcon from "../svg/ArrowUpIcon";
 import DimensionsIcon from "../svg/DimensionsIcon";
 import PaintDropIcon from "../svg/PaintDropIcon";
 import ImagesIcon from "../svg/ImagesIcon";
+import ImageCardHoverOverlay from "../components/ImageCardHoverOverlay";
 
 const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
   prompt,
@@ -79,6 +80,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
           <Card key={image} overflow={"hidden"}>
             <CardBody padding={0}>
               <img src={image} alt="" />
+              <ImageCardHoverOverlay />
             </CardBody>
           </Card>
         ))}
