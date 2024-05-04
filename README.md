@@ -30,7 +30,7 @@
 - Will also need to implement model and imageStyle states in SettingsContext
 - Also contemplating whether a custom hook/controller might be a better option than Context API here. Will need to research further.
 
-### Day 6 (28/04/2024) (later on):
+### Day 6 (later):
 
 <img width="1511" alt="Screenshot 2024-04-28 at 8 54 06 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/9c262d6f-8539-49db-b78e-5c9893dea6f2">
 
@@ -45,7 +45,7 @@
 - Basic implementation of Image Guidance UI
 - Basic implementation of Generation History UI (empty state)
 
-### Day 7 (29/04/2024) (later):
+### Day 7 (later):
 
 <img width="1512" alt="Screenshot 2024-04-29 at 3 43 44 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/c8aec195-f605-4238-849a-c624f65c0dca">
 
@@ -91,6 +91,13 @@
 <img width="1511" alt="Screenshot 2024-05-04 at 10 47 00 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/0c82f802-2e25-4b0d-b43d-a9fa341961c2">
 
 - Implemented ImageCardHoverOverlay, with various buttons for using generated images
+
+### Day 12 (later):
+
+<img width="1512" alt="Screenshot 2024-05-04 at 3 35 14 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/d2534e51-d960-4747-9e6d-3d1687d5de09">
+
+- Basic implementation of modal for viewing images
+- Despicable use of inline styles which will require tidy up
 
 ### To Do:
 
