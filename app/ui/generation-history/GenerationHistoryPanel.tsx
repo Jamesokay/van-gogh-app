@@ -29,6 +29,7 @@ import CopyOutlineIcon from "../svg/CopyOutlineIcon";
 import RemoveBackgroundIcon from "../svg/RemoveBackgroundIcon";
 import UpscalerIcon from "../svg/UpscalerIcon";
 import DeleteFilledIcon from "../svg/DeleteFilledIcon";
+import TriangleNavIcon from "../svg/TriangleNavIcon";
 
 const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
   prompt,
@@ -45,12 +46,22 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
   const emptyDivsCount = 4 - images.length;
   const copyPrompt = () => console.log("copy prompt");
   const reusePromps = () => console.log("reuse promps");
-  console.log(findApproximateAspectRatio({ width, height }));
 
   const openModal = (index: number) => {
     setSelectedImageIndex(index);
     onOpen();
   };
+
+  const handleImageNav = (direction: "forward" | "back", currentIndex: number) => {
+    if (direction === "forward") {
+      if (currentIndex >= images.length - 1) setSelectedImageIndex(0);
+      else setSelectedImageIndex((prev) => prev + 1);
+    } else {
+      if (currentIndex === 0) setSelectedImageIndex(images.length - 1);
+      else setSelectedImageIndex((prev) => prev - 1);
+    }
+  };
+
   return (
     <div>
       <div className="flex gap-8 mt-8 mb-3">
@@ -153,6 +164,26 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
             bg={"rgba(0, 0, 0, 0.36)"}
             borderRadius={"999px"}
           />
+          <button
+            className="flex justify-center items-center rounded-full bg-black w-8 h-8 absolute top-1/2 hover:shadow-purple-glow"
+            style={{
+              left: "calc(3rem * -1)",
+              background: "rgba(25, 25, 25, 0.5)",
+            }}
+            onClick={() => handleImageNav('back', selectedImageIndex)}
+          >
+            <TriangleNavIcon />
+          </button>
+          <button
+            className="flex justify-center items-center rounded-full bg-black w-8 h-8 absolute top-1/2 hover:shadow-purple-glow"
+            style={{
+              right: "calc(3rem * -1)",
+              background: "rgba(25, 25, 25, 0.5)",
+            }}
+            onClick={() => handleImageNav('forward', selectedImageIndex)}
+          >
+            <TriangleNavIcon className="rotate-180" />
+          </button>
           <ModalBody padding={0} marginTop={0}>
             <div
               style={{
@@ -166,7 +197,14 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
               }}
             >
               <div className="relative flex justify-center h-auto w-[768px] min-h-fit min-w-fit max-h-full max-w-fit">
-                <Image className="rounded-t-lg" width={width} height={height} alt="" src={images[selectedImageIndex]} crossOrigin="anonymous" />
+                <Image
+                  className="rounded-t-lg"
+                  width={width}
+                  height={height}
+                  alt=""
+                  src={images[selectedImageIndex]}
+                  crossOrigin="anonymous"
+                />
               </div>
             </div>
           </ModalBody>
