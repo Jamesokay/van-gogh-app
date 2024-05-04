@@ -103,7 +103,7 @@
 
 <img width="1512" alt="Screenshot 2024-05-04 at 4 29 39 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/efb0fe86-7ac2-4059-840b-ddefec23f661">
 
-- Added navigation arrows to modal, allowing users to cycle through set array of generated images
+- Added navigation arrows to modal, allowing users to cycle through sets of generated images
 
 ### To Do:
 
