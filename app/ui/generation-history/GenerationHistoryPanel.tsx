@@ -2,7 +2,18 @@
 
 import { modelData } from "@/app/lib/dataConstants";
 import { GenerationHistoryProps } from "@/app/lib/definitions";
-import { Card, CardBody, Tooltip } from "@chakra-ui/react";
+import {
+  Card,
+  CardBody,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  Tooltip,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import { FC } from "react";
 import CopyIcon from "../svg/CopyIcon";
@@ -12,6 +23,8 @@ import PaintDropIcon from "../svg/PaintDropIcon";
 import ImagesIcon from "../svg/ImagesIcon";
 import ImageCardHoverOverlay from "../components/ImageCardHoverOverlay";
 import EyeIcon from "../svg/EyeIcon";
+import { findApproximateAspectRatio } from "@/app/lib/actions";
+import DownloadIcon from "../svg/DownloadIcon";
 
 const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
   prompt,
@@ -21,11 +34,13 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
   width,
   height,
 }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const selectedModel =
     modelData.find((x) => x.modelId === modelId) || modelData[0];
   const emptyDivsCount = 4 - images.length;
   const copyPrompt = () => console.log("copy prompt");
   const reusePromps = () => console.log("reuse promps");
+  console.log(findApproximateAspectRatio({ width, height }));
   return (
     <div>
       <div className="flex gap-8 mt-8 mb-3">
@@ -82,7 +97,15 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
       </div>
       <div className="grid grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image) => (
-          <Card key={image} overflow={"hidden"} className="hover-parent">
+          <Card
+            key={image}
+            overflow={"hidden"}
+            className="hover-parent"
+            onClick={() => {
+              console.log("yo");
+              onOpen();
+            }}
+          >
             <CardBody padding={0}>
               <img src={image} alt="" />
               <Tooltip
@@ -105,6 +128,59 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
           <div key={`empty-${index}`}></div>
         ))}
       </div>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent bg="rgb(23, 23, 23)" maxW="90vw" width="auto">
+          <ModalCloseButton
+            zIndex={100}
+            bg={"rgba(255, 255, 255, 0.06)"}
+            borderRadius={"999px"}
+          />
+          <ModalBody padding={0} marginTop={0}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                minWidth: "calc(32rem)",
+                minHeight: "calc(32rem)",
+                maxHeight: "calc(-10rem + 100vh)",
+                maxWidth: "90vw",
+                aspectRatio: `auto ${width} / ${height}`,
+              }}
+            >
+              <div className="relative flex justify-center h-auto w-[768px] min-h-fit min-w-fit max-h-full max-w-fit">
+                <button type="button" aria-label="Close">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path
+                      fill="currentColor"
+                      d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+                    ></path>
+                  </svg>
+                </button>
+                <img alt="" src={images[0]} crossOrigin="anonymous"></img>
+              </div>
+            </div>
+          </ModalBody>
+          <ModalFooter padding={0}>
+            <div className="flex w-full p-4">
+              <Tooltip label="Download image" hasArrow>
+                <button
+                  type="button"
+                  className="h-10 w-10 rounded-full flex items-center justify-center grayscale hover:grayscale-0 transition-all"
+                  style={{
+                    background: "rgba(25, 25, 25, 0.5)",
+                  }}
+                  aria-label="Download image"
+                >
+                  <span className="flex">
+                    <DownloadIcon />
+                  </span>
+                </button>
+              </Tooltip>
+            </div>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 };
