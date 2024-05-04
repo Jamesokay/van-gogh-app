@@ -82,6 +82,7 @@ const SideBarAdvancedSettings = () => {
               isDisabled={true}
               align="left"
               headerTheme={false}
+              large={false}
             />
           </div>
         </AccordionPanel>

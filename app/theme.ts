@@ -1,4 +1,4 @@
-import { defineStyle, defineStyleConfig, extendTheme } from "@chakra-ui/react";
+import { cssVar, defineStyle, defineStyleConfig, extendTheme, Tooltip } from "@chakra-ui/react";
 import { menuAnatomy } from "@chakra-ui/anatomy";
 import { createMultiStyleConfigHelpers } from "@chakra-ui/react";
 
@@ -19,6 +19,15 @@ const baseMenuStyle = definePartsStyle({
 });
 
 const menuTheme = defineMultiStyleConfig({ baseStyle: baseMenuStyle });
+
+const $arrowBg = cssVar("popper-arrow-bg");
+const baseTooltipStyle = {
+  background: 'vanGoghGrey.500',
+  borderRadius: '0.375rem',
+  [$arrowBg.variable]: 'colors.vanGoghGrey.500'
+}
+
+const tooltipTheme = defineStyleConfig({ baseStyle: baseTooltipStyle })
 
 const outline = defineStyle({
   border: "1px solid",
@@ -59,6 +68,7 @@ const theme = extendTheme({
     },
     vanGoghGrey: {
       400: "rgb(36, 44, 62)",
+      500: "rgb(40, 40, 40)"
     },
     vanGoghPurple: {
       400: "rgb(114, 88, 242)",
@@ -67,6 +77,7 @@ const theme = extendTheme({
   components: {
     Menu: menuTheme,
     Textarea: textareaTheme,
+    Tooltip: tooltipTheme
   },
   styles: {
     global: {

@@ -35,6 +35,10 @@ body {
   -moz-appearance: textfield; /* Firefox */
 }
 
+.hover-parent:hover .hover-child {
+  opacity: 100;
+}
+
 ::-webkit-scrollbar {
   width: 0.25rem;
   background: #070a0f;

@@ -27,7 +27,7 @@ const SideBar = () => {
         <div className="flex gap-2 items-center w-full">
           <BackArrowIcon />
           <Image
-            src="/leonardo-logo-text.svg"
+            src="/leonardo-logo-text-new.svg"
             alt="Leonardo Logo"
             width={117}
             height={34}

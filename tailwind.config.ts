@@ -22,6 +22,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backdropFilter: {
+        "brightness-blur": "brightness(0.6) blur(3px)",
+      },
       backgroundImage: {
         "body-gradient": "linear-gradient(112deg, #020305 0%, #070A0F 100%)",
         "darkblue-to-darkerblue-gradient":
@@ -36,6 +39,8 @@ const config: Config = {
           "linear-gradient(0deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)), linear-gradient(81.02deg, rgb(250, 85, 96) -23.47%, rgb(177, 75, 244) 45.52%, rgb(77, 145, 255) 114.8%)",
         "green-gradient":
           "linear-gradient(90deg, rgb(0, 194, 119) 0%, rgb(0, 121, 78) 100%)",
+        "transparent-purple-gradient":
+          "linear-gradient(81.02deg, rgba(250, 85, 96, 0.08) -23.47%, rgba(177, 75, 244, 0.08) 45.52%, rgba(77, 145, 255, 0.08) 114.8%)",
       },
       boxShadow: {
         "purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)",
@@ -45,6 +50,7 @@ const config: Config = {
         "van-gogh-black-opal": "rgba(0, 0, 0, 0.34)",
         "van-gogh-white-opal": "rgba(255, 255, 255, 0.06)",
         "van-gogh-white-opal-hover": "rgba(255, 255, 255, 0.16)",
+        "van-gogh-grey-opal": "rgba(170, 170, 170, 0.28)",
         "van-gogh-grey-2xd": "rgb(32, 33, 37)",
         "van-gogh-grey-xd": "rgb(40, 40, 40)",
         "van-gogh-grey-d": "rgb(81, 81, 81)",
@@ -80,7 +86,8 @@ const config: Config = {
         "4.5": "1.125rem",
       },
       fontSize: {
-        "van-gogh-4xs": "0.45rem",
+        "van-gogh-5xs": "0.45rem",
+        "van-gogh-4xs": "0.538rem",
         "van-gogh-3xs": "0.625rem",
         "van-gogh-2xs": "0.6875rem",
         "van-gogh-xs": "0.75rem",
