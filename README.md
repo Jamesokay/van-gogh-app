@@ -101,7 +101,9 @@
 
 ### To Do:
 
-- Modal for displaying generated image on select
+- Extract modal into distinct component
+- Remove inline styles from said component
+- Add arrows for carousel functionality
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Mobile responsiveness
