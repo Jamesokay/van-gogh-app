@@ -86,6 +86,12 @@
 - Need to add hover states for cards with necessary buttons
 - Need to build out functionality
 
+### Day 12 (04/05/2024):
+
+<img width="1511" alt="Screenshot 2024-05-04 at 10 47 00 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/0c82f802-2e25-4b0d-b43d-a9fa341961c2">
+
+- Implemented ImageCardHoverOverlay, with various buttons for using generated images
+
 ### To Do:
 
 - Modal for displaying generated image on select
