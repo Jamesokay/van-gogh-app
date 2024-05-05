@@ -105,7 +105,7 @@
 
 - Added navigation arrows to modal, allowing users to cycle through sets of generated images
 
-## Day 13 (05/05/2024):
+### Day 13 (05/05/2024):
 
 - Extracted ImageModal
 - Removed all inline styling from ImageModal
@@ -113,6 +113,12 @@
 - Extracted ImageCardButton component and thereby culled alot of repetive code
 - Extracted BadgeWrapper component and did same
 - Expanded tooltip strings
+
+### Day 13 (later):
+
+- Defined custom Chakra UI theme for ModelDropdownMenu
+- Defined header menu theme
+- Defined alternate menu sizes
 
 ### To Do:
 
