@@ -13,25 +13,8 @@ const ModelDropdownMenu: FC<{
   setValue: (modelId: string) => void;
 }> = ({ options, value, setValue }) => {
   return (
-    <Menu>
-      <MenuButton
-        h="3.5rem"
-        minW="20rem"
-        bg="vanGoghBlue.900"
-        border="1px"
-        borderColor="transparent"
-        fontWeight={500}
-        paddingRight="0.5rem"
-        paddingLeft="0.75rem"
-        color="white"
-        _hover={{ bg: "vanGoghBlue.900" }}
-        _active={{
-          bg: "vanGoghBlue.900",
-          borderColor: "vanGoghPurple.400",
-        }}
-        as={Button}
-        
-      >
+    <Menu variant="modelMenu">
+      <MenuButton>
         <div className="flex items-center">
           <Image
             height={30}
@@ -56,18 +39,9 @@ const ModelDropdownMenu: FC<{
           </div>
         </div>
       </MenuButton>
-      <MenuList padding="0" borderWidth="0.0625rem" overflow="hidden">
+      <MenuList>
         {options.map((model) => (
-          <MenuItem
-            key={model.modelId}
-            onClick={() => setValue(model.modelId)}
-            fontSize="0.875rem"
-            borderBottom="0.03rem solid"
-            borderColor="rgb(36, 44, 62)"
-            bg="rgb(11, 15, 23)"
-            height="2.5rem"
-            _hover={{ bg: "rgb(22, 23, 27)" }}
-          >
+          <MenuItem key={model.modelId} onClick={() => setValue(model.modelId)}>
             <div className="flex justify-between w-full items-center">
               <p>{model.modelName}</p>
               <div className="flex items-center">

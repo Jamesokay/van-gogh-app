@@ -1,4 +1,4 @@
-import { extendTheme, Modal } from "@chakra-ui/react";
+import { extendTheme } from "@chakra-ui/react";
 import { menuTheme } from "./menuTheme";
 import { textareaTheme } from "./textareaTheme";
 import { tooltipTheme } from "./tooltipTheme";
