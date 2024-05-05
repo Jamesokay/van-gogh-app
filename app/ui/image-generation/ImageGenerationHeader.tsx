@@ -71,7 +71,6 @@ export default function ImageGenerationHeader() {
             options={imageStyles}
             value={settings.imageStyle}
             setValue={(x) => setSetting(SETTINGS_KEY.IMAGE_STYLE, x)}
-            align="left"
             isDisabled={false}
             leftIcon={<FlaskIcon />}
             headerTheme={true}

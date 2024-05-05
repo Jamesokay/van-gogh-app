@@ -38,7 +38,6 @@ const ImageUploadInput: FC<{
           value={"Select from Recent Images"}
           setValue={() => {}}
           isDisabled={false}
-          align="left"
           headerTheme={false}
           large={true}
         />

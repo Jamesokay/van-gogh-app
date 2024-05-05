@@ -1,5 +1,5 @@
 import { ImageGenModel } from "@/app/lib/definitions";
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import Image from "next/image";
 import { FC } from "react";
 import DimensionsIcon from "../svg/DimensionsIcon";

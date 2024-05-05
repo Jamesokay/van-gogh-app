@@ -59,8 +59,8 @@ const SideBarDimensionOptions = () => {
           options={aspectRatioOptions}
           setValue={(x) => handleAspectRatioOptionClick(x as AspectRatioKey)}
           isDisabled={false}
-          align="center"
           headerTheme={false}
+          large={false}
         />
       </div>
       <div className="flex items-center gap-van-gogh-spacing-m mb-2">

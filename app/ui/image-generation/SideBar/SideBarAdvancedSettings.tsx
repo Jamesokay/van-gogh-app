@@ -80,7 +80,6 @@ const SideBarAdvancedSettings = () => {
               options={[]}
               setValue={() => {}}
               isDisabled={true}
-              align="left"
               headerTheme={false}
               large={false}
             />

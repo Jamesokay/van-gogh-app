@@ -111,7 +111,6 @@ export type DropdownMenuProps<T extends string = string> = {
   value: T;
   setValue: (value: T) => void;
   isDisabled: boolean;
-  align: "center" | "left";
   leftIcon?: ReactElement;
   headerTheme: boolean;
   large: boolean;

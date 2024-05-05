@@ -130,7 +130,6 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
               options={imageGuidanceTypes}
               value={settings.imageGuidanceType}
               setValue={(x) => setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_TYPE, x)}
-              align="left"
               isDisabled={false}
               headerTheme={false}
               large={true}
