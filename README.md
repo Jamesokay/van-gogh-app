@@ -105,10 +105,17 @@
 
 - Added navigation arrows to modal, allowing users to cycle through sets of generated images
 
+## Day 13 (05/05/2024):
+
+- Extracted ImageModal
+- Removed all inline styling from ImageModal
+- Defined custom Chakra UI theme for modal
+- Extracted ImageCardButton component and thereby culled alot of repetive code
+- Extracted BadgeWrapper component and did same
+- Expanded tooltip strings
+
 ### To Do:
 
-- Extract modal into distinct component
-- Remove inline styles from said component
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Mobile responsiveness
