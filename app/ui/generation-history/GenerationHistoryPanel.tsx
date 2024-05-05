@@ -2,18 +2,7 @@
 
 import { modelData } from "@/app/lib/dataConstants";
 import { GenerationHistoryProps } from "@/app/lib/definitions";
-import {
-  Card,
-  CardBody,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalOverlay,
-  Tooltip,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Card, CardBody, Tooltip, useDisclosure } from "@chakra-ui/react";
 import Image from "next/image";
 import { FC, useState } from "react";
 import CopyIcon from "../svg/CopyIcon";
@@ -23,13 +12,7 @@ import PaintDropIcon from "../svg/PaintDropIcon";
 import ImagesIcon from "../svg/ImagesIcon";
 import ImageCardHoverOverlay from "../components/ImageCardHoverOverlay";
 import EyeIcon from "../svg/EyeIcon";
-import { findApproximateAspectRatio } from "@/app/lib/actions";
-import DownloadIcon from "../svg/DownloadIcon";
-import CopyOutlineIcon from "../svg/CopyOutlineIcon";
-import RemoveBackgroundIcon from "../svg/RemoveBackgroundIcon";
-import UpscalerIcon from "../svg/UpscalerIcon";
-import DeleteFilledIcon from "../svg/DeleteFilledIcon";
-import TriangleNavIcon from "../svg/TriangleNavIcon";
+import ImageModal from "./ImageModal";
 
 const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
   prompt,
@@ -52,12 +35,12 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
     onOpen();
   };
 
-  const handleImageNav = (direction: "forward" | "back", currentIndex: number) => {
+  const handleImageNav = (direction: "forward" | "back") => {
     if (direction === "forward") {
-      if (currentIndex >= images.length - 1) setSelectedImageIndex(0);
+      if (selectedImageIndex >= images.length - 1) setSelectedImageIndex(0);
       else setSelectedImageIndex((prev) => prev + 1);
     } else {
-      if (currentIndex === 0) setSelectedImageIndex(images.length - 1);
+      if (selectedImageIndex === 0) setSelectedImageIndex(images.length - 1);
       else setSelectedImageIndex((prev) => prev - 1);
     }
   };
@@ -148,143 +131,14 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
           <div key={`empty-${index}`}></div>
         ))}
       </div>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay
-          bg="rgba(0, 0, 0, 0.48)"
-          backdropFilter="blur(calc(2rem))"
-        />
-        <ModalContent
-          bg="rgb(23, 23, 23)"
-          maxW="90vw"
-          width="auto"
-          margin="auto"
-        >
-          <ModalCloseButton
-            zIndex={100}
-            bg={"rgba(0, 0, 0, 0.36)"}
-            borderRadius={"999px"}
-          />
-          <button
-            className="flex justify-center items-center rounded-full bg-black w-8 h-8 absolute top-1/2 hover:shadow-purple-glow"
-            style={{
-              left: "calc(3rem * -1)",
-              background: "rgba(25, 25, 25, 0.5)",
-            }}
-            onClick={() => handleImageNav('back', selectedImageIndex)}
-          >
-            <TriangleNavIcon />
-          </button>
-          <button
-            className="flex justify-center items-center rounded-full bg-black w-8 h-8 absolute top-1/2 hover:shadow-purple-glow"
-            style={{
-              right: "calc(3rem * -1)",
-              background: "rgba(25, 25, 25, 0.5)",
-            }}
-            onClick={() => handleImageNav('forward', selectedImageIndex)}
-          >
-            <TriangleNavIcon className="rotate-180" />
-          </button>
-          <ModalBody padding={0} marginTop={0}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                minWidth: "calc(32rem)",
-                minHeight: "calc(32rem)",
-                maxHeight: "calc(-10rem + 100vh)",
-                maxWidth: "90vw",
-                aspectRatio: `auto ${width} / ${height}`,
-              }}
-            >
-              <div className="relative flex justify-center h-auto w-[768px] min-h-fit min-w-fit max-h-full max-w-fit">
-                <Image
-                  className="rounded-t-lg"
-                  width={width}
-                  height={height}
-                  alt=""
-                  src={images[selectedImageIndex]}
-                  crossOrigin="anonymous"
-                />
-              </div>
-            </div>
-          </ModalBody>
-          <ModalFooter padding={0}>
-            <div className="flex w-full p-4 gap-5 justify-end">
-              <div className="flex gap-1">
-                <Tooltip label="Download image" hasArrow>
-                  <button
-                    type="button"
-                    className="h-10 w-10 rounded-full flex items-center justify-center backdrop-brightness-150 grayscale hover:grayscale-0 transition-all"
-                    style={{
-                      background: "rgba(25, 25, 25, 0.5)",
-                    }}
-                    aria-label="Download image"
-                  >
-                    <span className="flex">
-                      <DownloadIcon />
-                    </span>
-                  </button>
-                </Tooltip>
-                <Tooltip label="Copy to clipboard" hasArrow>
-                  <button
-                    type="button"
-                    className="h-10 w-10 rounded-full flex items-center justify-center backdrop-brightness-150 grayscale hover:grayscale-0 transition-all"
-                    style={{
-                      background: "rgba(25, 25, 25, 0.5)",
-                    }}
-                    aria-label="Download image"
-                  >
-                    <span className="flex">
-                      <CopyOutlineIcon />
-                    </span>
-                  </button>
-                </Tooltip>
-                <Tooltip label="Remove background" hasArrow>
-                  <button
-                    className="flex items-center justify-center h-10 w-10 rounded-full backdrop-brightness-150 grayscale hover:grayscale-0 transition-all"
-                    type="button"
-                    style={{ background: "rgba(25, 25, 25, 0.5)" }}
-                    aria-label="Remove background - "
-                  >
-                    <RemoveBackgroundIcon />
-                  </button>
-                </Tooltip>
-              </div>
-
-              <Tooltip label="Alchemy Upscaler" hasArrow>
-                <div className="relative mt-0 rounded-full">
-                  <div className="absolute top-px left-1/2 transform -translate-x-1/2 z-10 w-fit flex justify-center bg-purple-gradient text-van-gogh-5xs font-medium px-1.5 py-0.25 text-white rounded-full">
-                    NEW
-                  </div>
-                  <button
-                    type="button"
-                    style={{ background: "rgba(25, 25, 25, 0.5)" }}
-                    className="flex items-center justify-center rounded-full h-10 w-10 backdrop-brightness-150 grayscale hover:grayscale-0 transition-all"
-                    aria-label="Alchemy Upscaler - use this to refine and upscale your images. This can improve faces and hands as part of the process. "
-                  >
-                    <UpscalerIcon />
-                  </button>
-                </div>
-              </Tooltip>
-              <Tooltip label="Upgrade to Premium to delete images" hasArrow>
-                <div className="relative">
-                  <div className="flex w-fit bg-purple-gradient absolute z-10 top-px left-1/2 transform -translate-x-1/2 text-van-gogh-4xs font-medium text-white rounded-full px-1.5">
-                    Premium
-                  </div>
-                  <button
-                    type="button"
-                    style={{ background: "rgba(25, 25, 25, 0.5)" }}
-                    className="flex items-center justify-center h-10 w-10 rounded-full backdrop-brightness-150 grayscale cursor-not-allowed"
-                    aria-label="Upgrade to premium to delete image"
-                  >
-                    <DeleteFilledIcon />
-                  </button>
-                </div>
-              </Tooltip>
-            </div>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ImageModal
+        isOpen={isOpen}
+        onClose={onClose}
+        width={width}
+        height={height}
+        handleImageNav={handleImageNav}
+        src={images[selectedImageIndex]}
+      />
     </div>
   );
 };

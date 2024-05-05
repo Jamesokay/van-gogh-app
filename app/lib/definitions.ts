@@ -144,6 +144,19 @@ export type GenerationHistoryProps = {
   height: number;
 };
 
+export type ImageCardButtonProps = {
+  children: React.ReactNode;
+  label: string;
+  onClick?: (e: React.MouseEvent) => void;
+  rounded?: "t" | "b";
+  disabled?: boolean;
+};
+
+export type BadgeWrapperProps = {
+  children: React.ReactNode;
+  label: string;
+};
+
 // Action type definitions
 export type Dimension = {
   width: number;

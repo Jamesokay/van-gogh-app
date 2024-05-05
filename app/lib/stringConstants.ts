@@ -75,10 +75,19 @@ export const tooltipText = {
   deleteInput: "Delete image input",
   mismatchedAspectRatio:
     "Selected aspect ratio does not match dimensions of the image. Match output ratio for best results.",
+  downloadImage: "Download image",
+  copy: "Copy to clipboard",
+  removeBackground: "Remove background",
+  alchemyUpscaler: "Alchemy Upscaler - use this to refine and upscale your images. This can improve faces and hands as part of the process.",
+  premiumToDelete: "Upgrade to premium to delete image",
+  motionVideo: "Generate a Motion video",
+  imageGuidance: "Use as Image Guidance input",
+  editCanvas: "Edit in canvas"
 };
 
 export const badgeText = {
   v2: "V2",
   beta: "Beta",
   new: "New",
+  premium: "Premium"
 };

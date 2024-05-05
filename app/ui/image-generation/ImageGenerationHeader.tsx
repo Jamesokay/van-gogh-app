@@ -27,7 +27,7 @@ export default function ImageGenerationHeader() {
   const text = imageGenerationHeaderStrings;
 
   return (
-    <div className="flex flex-col w-full px-8">
+    <div className="flex flex-col w-full px-8 z-50">
       <div className="mt-10 mb-2">
         <Heading as="h1" fontSize="1.5rem" fontWeight={500}>
           {text.title}

@@ -19,11 +19,13 @@ const config: Config = {
     "bg-van-gogh-badge-grey",
     "bg-green-gradient",
     "bg-darkblue-to-purple-gradient",
+    "rounded-b-full",
+    "rounded-t-full"
   ],
   theme: {
     extend: {
-      backdropFilter: {
-        "brightness-blur": "brightness(0.6) blur(3px)",
+      backdropBlur: {
+        "modal-overlay-blur": "2rem"
       },
       backgroundImage: {
         "body-gradient": "linear-gradient(112deg, #020305 0%, #070A0F 100%)",
@@ -41,13 +43,17 @@ const config: Config = {
           "linear-gradient(90deg, rgb(0, 194, 119) 0%, rgb(0, 121, 78) 100%)",
         "transparent-purple-gradient":
           "linear-gradient(81.02deg, rgba(250, 85, 96, 0.08) -23.47%, rgba(177, 75, 244, 0.08) 45.52%, rgba(77, 145, 255, 0.08) 114.8%)",
+        "image-overlay-gradient": "linear-gradient(rgba(18, 19, 21, 0) -2.43%, rgb(18, 19, 21) 97.57%)"
       },
       boxShadow: {
         "purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)",
       },
       colors: {
         "van-gogh-border-grey": "rgb(36, 44, 62)",
+        "van-gogh-border-white-alpha": "rgba(255, 255, 255, 0.24)",
         "van-gogh-black-opal": "rgba(0, 0, 0, 0.34)",
+        "van-gogh-black-opal-100": "rgba(0, 0, 0, 0.48)",
+        "van-gogh-black-opal-200": "rgba(25, 25, 25, 0.5)",
         "van-gogh-white-opal": "rgba(255, 255, 255, 0.06)",
         "van-gogh-white-opal-hover": "rgba(255, 255, 255, 0.16)",
         "van-gogh-grey-opal": "rgba(170, 170, 170, 0.28)",
@@ -74,16 +80,24 @@ const config: Config = {
       },
       maxHeight: {
         "input-height": "50px",
+        "van-gogh-modal-height": "calc(-10rem + 100vh)"
       },
       minWidth: {
         "input-width": "100px",
+        "van-gogh-modal-width": "32rem"
       },
       width: {
         "van-gogh-sidebar-width": "17rem",
         "4.5": "1.125rem",
       },
+      maxWidth: {
+        "van-gogh-modal-width": "90vw"
+      },
       height: {
         "4.5": "1.125rem",
+      },
+      minHeight: {
+        "van-gogh-modal-height": "32rem"
       },
       fontSize: {
         "van-gogh-5xs": "0.45rem",
@@ -114,7 +128,7 @@ const config: Config = {
         "switch-track-height": "calc(1rem * 1.25)",
         "switch-track-x-enable": "calc(1rem * 2.625 - 1rem * 1.25 - 0.125rem)",
         "switch-track-x-disable": "0.125rem",
-      },
+      }
     },
   },
   plugins: [],
