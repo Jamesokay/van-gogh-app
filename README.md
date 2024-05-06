@@ -124,8 +124,11 @@
 
 <img width="1512" alt="Screenshot 2024-05-06 at 9 08 14 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/9ebf36ec-7105-4259-8249-a655e669459d">
 
+https://github.com/Jamesokay/van-gogh-app/assets/78640728/92e87f53-9b10-4fbc-b8ac-649c24115223
+
 - Basic implementation of skeleton state for image cards
 - Need to revise logic for sizing these correctly once actual fetch logic has been implemented
+- Generic loading UI with spinner
 
 ### To Do:
 
