@@ -25,7 +25,7 @@ const ImageCardHoverOverlay: FC<{ src: string }> = ({ src }) => {
     e.stopPropagation();
     setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_SRC, src);
     if (!settings.imageGuidance) setSetting(SETTINGS_KEY.IMAGE_GUIDANCE, true);
-    router.push("/image-generation/image-guidance");
+    router.push("/image-guidance");
   };
 
   return (

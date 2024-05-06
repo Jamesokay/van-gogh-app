@@ -15,9 +15,9 @@ const CanvasIcon = () => {
           y2="-0.984221"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560" />
-          <stop offset="0.499028" stop-color="#B14BF4" />
-          <stop offset="1" stop-color="#4D91FF" />
+          <stop offset="0.0001" stopColor="#FA5560" />
+          <stop offset="0.499028" stopColor="#B14BF4" />
+          <stop offset="1" stopColor="#4D91FF" />
         </linearGradient>
       </defs>
       <path

@@ -850,9 +850,9 @@ const LeonardoIcon = () => {
           y2="324.49"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#9D21A4" />
-          <stop offset="0.5205" stop-color="#F51C90" />
-          <stop offset="1" stop-color="#9801CA" />
+          <stop stopColor="#9D21A4" />
+          <stop offset="0.5205" stopColor="#F51C90" />
+          <stop offset="1" stopColor="#9801CA" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_494_13865"
@@ -862,9 +862,9 @@ const LeonardoIcon = () => {
           y2="256.311"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF7300" />
-          <stop offset="0.6811" stop-color="#FFB933" />
-          <stop offset="1" stop-color="#FFDB4C" />
+          <stop stopColor="#FF7300" />
+          <stop offset="0.6811" stopColor="#FFB933" />
+          <stop offset="1" stopColor="#FFDB4C" />
         </linearGradient>
         <radialGradient
           id="paint2_radial_494_13865"
@@ -874,9 +874,9 @@ const LeonardoIcon = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(203.736 153.114) scale(50.3535 50.3184)"
         >
-          <stop stop-color="#202646" />
-          <stop offset="0.3492" stop-color="#0025C6" />
-          <stop offset="0.8333" stop-color="#182948" />
+          <stop stopColor="#202646" />
+          <stop offset="0.3492" stopColor="#0025C6" />
+          <stop offset="0.8333" stopColor="#182948" />
         </radialGradient>
         <linearGradient
           id="paint3_linear_494_13865"
@@ -886,9 +886,9 @@ const LeonardoIcon = () => {
           y2="185.378"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F1D003" />
-          <stop offset="0.5615" stop-color="#EB583F" />
-          <stop offset="0.9227" stop-color="#E4D494" />
+          <stop stopColor="#F1D003" />
+          <stop offset="0.5615" stopColor="#EB583F" />
+          <stop offset="0.9227" stopColor="#E4D494" />
         </linearGradient>
         <linearGradient
           id="paint4_linear_494_13865"
@@ -898,11 +898,11 @@ const LeonardoIcon = () => {
           y2="162.597"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBB03B" />
-          <stop offset="0.1676" stop-color="#F3BC58" />
-          <stop offset="0.4407" stop-color="#E8CD82" />
-          <stop offset="0.5808" stop-color="#E4D492" />
-          <stop offset="1" stop-color="#E4D494" />
+          <stop stopColor="#FBB03B" />
+          <stop offset="0.1676" stopColor="#F3BC58" />
+          <stop offset="0.4407" stopColor="#E8CD82" />
+          <stop offset="0.5808" stopColor="#E4D492" />
+          <stop offset="1" stopColor="#E4D494" />
         </linearGradient>
         <linearGradient
           id="paint5_linear_494_13865"
@@ -912,8 +912,8 @@ const LeonardoIcon = () => {
           y2="148.075"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#C7B299" />
-          <stop offset="0.7226" stop-color="#F89B23" />
+          <stop stopColor="#C7B299" />
+          <stop offset="0.7226" stopColor="#F89B23" />
         </linearGradient>
         <radialGradient
           id="paint6_radial_494_13865"
@@ -923,9 +923,9 @@ const LeonardoIcon = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(203.736 153.114) scale(50.3535 50.3184)"
         >
-          <stop stop-color="#202646" />
-          <stop offset="0.3492" stop-color="#0025C6" />
-          <stop offset="0.8333" stop-color="#182948" />
+          <stop stopColor="#202646" />
+          <stop offset="0.3492" stopColor="#0025C6" />
+          <stop offset="0.8333" stopColor="#182948" />
         </radialGradient>
         <linearGradient
           id="paint7_linear_494_13865"
@@ -935,9 +935,9 @@ const LeonardoIcon = () => {
           y2="321.75"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#9800CE" />
-          <stop offset="0.4795" stop-color="#FF288B" />
-          <stop offset="1" stop-color="#F84690" />
+          <stop stopColor="#9800CE" />
+          <stop offset="0.4795" stopColor="#FF288B" />
+          <stop offset="1" stopColor="#F84690" />
         </linearGradient>
         <linearGradient
           id="paint8_linear_494_13865"
@@ -947,9 +947,9 @@ const LeonardoIcon = () => {
           y2="346.796"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F84690" />
-          <stop offset="0.5205" stop-color="#FF288B" />
-          <stop offset="1" stop-color="#9800CE" />
+          <stop stopColor="#F84690" />
+          <stop offset="0.5205" stopColor="#FF288B" />
+          <stop offset="1" stopColor="#9800CE" />
         </linearGradient>
         <linearGradient
           id="paint9_linear_494_13865"
@@ -959,9 +959,9 @@ const LeonardoIcon = () => {
           y2="156.313"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF7300" />
-          <stop offset="0.9583" stop-color="#F7AA46" />
-          <stop offset="1" stop-color="#F7AD49" />
+          <stop stopColor="#FF7300" />
+          <stop offset="0.9583" stopColor="#F7AA46" />
+          <stop offset="1" stopColor="#F7AD49" />
         </linearGradient>
         <linearGradient
           id="paint10_linear_494_13865"
@@ -971,9 +971,9 @@ const LeonardoIcon = () => {
           y2="251.566"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF7300" />
-          <stop offset="0.6811" stop-color="#FFB933" />
-          <stop offset="1" stop-color="#FFDB4C" />
+          <stop stopColor="#FF7300" />
+          <stop offset="0.6811" stopColor="#FFB933" />
+          <stop offset="1" stopColor="#FFDB4C" />
         </linearGradient>
         <linearGradient
           id="paint11_linear_494_13865"
@@ -983,9 +983,9 @@ const LeonardoIcon = () => {
           y2="286.284"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF7300" />
-          <stop offset="0.6811" stop-color="#FFB933" />
-          <stop offset="1" stop-color="#FFDB4C" />
+          <stop stopColor="#FF7300" />
+          <stop offset="0.6811" stopColor="#FFB933" />
+          <stop offset="1" stopColor="#FFDB4C" />
         </linearGradient>
         <radialGradient
           id="paint12_radial_494_13865"
@@ -995,9 +995,9 @@ const LeonardoIcon = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(173.669 156.97) scale(39.3113 39.2839)"
         >
-          <stop stop-color="#202646" />
-          <stop offset="0.3492" stop-color="#0025C6" />
-          <stop offset="0.8333" stop-color="#182948" />
+          <stop stopColor="#202646" />
+          <stop offset="0.3492" stopColor="#0025C6" />
+          <stop offset="0.8333" stopColor="#182948" />
         </radialGradient>
         <radialGradient
           id="paint13_radial_494_13865"
@@ -1007,9 +1007,9 @@ const LeonardoIcon = () => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(173.669 156.97) scale(39.3113 39.2839)"
         >
-          <stop stop-color="#202646" />
-          <stop offset="0.3492" stop-color="#0025C6" />
-          <stop offset="0.8333" stop-color="#182948" />
+          <stop stopColor="#202646" />
+          <stop offset="0.3492" stopColor="#0025C6" />
+          <stop offset="0.8333" stopColor="#182948" />
         </radialGradient>
         <linearGradient
           id="paint14_linear_494_13865"
@@ -1019,9 +1019,9 @@ const LeonardoIcon = () => {
           y2="346.796"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F84690" />
-          <stop offset="0.5205" stop-color="#FF288B" />
-          <stop offset="1" stop-color="#9800CE" />
+          <stop stopColor="#F84690" />
+          <stop offset="0.5205" stopColor="#FF288B" />
+          <stop offset="1" stopColor="#9800CE" />
         </linearGradient>
         <linearGradient
           id="paint15_linear_494_13865"
@@ -1031,9 +1031,9 @@ const LeonardoIcon = () => {
           y2="324.49"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#9D21A4" />
-          <stop offset="0.5205" stop-color="#F51C90" />
-          <stop offset="1" stop-color="#9801CA" />
+          <stop stopColor="#9D21A4" />
+          <stop offset="0.5205" stopColor="#F51C90" />
+          <stop offset="1" stopColor="#9801CA" />
         </linearGradient>
         <linearGradient
           id="paint16_linear_494_13865"
@@ -1043,9 +1043,9 @@ const LeonardoIcon = () => {
           y2="174.033"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F1D003" />
-          <stop offset="0.5615" stop-color="#EB583F" />
-          <stop offset="0.9227" stop-color="#848D73" />
+          <stop stopColor="#F1D003" />
+          <stop offset="0.5615" stopColor="#EB583F" />
+          <stop offset="0.9227" stopColor="#848D73" />
         </linearGradient>
         <linearGradient
           id="paint17_linear_494_13865"
@@ -1055,9 +1055,9 @@ const LeonardoIcon = () => {
           y2="203.378"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F1D003" />
-          <stop offset="0.6094" stop-color="#E65B42" />
-          <stop offset="1" stop-color="#818E93" />
+          <stop stopColor="#F1D003" />
+          <stop offset="0.6094" stopColor="#E65B42" />
+          <stop offset="1" stopColor="#818E93" />
         </linearGradient>
         <linearGradient
           id="paint18_linear_494_13865"
@@ -1067,9 +1067,9 @@ const LeonardoIcon = () => {
           y2="321.75"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F84690" />
-          <stop offset="0.5205" stop-color="#FF288B" />
-          <stop offset="1" stop-color="#9800CE" />
+          <stop stopColor="#F84690" />
+          <stop offset="0.5205" stopColor="#FF288B" />
+          <stop offset="1" stopColor="#9800CE" />
         </linearGradient>
         <linearGradient
           id="paint19_linear_494_13865"
@@ -1079,9 +1079,9 @@ const LeonardoIcon = () => {
           y2="258.575"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF8F01" />
-          <stop offset="0.5615" stop-color="#FF9800" />
-          <stop offset="1" stop-color="#FFAF00" />
+          <stop stopColor="#FF8F01" />
+          <stop offset="0.5615" stopColor="#FF9800" />
+          <stop offset="1" stopColor="#FFAF00" />
         </linearGradient>
         <linearGradient
           id="paint20_linear_494_13865"
@@ -1091,9 +1091,9 @@ const LeonardoIcon = () => {
           y2="227.848"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF7300" />
-          <stop offset="0.6811" stop-color="#FFB933" />
-          <stop offset="1" stop-color="#FFDB4C" />
+          <stop stopColor="#FF7300" />
+          <stop offset="0.6811" stopColor="#FFB933" />
+          <stop offset="1" stopColor="#FFDB4C" />
         </linearGradient>
         <linearGradient
           id="paint21_linear_494_13865"
@@ -1103,9 +1103,9 @@ const LeonardoIcon = () => {
           y2="275.047"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF8F01" />
-          <stop offset="0.5615" stop-color="#FF9800" />
-          <stop offset="1" stop-color="#FFAF00" />
+          <stop stopColor="#FF8F01" />
+          <stop offset="0.5615" stopColor="#FF9800" />
+          <stop offset="1" stopColor="#FFAF00" />
         </linearGradient>
         <linearGradient
           id="paint22_linear_494_13865"
@@ -1115,9 +1115,9 @@ const LeonardoIcon = () => {
           y2="194.172"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#009BB6" />
-          <stop offset="0.5615" stop-color="#2D6DB2" />
-          <stop offset="0.9227" stop-color="#585CA4" />
+          <stop stopColor="#009BB6" />
+          <stop offset="0.5615" stopColor="#2D6DB2" />
+          <stop offset="0.9227" stopColor="#585CA4" />
         </linearGradient>
       </defs>
     </svg>

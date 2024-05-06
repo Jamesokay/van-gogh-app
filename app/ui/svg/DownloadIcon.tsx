@@ -15,9 +15,9 @@ const DownloadIcon = () => {
           y2="-3.33331"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
       </defs>
       <path

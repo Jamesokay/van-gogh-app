@@ -30,9 +30,9 @@ const RemoveBackgroundIcon = () => {
           y2="-2.7096"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="paint1_linear_2003_5947"
@@ -42,9 +42,9 @@ const RemoveBackgroundIcon = () => {
           y2="-1.22825"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="paint2_linear_2003_5947"
@@ -54,9 +54,9 @@ const RemoveBackgroundIcon = () => {
           y2="0.253108"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="paint3_linear_2003_5947"
@@ -66,9 +66,9 @@ const RemoveBackgroundIcon = () => {
           y2="4.77175"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id="paint4_linear_2003_5947"
@@ -78,9 +78,9 @@ const RemoveBackgroundIcon = () => {
           y2="12.2531"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
       </defs>
     </svg>
