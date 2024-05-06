@@ -130,8 +130,17 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/92e87f53-9b10-4fbc-b8a
 - Need to revise logic for sizing these correctly once actual fetch logic has been implemented
 - Generic loading UI with spinner
 
+### Day 14 (later):
+
+https://github.com/Jamesokay/van-gogh-app/assets/78640728/1ca1101b-c30f-4048-a76d-77347a3e6013
+
+- Fixed layout styling to keep SideBar fixed with main page scrollable
+- General clean-up
+
+
 ### To Do:
 
+- Set up database
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Mobile responsiveness
