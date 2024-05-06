@@ -13,7 +13,7 @@ export const sideBarStrings = {
   tiling: "Tiling",
   recommendedSizes: "Recommended Sizes",
   useFixedSeed: "Use Fixed Seed",
-  upgrade: "Upgrade",
+  manage: "Manage",
   reset: "Reset to defaults",
   outputResolution: "Output Resolution",
 };
@@ -47,6 +47,11 @@ export const imageGuidanceStrings = {
       "Detects the color pattern, and the overall entire look view of an input image, and will use this to guide your image generations",
     strength: "Strength",
   },
+  CTAStrings: {
+    fourLayers: "Add up to 4 layers of",
+    imageGuidance: "Image Guidance",
+    buttonText: "Unlock with Premium",
+  },
 };
 
 export const promptGenerationStrings = {
@@ -78,16 +83,20 @@ export const tooltipText = {
   downloadImage: "Download image",
   copy: "Copy to clipboard",
   removeBackground: "Remove background",
-  alchemyUpscaler: "Alchemy Upscaler - use this to refine and upscale your images. This can improve faces and hands as part of the process.",
+  alchemyUpscaler:
+    "Alchemy Upscaler - use this to refine and upscale your images. This can improve faces and hands as part of the process.",
   premiumToDelete: "Upgrade to premium to delete image",
   motionVideo: "Generate a Motion video",
   imageGuidance: "Use as Image Guidance input",
-  editCanvas: "Edit in canvas"
+  editCanvas: "Edit in canvas",
+  premiumPrivateImages:
+    "The image is public. Please subscribe to a paid plan if you wish to generate private images.",
 };
 
 export const badgeText = {
   v2: "V2",
   beta: "Beta",
   new: "New",
-  premium: "Premium"
+  premium: "Premium",
+  alchemy: "Alchemy V2",
 };

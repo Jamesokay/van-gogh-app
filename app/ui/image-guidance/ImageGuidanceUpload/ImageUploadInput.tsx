@@ -5,11 +5,11 @@ import UploadIcon from "../../svg/UploadIcon";
 import DropdownMenu from "../../components/DropdownMenu";
 import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
+
 const ImageUploadInput: FC<{
   openFileSystem: () => void;
 }> = ({ openFileSystem }) => {
   const { settings } = useSettings();
-
   const text = imageGuidanceStrings.uploadStrings;
 
   return (
@@ -21,7 +21,6 @@ const ImageUploadInput: FC<{
       }
     >
       <p className="text-van-gogh-xs font-medium">{text.description}</p>
-
       <button
         className="flex flex-col items-center justify-center gap-2.5 px-2 py-4 bg-van-gogh-dark-blue border border-van-gogh-grey-blue rounded-lg"
         onClick={() => openFileSystem()}

@@ -6,6 +6,7 @@ import DimensionsIcon from "../svg/DimensionsIcon";
 import PageIcon from "../svg/PageIcon";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import LightningIcon from "../svg/LightningIcon";
+import { badgeText } from "@/app/lib/stringConstants";
 
 const ModelDropdownMenu: FC<{
   options: ImageGenModel[];
@@ -55,7 +56,7 @@ const ModelDropdownMenu: FC<{
                       : "hidden"
                   }
                 >
-                  <p className="van-gogh-gradient-text">Alchemy V2</p>
+                  <p className="van-gogh-gradient-text">{badgeText.alchemy}</p>
                 </div>
               </div>
             </div>

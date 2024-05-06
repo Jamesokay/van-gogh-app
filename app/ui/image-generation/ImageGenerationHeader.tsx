@@ -44,7 +44,7 @@ export default function ImageGenerationHeader() {
         <button className="flex items-center bg-purple-gradient px-12 rounded-lg ml-4 text-van-gogh-lg font-medium">
           <span className="mr-3">{text.buttonText}</span>
           <CoinsIcon white={true} />
-          <span className="text-van-gogh-sm ml-1">15</span>
+          <span className="text-van-gogh-sm ml-1">{settings.credits}</span>
         </button>
       </div>
       <div

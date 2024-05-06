@@ -1,7 +1,7 @@
 "use client";
 
 import OptionWithSwitch from "../../components/OptionWithSwitch";
-import { COLUMN_OPTIONS, SETTINGS_KEY } from "../../../lib/definitions";
+import { COLUMN_OPTIONS, GUIDANCE_SCALE_STRENGTH, SETTINGS_KEY } from "../../../lib/definitions";
 import { numberOfImagesOptions } from "../../../lib/dataConstants";
 import SectionWithOptionsGrid from "../../components/SectionWithOptionsGrid";
 import RangeSlider from "../../components/RangeSlider";
@@ -36,11 +36,11 @@ const SideBar = () => {
         <div className="flex gap-2 items-center justify-center px-3 py-2 border border-w-thin border-van-gogh-border-grey rounded-full">
           <div className="flex items-center text-van-gogh-xs">
             <CoinsIcon />
-            150
+            {settings.credits}
           </div>
           <QuestionMarkIcon />
           <button className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-xs rounded-full">
-            {sideBarStrings.upgrade}
+            {sideBarStrings.manage}
           </button>
         </div>
       </div>
@@ -70,8 +70,8 @@ const SideBar = () => {
         <RangeSlider
           value={settings.guidanceScale}
           setValue={(x) => setSetting(SETTINGS_KEY.GUIDANCE_SCALE, x)}
-          min={1}
-          max={20}
+          min={GUIDANCE_SCALE_STRENGTH.MIN}
+          max={GUIDANCE_SCALE_STRENGTH.MAX}
         />
         <div className="flex items-center justify-center font-semibold w-8 text-van-gogh-xs select-none">
           {settings.guidanceScale}

@@ -5,6 +5,7 @@ import GenerationHistoryPanel from "../ui/generation-history/GenerationHistoryPa
 const Page = () => {
   const text = generationHistoryStrings;
   const generationHistory = sampleGenerationHistoryArray;
+
   return (
     <div className="flex flex-col pt-9 pb-4 w-full">
       <div

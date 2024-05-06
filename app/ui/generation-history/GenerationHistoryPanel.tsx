@@ -14,6 +14,7 @@ import ImageCardHoverOverlay from "../components/ImageCardHoverOverlay";
 import EyeIcon from "../svg/EyeIcon";
 import ImageModal from "./ImageModal";
 import ImageCardSkeleton from "../components/ImageCardSkeleton";
+import { tooltipText } from "@/app/lib/stringConstants";
 
 const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
   prompt,
@@ -116,7 +117,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
                 <Tooltip
                   placement="left"
                   hasArrow
-                  label="The image is public. Please subscribe to a paid plan if you wish to generate private images."
+                  label={tooltipText.premiumPrivateImages}
                 >
                   <div
                     role="button"
@@ -125,7 +126,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
                     <EyeIcon />
                   </div>
                 </Tooltip>
-                <ImageCardHoverOverlay />
+                <ImageCardHoverOverlay src={image} />
               </CardBody>
             </Card>
           </Suspense>

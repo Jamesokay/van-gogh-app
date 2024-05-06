@@ -1,3 +1,5 @@
+"use client";
+
 import CanvasIcon from "../svg/CanvasIcon";
 import DownloadIcon from "../svg/DownloadIcon";
 import ImageGuidanceIcon from "../svg/ImageGuidanceIcon";
@@ -10,8 +12,22 @@ import DeleteFilledIcon from "../svg/DeleteFilledIcon";
 import { badgeText, tooltipText } from "@/app/lib/stringConstants";
 import ImageCardButton from "./ImageCardButton";
 import BadgeWrapper from "./BadgeWrapper";
+import { FC } from "react";
+import { useSettings } from "@/app/context/SettingsContext";
+import { SETTINGS_KEY } from "@/app/lib/definitions";
+import { useRouter } from "next/navigation";
 
-const ImageCardHoverOverlay = () => {
+const ImageCardHoverOverlay: FC<{ src: string }> = ({ src }) => {
+  const { settings, setSetting } = useSettings();
+  const router = useRouter();
+
+  const useAsImageGuidanceInput = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_SRC, src);
+    if (!settings.imageGuidance) setSetting(SETTINGS_KEY.IMAGE_GUIDANCE, true);
+    router.push("/image-generation/image-guidance");
+  };
+
   return (
     <div className="hover-child bg-image-overlay-gradient flex flex-col justify-between rounded-md absolute left-0 top-0 cursor-pointer z-10 w-full h-full opacity-0 transition-opacity duration-300">
       <Tooltip label="Select image" hasArrow>
@@ -49,7 +65,11 @@ const ImageCardHoverOverlay = () => {
           </div>
           <div className="flex flex-col">
             <div className="border border-transparent border-b-van-gogh-border-white-alpha">
-              <ImageCardButton label={tooltipText.imageGuidance} rounded="t">
+              <ImageCardButton
+                onClick={(e) => useAsImageGuidanceInput(e)}
+                label={tooltipText.imageGuidance}
+                rounded="t"
+              >
                 <ImageGuidanceIcon />
               </ImageCardButton>
             </div>

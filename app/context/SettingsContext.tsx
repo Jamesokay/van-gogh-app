@@ -32,6 +32,7 @@ const defaultState: SettingsState = {
   modelId: "0",
   imageStyle: "Dynamic",
   imageGuidance: false,
+  credits: 150,
   // Note: imageGuidanceSrc will be a base64 encoded string.
   // Unsure of whether keeping this in Context is a performance concern,
   // but just rolling with it for now.

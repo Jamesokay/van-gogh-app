@@ -6,7 +6,7 @@ import RangeSlider from "../../components/RangeSlider";
 import { imageGuidanceStrings, tooltipText } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import { imageGuidanceTypes } from "@/app/lib/dataConstants";
-import { SETTINGS_KEY } from "@/app/lib/definitions";
+import { IMAGE_GUIDANCE_STRENGTH, SETTINGS_KEY } from "@/app/lib/definitions";
 import AspectRatioIcon from "../../svg/AspectRatioIcon";
 import UploadIcon from "../../svg/UploadIcon";
 import DeleteIcon from "../../svg/DeleteIcon";
@@ -154,8 +154,8 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
               setValue={(x) =>
                 setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_STRENGTH, x)
               }
-              max={90}
-              min={10}
+              max={IMAGE_GUIDANCE_STRENGTH.MAX}
+              min={IMAGE_GUIDANCE_STRENGTH.MIN}
             />
           </div>
         </div>

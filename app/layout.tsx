@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Providers } from './providers'
+import { Providers } from "./providers";
 import "./globals.css";
+import { Suspense } from "react";
+import LoadingSpinner from "./ui/components/LoadingSpinner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +19,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-body-gradient`}>
-        <Providers>{children}</Providers>
-      </body>
+      <Suspense
+        fallback={
+          <div className="flex w-full h-full justify-center items-center bg-red-500">
+            <LoadingSpinner />
+          </div>
+        }
+      >
+        <body className={`${inter.className} bg-body-gradient`}>
+          <Providers>{children}</Providers>
+        </body>
+      </Suspense>
     </html>
   );
 }

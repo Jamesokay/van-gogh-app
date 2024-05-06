@@ -3,6 +3,7 @@ import SectionWithOptionsGrid from "../../components/SectionWithOptionsGrid";
 import {
   AspectRatioKey,
   COLUMN_OPTIONS,
+  INPUT_DIMENSIONS,
   SETTINGS_KEY,
 } from "@/app/lib/definitions";
 import { findApproximateAspectRatio } from "@/app/lib/actions";
@@ -69,8 +70,8 @@ const SideBarDimensionOptions = () => {
           setValue={(x) =>
             handleAspectRatioChange(SETTINGS_KEY.ASPECT_RATIO_WIDTH, x)
           }
-          max={1536}
-          min={512}
+          max={INPUT_DIMENSIONS.MAX}
+          min={INPUT_DIMENSIONS.MIN}
         />
         <DimensionInput
           dimension="W"
@@ -78,8 +79,8 @@ const SideBarDimensionOptions = () => {
           setValue={(x) =>
             handleAspectRatioChange(SETTINGS_KEY.ASPECT_RATIO_WIDTH, x)
           }
-          max={1536}
-          min={512}
+          max={INPUT_DIMENSIONS.MAX}
+          min={INPUT_DIMENSIONS.MIN}
           unit="px"
         />
       </div>
@@ -89,8 +90,8 @@ const SideBarDimensionOptions = () => {
           setValue={(x) =>
             handleAspectRatioChange(SETTINGS_KEY.ASPECT_RATIO_HEIGHT, x)
           }
-          max={1536}
-          min={512}
+          max={INPUT_DIMENSIONS.MAX}
+          min={INPUT_DIMENSIONS.MIN}
         />
         <DimensionInput
           dimension="H"
@@ -98,8 +99,8 @@ const SideBarDimensionOptions = () => {
           setValue={(x) =>
             handleAspectRatioChange(SETTINGS_KEY.ASPECT_RATIO_HEIGHT, x)
           }
-          max={1536}
-          min={512}
+          max={INPUT_DIMENSIONS.MAX}
+          min={INPUT_DIMENSIONS.MIN}
           unit="px"
         />
       </div>

@@ -25,6 +25,7 @@ export interface SettingsState {
   imageGuidanceSrc: string;
   imageGuidanceType: string;
   imageGuidanceStrength: number;
+  credits: number;
 }
 
 export interface SettingsProviderProps {
@@ -165,4 +166,19 @@ export type Dimension = {
 export const enum COLUMN_OPTIONS {
   TWO = "2",
   FOUR = "4",
+}
+
+export const enum INPUT_DIMENSIONS {
+  MIN = 512,
+  MAX = 1536,
+}
+
+export const enum IMAGE_GUIDANCE_STRENGTH {
+  MIN = 10,
+  MAX = 90,
+}
+
+export const enum GUIDANCE_SCALE_STRENGTH {
+  MIN = 1,
+  MAX = 20,
 }
