@@ -103,9 +103,8 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
       </div>
       <div className="grid grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image, index) => (
-          <Suspense fallback={<ImageCardSkeleton />}>
+          <Suspense key={image} fallback={<ImageCardSkeleton />}>
             <Card
-              key={image}
               overflow={"hidden"}
               className="hover-parent"
               onClick={() => {

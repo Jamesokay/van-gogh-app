@@ -21,7 +21,7 @@ const ImageCardHoverOverlay: FC<{ src: string }> = ({ src }) => {
   const { settings, setSetting } = useSettings();
   const router = useRouter();
 
-  const useAsImageGuidanceInput = (e: React.MouseEvent) => {
+  const handleImageGuidanceInput = (e: React.MouseEvent) => {
     e.stopPropagation();
     setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_SRC, src);
     if (!settings.imageGuidance) setSetting(SETTINGS_KEY.IMAGE_GUIDANCE, true);
@@ -66,7 +66,7 @@ const ImageCardHoverOverlay: FC<{ src: string }> = ({ src }) => {
           <div className="flex flex-col">
             <div className="border border-transparent border-b-van-gogh-border-white-alpha">
               <ImageCardButton
-                onClick={(e) => useAsImageGuidanceInput(e)}
+                onClick={(e) => handleImageGuidanceInput(e)}
                 label={tooltipText.imageGuidance}
                 rounded="t"
               >
