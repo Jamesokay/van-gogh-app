@@ -20,12 +20,12 @@ const config: Config = {
     "bg-green-gradient",
     "bg-darkblue-to-purple-gradient",
     "rounded-b-full",
-    "rounded-t-full"
+    "rounded-t-full",
   ],
   theme: {
     extend: {
       backdropBlur: {
-        "modal-overlay-blur": "2rem"
+        "modal-overlay-blur": "2rem",
       },
       backgroundImage: {
         "body-gradient": "linear-gradient(112deg, #020305 0%, #070A0F 100%)",
@@ -43,7 +43,10 @@ const config: Config = {
           "linear-gradient(90deg, rgb(0, 194, 119) 0%, rgb(0, 121, 78) 100%)",
         "transparent-purple-gradient":
           "linear-gradient(81.02deg, rgba(250, 85, 96, 0.08) -23.47%, rgba(177, 75, 244, 0.08) 45.52%, rgba(77, 145, 255, 0.08) 114.8%)",
-        "image-overlay-gradient": "linear-gradient(rgba(18, 19, 21, 0) -2.43%, rgb(18, 19, 21) 97.57%)"
+        "image-overlay-gradient":
+          "linear-gradient(rgba(18, 19, 21, 0) -2.43%, rgb(18, 19, 21) 97.57%)",
+        "loading-spinner-gradient":
+          "conic-gradient(rgb(23, 38, 44), rgb(250, 85, 96), rgb(177, 75, 244), rgb(23, 38, 44), rgb(23, 38, 44), rgb(177, 75, 244), rgb(77, 145, 255), rgb(23, 38, 44), rgb(23, 38, 44))",
       },
       boxShadow: {
         "purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)",
@@ -80,24 +83,24 @@ const config: Config = {
       },
       maxHeight: {
         "input-height": "50px",
-        "van-gogh-modal-height": "calc(-10rem + 100vh)"
+        "van-gogh-modal-height": "calc(-10rem + 100vh)",
       },
       minWidth: {
         "input-width": "100px",
-        "van-gogh-modal-width": "32rem"
+        "van-gogh-modal-width": "32rem",
       },
       width: {
         "van-gogh-sidebar-width": "17rem",
         "4.5": "1.125rem",
       },
       maxWidth: {
-        "van-gogh-modal-width": "90vw"
+        "van-gogh-modal-width": "90vw",
       },
       height: {
         "4.5": "1.125rem",
       },
       minHeight: {
-        "van-gogh-modal-height": "32rem"
+        "van-gogh-modal-height": "32rem",
       },
       fontSize: {
         "van-gogh-5xs": "0.45rem",
@@ -128,7 +131,7 @@ const config: Config = {
         "switch-track-height": "calc(1rem * 1.25)",
         "switch-track-x-enable": "calc(1rem * 2.625 - 1rem * 1.25 - 0.125rem)",
         "switch-track-x-disable": "0.125rem",
-      }
+      },
     },
   },
   plugins: [],
