@@ -120,6 +120,13 @@
 - Defined header menu theme
 - Defined alternate menu sizes
 
+### Day 14 (06/05/2024):
+
+<img width="1512" alt="Screenshot 2024-05-06 at 9 08 14 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/9ebf36ec-7105-4259-8249-a655e669459d">
+
+- Basic implementation of skeleton state for image cards
+- Need to revise logic for sizing these correctly once actual fetch logic has been implemented
+
 ### To Do:
 
 - Add further UI elements for when Image Guidance is enabled
