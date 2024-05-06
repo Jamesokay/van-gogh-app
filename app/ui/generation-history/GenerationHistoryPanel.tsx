@@ -4,7 +4,7 @@ import { modelData } from "@/app/lib/dataConstants";
 import { GenerationHistoryProps } from "@/app/lib/definitions";
 import { Card, CardBody, Tooltip, useDisclosure } from "@chakra-ui/react";
 import Image from "next/image";
-import { FC, useState } from "react";
+import { FC, Suspense, useState } from "react";
 import CopyIcon from "../svg/CopyIcon";
 import ArrowUpIcon from "../svg/ArrowUpIcon";
 import DimensionsIcon from "../svg/DimensionsIcon";
@@ -13,6 +13,7 @@ import ImagesIcon from "../svg/ImagesIcon";
 import ImageCardHoverOverlay from "../components/ImageCardHoverOverlay";
 import EyeIcon from "../svg/EyeIcon";
 import ImageModal from "./ImageModal";
+import ImageCardSkeleton from "../components/ImageCardSkeleton";
 
 const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
   prompt,
@@ -101,31 +102,33 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
       </div>
       <div className="grid grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image, index) => (
-          <Card
-            key={image}
-            overflow={"hidden"}
-            className="hover-parent"
-            onClick={() => {
-              openModal(index);
-            }}
-          >
-            <CardBody padding={0}>
-              <img src={image} alt="" />
-              <Tooltip
-                placement="left"
-                hasArrow
-                label="The image is public. Please subscribe to a paid plan if you wish to generate private images."
-              >
-                <div
-                  role="button"
-                  className="absolute z-20 right-4 top-4 rounded-full h-10 w-10 flex justify-center items-center bg-van-gogh-grey-opal backdrop-blur-md text-white"
+          <Suspense fallback={<ImageCardSkeleton />}>
+            <Card
+              key={image}
+              overflow={"hidden"}
+              className="hover-parent"
+              onClick={() => {
+                openModal(index);
+              }}
+            >
+              <CardBody padding={0}>
+                <img src={image} alt="" />
+                <Tooltip
+                  placement="left"
+                  hasArrow
+                  label="The image is public. Please subscribe to a paid plan if you wish to generate private images."
                 >
-                  <EyeIcon />
-                </div>
-              </Tooltip>
-              <ImageCardHoverOverlay />
-            </CardBody>
-          </Card>
+                  <div
+                    role="button"
+                    className="absolute z-20 right-4 top-4 rounded-full h-10 w-10 flex justify-center items-center bg-van-gogh-grey-opal backdrop-blur-md text-white"
+                  >
+                    <EyeIcon />
+                  </div>
+                </Tooltip>
+                <ImageCardHoverOverlay />
+              </CardBody>
+            </Card>
+          </Suspense>
         ))}
         {[...Array(emptyDivsCount)].map((_, index) => (
           <div key={`empty-${index}`}></div>
