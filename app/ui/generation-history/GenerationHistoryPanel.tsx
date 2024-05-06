@@ -52,7 +52,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
       <div className="flex gap-8 mt-8 mb-3">
         <div className="flex w-full">
           <div className="flex w-full items-center">
-            <p>{prompt}</p>
+            <p className="truncate max-w-full">{prompt}</p>
             <div className="flex ml-4 gap-2 items-center">
               <Tooltip label="Copy prompt">
                 <button

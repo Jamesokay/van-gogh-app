@@ -127,6 +127,35 @@ export const imageGuidanceTypes = [
 export const sampleGenerationHistoryArray: GenerationHistoryProps[] = [
   {
     id: "xyz123",
+    prompt:
+      "Cityscape in evening, skyscrapers, dusky blue skies, blue colour palette, lights just coming on in some of the buildings, elevated view",
+    images: [
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_1.jpg",
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_3.jpg",
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_2.jpg",
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_0.jpg"
+    ],
+    modelId: "0",
+    style: "Dynamic",
+    width: 768,
+    height: 1024,
+  },
+  {
+    id: "xyz456",
+    prompt: "Natural beauty, mountains in mist, forest, photo realistic",
+    images: [
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/364e0b86-64bc-469d-9e6f-2760ccb9a077/Default_Natural_beauty_mountains_in_mist_forest_photo_realisti_3.jpg",
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/364e0b86-64bc-469d-9e6f-2760ccb9a077/Default_Natural_beauty_mountains_in_mist_forest_photo_realisti_2.jpg",
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/364e0b86-64bc-469d-9e6f-2760ccb9a077/Default_Natural_beauty_mountains_in_mist_forest_photo_realisti_1.jpg",
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/364e0b86-64bc-469d-9e6f-2760ccb9a077/Default_Natural_beauty_mountains_in_mist_forest_photo_realisti_0.jpg",
+    ],
+    modelId: "0",
+    style: "Dynamic",
+    width: 768,
+    height: 1024,
+  },
+  {
+    id: "xyz789",
     prompt: "Architectural wonders",
     images: [
       "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/ef61be8e-3f80-4c3e-9e59-57305bd119fc/Default_architectural_wonders_1.jpg?w=512",
@@ -136,7 +165,7 @@ export const sampleGenerationHistoryArray: GenerationHistoryProps[] = [
     style: "Dynamic",
     width: 768,
     height: 1360,
-  },
+  }
 ];
 
 export const numberOfPromptsOptions = [2, 4, 6, 8];
