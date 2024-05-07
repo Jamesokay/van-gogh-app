@@ -22,16 +22,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Suspense
-        fallback={
-          <div className="flex w-full h-full justify-center items-center bg-red-500">
-            <LoadingSpinner />
-          </div>
-        }
-      >
-        <body className={`${inter.className} bg-body-gradient`}>
-          <Providers>
-            <SettingsProvider>
+      <body className={`${inter.className} bg-body-gradient`}>
+        <Providers>
+          <SettingsProvider>
+            <Suspense
+              fallback={
+                <div className="flex w-full h-full justify-center items-center">
+                  <LoadingSpinner />
+                </div>
+              }
+            >
               <main className="grid grid-cols-main-page-grid h-full">
                 <SideBar />
                 <div className="flex flex-col flex-1 w-full pl-[17rem]">
@@ -41,10 +41,10 @@ export default function RootLayout({
                   </div>
                 </div>
               </main>
-            </SettingsProvider>
-          </Providers>
-        </body>
-      </Suspense>
+            </Suspense>
+          </SettingsProvider>
+        </Providers>
+      </body>
     </html>
   );
 }

@@ -1,4 +1,9 @@
-import { GenerationHistoryProps, ImageGenModel } from "./definitions";
+import {
+  Generation,
+  GenerationHistoryProps,
+  ImageGenModel,
+  User,
+} from "./definitions";
 
 export const routes = [
   { title: "Generation History", path: "/" },
@@ -52,7 +57,7 @@ export const defaultAspectRatioConversion = {
 
 export const modelData: ImageGenModel[] = [
   {
-    modelId: "0",
+    modelId: "cb04d937-fbc5-416b-bdb5-bd8d03eeb2b0",
     modelName: "Leonardo Lightning XL",
     ModelType: "Finetuned Model",
     dimensions: "1024x768",
@@ -133,7 +138,7 @@ export const sampleGenerationHistoryArray: GenerationHistoryProps[] = [
       "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_1.jpg",
       "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_3.jpg",
       "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_2.jpg",
-      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_0.jpg"
+      "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/07472a57-0e9b-4081-805c-c1599161a8c7/Default_Cityscape_in_evening_skyscrapers_dusky_blue_skies_blue_0.jpg",
     ],
     modelId: "0",
     style: "Dynamic",
@@ -165,7 +170,102 @@ export const sampleGenerationHistoryArray: GenerationHistoryProps[] = [
     style: "Dynamic",
     width: 768,
     height: 1360,
-  }
+  },
 ];
+
+const seedGenerationArray: Generation[] = [{
+  createdAt: "2024-05-04T14:30:00Z",
+  generated_images: [
+    {
+      generated_image_variation_generics: null,
+      fantasyAvatar: false,
+      id: "8a22fac1-bcd4-4367-ae7a-af01f4da6cbf",
+      imageToVideo: false,
+      likeCount: 0,
+      motion: false,
+      motionModel: null,
+      motionMP4URL: null,
+      motionStrength: null,
+      nsfw: false,
+      url: "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/364e0b86-64bc-469d-9e6f-2760ccb9a077/Default_Natural_beauty_mountains_in_mist_forest_photo_realisti_3.jpg",
+    },
+    {
+      generated_image_variation_generics: null,
+      fantasyAvatar: false,
+      id: "80f6bc89-1de7-488e-a5ef-4faf8bad4b8c",
+      imageToVideo: false,
+      likeCount: 0,
+      motion: false,
+      motionModel: null,
+      motionMP4URL: null,
+      motionStrength: null,
+      nsfw: false,
+      url: "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/364e0b86-64bc-469d-9e6f-2760ccb9a077/Default_Natural_beauty_mountains_in_mist_forest_photo_realisti_2.jpg",
+    },
+    {
+      generated_image_variation_generics: null,
+      fantasyAvatar: false,
+      id: "701fc582-3d85-4bf6-8f46-dbc1daa010fe",
+      imageToVideo: false,
+      likeCount: 0,
+      motion: false,
+      motionModel: null,
+      motionMP4URL: null,
+      motionStrength: null,
+      nsfw: false,
+      url: "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/364e0b86-64bc-469d-9e6f-2760ccb9a077/Default_Natural_beauty_mountains_in_mist_forest_photo_realisti_1.jpg",
+    },
+    {
+      generated_image_variation_generics: null,
+      fantasyAvatar: false,
+      id: "cf43c882-de82-41b3-98aa-c33f821ca371",
+      imageToVideo: false,
+      likeCount: 0,
+      motion: false,
+      motionModel: null,
+      motionMP4URL: null,
+      motionStrength: null,
+      nsfw: false,
+      url: "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/364e0b86-64bc-469d-9e6f-2760ccb9a077/Default_Natural_beauty_mountains_in_mist_forest_photo_realisti_0.jpg",
+    },
+  ],
+  generation_elements: null,
+  guidanceScale: null,
+  id: "7f303cdc-05ca-436d-9826-2295dc295304",
+  imageHeight: 1024,
+  imageWidth: 768,
+  inferenceSteps: null,
+  initStrength: null,
+  modelId: "cb04d937-fbc5-416b-bdb5-bd8d03eeb2b0",
+  negativePrompt: null,
+  photoReal: false,
+  photoRealStrength: null,
+  presetStyle: "LEONARDO",
+  prompt: "Natural beauty, mountains in mist, forest, photo realistic",
+  promptMagic: false,
+  promptMagicStrength: null,
+  promptMagicVersion: null,
+  public: true,
+  scheduler: "EULER_DISCRETE",
+  sdVersion: "v1_5",
+  seed: null,
+  status: "COMPLETE",
+}];
+
+const seedUser: User = {
+  user: {
+    id: "76b7484a-9319-477c-ae3d-d2b297c31a9c",
+    username: "Vincent"
+  },
+  tokenRenewalDate: "2024-08-05T15:20:00Z",
+  paidTokens: 0,
+  subscriptionTokens: 0,
+  subscriptionGptTokens: 0,
+  subscriptionModelTokens: 0,
+  apiConcurrencySlots: 0,
+  apiPaidTokens: 0,
+  apiSubscriptionTokens: 0,
+  apiPlanTokenRenewalDate: "2024-08-05T15:20:00Z",
+};
 
 export const numberOfPromptsOptions = [2, 4, 6, 8];

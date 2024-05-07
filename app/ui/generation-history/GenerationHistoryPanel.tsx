@@ -1,7 +1,7 @@
 "use client";
 
 import { modelData } from "@/app/lib/dataConstants";
-import { GenerationHistoryProps } from "@/app/lib/definitions";
+import { GenerationHistoryProps, GenerationWithImagesResponse } from "@/app/lib/definitions";
 import { Card, CardBody, Tooltip, useDisclosure } from "@chakra-ui/react";
 import Image from "next/image";
 import { FC, Suspense, useState } from "react";
@@ -16,14 +16,15 @@ import ImageModal from "./ImageModal";
 import ImageCardSkeleton from "../components/ImageCardSkeleton";
 import { tooltipText } from "@/app/lib/stringConstants";
 
-const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
+const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   prompt,
   images,
   modelId,
-  style,
-  width,
-  height,
+  presetStyle,
+  imageWidth,
+  imageHeight,
 }) => {
+  console.log(images)
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const selectedModel =
@@ -87,7 +88,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
               </div>
               <div className="flex px-2 gap-1 items-center">
                 <PaintDropIcon />
-                <p>{style}</p>
+                <p>{presetStyle}</p>
               </div>
               <div className="p-2 flex gap-1 items-center">
                 <ImagesIcon />
@@ -95,7 +96,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
               </div>
               <div className="flex gap-1 p-2 items-center">
                 <DimensionsIcon />
-                <span>{`${width} x ${height}`}</span>
+                <span>{`${imageWidth} x ${imageHeight}`}</span>
               </div>
             </div>
           </div>
@@ -103,7 +104,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
       </div>
       <div className="grid grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image, index) => (
-          <Suspense key={image} fallback={<ImageCardSkeleton />}>
+          <Suspense key={image.id} fallback={<ImageCardSkeleton />}>
             <Card
               overflow={"hidden"}
               className="hover-parent"
@@ -112,7 +113,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
               }}
             >
               <CardBody padding={0}>
-                <img src={image} alt="" />
+                <img src={image.url} alt="" />
                 <Tooltip
                   placement="left"
                   hasArrow
@@ -125,7 +126,7 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
                     <EyeIcon />
                   </div>
                 </Tooltip>
-                <ImageCardHoverOverlay src={image} />
+                <ImageCardHoverOverlay src={image.url} />
               </CardBody>
             </Card>
           </Suspense>
@@ -137,10 +138,10 @@ const GenerationHistoryPanel: FC<GenerationHistoryProps> = ({
       <ImageModal
         isOpen={isOpen}
         onClose={onClose}
-        width={width}
-        height={height}
+        width={imageWidth}
+        height={imageHeight}
         handleImageNav={handleImageNav}
-        src={images[selectedImageIndex]}
+        src={images?.[selectedImageIndex]?.url}
       />
     </div>
   );

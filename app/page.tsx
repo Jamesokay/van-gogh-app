@@ -1,10 +1,10 @@
-import { sampleGenerationHistoryArray } from "./lib/dataConstants";
+import { fetchImageGenerations } from "./lib/services";
 import { generationHistoryStrings } from "./lib/stringConstants";
 import GenerationHistoryPanel from "./ui/generation-history/GenerationHistoryPanel";
 
-const Page = () => {
+const Page = async () => {
   const text = generationHistoryStrings;
-  const generationHistory = sampleGenerationHistoryArray;
+  const generationHistory = await fetchImageGenerations('76b7484a-9319-477c-ae3d-d2b297c31a9c');
 
   return (
     <div className="flex flex-col pt-9 pb-4 w-full">

@@ -182,3 +182,181 @@ export const enum GUIDANCE_SCALE_STRENGTH {
   MIN = 1,
   MAX = 20,
 }
+
+// API Definitions
+
+type PresetStyle =
+  | "ANIME"
+  | "BOKEH"
+  | "CINEMATIC"
+  | "CINEMATIC_CLOSEUP"
+  | "CREATIVE"
+  | "DYNAMIC"
+  | "ENVIRONMENT"
+  | "FASHION"
+  | "FILM"
+  | "FOOD"
+  | "GENERAL"
+  | "HDR"
+  | "ILLUSTRATION"
+  | "LEONARDO"
+  | "LONG_EXPOSURE"
+  | "MACRO"
+  | "MINIMALISTIC"
+  | "MONOCHROME"
+  | "MOODY"
+  | "NONE"
+  | "NEUTRAL"
+  | "PHOTOGRAPHY"
+  | "PORTRAIT"
+  | "RAYTRACED"
+  | "RENDER_3D"
+  | "RETRO"
+  | "SKETCH_BW"
+  | "SKETCH_COLOR"
+  | "STOCK_PHOTO"
+  | "VIBRANT"
+  | "UNPROCESSED";
+
+type Scheduler =
+  | "KLMS"
+  | "EULER_ANCESTRAL_DISCRETE"
+  | "EULER_DISCRETE"
+  | "DDIM"
+  | "DPM_SOLVER"
+  | "PNDM"
+  | "LEONARDO";
+
+type GenerationStatus = "PENDING" | "COMPLETE" | "FAILED";
+
+type BaseModel =
+  | "v1_5"
+  | "v2"
+  | "v3"
+  | "SDXL_0_8"
+  | "SDXL_0_9"
+  | "SDXL_1_0"
+  | "SDXL_LIGHTNING";
+
+type TransformType = "OUTPAINT" | "INPAINT" | "UPSCALE" | "UNZOOM" | "NOBG";
+
+type StableDiffusionVersion =
+  | "v1_5"
+  | "v2"
+  | "v3"
+  | "SDXL_0_8"
+  | "SDXL_0_9"
+  | "SDXL_1_0"
+  | "SDXL_LIGHTNING";
+
+export type Generation = {
+  createdAt: string;
+  generated_images: Array<{
+    generated_image_variation_generics?: Array<{
+      id: string;
+      status: GenerationStatus;
+      transformType: TransformType;
+      url: string;
+    }> | null;
+    fantasyAvatar?: boolean;
+    id: string;
+    imageToVideo: boolean;
+    likeCount: number;
+    motion: boolean;
+    motionModel: string | null;
+    motionMP4URL: string | null;
+    motionStrength: number | null;
+    nsfw: boolean;
+    url: string;
+  }>;
+  generation_elements: Array<{
+    id: number;
+    lora: {
+      akUUID: string;
+      baseModel: BaseModel;
+      description: string;
+      name: string;
+      urlImage: string;
+      weightDefault: number;
+      weightMax: number;
+      weightMin: number;
+    };
+    weightApplied: number;
+  }> | null;
+  guidanceScale: number | null;
+  id: string;
+  imageHeight: number;
+  imageWidth: number;
+  inferenceSteps: number | null;
+  initStrength: number | null;
+  modelId: string;
+  negativePrompt: string | null;
+  photoReal: boolean | null;
+  photoRealStrength: number | null;
+  presetStyle: PresetStyle;
+  prompt: string;
+  promptMagic: boolean;
+  promptMagicStrength: number | null;
+  promptMagicVersion: string | null;
+  public: boolean;
+  scheduler: Scheduler;
+  sdVersion: StableDiffusionVersion;
+  seed: number | null;
+  status: GenerationStatus;
+};
+
+type GenerationResponse = {
+  id: string;
+  userId: string;
+  createdAt: Date;
+  prompt: string;
+  imageWidth: number;
+  imageHeight: number;
+  modelId: string;
+  status: string;
+  public: boolean;
+  presetStyle: string;
+  photoReal: boolean;
+  scheduler: string;
+  sdVersion: string;
+};
+
+type GeneratedImageResponse = {
+  id: string;
+  generationId: string;
+  url: string;
+  likeCount: number;
+  nsfw: boolean;
+};
+
+export type GenerationWithImagesResponse = GenerationResponse & {
+  images: GeneratedImageResponse[];
+};
+
+export type CustomModel = {
+  description: string;
+  featured: true;
+  generated_image: {
+    id: string;
+    url: string;
+  };
+  id: string;
+  name: string;
+  nsfw: true;
+};
+
+export type User = {
+  user: {
+    id: string;
+    username: string;
+  };
+  tokenRenewalDate: string;
+  paidTokens: 0;
+  subscriptionTokens: 0;
+  subscriptionGptTokens: 0;
+  subscriptionModelTokens: 0;
+  apiConcurrencySlots: 0;
+  apiPaidTokens: 0;
+  apiSubscriptionTokens: 0;
+  apiPlanTokenRenewalDate: string;
+};
