@@ -17,7 +17,7 @@ import { useSettings } from "@/app/context/SettingsContext";
 import { SETTINGS_KEY } from "@/app/lib/definitions";
 import { useRouter } from "next/navigation";
 
-const ImageCardHoverOverlay: FC<{ src: string }> = ({ src }) => {
+const ImageCardHoverOverlay: FC<{ src: string, hidden: boolean }> = ({ src, hidden }) => {
   const { settings, setSetting } = useSettings();
   const router = useRouter();
 
@@ -29,7 +29,7 @@ const ImageCardHoverOverlay: FC<{ src: string }> = ({ src }) => {
   };
 
   return (
-    <div className="hover-child bg-image-overlay-gradient flex flex-col justify-between rounded-md absolute left-0 top-0 cursor-pointer z-10 w-full h-full opacity-0 transition-opacity duration-300">
+    <div className={hidden ? "hidden" : "hover-child bg-image-overlay-gradient flex flex-col justify-between rounded-md absolute left-0 top-0 cursor-pointer z-10 w-full h-full opacity-0 transition-opacity duration-300"}>
       <Tooltip label="Select image" hasArrow>
         <button
           type="button"

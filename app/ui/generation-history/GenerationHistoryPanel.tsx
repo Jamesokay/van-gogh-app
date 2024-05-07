@@ -5,7 +5,13 @@ import {
   GeneratedImageResponse,
   GenerationWithImagesResponse,
 } from "@/app/lib/definitions";
-import { Card, CardBody, Tooltip, useDisclosure } from "@chakra-ui/react";
+import {
+  AspectRatio,
+  Card,
+  CardBody,
+  Tooltip,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import CopyIcon from "../svg/CopyIcon";
@@ -13,10 +19,8 @@ import ArrowUpIcon from "../svg/ArrowUpIcon";
 import DimensionsIcon from "../svg/DimensionsIcon";
 import PaintDropIcon from "../svg/PaintDropIcon";
 import ImagesIcon from "../svg/ImagesIcon";
-import ImageCardHoverOverlay from "../components/ImageCardHoverOverlay";
-import EyeIcon from "../svg/EyeIcon";
 import ImageModal from "./ImageModal";
-import { tooltipText } from "@/app/lib/stringConstants";
+import CardImageLoader from "../components/CardImageLoader";
 
 const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   prompt,
@@ -110,31 +114,19 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
       </div>
       <div className="grid grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image, index) => (
-          <Card
-            key={image.id}
-            overflow={"hidden"}
-            className="hover-parent"
-            onClick={() => {
-              openModal(index);
-            }}
-          >
-            <CardBody padding={0}>
-              <Image src={image.url} width={imageWidth} height={imageHeight} alt="" />
-              <Tooltip
-                placement="left"
-                hasArrow
-                label={tooltipText.premiumPrivateImages}
-              >
-                <div
-                  role="button"
-                  className="absolute z-20 right-4 top-4 rounded-full h-10 w-10 flex justify-center items-center bg-van-gogh-grey-opal backdrop-blur-md text-white"
-                >
-                  <EyeIcon />
-                </div>
-              </Tooltip>
-              <ImageCardHoverOverlay src={image.url} />
-            </CardBody>
-          </Card>
+          <AspectRatio key={image.id} ratio={0.75 / 1}>
+            <Card
+              overflow={"hidden"}
+              className="hover-parent"
+              onClick={() => {
+                openModal(index);
+              }}
+            >
+              <CardBody padding={0} h={"100%"} w={"100%"}>
+                <CardImageLoader src={image.url} alt="" />
+              </CardBody>
+            </Card>
+          </AspectRatio>
         ))}
         {[...Array(emptyDivsCount)].map((_, index) => (
           <div key={`empty-${index}`}></div>
