@@ -137,10 +137,17 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/1ca1101b-c30f-4048-a76
 - Fixed layout styling to keep SideBar fixed with main page scrollable
 - General clean-up
 
+### Day 15 (07/05/2024):
+
+- Implemented a Postgres database with Vercel
+- Basic seed data
+- Basic function for fetching and displaying the generated images for a given user
+- Suspense loading screen is now working as expected
+- Will need to make a component for images with logic for loading state
+- Will also need to clean up some of the redundant type definitions
 
 ### To Do:
 
-- Set up database
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Mobile responsiveness
