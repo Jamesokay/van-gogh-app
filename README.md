@@ -146,6 +146,13 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/1ca1101b-c30f-4048-a76
 - Will need to make a component for images with logic for loading state
 - Will also need to clean up some of the redundant type definitions
 
+### Day 15 (later):
+
+https://github.com/Jamesokay/van-gogh-app/assets/78640728/985a1f8a-1c9f-4ed0-a9ce-8c1d0b519396
+
+- Basic (and messy) implementation of image loading state
+- Will need to tidy this bad boy up
+
 ### To Do:
 
 - Add further UI elements for when Image Guidance is enabled
