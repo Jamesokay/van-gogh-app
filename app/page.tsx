@@ -1,3 +1,5 @@
+"use server"
+
 import { fetchImageGenerations } from "./lib/services";
 import { generationHistoryStrings } from "./lib/stringConstants";
 import GenerationHistoryPanel from "./ui/generation-history/GenerationHistoryPanel";

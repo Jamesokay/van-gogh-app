@@ -1,10 +1,13 @@
 "use client";
 
 import { modelData } from "@/app/lib/dataConstants";
-import { GenerationHistoryProps, GenerationWithImagesResponse } from "@/app/lib/definitions";
+import {
+  GeneratedImageResponse,
+  GenerationWithImagesResponse,
+} from "@/app/lib/definitions";
 import { Card, CardBody, Tooltip, useDisclosure } from "@chakra-ui/react";
 import Image from "next/image";
-import { FC, Suspense, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import CopyIcon from "../svg/CopyIcon";
 import ArrowUpIcon from "../svg/ArrowUpIcon";
 import DimensionsIcon from "../svg/DimensionsIcon";
@@ -13,25 +16,28 @@ import ImagesIcon from "../svg/ImagesIcon";
 import ImageCardHoverOverlay from "../components/ImageCardHoverOverlay";
 import EyeIcon from "../svg/EyeIcon";
 import ImageModal from "./ImageModal";
-import ImageCardSkeleton from "../components/ImageCardSkeleton";
 import { tooltipText } from "@/app/lib/stringConstants";
 
 const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   prompt,
-  images,
+  images: initialImages,
   modelId,
   presetStyle,
   imageWidth,
   imageHeight,
 }) => {
-  console.log(images)
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [images, setImages] = useState<GeneratedImageResponse[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const selectedModel =
     modelData.find((x) => x.modelId === modelId) || modelData[0];
   const emptyDivsCount = 4 - images.length;
   const copyPrompt = () => console.log("copy prompt");
   const reusePromps = () => console.log("reuse promps");
+
+  useEffect(() => {
+    setImages(initialImages);
+  }, []);
 
   const openModal = (index: number) => {
     setSelectedImageIndex(index);
@@ -104,32 +110,31 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
       </div>
       <div className="grid grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image, index) => (
-          <Suspense key={image.id} fallback={<ImageCardSkeleton />}>
-            <Card
-              overflow={"hidden"}
-              className="hover-parent"
-              onClick={() => {
-                openModal(index);
-              }}
-            >
-              <CardBody padding={0}>
-                <img src={image.url} alt="" />
-                <Tooltip
-                  placement="left"
-                  hasArrow
-                  label={tooltipText.premiumPrivateImages}
+          <Card
+            key={image.id}
+            overflow={"hidden"}
+            className="hover-parent"
+            onClick={() => {
+              openModal(index);
+            }}
+          >
+            <CardBody padding={0}>
+              <Image src={image.url} width={imageWidth} height={imageHeight} alt="" />
+              <Tooltip
+                placement="left"
+                hasArrow
+                label={tooltipText.premiumPrivateImages}
+              >
+                <div
+                  role="button"
+                  className="absolute z-20 right-4 top-4 rounded-full h-10 w-10 flex justify-center items-center bg-van-gogh-grey-opal backdrop-blur-md text-white"
                 >
-                  <div
-                    role="button"
-                    className="absolute z-20 right-4 top-4 rounded-full h-10 w-10 flex justify-center items-center bg-van-gogh-grey-opal backdrop-blur-md text-white"
-                  >
-                    <EyeIcon />
-                  </div>
-                </Tooltip>
-                <ImageCardHoverOverlay src={image.url} />
-              </CardBody>
-            </Card>
-          </Suspense>
+                  <EyeIcon />
+                </div>
+              </Tooltip>
+              <ImageCardHoverOverlay src={image.url} />
+            </CardBody>
+          </Card>
         ))}
         {[...Array(emptyDivsCount)].map((_, index) => (
           <div key={`empty-${index}`}></div>

@@ -321,7 +321,7 @@ type GenerationResponse = {
   sdVersion: string;
 };
 
-type GeneratedImageResponse = {
+export type GeneratedImageResponse = {
   id: string;
   generationId: string;
   url: string;

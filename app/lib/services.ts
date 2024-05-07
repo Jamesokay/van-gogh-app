@@ -1,8 +1,11 @@
-import { sql } from '@vercel/postgres';
-import { unstable_noStore as noStore } from 'next/cache';
-import { GenerationWithImagesResponse } from './definitions';
+import { sql } from "@vercel/postgres";
+import { unstable_noStore as noStore } from "next/cache";
+import { GenerationWithImagesResponse } from "./definitions";
 
-export async function fetchImageGenerations(userId: string): Promise<GenerationWithImagesResponse[]> {
+export async function fetchImageGenerations(
+  userId: string
+): Promise<GenerationWithImagesResponse[]> {
+
   noStore();
   try {
     const data = await sql`
@@ -30,7 +33,7 @@ export async function fetchImageGenerations(userId: string): Promise<GenerationW
           photoReal: row.photoreal,
           scheduler: row.scheduler,
           sdVersion: row.sdversion,
-          images: []
+          images: [],
         };
         generationMap.set(row.id, generation);
       }
@@ -40,7 +43,7 @@ export async function fetchImageGenerations(userId: string): Promise<GenerationW
           generationId: row.generationid,
           url: row.imageurl,
           likeCount: row.likecount,
-          nsfw: row.nsfw
+          nsfw: row.nsfw,
         });
       }
     }
