@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import CopyIcon from "../svg/CopyIcon";
 import ArrowUpIcon from "../svg/ArrowUpIcon";
 import DimensionsIcon from "../svg/DimensionsIcon";
@@ -21,6 +21,7 @@ import PaintDropIcon from "../svg/PaintDropIcon";
 import ImagesIcon from "../svg/ImagesIcon";
 import ImageModal from "./ImageModal";
 import CardImageLoader from "../components/CardImageLoader";
+import TickIcon from "../svg/TickIcon";
 
 const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   prompt,
@@ -33,19 +34,38 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [images, setImages] = useState<GeneratedImageResponse[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [copied, setCopied] = useState(false);
+  const copyRef = useRef<NodeJS.Timeout | number | null>(null);
   const selectedModel =
     modelData.find((x) => x.modelId === modelId) || modelData[0];
   const emptyDivsCount = 4 - images.length;
-  const copyPrompt = () => console.log("copy prompt");
   const reusePromps = () => console.log("reuse promps");
 
   useEffect(() => {
     setImages(initialImages);
+    return () => {
+      if (copyRef.current !== null) clearTimeout(copyRef.current);
+    };
   }, []);
 
   const openModal = (index: number) => {
     setSelectedImageIndex(index);
     onOpen();
+  };
+
+  const copyPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setCopied(true);
+      if (copyRef.current !== null) clearTimeout(copyRef.current);
+      copyRef.current = setTimeout(() => {
+        setCopied(false);
+        copyRef.current = null;
+      }, 1000);
+    } catch (err) {
+      console.log("Failed to copy!");
+      setCopied(false);
+    }
   };
 
   const handleImageNav = (direction: "forward" | "back") => {
@@ -61,16 +81,29 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   return (
     <div>
       <div className="flex gap-8 mt-8 mb-3">
-        <div className="flex w-full">
-          <div className="flex w-full items-center">
-            <p className="truncate max-w-full">{prompt}</p>
-            <div className="flex ml-4 gap-2 items-center">
+        <div className="flex flex-col lg:flex-row w-full justify-between">
+          <div className="flex items-center overflow-hidden">
+            <p className="truncate">{prompt}</p>
+            <div className="flex ml-auto gap-2 items-center">
               <Tooltip label="Copy prompt">
                 <button
                   onClick={() => copyPrompt()}
-                  className="text-van-gogh-grey-subdued"
+                  className="relative text-van-gogh-grey-subdued w-8 h-8"
                 >
-                  <CopyIcon />
+                  <span
+                    className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                      copied ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    <TickIcon fill="green" />
+                  </span>
+                  <span
+                    className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                      copied ? "opacity-0" : "opacity-100"
+                    }`}
+                  >
+                    <CopyIcon />
+                  </span>
                 </button>
               </Tooltip>
               <Tooltip label="Reuse prompt">
@@ -83,7 +116,7 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
               </Tooltip>
             </div>
           </div>
-          <div className="flex w-full justify-end h-8">
+          <div className="flex-none w-auto justify-end h-8 self-end">
             <div className="pl-2 flex flex-nowrap gap-1 items-center text-van-gogh-xs">
               <div className="flex gap-1.5 items-center pl-1 pr-2">
                 <div className="flex w-4.5 h-4.5">
@@ -112,7 +145,7 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-auto-fit-minmax-16 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image, index) => (
           <AspectRatio key={image.id} ratio={0.75 / 1}>
             <Card

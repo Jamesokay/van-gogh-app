@@ -1,6 +1,6 @@
 "use client";
 
-import { Heading, Textarea } from "@chakra-ui/react";
+import { Heading, Textarea, Tooltip } from "@chakra-ui/react";
 import DiceIcon from "../svg/DiceIcon";
 import { imageStyles, modelData, routes } from "@/app/lib/dataConstants";
 import { SETTINGS_KEY } from "@/app/lib/definitions";
@@ -18,6 +18,7 @@ import {
   imageGenerationHeaderStrings,
 } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
+import TextareaAutoResize from "../components/TextareaAutoResize";
 
 export default function ImageGenerationHeader() {
   const { settings, setSetting } = useSettings();
@@ -27,40 +28,53 @@ export default function ImageGenerationHeader() {
   const text = imageGenerationHeaderStrings;
 
   return (
-    <div className="flex flex-col w-full px-8 z-50">
-      <div className="mt-10 mb-2">
+    <div className="flex flex-col w-full z-50">
+      <div className="mt-10 mb-2 px-4 md:px-8">
         <Heading as="h1" fontSize="1.5rem" fontWeight={500}>
           {text.title}
         </Heading>
       </div>
-      <div className="flex w-full mt-5 mb-4">
-        <button className="flex items-center px-2 bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
+      <div className="flex w-full mt-5 mb-4 px-4 md:px-8">
+        <button className="flex items-center justify-center min-w-[45px] w-[45px] h-[45px] bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
           <DiceIcon />
         </button>
-        <Textarea
+        <TextareaAutoResize
+          maxLength={1000}
           placeholder={text.promptInputPlaceholder}
-          onChange={(e) => setSetting(SETTINGS_KEY.PROMPT, e.target.value)}
-        ></Textarea>
-        <button className="flex items-center bg-purple-gradient px-12 rounded-lg ml-4 text-van-gogh-lg font-medium">
-          <span className="mr-3">{text.buttonText}</span>
-          <CoinsIcon white={true} />
-          <span className="text-van-gogh-sm ml-1">{settings.credits}</span>
-        </button>
+          value={settings.prompt}
+          handleChange={(e) => setSetting(SETTINGS_KEY.PROMPT, e.target.value)}
+        />
+        {/* TODO: Extract this button into a re-useable component */}
+        <Tooltip
+          label={
+            !settings.prompt ? "Please type a prompt" : "This will use 8 tokens"
+          }
+        >
+          <button
+            className={`hidden md:flex items-center h-[45px] bg-purple-gradient px-12 rounded-lg ml-4 text-van-gogh-lg font-medium ${
+              !settings.prompt ? "grayscale opacity-30 cursor-not-allowed" : ""
+            }`}
+            disabled={!settings.prompt}
+          >
+            <span className="mr-3">{text.buttonText}</span>
+            <CoinsIcon white={true} />
+            <span className="text-van-gogh-sm ml-1">{settings.credits}</span>
+          </button>
+        </Tooltip>
       </div>
       <div
-        className={`overflow-hidden max-h-${
-          settings.enableNegativePrompt ? "input-height" : "0"
-        } opacity-${settings.enableNegativePrompt ? "100" : "0"}
-        mb-${settings.enableNegativePrompt ? "4" : "0"} transition-all`}
+        className={settings.enableNegativePrompt ? "overflow-hidden px-4 md:px-8 mb-4" : "hidden"}
       >
-        <Textarea
+        <TextareaAutoResize
+          maxLength={1000}
           placeholder={text.negPromptInputPlaceholder}
-          onChange={(e) =>
+          value={settings.negativePrompt}
+          handleChange={(e) =>
             setSetting(SETTINGS_KEY.NEGATIVE_PROMPT, e.target.value)
           }
-        ></Textarea>
+        />
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4 px-4 mb-8 md:mb-0 md:px-8">
         <ModelDropdownMenu
           options={modelData}
           value={selectedModel}
@@ -77,7 +91,7 @@ export default function ImageGenerationHeader() {
             large={true}
           />
         </div>
-        <div className="flex items-center gap-2.5 px-3.5 rounded-md bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover cursor-pointer">
+        <div className="flex h-14 items-center gap-2.5 px-3.5 rounded-md bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover cursor-pointer">
           <AtomicIcon />
           <p className="text-van-gogh-sm font-medium">{text.addElements}</p>
           <CirclePlusIcon />
@@ -98,13 +112,30 @@ export default function ImageGenerationHeader() {
           {text.addNegPrompt}
         </div>
       </div>
-      <div className="mt-5 ">
+      <div className="flex px-4">
+        <Tooltip
+          label={
+            !settings.prompt ? "Please type a prompt" : "This will use 8 tokens"
+          }
+        >
+          <button
+            className={`flex md:hidden h-14 w-full justify-center items-center bg-purple-gradient px-12 rounded-lg text-van-gogh-lg font-medium ${
+              !settings.prompt ? "grayscale opacity-30 cursor-not-allowed" : ""
+            }`}
+          >
+            <span className="mr-3">{text.buttonText}</span>
+            <CoinsIcon white={true} />
+            <span className="text-van-gogh-sm ml-1">{settings.credits}</span>
+          </button>
+        </Tooltip>
+      </div>
+      <div className="mt-8 px-0 md:mt-5 md:px-8 ">
         <div className="flex">
           {routes.map((route) => (
             <Link
               key={route.path}
               href={route.path}
-              className={`flex gap-1 items-center mr-8 py-2 font-medium ${
+              className={`flex flex-1 md:flex-none gap-1 items-center justify-center mr-8 py-2 text-van-gogh-sm md:text-van-gogh-md font-medium ${
                 pathname !== route.path
                   ? "text-van-gogh-grey-m hover:text-white"
                   : "van-gogh-header-link"
@@ -119,7 +150,9 @@ export default function ImageGenerationHeader() {
                       : "bg-van-gogh-badge-grey"
                   }`}
                 >
-                  <span className="text-white">{settings.imageGuidance ? "ON" : "OFF"}</span>
+                  <span className="text-white">
+                    {settings.imageGuidance ? "ON" : "OFF"}
+                  </span>
                 </div>
               )}
             </Link>

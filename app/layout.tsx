@@ -32,11 +32,11 @@ export default function RootLayout({
                 </div>
               }
             >
-              <main className="grid grid-cols-main-page-grid h-full">
+              <main className="flex h-full">
                 <SideBar />
-                <div className="flex flex-col flex-1 w-full pl-[17rem]">
+                <div className="pl-0 md:pl-[17rem] flex flex-col flex-1 w-full overflow-x-hidden">
                   <ImageGenerationHeader />
-                  <div className="flex w-full border-t border-van-gogh-grey-2xd px-8">
+                  <div className="flex w-full border-t border-van-gogh-grey-2xd px-4 md:px-8">
                     {children}
                   </div>
                 </div>
