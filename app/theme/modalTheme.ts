@@ -11,7 +11,7 @@ const imageModal = definePartsStyle({
   },
   overlay: {
     bg: "rgba(0, 0, 0, 0.48)",
-    backdropBlur: "2rem",
+    backdropFilter: "blur(2rem)",
   },
   closeButton: {
     bg: "rgba(0, 0, 0, 0.34)",
@@ -25,10 +25,10 @@ const imageModal = definePartsStyle({
     bg: "rgb(23, 23, 23)",
     width: "auto",
     margin: "auto",
-    maxW: "32rem",
+    maxW: "90vw",
   },
   dialogContainer: {
-    overflow: 'hidden'
+    overflow: "hidden",
   },
   footer: {
     padding: 0,

@@ -26,8 +26,9 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
+        background: "linear-gradient(112deg, #020305 0%, #070A0F 100%)",
         color: "white",
-      },
+      }
     },
   },
 });

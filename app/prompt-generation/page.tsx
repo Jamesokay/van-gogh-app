@@ -13,7 +13,7 @@ const Page = () => {
   const text = promptGenerationStrings;
 
   return (
-    <div className="flex flex-col gap-6 pt-9 w-full">
+    <div className="flex flex-col gap-6 py-9 w-full">
       <div className="flex items-center gap-3 bg-van-gogh-white-opal p-4 rounded-xl">
         <InfoOutlineIcon w="5" h="5" />
         <p className="text-van-gogh-sm">{text.description}</p>
