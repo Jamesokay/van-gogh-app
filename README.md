@@ -157,6 +157,12 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/985a1f8a-1c9f-4ed0-a9c
 - Basic (and messy) implementation of image loading state
 - Will need to tidy this bad boy up
 
+### Day 16 (08/05/2024):
+
+- Basic mobile responsiveness for base layout and Generation History Page
+- Extracted out TextareaAutosize component
+- Extracted out GenerateButton component
+  
 ### To Do:
 
 - Add further UI elements for when Image Guidance is enabled
