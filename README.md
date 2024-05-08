@@ -180,7 +180,6 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/308757f6-c4cc-4bd4-914
 - Mobile page header
 - Mobile SideBar logic
 - Mobile font-sizes (?)
-- Adjust Modal size
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Clean-up of styles
