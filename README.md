@@ -159,14 +159,16 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/985a1f8a-1c9f-4ed0-a9c
 
 ### Day 16 (08/05/2024):
 
+https://github.com/Jamesokay/van-gogh-app/assets/78640728/308757f6-c4cc-4bd4-914d-b3f9b9a84237
+
 - Basic mobile responsiveness for base layout and Generation History Page
 - Extracted out TextareaAutosize component
 - Extracted out GenerateButton component
   
 ### To Do:
 
+- Continue work on Mobile responsiveness
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
-- Mobile responsiveness
 - Clean-up of styles
 - Implement services for Leonardo API
