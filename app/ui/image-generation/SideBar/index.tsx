@@ -1,7 +1,11 @@
 "use client";
 
 import OptionWithSwitch from "../../components/OptionWithSwitch";
-import { COLUMN_OPTIONS, GUIDANCE_SCALE_STRENGTH, SETTINGS_KEY } from "../../../lib/definitions";
+import {
+  COLUMN_OPTIONS,
+  GUIDANCE_SCALE_STRENGTH,
+  SETTINGS_KEY,
+} from "../../../lib/definitions";
 import { numberOfImagesOptions } from "../../../lib/dataConstants";
 import SectionWithOptionsGrid from "../../components/SectionWithOptionsGrid";
 import RangeSlider from "../../components/RangeSlider";
@@ -17,6 +21,7 @@ import { useSettings } from "@/app/context/SettingsContext";
 import SideBarSwitchOptions from "./SideBarSwitchOptions";
 import SideBarDimensionOptions from "./SideBarDimensionOptions";
 import SideBarAdvancedSettings from "./SideBarAdvancedSettings";
+import TokenHeader from "../../components/TokenHeader";
 
 const SideBar = () => {
   const { settings, setSetting, handleReset } = useSettings();
@@ -33,16 +38,7 @@ const SideBar = () => {
             height={34}
           />
         </div>
-        <div className="flex gap-2 items-center justify-center px-3 py-2 border border-w-thin border-van-gogh-border-grey rounded-full">
-          <div className="flex items-center text-van-gogh-xs">
-            <CoinsIcon />
-            {settings.credits}
-          </div>
-          <QuestionMarkIcon />
-          <button className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-xs rounded-full">
-            {sideBarStrings.manage}
-          </button>
-        </div>
+        <TokenHeader />
       </div>
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <SectionWithOptionsGrid

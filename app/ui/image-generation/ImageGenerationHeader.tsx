@@ -19,6 +19,9 @@ import {
 import { useSettings } from "@/app/context/SettingsContext";
 import TextareaAutoResize from "../components/TextareaAutoResize";
 import GenerateButton from "../components/GenerateButton";
+import TokenHeader from "../components/TokenHeader";
+import SettingsIcon from "../svg/SettingsIcon";
+import Image from "next/image";
 
 export default function ImageGenerationHeader() {
   const { settings, setSetting } = useSettings();
@@ -29,14 +32,33 @@ export default function ImageGenerationHeader() {
 
   return (
     <div className="flex flex-col w-full z-50">
-      <div className="mt-10 mb-2 px-4 md:px-8">
+      <div className="flex my-5 md:hidden px-4">
+        <Image
+          src="/leonardo-logo-text-new.svg"
+          alt="Leonardo Logo"
+          width={117}
+          height={34}
+        />
+      </div>
+      <div className="px-4 mb-8 md:mb-2 md:mt-10 md:px-8">
         <Heading as="h1" fontSize="1.5rem" fontWeight={500}>
           {text.title}
         </Heading>
       </div>
-      <div className="flex w-full mt-5 mb-4 px-4 md:px-8">
+      <div className="flex md:hidden justify-between px-4">
         <button className="flex items-center justify-center min-w-[45px] w-[45px] h-[45px] bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
-          <DiceIcon />
+          <DiceIcon id="1" />
+        </button>
+        <div className="flex items-center gap-3">
+          <TokenHeader />
+          <button className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-10 h-10 hover:bg-van-gogh-hover-grey">
+            <SettingsIcon />
+          </button>
+        </div>
+      </div>
+      <div className="flex w-full mt-5 mb-4 px-4 md:px-8">
+        <button className="hidden md:flex items-center justify-center min-w-[45px] w-[45px] h-[45px] bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
+          <DiceIcon id="2" />
         </button>
         <TextareaAutoResize
           maxLength={1000}
