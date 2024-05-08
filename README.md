@@ -167,10 +167,6 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/308757f6-c4cc-4bd4-914
 
 ### Day 16 (later):
 
-<img width="494" alt="Screenshot 2024-05-08 at 4 34 19 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/2f029f35-1cdf-4862-a7c3-92ef1d58945d">
-<img width="498" alt="Screenshot 2024-05-08 at 4 34 42 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/e395cc81-392b-4881-93fc-1367ac823883">
-<img width="497" alt="Screenshot 2024-05-08 at 4 34 53 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/0615ee63-93a9-4689-b004-504ea6102afa">
-
 - Base mobile responsiveness for Image Guidance Page (with and without image selected)
 - Base mobile responsiveness for Prompt Generation Page
   
@@ -179,6 +175,7 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/308757f6-c4cc-4bd4-914
 - Mobile page header
 - Mobile SideBar logic
 - Mobile font-sizes (?)
+- Adjust Modal size
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Clean-up of styles
