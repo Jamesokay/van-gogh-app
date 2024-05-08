@@ -30,6 +30,7 @@ const TextareaAutoResize: FC<{
   };
 
   return (
+    <>
     <Textarea
       ref={textareaRef}
       maxLength={maxLength}
@@ -37,6 +38,7 @@ const TextareaAutoResize: FC<{
       value={value}
       onChange={handleChange}
     ></Textarea>
+    </>
   );
 };
 

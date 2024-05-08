@@ -79,7 +79,7 @@ body {
 }
 
 .empty-selections-bg {
-  background-image: url('/empty-selections.webp');
+  background-image: url("/empty-selections.webp");
   background-size: contain; /* Cover the entire area of the element */
   background-position: center center; /* Center the background image */
   background-repeat: no-repeat; /* Do not repeat the image */
@@ -87,7 +87,7 @@ body {
 }
 
 .cta-bg {
-  background-image: url('/cta-background.webp');
+  background-image: url("/cta-background.webp");
   background-size: cover;
   box-shadow: rgba(0, 0, 0, 0.25) 0px calc(0.25rem) calc(0.25rem) 0px;
   min-width: 18.5rem;
@@ -100,6 +100,29 @@ body {
 .right-image-nav {
   right: calc(3rem * -1);
 }
+
+/* Styles for dynamically resizing textarea, may implement later
+.grow-wrap {
+  display: grid;
+  width: 100%;
+}
+.grow-wrap::after {
+  content: attr(data-replicated-value) " ";
+  white-space: pre-wrap;
+  visibility: hidden;
+}
+.grow-wrap > textarea {
+  resize: none;
+  overflow: hidden;
+}
+.grow-wrap > textarea,
+.grow-wrap::after {
+  border-radius: 0.5rem;
+  padding: 0.154rem;
+  font: inherit;
+  grid-area: 1 / 1 / 2 / 2;
+  background: rgb(16, 22, 34);
+} */
 
 @layer utilities {
   .text-balance {

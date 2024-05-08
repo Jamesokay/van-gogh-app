@@ -1,6 +1,6 @@
 "use client";
 
-import { Heading, Textarea, Tooltip } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import DiceIcon from "../svg/DiceIcon";
 import { imageStyles, modelData, routes } from "@/app/lib/dataConstants";
 import { SETTINGS_KEY } from "@/app/lib/definitions";
@@ -11,7 +11,6 @@ import AtomicIcon from "../svg/AtomicIcon";
 import CirclePlusIcon from "../svg/CirclePlusIcon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import CoinsIcon from "../svg/CoinsIcon";
 import Switch from "../components/Switch";
 import {
   badgeText,
@@ -19,6 +18,7 @@ import {
 } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import TextareaAutoResize from "../components/TextareaAutoResize";
+import GenerateButton from "../components/GenerateButton";
 
 export default function ImageGenerationHeader() {
   const { settings, setSetting } = useSettings();
@@ -44,26 +44,14 @@ export default function ImageGenerationHeader() {
           value={settings.prompt}
           handleChange={(e) => setSetting(SETTINGS_KEY.PROMPT, e.target.value)}
         />
-        {/* TODO: Extract this button into a re-useable component */}
-        <Tooltip
-          label={
-            !settings.prompt ? "Please type a prompt" : "This will use 8 tokens"
-          }
-        >
-          <button
-            className={`hidden md:flex items-center h-[45px] bg-purple-gradient px-12 rounded-lg ml-4 text-van-gogh-lg font-medium ${
-              !settings.prompt ? "grayscale opacity-30 cursor-not-allowed" : ""
-            }`}
-            disabled={!settings.prompt}
-          >
-            <span className="mr-3">{text.buttonText}</span>
-            <CoinsIcon white={true} />
-            <span className="text-van-gogh-sm ml-1">{settings.credits}</span>
-          </button>
-        </Tooltip>
+        <GenerateButton mobile={false} />
       </div>
       <div
-        className={settings.enableNegativePrompt ? "overflow-hidden px-4 md:px-8 mb-4" : "hidden"}
+        className={
+          settings.enableNegativePrompt
+            ? "overflow-hidden px-4 md:px-8 mb-4"
+            : "hidden"
+        }
       >
         <TextareaAutoResize
           maxLength={1000}
@@ -113,21 +101,7 @@ export default function ImageGenerationHeader() {
         </div>
       </div>
       <div className="flex px-4">
-        <Tooltip
-          label={
-            !settings.prompt ? "Please type a prompt" : "This will use 8 tokens"
-          }
-        >
-          <button
-            className={`flex md:hidden h-14 w-full justify-center items-center bg-purple-gradient px-12 rounded-lg text-van-gogh-lg font-medium ${
-              !settings.prompt ? "grayscale opacity-30 cursor-not-allowed" : ""
-            }`}
-          >
-            <span className="mr-3">{text.buttonText}</span>
-            <CoinsIcon white={true} />
-            <span className="text-van-gogh-sm ml-1">{settings.credits}</span>
-          </button>
-        </Tooltip>
+        <GenerateButton mobile={true} />
       </div>
       <div className="mt-8 px-0 md:mt-5 md:px-8 ">
         <div className="flex">

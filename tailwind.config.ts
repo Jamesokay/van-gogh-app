@@ -67,6 +67,7 @@ const config: Config = {
         "van-gogh-grey-blue": "#242C3E",
         "van-gogh-purple": "rgb(114, 88, 242)",
         "van-gogh-dark-blue": "rgb(16, 22, 34)",
+        "van-gogh-blue-hover": "rgb(11, 15, 23)",
         "van-gogh-dark-blue-alt": "#0B0F17",
         "van-gogh-dark-blue-hover": "rgb(22, 29, 45)",
         "van-gogh-badge-grey": "rgb(38, 39, 44)",
