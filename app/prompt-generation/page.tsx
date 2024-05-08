@@ -36,7 +36,7 @@ const Page = () => {
           ))}
         </div>
       </div>
-      <div className="flex w-full gap-4">
+      <div className="flex flex-col md:flex-row w-full gap-4">
         <input
           className="outline-none border-none w-full bg-van-gogh-input-grey van-gogh-sm px-4 h-10 rounded-md"
           type="text"
@@ -45,13 +45,13 @@ const Page = () => {
           onChange={(e) => setPrompt(e.target.value)}
         />
         <button className="relative flex text-van-gogh-sm h-10 bg-pink-gradient p-[1px] rounded-lg hover:shadow-purple-glow">
-          <p className="absolute text-center w-full pb-1 bottom-full text-van-gogh-2xs text-van-gogh-text-grey">
+          <p className="hidden md:block absolute text-center w-full pb-1 bottom-full text-van-gogh-2xs text-van-gogh-text-grey">
             {`${remainingPrompts} ${text.promptsRemaining}`}
           </p>
-          <div className="flex gap-1 bg-van-gogh-input-grey h-full w-full flex items-center justfy-center px-14 rounded-lg">
+          <button className="flex gap-1 bg-van-gogh-input-grey h-full w-full flex items-center justify-center px-14 rounded-lg">
             <LightBulbIcon />
             {text.buttonText}
-          </div>
+          </button>
         </button>
       </div>
     </div>

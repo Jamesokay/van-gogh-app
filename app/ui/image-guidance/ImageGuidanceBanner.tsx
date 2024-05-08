@@ -1,9 +1,20 @@
+"use client";
+
+import { useSettings } from "@/app/context/SettingsContext";
 import Image from "next/image";
 
 const ImageGuidanceBanner = () => {
+  const { settings } = useSettings();
+  const hidden = !!settings.imageGuidanceSrc;
   return (
-    <div className="flex w-full overflow-hidden p-[1px] rounded-md min-h-16 bg-pink-gradient">
-      <div className="flex bg-black rounded-md items-center w-full font-medium text-van-gogh-sm">
+    <div
+      className={
+        hidden
+          ? "hidden"
+          : "flex w-full overflow-hidden p-[1px] rounded-md min-h-16 bg-pink-gradient"
+      }
+    >
+      <div className="flex bg-black rounded-md items-center w-full font-medium md:text-van-gogh-sm">
         <Image
           src="/leonardo-wizard.webp"
           height={45}
@@ -11,9 +22,11 @@ const ImageGuidanceBanner = () => {
           className="min-h-[45px]"
           alt="An image of a wizard"
         />
-        Leverage&nbsp;
-        <span className="van-gogh-gradient-text">images & photos</span>&nbsp; to
-        guide your generations. Upload an image to get started.
+        <div className="py-3">
+          Leverage&nbsp;
+          <span className="van-gogh-gradient-text">images & photos</span>&nbsp;
+          to guide your generations. Upload an image to get started.
+        </div>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
   return (
     <div
       className={
-        !settings.imageGuidanceSrc ? "hidden" : "flex gap-6 py-2.5 px-4"
+        !settings.imageGuidanceSrc ? "hidden" : "flex flex-col sm:flex-row gap-6 py-2.5 px-4"
       }
     >
       <div className="flex flex-col gap-1.5 flex-1-1-0">

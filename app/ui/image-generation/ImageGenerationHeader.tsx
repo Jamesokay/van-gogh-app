@@ -109,7 +109,7 @@ export default function ImageGenerationHeader() {
             <Link
               key={route.path}
               href={route.path}
-              className={`flex flex-1 md:flex-none gap-1 items-center justify-center mr-8 py-2 text-van-gogh-sm md:text-van-gogh-md font-medium ${
+              className={`flex flex-1 md:flex-none gap-1 items-center justify-center md:mr-8 py-2 text-van-gogh-sm md:text-van-gogh-md font-medium ${
                 pathname !== route.path
                   ? "text-van-gogh-grey-m hover:text-white"
                   : "van-gogh-header-link"
