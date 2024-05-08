@@ -169,6 +169,11 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/308757f6-c4cc-4bd4-914
 
 - Base mobile responsiveness for Image Guidance Page (with and without image selected)
 - Base mobile responsiveness for Prompt Generation Page
+
+### Day 16 (even later):
+
+- Fixed modal sizing
+- Applied dark color scheme to html
   
 ### To Do:
 
