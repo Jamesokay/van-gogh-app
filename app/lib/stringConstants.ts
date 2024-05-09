@@ -22,7 +22,7 @@ export const imageGenerationHeaderStrings = {
   title: "AI Image Generation",
   promptInputPlaceholder: "Type a prompt...",
   negPromptInputPlaceholder:
-    "Type what you don't want to see in the image...",
+    "Type a negative prompt...",
   addNegPrompt: "Add negative prompt",
   addElements: "Add Elements",
   buttonText: "Generate",

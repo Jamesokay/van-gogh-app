@@ -28,7 +28,7 @@ const TextareaAutoResize: FC<{
   return (
     <Textarea
       variant="prompt"
-      fontSize={{ base: "0.9375rem", md: "1.25rem" }}
+      fontSize={{ base: "1rem", md: "1.25rem" }}
       ref={textareaRef}
       maxLength={maxLength}
       placeholder={placeholder}

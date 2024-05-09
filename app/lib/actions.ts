@@ -66,4 +66,10 @@ export function calculateProportionalWidth(ratio: string, height: number): numbe
   return Math.round((numerator / denominator) * height);
 }
 
+export function formatDate(createdAt: Date) {
+  const date = new Date(createdAt);
+  const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+  return new Intl.DateTimeFormat('en-GB', options).format(date);
+}
+
 

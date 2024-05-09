@@ -23,6 +23,7 @@ import ImageModal from "./ImageModal";
 import CardImageLoader from "../components/CardImageLoader";
 import TickIcon from "../svg/TickIcon";
 import ImageCardSkeletonRow from "../components/ImageCardSkeletonRow";
+import { formatDate } from "@/app/lib/actions";
 
 const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   prompt,
@@ -31,6 +32,7 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   presetStyle,
   imageWidth,
   imageHeight,
+  createdAt,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [images, setImages] = useState<GeneratedImageResponse[]>([]);
@@ -41,6 +43,7 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
     modelData.find((x) => x.modelId === modelId) || modelData[0];
   const emptyDivsCount = 4 - images.length;
   const reusePromps = () => console.log("reuse promps");
+  const formattedDate = formatDate(createdAt);
 
   useEffect(() => {
     setImages(initialImages);
@@ -80,8 +83,11 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   };
 
   return (
-    <div>
-      <div className="flex gap-8 mt-8 mb-3">
+    <div className="flex flex-col">
+      <div className="mt-8 mb-4 flex justify-center">
+        <p className="text-van-gogh-grey-subdued text-van-gogh-md">{formattedDate}</p>
+      </div>
+      <div className="flex gap-8 mb-3">
         <div className="flex flex-col lg:flex-row w-full justify-between">
           <div className="flex items-center overflow-hidden">
             <Tooltip label={prompt}>
@@ -132,7 +138,7 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
                 </div>
                 <p>{selectedModel.modelName}</p>
               </div>
-              <div className="flex px-2 gap-1 items-center">
+              <div className="hidden md:flex px-2 gap-1 items-center">
                 <PaintDropIcon />
                 <p>{presetStyle}</p>
               </div>

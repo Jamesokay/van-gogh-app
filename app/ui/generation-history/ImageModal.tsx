@@ -54,7 +54,7 @@ const ImageModal: FC<ImageModalProps> = ({
         </button>
         <ModalBody>
           <div
-            className="flex justify-center min-w-van-gogh-modal-width max-w-van-gogh-modal-width min-h-van-gogh-modal-height max-h-van-gogh-modal-height"
+            className="flex justify-center md:min-w-van-gogh-modal-width max-w-van-gogh-modal-width md:min-h-van-gogh-modal-height max-h-van-gogh-modal-height"
             style={{
               aspectRatio: `auto ${width} / ${height}`,
             }}
