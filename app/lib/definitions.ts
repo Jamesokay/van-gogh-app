@@ -251,7 +251,49 @@ type StableDiffusionVersion =
   | "SDXL_1_0"
   | "SDXL_LIGHTNING";
 
-export type Generation = {
+export type LeonardoGenerationRequestBody = {
+  alchemy?: boolean | null;
+  contrastRatio?: number | null; // Requires Alchemy
+  controlNet?: boolean | null; // Requires init img and model based on SD v1.5
+  controlNetType?: string | null;
+  elements?: { akUUID?: string | null; weight?: number | null} | null;
+  expandedDomain?: boolean | null; // Requires Alchemy
+  fantasyAvatar?: boolean | null;
+  guidance_scale?: number | null;
+  height?: number | null;
+  highContrast?: boolean | null;
+  highResolution?: boolean | null;
+  imagePrompts?: string[] | null;
+  imagePromptWeight?: number | null;
+  init_generation_image?: string | null; // For Image to Image
+  init_image_id?: string | null;
+  init_strength?: number;
+  modelId?: string | null;
+  negative_prompt?: string | null;
+  num_images?: number | null;
+  num_inference_steps?: number | null;
+  photoReal?: boolean | null;
+  photoRealVersion?: 'v1' | 'v2' | null;
+  photoRealStrength?: 0.55 | 0.5 | 0.45 | null;
+  presetStyle?: PresetStyle | null;
+  prompt: string;
+  promptMagic?: boolean | null;
+  promptMagicStrength?: number | null;
+  promptMagicVersion?: 'v2' | 'v3' | null;
+  public?: boolean | null;
+  scheduler?: Scheduler | null;
+  sd_version?: StableDiffusionVersion | null;
+  seed?: number | null;
+  tiling?: boolean | null;
+  transparency?: string | null;
+  unzoom?: boolean | null; // Requires init_image_id and unzoomAmount
+  unzoomAmount?: number | null;
+  upscaleRatio?: number | null; // Enterprise only
+  weighting?: number | null; // Requires controlNet
+  width?: number | null;
+}
+
+export type LeonardoGenerationResponse = {
   createdAt: string;
   generated_images: Array<{
     generated_image_variation_generics?: Array<{
@@ -306,6 +348,8 @@ export type Generation = {
   seed: number | null;
   status: GenerationStatus;
 };
+
+// Database definitions which will be updated once actual API is being used
 
 type GenerationResponse = {
   id: string;
