@@ -188,6 +188,16 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/ad730729-99a4-4e92-bd2
 - Added skeleton element for rows of images
 - Adjusted sizing logic for TextareaAutoResize component
 - Added prompt text to tooltips in order to handle truncated prompts
+
+### Day 17 (later):
+
+<img width="374" alt="Screenshot 2024-05-09 at 1 50 54 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/aec3bd29-3125-4303-b96b-aec0e267b452">
+<img width="1512" alt="Screenshot 2024-05-09 at 2 13 28 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/c807ff51-9ffc-45cc-959a-9f604b21e58d">
+
+- Fixed sizing of ImageModal in mobile viewports
+- Hide style preset in mobile view
+- Fixed textarea mobile font size to prevent zoom
+- Added dates to generations
   
 ### To Do:
 
