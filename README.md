@@ -178,12 +178,20 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/308757f6-c4cc-4bd4-914
 ### Day 16 (even later than that):
 
 - Implemented mobile page header
+
+### Day 17 (09/05/2024):
+
+https://github.com/Jamesokay/van-gogh-app/assets/78640728/ad730729-99a4-4e92-bd22-8813f5554453
+
+- Implemented SideBar functionality for mobile view
+- Added mobile font size
+- Added skeleton element for rows of images
+- Adjusted sizing logic for TextareaAutoResize component
+- Added prompt text to tooltips in order to handle truncated prompts
   
 ### To Do:
 
-- Mobile SideBar logic
-- Mobile font-sizes (?)
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Clean-up of styles
-- Implement services for Leonardo API
+- Implement image generation services for Leonardo API
