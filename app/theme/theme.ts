@@ -11,7 +11,7 @@ const theme = extendTheme({
     },
     vanGoghGrey: {
       400: "rgb(36, 44, 62)",
-      500: "rgb(40, 40, 40)"
+      500: "rgb(40, 40, 40)",
     },
     vanGoghPurple: {
       400: "rgb(114, 88, 242)",
@@ -21,14 +21,14 @@ const theme = extendTheme({
     Menu: menuTheme,
     Modal: modalTheme,
     Textarea: textareaTheme,
-    Tooltip: tooltipTheme
+    Tooltip: tooltipTheme,
   },
   styles: {
     global: {
       body: {
         background: "linear-gradient(112deg, #020305 0%, #070A0F 100%)",
         color: "white",
-      }
+      },
     },
   },
 });

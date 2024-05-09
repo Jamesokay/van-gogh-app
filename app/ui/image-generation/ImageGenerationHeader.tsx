@@ -24,7 +24,7 @@ import SettingsIcon from "../svg/SettingsIcon";
 import Image from "next/image";
 
 export default function ImageGenerationHeader() {
-  const { settings, setSetting } = useSettings();
+  const { settings, setSetting, setMobileSideBarExpanded } = useSettings();
   const pathname = usePathname();
   const selectedModel =
     modelData.find((x) => x.modelId === settings.modelId) || modelData[0];
@@ -41,17 +41,20 @@ export default function ImageGenerationHeader() {
         />
       </div>
       <div className="px-4 mb-8 md:mb-2 md:mt-10 md:px-8">
-        <Heading as="h1" fontSize="1.5rem" fontWeight={500}>
+        <h1 className="font-medium text-van-gogh-lg md:text-van-gogh-2xl">
           {text.title}
-        </Heading>
+        </h1>
       </div>
       <div className="flex md:hidden justify-between px-4">
-        <button className="flex items-center justify-center min-w-[45px] w-[45px] h-[45px] bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
+        <button className="flex items-center justify-center min-w-14 w-14 h-14 bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
           <DiceIcon id="1" />
         </button>
         <div className="flex items-center gap-3">
           <TokenHeader />
-          <button className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-10 h-10 hover:bg-van-gogh-hover-grey">
+          <button
+            className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey"
+            onClick={() => setMobileSideBarExpanded(true)}
+          >
             <SettingsIcon />
           </button>
         </div>
@@ -131,7 +134,7 @@ export default function ImageGenerationHeader() {
             <Link
               key={route.path}
               href={route.path}
-              className={`flex flex-1 md:flex-none gap-1 items-center justify-center md:mr-8 py-2 text-van-gogh-sm md:text-van-gogh-md font-medium ${
+              className={`flex flex-1 md:flex-none gap-1 items-center justify-center text-center md:mr-8 py-2 text-[0.8175rem] md:text-van-gogh-md font-medium ${
                 pathname !== route.path
                   ? "text-van-gogh-grey-m hover:text-white"
                   : "van-gogh-header-link"

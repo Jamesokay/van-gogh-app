@@ -12,7 +12,6 @@ import RangeSlider from "../../components/RangeSlider";
 
 import QuestionMarkIcon from "../../svg/QuestionMarkIcon";
 import Image from "next/image";
-import CoinsIcon from "../../svg/CoinsIcon";
 import BackArrowIcon from "../../svg/BackArrowIcon";
 import { Tooltip } from "@chakra-ui/react";
 import RefreshIcon from "../../svg/RefreshIcon";
@@ -24,13 +23,34 @@ import SideBarAdvancedSettings from "./SideBarAdvancedSettings";
 import TokenHeader from "../../components/TokenHeader";
 
 const SideBar = () => {
-  const { settings, setSetting, handleReset } = useSettings();
+  const {
+    settings,
+    setSetting,
+    handleReset,
+    mobileSideBarExpanded,
+    setMobileSideBarExpanded,
+  } = useSettings();
 
   return (
-    <div className="hidden md:flex fixed top-0 left-0 h-full max-h-full z-50 flex-col w-van-gogh-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto">
+    <div
+      className={`flex fixed top-0 transition-transform ${
+        mobileSideBarExpanded
+          ? "translate-x-0"
+          : "-translate-x-full md:translate-x-0"
+      } md:left-0 h-full max-h-full z-[100] flex-col w-full md:w-van-gogh-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto`}
+    >
       <div className="flex flex-col items-center my-5 gap-3.5">
         <div className="flex gap-2 items-center w-full">
-          <BackArrowIcon />
+          <span className="hidden md:flex text-van-gogh-icon-grey">
+            <BackArrowIcon />
+          </span>
+          <div
+            role="button"
+            className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey md:hidden"
+            onClick={() => setMobileSideBarExpanded(false)}
+          >
+            <BackArrowIcon />
+          </div>
           <Image
             src="/leonardo-logo-text-new.svg"
             alt="Leonardo Logo"

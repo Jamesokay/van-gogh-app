@@ -47,6 +47,8 @@ export type SettingsContextProps = {
   aspectRatioLocked: boolean;
   setAspectRatioLocked: (value: boolean) => void;
   clearImageGuidance: () => void;
+  mobileSideBarExpanded: boolean;
+  setMobileSideBarExpanded: (value: boolean) => void;
 };
 
 export const enum SETTINGS_KEY {

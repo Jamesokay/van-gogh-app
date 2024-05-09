@@ -22,6 +22,7 @@ import ImagesIcon from "../svg/ImagesIcon";
 import ImageModal from "./ImageModal";
 import CardImageLoader from "../components/CardImageLoader";
 import TickIcon from "../svg/TickIcon";
+import ImageCardSkeletonRow from "../components/ImageCardSkeletonRow";
 
 const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   prompt,
@@ -83,7 +84,9 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
       <div className="flex gap-8 mt-8 mb-3">
         <div className="flex flex-col lg:flex-row w-full justify-between">
           <div className="flex items-center overflow-hidden">
-            <p className="truncate">{prompt}</p>
+            <Tooltip label={prompt}>
+              <p className="truncate text-van-gogh-sm">{prompt}</p>
+            </Tooltip>
             <div className="flex ml-auto gap-2 items-center">
               <Tooltip label="Copy prompt">
                 <button
@@ -145,6 +148,7 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
           </div>
         </div>
       </div>
+      <ImageCardSkeletonRow hidden={images.length > 0} />
       <div className="grid grid-cols-1 lg:grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image, index) => (
           <AspectRatio key={image.id} ratio={0.75 / 1}>

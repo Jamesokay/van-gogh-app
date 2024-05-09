@@ -12,7 +12,8 @@ export async function fetchImageGenerations(
       SELECT g.*, i.id as imageId, i.generationId, i.url as imageUrl, i.likeCount, i.nsfw
       FROM generations g
       LEFT JOIN generated_images i ON g.id = i.generationId
-      WHERE g.userId = ${userId};
+      WHERE g.userId = ${userId}
+      ORDER BY g.createdAt DESC;
     `;
     const generationMap = new Map<string, GenerationWithImagesResponse>();
 

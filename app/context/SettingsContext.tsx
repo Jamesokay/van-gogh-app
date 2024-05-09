@@ -54,7 +54,9 @@ const SettingsContext = createContext<SettingsContextProps>({
   handleReset: () => {},
   aspectRatioLocked: false,
   setAspectRatioLocked: () => {},
-  clearImageGuidance: () => {}
+  clearImageGuidance: () => {},
+  mobileSideBarExpanded: false,
+  setMobileSideBarExpanded: () => {}
 });
 
 export const useSettings = () => useContext(SettingsContext);
@@ -65,6 +67,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const [settings, setSettings] = useState<SettingsState>(defaultState);
   const [aspectRatioLocked, setAspectRatioLocked] = useState(false);
   const [aspectRatio, setAspectRatio] = useState<AspectRatioKey>("3:2");
+  const [mobileSideBarExpanded, setMobileSideBarExpanded] = useState(false);
 
   const setSetting = <K extends keyof SettingsState>(
     settingKey: K,
@@ -179,7 +182,9 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     handleReset,
     aspectRatioLocked,
     setAspectRatioLocked,
-    clearImageGuidance
+    clearImageGuidance,
+    mobileSideBarExpanded,
+    setMobileSideBarExpanded
   };
 
   return (

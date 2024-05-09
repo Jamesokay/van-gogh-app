@@ -21,6 +21,12 @@ html {
   color-scheme: dark !important;
 }
 
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
 body {
   height: 100dvh;
   color: rgb(var(--foreground-rgb));
