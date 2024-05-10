@@ -351,37 +351,7 @@ export type LeonardoGenerationResponse = {
   status: GenerationStatus;
 };
 
-// Database definitions which will be updated once actual API is being used
-
-type GenerationResponse = {
-  id: string;
-  userId: string;
-  createdAt: Date;
-  prompt: string;
-  imageWidth: number;
-  imageHeight: number;
-  modelId: string;
-  status: string;
-  public: boolean;
-  presetStyle: string;
-  photoReal: boolean;
-  scheduler: string;
-  sdVersion: string;
-};
-
-export type GeneratedImageResponse = {
-  id: string;
-  generationId: string;
-  url: string;
-  likeCount: number;
-  nsfw: boolean;
-};
-
-export type GenerationWithImagesResponse = GenerationResponse & {
-  images: GeneratedImageResponse[];
-};
-
-export type CustomModel = {
+export type LeonardoCustomModel = {
   description: string;
   featured: true;
   generated_image: {
@@ -393,7 +363,7 @@ export type CustomModel = {
   nsfw: true;
 };
 
-export type User = {
+export type LeonardoUserResponse = {
   user: {
     id: string;
     username: string;
