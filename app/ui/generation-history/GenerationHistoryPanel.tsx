@@ -2,7 +2,6 @@
 
 import { modelData } from "@/app/lib/dataConstants";
 import {
-  GeneratedImageResponse,
   LeonardoGeneratedImage,
   LeonardoGenerationResponse,
 } from "@/app/lib/definitions";
@@ -86,7 +85,9 @@ const GenerationHistoryPanel: FC<LeonardoGenerationResponse> = ({
   return (
     <div className="flex flex-col">
       <div className="mt-8 mb-4 flex justify-center">
-        <p className="text-van-gogh-grey-subdued text-van-gogh-md">{formattedDate}</p>
+        <p className="text-van-gogh-grey-subdued text-van-gogh-md">
+          {formattedDate}
+        </p>
       </div>
       <div className="flex gap-8 mb-3">
         <div className="flex flex-col lg:flex-row w-full justify-between">
