@@ -207,13 +207,16 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/ad730729-99a4-4e92-bd2
 - Not enabled for production environment yet, obviously
 - Updated GenerationHistoryPanel to accomodate new data structure
 - Made aspect ratio of image rows dynamic
+
+### Day 18 (later):
+
+- Added API call to fetch user details
+- Removed redundant type definitions
   
 ### To Do:
 
-- API call to get user
 - API call to fetch newly generated images (have investigated webhooks, but these seem unfeasible for personal project)
 - API call for deleting generations
-- Remove the many redundant type definitions
 - Ensure settings state accurately translates to request body
 - Download image functionality
 - Add further UI elements for when Image Guidance is enabled
