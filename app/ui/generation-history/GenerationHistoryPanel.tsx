@@ -3,7 +3,8 @@
 import { modelData } from "@/app/lib/dataConstants";
 import {
   GeneratedImageResponse,
-  GenerationWithImagesResponse,
+  LeonardoGeneratedImage,
+  LeonardoGenerationResponse,
 } from "@/app/lib/definitions";
 import {
   AspectRatio,
@@ -25,9 +26,9 @@ import TickIcon from "../svg/TickIcon";
 import ImageCardSkeletonRow from "../components/ImageCardSkeletonRow";
 import { formatDate } from "@/app/lib/actions";
 
-const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
+const GenerationHistoryPanel: FC<LeonardoGenerationResponse> = ({
   prompt,
-  images: initialImages,
+  generated_images: initialImages,
   modelId,
   presetStyle,
   imageWidth,
@@ -35,7 +36,7 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
   createdAt,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [images, setImages] = useState<GeneratedImageResponse[]>([]);
+  const [images, setImages] = useState<LeonardoGeneratedImage[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const copyRef = useRef<NodeJS.Timeout | number | null>(null);
@@ -157,7 +158,7 @@ const GenerationHistoryPanel: FC<GenerationWithImagesResponse> = ({
       <ImageCardSkeletonRow hidden={images.length > 0} />
       <div className="grid grid-cols-1 lg:grid-cols-auto-fit-minmax-16 gap-4">
         {images.map((image, index) => (
-          <AspectRatio key={image.id} ratio={0.75 / 1}>
+          <AspectRatio key={image.id} ratio={imageWidth / imageHeight}>
             <Card
               overflow={"hidden"}
               className="hover-parent"

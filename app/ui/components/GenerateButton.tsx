@@ -5,12 +5,19 @@ import { Tooltip } from "@chakra-ui/react";
 import { FC } from "react";
 import CoinsIcon from "../svg/CoinsIcon";
 import { useSettings } from "@/app/context/SettingsContext";
+import { extractRequestBodyFromSettings } from "@/app/lib/actions";
+import { generateImages } from "@/app/lib/services";
 
 const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
   const { settings } = useSettings();
   const disabled = !settings.prompt;
   const label = disabled ? "Please type a prompt" : "This will use 8 tokens";
   const credits = settings.credits;
+
+  const generate = async () => {
+    const body = extractRequestBodyFromSettings(settings);
+    await generateImages(body);
+  };
 
   return (
     <Tooltip label={label}>
@@ -25,7 +32,7 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
               }`
         }
         disabled={disabled}
-        onClick={() => {}}
+        onClick={() => generate()}
       >
         <span className="mr-3">{imageGenerationHeaderStrings.buttonText}</span>
         <CoinsIcon white={true} />

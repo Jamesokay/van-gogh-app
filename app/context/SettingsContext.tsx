@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import {
   AspectRatioKey,
   InputDimension,
@@ -25,11 +25,11 @@ const defaultState: SettingsState = {
   tiling: false,
   recommendedSizes: true,
   useFixedSeed: false,
-  fixedSeed: "",
+  fixedSeed: null,
   prompt: "",
   enableNegativePrompt: false,
   negativePrompt: "",
-  modelId: "0",
+  modelId: "b24e16ff-06e3-43eb-8d33-4416c2d75876",
   imageStyle: "Dynamic",
   imageGuidance: false,
   credits: 150,

@@ -58,9 +58,9 @@ const SideBarAdvancedSettings = () => {
           <input
             type="number"
             className="input-number appearance-none bg-transparent rounded-md border border-van-gogh-grey-blue hover:border-van-gogh-grey-d focus:border-van-gogh-purple outline-none h-10 w-full min-w-input-width text-van-gogh-sm p-4 mb-4"
-            value={settings?.fixedSeed}
+            value={settings?.fixedSeed || ''}
             onChange={(e) =>
-              setSetting(SETTINGS_KEY.FIXED_SEED, e.target.value)
+              setSetting(SETTINGS_KEY.FIXED_SEED, parseInt(e.target.value))
             }
             maxLength={10}
           />

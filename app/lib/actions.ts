@@ -1,5 +1,10 @@
 import { defaultAspectRatioConversion } from "./dataConstants";
-import { Dimension } from "./definitions";
+import {
+  Dimension,
+  LeonardoGenerationRequestBody,
+  PresetStyle,
+  SettingsState,
+} from "./definitions";
 
 export function transformDimensions(input: Dimension): Dimension {
   const scalingFactor = 1.75;
@@ -56,20 +61,84 @@ export function findApproximateAspectRatio(dimensions: Dimension): string {
   return nearestRatio;
 }
 
-export function calculateProportionalHeight(ratio: string, width: number): number {
-  const [numerator, denominator] = ratio.split(':').map(Number);
+export function calculateProportionalHeight(
+  ratio: string,
+  width: number
+): number {
+  const [numerator, denominator] = ratio.split(":").map(Number);
   return Math.round((denominator / numerator) * width);
 }
 
-export function calculateProportionalWidth(ratio: string, height: number): number {
-  const [numerator, denominator] = ratio.split(':').map(Number);
+export function calculateProportionalWidth(
+  ratio: string,
+  height: number
+): number {
+  const [numerator, denominator] = ratio.split(":").map(Number);
   return Math.round((numerator / denominator) * height);
 }
 
 export function formatDate(createdAt: Date) {
   const date = new Date(createdAt);
-  const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-  return new Intl.DateTimeFormat('en-GB', options).format(date);
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+  return new Intl.DateTimeFormat("en-GB", options).format(date);
 }
 
+function convertStringToPresetStyle(style: string): PresetStyle | null {
+  switch (style.toLowerCase()) {
+    case "anime":
+      return "ANIME";
+    case "cinematic":
+      return "CINEMATIC";
+    case "creative":
+      return "CREATIVE";
+    case "dynamic":
+      return "DYNAMIC";
+    case "environment":
+      return "ENVIRONMENT";
+    case "general":
+      return "GENERAL";
+    case "illustration":
+      return "ILLUSTRATION";
+    case "photography":
+      return "PHOTOGRAPHY";
+    case "raytraced":
+      return "RAYTRACED";
+    case "3d render":
+      return "RENDER_3D";
+    case "sketch b/w":
+      return "SKETCH_BW";
+    case "sketch color":
+      return "SKETCH_COLOR";
+    case "vibrant":
+      return "VIBRANT";
+    default:
+      return "NONE";
+  }
+}
 
+export function extractRequestBodyFromSettings(
+  settings: SettingsState
+): LeonardoGenerationRequestBody {
+  return {
+    alchemy: settings.alchemy,
+    photoReal: settings.photoReal,
+    prompt: settings.prompt,
+    public: settings.publicImages,
+    height: settings.aspectRatioHeight,
+    width: settings.aspectRatioWidth,
+    guidance_scale: settings.guidanceScale,
+    tiling: settings.tiling,
+    seed: settings.useFixedSeed ? settings.fixedSeed : null,
+    negative_prompt: settings.enableNegativePrompt
+      ? settings.negativePrompt
+      : null,
+    num_images: parseInt(settings.numberOfImages, 10),
+    presetStyle: convertStringToPresetStyle(settings.imageStyle),
+    modelId: settings.modelId,
+  };
+}

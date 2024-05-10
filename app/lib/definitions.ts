@@ -15,7 +15,7 @@ export interface SettingsState {
   tiling: boolean;
   recommendedSizes: boolean;
   useFixedSeed: boolean;
-  fixedSeed: string;
+  fixedSeed: number | null;
   prompt: string;
   enableNegativePrompt: boolean;
   negativePrompt: string;
@@ -187,7 +187,7 @@ export const enum GUIDANCE_SCALE_STRENGTH {
 
 // API Definitions
 
-type PresetStyle =
+export type PresetStyle =
   | "ANIME"
   | "BOKEH"
   | "CINEMATIC"
@@ -293,26 +293,28 @@ export type LeonardoGenerationRequestBody = {
   width?: number | null;
 }
 
-export type LeonardoGenerationResponse = {
-  createdAt: string;
-  generated_images: Array<{
-    generated_image_variation_generics?: Array<{
-      id: string;
-      status: GenerationStatus;
-      transformType: TransformType;
-      url: string;
-    }> | null;
-    fantasyAvatar?: boolean;
+export type LeonardoGeneratedImage = {
+  generated_image_variation_generics?: Array<{
     id: string;
-    imageToVideo: boolean;
-    likeCount: number;
-    motion: boolean;
-    motionModel: string | null;
-    motionMP4URL: string | null;
-    motionStrength: number | null;
-    nsfw: boolean;
+    status: GenerationStatus;
+    transformType: TransformType;
     url: string;
-  }>;
+  }> | null;
+  fantasyAvatar?: boolean;
+  id: string;
+  imageToVideo: boolean;
+  likeCount: number;
+  motion: boolean;
+  motionModel: string | null;
+  motionMP4URL: string | null;
+  motionStrength: number | null;
+  nsfw: boolean;
+  url: string;
+}
+
+export type LeonardoGenerationResponse = {
+  createdAt: Date;
+  generated_images: LeonardoGeneratedImage[];
   generation_elements: Array<{
     id: number;
     lora: {

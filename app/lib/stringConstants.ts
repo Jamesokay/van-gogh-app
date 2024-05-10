@@ -21,8 +21,7 @@ export const sideBarStrings = {
 export const imageGenerationHeaderStrings = {
   title: "AI Image Generation",
   promptInputPlaceholder: "Type a prompt...",
-  negPromptInputPlaceholder:
-    "Type a negative prompt...",
+  negPromptInputPlaceholder: "Type a negative prompt...",
   addNegPrompt: "Add negative prompt",
   addElements: "Add Elements",
   buttonText: "Generate",
