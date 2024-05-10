@@ -198,9 +198,26 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/ad730729-99a4-4e92-bd2
 - Hide style preset in mobile view
 - Fixed textarea mobile font size to prevent zoom
 - Added dates to generations
+
+### Day 18 (10/05/2024):
+
+- Built out basic API structure
+- Added services for hitting my API
+- Plugged in API token from Leonardo
+- Implemented fetch of generated images from Leonardo API rather than my DB
+- Implemented image generation post request
+- Not enabled for production environment yet, obviously
+- Updated GenerationHistoryPanel to accomodate new data structure
+- Made aspect ratio of image rows dynamic
   
 ### To Do:
 
+- API call to get user
+- API call to fetch newly generated images (have investigated webhooks, but these seem unfeasible for personal project)
+- API call for deleting generations
+- Remove the many redundant type definitions
+- Ensure settings state accurately translates to request body
+- Download image functionality
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Clean-up of styles
