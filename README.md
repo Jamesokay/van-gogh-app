@@ -1,5 +1,3 @@
-## Current version of project available at: https://van-gogh-app.vercel.app/
-
 ## Development Log
 
 ### Day 4 (26/04/2024):
