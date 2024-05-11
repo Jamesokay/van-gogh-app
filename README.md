@@ -212,10 +212,22 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/ad730729-99a4-4e92-bd2
 
 - Added API call to fetch user details
 - Removed redundant type definitions
+
+### Day 19 (11/05/2024):
+
+https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be27-a023702aae54
+
+- Alright, so I have now removed those API routes, because this is Next 14 and I need to get with the program apparently. What we have now are server actions, defined in the ‘actions’ file. Farewell API, things just got simpler.
+- I have added logic for polling the Leonardo API to retrieve a new generation. Ideally I would do this with web hooks, but at this time I cannot generate a consistent callback url that will tunnel to my local environment. The service provided by ngrok, for instance, resets the url every few hours. Since my Leonardo API key can only be associated with one web hook callback url, this is no bueno. There might be a way around this, but hey, one problem at a time.
+- For now, I have build a client component called NewGenerationPanel, which handles the polling logic and associated render.
+- Will probably use Suspense for this component, but have whacked together a basic loading state for the time being.
+- Basic functionality for firing off a prompt and rendering the generated images is there now.
   
 ### To Do:
 
-- API call to fetch newly generated images (have investigated webhooks, but these seem unfeasible for personal project)
+- Error handling throughout
+- Standardise skeletons/loading states, use Suspense where appropriate
+- Styling of loading states, prevent layout jumps
 - API call for deleting generations
 - Ensure settings state accurately translates to request body
 - Download image functionality
