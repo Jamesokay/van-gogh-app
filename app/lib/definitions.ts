@@ -49,6 +49,8 @@ export type SettingsContextProps = {
   clearImageGuidance: () => void;
   mobileSideBarExpanded: boolean;
   setMobileSideBarExpanded: (value: boolean) => void;
+  newGenerationId: string;
+  setNewGenerationId: (value: string) => void;
 };
 
 export const enum SETTINGS_KEY {
@@ -256,7 +258,7 @@ export type LeonardoGenerationRequestBody = {
   contrastRatio?: number | null; // Requires Alchemy
   controlNet?: boolean | null; // Requires init img and model based on SD v1.5
   controlNetType?: string | null;
-  elements?: { akUUID?: string | null; weight?: number | null} | null;
+  elements?: { akUUID?: string | null; weight?: number | null } | null;
   expandedDomain?: boolean | null; // Requires Alchemy
   fantasyAvatar?: boolean | null;
   guidance_scale?: number | null;
@@ -273,13 +275,13 @@ export type LeonardoGenerationRequestBody = {
   num_images?: number | null;
   num_inference_steps?: number | null;
   photoReal?: boolean | null;
-  photoRealVersion?: 'v1' | 'v2' | null;
+  photoRealVersion?: "v1" | "v2" | null;
   photoRealStrength?: 0.55 | 0.5 | 0.45 | null;
   presetStyle?: PresetStyle | null;
   prompt: string;
   promptMagic?: boolean | null;
   promptMagicStrength?: number | null;
-  promptMagicVersion?: 'v2' | 'v3' | null;
+  promptMagicVersion?: "v2" | "v3" | null;
   public?: boolean | null;
   scheduler?: Scheduler | null;
   sd_version?: StableDiffusionVersion | null;
@@ -291,7 +293,14 @@ export type LeonardoGenerationRequestBody = {
   upscaleRatio?: number | null; // Enterprise only
   weighting?: number | null; // Requires controlNet
   width?: number | null;
-}
+};
+
+export type LeonardoGenerationJobResponse = {
+  sdGenerationJob: {
+    generationId: string;
+    apiCreditCost: number;
+  };
+};
 
 export type LeonardoGeneratedImage = {
   generated_image_variation_generics?: Array<{
@@ -310,7 +319,7 @@ export type LeonardoGeneratedImage = {
   motionStrength: number | null;
   nsfw: boolean;
   url: string;
-}
+};
 
 export type LeonardoGenerationResponse = {
   createdAt: Date;

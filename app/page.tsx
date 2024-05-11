@@ -1,6 +1,7 @@
-import { getGenerationsByUserId, getUserInformation } from "./lib/services";
+import { getGenerationsByUserId, getUserInformation } from "./lib/actions";
 import { generationHistoryStrings } from "./lib/stringConstants";
 import GenerationHistoryPanel from "./ui/generation-history/GenerationHistoryPanel";
+import NewGenerationPanel from "./ui/generation-history/NewGenerationPanel";
 
 const Page = async () => {
   const userDetails = await getUserInformation();
@@ -18,7 +19,8 @@ const Page = async () => {
       >
         {generationHistoryStrings.emptyState}
       </div>
-      {generationHistory?.length && generationHistory?.map((generation) => (
+      <NewGenerationPanel />
+      {generationHistory?.map((generation) => (
         <GenerationHistoryPanel key={generation.id} {...generation} />
       ))}
     </div>

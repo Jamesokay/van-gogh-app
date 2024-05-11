@@ -11,7 +11,7 @@ import AspectRatioIcon from "../../svg/AspectRatioIcon";
 import UploadIcon from "../../svg/UploadIcon";
 import DeleteIcon from "../../svg/DeleteIcon";
 import { FC, useRef, useState } from "react";
-import { findApproximateAspectRatio } from "@/app/lib/actions";
+import { findApproximateAspectRatio } from "@/app/lib/helpers";
 import { Tooltip } from "@chakra-ui/react";
 
 const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({

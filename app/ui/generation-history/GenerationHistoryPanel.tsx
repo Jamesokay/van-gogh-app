@@ -23,7 +23,7 @@ import ImageModal from "./ImageModal";
 import CardImageLoader from "../components/CardImageLoader";
 import TickIcon from "../svg/TickIcon";
 import ImageCardSkeletonRow from "../components/ImageCardSkeletonRow";
-import { formatDate } from "@/app/lib/actions";
+import { formatDate } from "@/app/lib/helpers";
 
 const GenerationHistoryPanel: FC<LeonardoGenerationResponse> = ({
   prompt,

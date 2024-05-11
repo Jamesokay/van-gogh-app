@@ -9,7 +9,7 @@ import {
   SettingsProviderProps,
   SettingsState,
 } from "../lib/definitions";
-import { calculateProportionalHeight, parseDimension } from "../lib/actions";
+import { calculateProportionalHeight, parseDimension } from "../lib/helpers";
 import { defaultAspectRatioConversion } from "../lib/dataConstants";
 
 const defaultState: SettingsState = {
@@ -56,7 +56,9 @@ const SettingsContext = createContext<SettingsContextProps>({
   setAspectRatioLocked: () => {},
   clearImageGuidance: () => {},
   mobileSideBarExpanded: false,
-  setMobileSideBarExpanded: () => {}
+  setMobileSideBarExpanded: () => {},
+  newGenerationId: '',
+  setNewGenerationId: () => {}
 });
 
 export const useSettings = () => useContext(SettingsContext);
@@ -68,6 +70,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const [aspectRatioLocked, setAspectRatioLocked] = useState(false);
   const [aspectRatio, setAspectRatio] = useState<AspectRatioKey>("3:2");
   const [mobileSideBarExpanded, setMobileSideBarExpanded] = useState(false);
+  const [newGenerationId, setNewGenerationId] = useState('');
 
   const setSetting = <K extends keyof SettingsState>(
     settingKey: K,
@@ -184,7 +187,9 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     setAspectRatioLocked,
     clearImageGuidance,
     mobileSideBarExpanded,
-    setMobileSideBarExpanded
+    setMobileSideBarExpanded,
+    newGenerationId,
+    setNewGenerationId
   };
 
   return (

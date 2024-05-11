@@ -6,7 +6,7 @@ import {
   INPUT_DIMENSIONS,
   SETTINGS_KEY,
 } from "@/app/lib/definitions";
-import { findApproximateAspectRatio } from "@/app/lib/actions";
+import { findApproximateAspectRatio } from "@/app/lib/helpers";
 import { aspectRatioOptions, dimensionOptions } from "@/app/lib/dataConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import { LockIcon, UnlockIcon } from "@chakra-ui/icons";

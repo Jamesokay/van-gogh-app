@@ -5,7 +5,7 @@ import {
 } from "@/app/lib/stringConstants";
 import OptionWithSwitch from "../../components/OptionWithSwitch";
 import { useSettings } from "@/app/context/SettingsContext";
-import { transformDimensions } from "@/app/lib/actions";
+import { transformDimensions } from "@/app/lib/helpers";
 import { SETTINGS_KEY } from "@/app/lib/definitions";
 
 const SideBarSwitchOptions = () => {
