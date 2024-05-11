@@ -223,13 +223,17 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Will probably use Suspense for this component, but have whacked together a basic loading state for the time being.
 - Basic functionality for firing off a prompt and rendering the generated images is there now.
 
-### Day 19 (later)
+### Day 19 (later):
 
 - Smoother out loading state (added spinner, minor styles)
 - Added loading state to context, allowing components to synchronise based on this
 - Added spinner to GenerateButton
 - Extracted re-useable PanelHeader component
 - Extracted NewGenerationLoading component
+
+### Day 19 (even later):
+
+- Implemented grid columns specifically for landscape generations and associated loading states
   
 ### To Do:
 
@@ -237,7 +241,11 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Standardise skeletons/loading states, use Suspense where appropriate
 - Styling of loading states, prevent layout jumps
 - API call for deleting generations
+- Update settings keys to mirror those of request object
+- Infinite scroll/fetch on Generation History
 - Ensure settings state accurately translates to request body
+- Fix button background flickering in hover overlay
+- Fix tick button very faded in hover overlay
 - Download image functionality
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
