@@ -40,7 +40,13 @@ const NewGenerationLoading = () => {
         imageHeight={settings.aspectRatioHeight}
         imageWidth={settings.aspectRatioWidth}
       />
-      <div className="grid grid-cols-1 lg:grid-cols-auto-fit-minmax-16 gap-4">
+      <div
+        className={`grid grid-cols-1 ${
+          settings.aspectRatioHeight > settings.aspectRatioWidth
+            ? "lg:grid-cols-auto-fit-minmax-16"
+            : "lg:grid-cols-auto-fit-minmax-24"
+        } gap-4`}
+      >
         {generating &&
           [...Array(parseInt(settings.numberOfImages))].map((_, index) => (
             <AspectRatio

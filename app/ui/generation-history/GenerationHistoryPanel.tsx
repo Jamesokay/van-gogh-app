@@ -57,8 +57,8 @@ const GenerationHistoryPanel: FC<LeonardoGenerationResponse> = ({
         imageHeight={imageHeight}
         imageWidth={imageWidth}
       />
-      <ImageCardSkeletonRow hidden={renderedImages.length > 0} />
-      <div className="grid grid-cols-1 lg:grid-cols-auto-fit-minmax-16 gap-4">
+      <ImageCardSkeletonRow hidden={renderedImages.length > 0} landscape={imageWidth > imageHeight} />
+      <div className={`grid grid-cols-1 ${imageHeight > imageWidth ? "lg:grid-cols-auto-fit-minmax-16" : "lg:grid-cols-auto-fit-minmax-24"} gap-4`}>
         {renderedImages.map((image, index) => (
           <AspectRatio key={image.id} ratio={imageWidth / imageHeight}>
             <Card
