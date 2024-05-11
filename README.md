@@ -222,6 +222,14 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - For now, I have build a client component called NewGenerationPanel, which handles the polling logic and associated render.
 - Will probably use Suspense for this component, but have whacked together a basic loading state for the time being.
 - Basic functionality for firing off a prompt and rendering the generated images is there now.
+
+### Day 19 (later)
+
+- Smoother out loading state (added spinner, minor styles)
+- Added loading state to context, allowing components to synchronise based on this
+- Added spinner to GenerateButton
+- Extracted re-useable PanelHeader component
+- Extracted NewGenerationLoading component
   
 ### To Do:
 
