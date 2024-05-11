@@ -77,8 +77,17 @@ export function calculateProportionalWidth(
   return Math.round((numerator / denominator) * height);
 }
 
-export function formatDate(createdAt: Date) {
+export function constructDateString(createdAt: Date) {
+  const currentDate = new Date();
   const date = new Date(createdAt);
+
+  // Check if the year, month, and day are the same
+  if (date.getFullYear() === currentDate.getFullYear() &&
+      date.getMonth() === currentDate.getMonth() &&
+      date.getDate() === currentDate.getDate()) {
+    return 'today';
+  }
+
   const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     day: "numeric",

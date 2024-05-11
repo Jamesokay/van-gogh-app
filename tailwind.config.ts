@@ -83,6 +83,7 @@ const config: Config = {
       gridTemplateColumns: {
         "auto-fit-minmax-35": "repeat(auto-fit, minmax(calc(35.75rem), 1fr))",
         "auto-fit-minmax-16": "repeat(auto-fit, minmax(calc(16rem), 1fr))",
+        "auto-fit-minmax-24": "repeat(auto-fit, minmax(calc(24rem), 1fr))"
       },
       maxHeight: {
         "input-height": "50px",

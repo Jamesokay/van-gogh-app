@@ -20,7 +20,7 @@ export interface SettingsState {
   enableNegativePrompt: boolean;
   negativePrompt: string;
   modelId: string;
-  imageStyle: string;
+  imageStyle: PresetStyle;
   imageGuidance: boolean;
   imageGuidanceSrc: string;
   imageGuidanceType: string;
@@ -51,6 +51,8 @@ export type SettingsContextProps = {
   setMobileSideBarExpanded: (value: boolean) => void;
   newGenerationId: string;
   setNewGenerationId: (value: string) => void;
+  generating: boolean;
+  setGenerating: (value: boolean) => void;
 };
 
 export const enum SETTINGS_KEY {

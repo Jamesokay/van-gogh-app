@@ -30,7 +30,7 @@ const defaultState: SettingsState = {
   enableNegativePrompt: false,
   negativePrompt: "",
   modelId: "b24e16ff-06e3-43eb-8d33-4416c2d75876",
-  imageStyle: "Dynamic",
+  imageStyle: "LEONARDO",
   imageGuidance: false,
   credits: 150,
   // Note: imageGuidanceSrc will be a base64 encoded string.
@@ -57,8 +57,10 @@ const SettingsContext = createContext<SettingsContextProps>({
   clearImageGuidance: () => {},
   mobileSideBarExpanded: false,
   setMobileSideBarExpanded: () => {},
-  newGenerationId: '',
-  setNewGenerationId: () => {}
+  newGenerationId: "",
+  setNewGenerationId: () => {},
+  generating: false,
+  setGenerating: () => {},
 });
 
 export const useSettings = () => useContext(SettingsContext);
@@ -70,7 +72,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const [aspectRatioLocked, setAspectRatioLocked] = useState(false);
   const [aspectRatio, setAspectRatio] = useState<AspectRatioKey>("3:2");
   const [mobileSideBarExpanded, setMobileSideBarExpanded] = useState(false);
-  const [newGenerationId, setNewGenerationId] = useState('');
+  const [newGenerationId, setNewGenerationId] = useState("");
+  const [generating, setGenerating] = useState(false);
 
   const setSetting = <K extends keyof SettingsState>(
     settingKey: K,
@@ -189,7 +192,9 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     mobileSideBarExpanded,
     setMobileSideBarExpanded,
     newGenerationId,
-    setNewGenerationId
+    setNewGenerationId,
+    generating,
+    setGenerating
   };
 
   return (
