@@ -8,14 +8,15 @@ import GenerationHistoryPanel from "./GenerationHistoryPanel";
 import NewGenerationLoading from "./NewGenerationLoading";
 
 const NewGenerationPanels = () => {
-  const { newGenerationId, setNewGenerationId, setGenerating } = useSettings();
+  const { newGenerationId, setNewGenerationId, setKeyOfInterfaceState } =
+    useSettings();
   const [newGenerations, setNewGenerations] = useState<
     LeonardoGenerationResponse[]
   >([]);
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
 
   const resetGenerationState = () => {
-    setGenerating(false);
+    setKeyOfInterfaceState("generating", false);
     setNewGenerationId("");
     if (pollingRef.current) clearInterval(pollingRef.current);
   };
