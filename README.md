@@ -234,6 +234,16 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 ### Day 19 (even later):
 
 - Implemented grid columns specifically for landscape generations and associated loading states
+
+### Day 20 (12/05/2024):
+
+- Seperating concerns all day every day
+- Separated out global state into InterfaceState and GenerationRequestState
+- InterfaceState stores all user interface related state
+- GenerationRequest stores all data relevant to the request being sent to API
+- The keys of GenerationRequestState correspond to the type definition for LeonardoGenerationRequestBody (because boy was it getting confusing before)
+- This batches state in a way that seems cleaner and more maintainable
+- Also defined fetch call to retrive platform models
   
 ### To Do:
 
@@ -241,7 +251,6 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Standardise skeletons/loading states, use Suspense where appropriate
 - Styling of loading states, prevent layout jumps
 - API call for deleting generations
-- Update settings keys to mirror those of request object
 - Infinite scroll/fetch on Generation History
 - Ensure settings state accurately translates to request body
 - Fix button background flickering in hover overlay
