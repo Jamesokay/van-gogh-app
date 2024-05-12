@@ -42,6 +42,7 @@ export type GenerationRequestState = {
   prompt: string;
   promptMagic: boolean;
   public: boolean;
+  seed?: number;
   tiling: boolean;
   transparency: boolean;
   width: number;
