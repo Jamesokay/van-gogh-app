@@ -241,7 +241,7 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Separated out global state into InterfaceState and GenerationRequestState
 - InterfaceState stores all user interface related state
 - GenerationRequest stores all data relevant to the request being sent to API
-- The keys of GenerationRequestState correspond to the type definition for LeonardoGenerationRequestBody (because boy was it getting confusing before)
+- The key names of GenerationRequestState correspond to the type definition for LeonardoGenerationRequestBody (because boy was it getting confusing before)
 - This batches state in a way that seems cleaner and more maintainable
 - Also defined fetch call to retrive platform models
   
