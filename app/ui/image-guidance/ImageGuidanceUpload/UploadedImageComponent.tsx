@@ -6,7 +6,7 @@ import RangeSlider from "../../components/RangeSlider";
 import { imageGuidanceStrings, tooltipText } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import { imageGuidanceTypes } from "@/app/lib/dataConstants";
-import { IMAGE_GUIDANCE_STRENGTH, SETTINGS_KEY } from "@/app/lib/definitions";
+import { IMAGE_GUIDANCE_STRENGTH } from "@/app/lib/definitions";
 import AspectRatioIcon from "../../svg/AspectRatioIcon";
 import UploadIcon from "../../svg/UploadIcon";
 import DeleteIcon from "../../svg/DeleteIcon";
@@ -17,16 +17,17 @@ import { Tooltip } from "@chakra-ui/react";
 const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
   openFileSystem,
 }) => {
-  const { settings, setSetting, clearImageGuidance } = useSettings();
+  const { generationRequest, setKeyOfGenerationRequest, clearImageGuidance } =
+    useSettings();
   const currentAspectRatio = findApproximateAspectRatio({
-    width: settings.aspectRatioWidth,
-    height: settings.aspectRatioHeight,
+    width: generationRequest.width,
+    height: generationRequest.height
   });
   const [uploadedAspectRatio, setUploadedAspectRatio] =
     useState(currentAspectRatio);
   const uploadedDimensions = useRef({
-    width: settings.aspectRatioWidth,
-    height: settings.aspectRatioHeight,
+    width: generationRequest.width,
+    height: generationRequest.height,
   });
   const mismatchedRatio = currentAspectRatio !== uploadedAspectRatio;
 
@@ -43,20 +44,16 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
   };
 
   const setAspectRatioToUploadedValues = () => {
-    setSetting(
-      SETTINGS_KEY.ASPECT_RATIO_WIDTH,
-      uploadedDimensions.current.width
-    );
-    setSetting(
-      SETTINGS_KEY.ASPECT_RATIO_HEIGHT,
-      uploadedDimensions.current.height
-    );
+    setKeyOfGenerationRequest("width", uploadedDimensions.current.width);
+    setKeyOfGenerationRequest("height", uploadedDimensions.current.height);
   };
 
   return (
     <div
       className={
-        !settings.imageGuidanceSrc ? "hidden" : "flex flex-col sm:flex-row gap-6 py-2.5 px-4"
+        !generationRequest.init_generation_image
+          ? "hidden"
+          : "flex flex-col sm:flex-row gap-6 py-2.5 px-4"
       }
     >
       <div className="flex flex-col gap-1.5 flex-1-1-0">
@@ -65,11 +62,11 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           <QuestionIcon opacity={0.3} />
         </div>
         <div className="flex justify-center w-full h-60 bg-black border border-van-gogh-grey-blue rounded-lg overflow-hidden">
-          {settings.imageGuidanceSrc && (
+          {generationRequest.init_generation_image && (
             <div>
               <img
                 className="h-60 w-full object-contain"
-                src={settings.imageGuidanceSrc}
+                src={generationRequest.init_generation_image}
                 alt=""
                 onLoad={handleImageLoaded}
               />
@@ -128,8 +125,11 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           <div className="h-10">
             <DropdownMenu
               options={imageGuidanceTypes}
-              value={settings.imageGuidanceType}
-              setValue={(x) => setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_TYPE, x)}
+              value={"Image to Image"}
+              setValue={(x) => {
+                console.log('investigate if this is possible via API');
+                return x;
+              }}
               isDisabled={false}
               headerTheme={false}
               large={true}
@@ -146,13 +146,13 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
               <p>{text.strength}</p>
               <QuestionIcon opacity={0.3} />
             </div>
-            <p>{settings.imageGuidanceStrength / 100}</p>
+            <p>{(generationRequest.init_strength || 30) / 100}</p>
           </div>
           <div className="w-full">
             <RangeSlider
-              value={settings.imageGuidanceStrength}
+              value={generationRequest.init_strength ? generationRequest.init_strength : 30}
               setValue={(x) =>
-                setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_STRENGTH, x)
+                setKeyOfGenerationRequest('init_strength', x)
               }
               max={IMAGE_GUIDANCE_STRENGTH.MAX}
               min={IMAGE_GUIDANCE_STRENGTH.MIN}

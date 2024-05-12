@@ -11,6 +11,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { modelData } from "@/app/lib/dataConstants";
 import CopyIcon from "../svg/CopyIcon";
 import { PresetStyle } from "@/app/lib/definitions";
+import { convertPresetStyleToString } from "@/app/lib/helpers";
 
 const PanelHeader: FC<{
   prompt: string;
@@ -102,7 +103,7 @@ const PanelHeader: FC<{
             </div>
             <div className="hidden md:flex px-2 gap-1 items-center">
               <PaintDropIcon />
-              <p>{presetStyle}</p>
+              <p>{convertPresetStyleToString(presetStyle)}</p>
             </div>
             <div className="p-2 flex gap-1 items-center">
               <ImagesIcon />

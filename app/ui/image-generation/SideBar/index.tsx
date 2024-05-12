@@ -4,12 +4,10 @@ import OptionWithSwitch from "../../components/OptionWithSwitch";
 import {
   COLUMN_OPTIONS,
   GUIDANCE_SCALE_STRENGTH,
-  SETTINGS_KEY,
 } from "../../../lib/definitions";
 import { numberOfImagesOptions } from "../../../lib/dataConstants";
 import SectionWithOptionsGrid from "../../components/SectionWithOptionsGrid";
 import RangeSlider from "../../components/RangeSlider";
-
 import QuestionMarkIcon from "../../svg/QuestionMarkIcon";
 import Image from "next/image";
 import BackArrowIcon from "../../svg/BackArrowIcon";
@@ -24,17 +22,17 @@ import TokenHeader from "../../components/TokenHeader";
 
 const SideBar = () => {
   const {
-    settings,
-    setSetting,
+    generationRequest,
+    setKeyOfGenerationRequest,
     handleReset,
-    mobileSideBarExpanded,
-    setMobileSideBarExpanded,
+    interfaceState,
+    setKeyOfInterfaceState,
   } = useSettings();
 
   return (
     <div
       className={`flex fixed top-0 transition-transform ${
-        mobileSideBarExpanded
+        interfaceState.mobileSideBarExpanded
           ? "translate-x-0"
           : "-translate-x-full md:translate-x-0"
       } md:left-0 h-full max-h-full z-[100] flex-col w-full md:w-van-gogh-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto`}
@@ -47,7 +45,9 @@ const SideBar = () => {
           <div
             role="button"
             className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey md:hidden"
-            onClick={() => setMobileSideBarExpanded(false)}
+            onClick={() =>
+              setKeyOfInterfaceState("mobileSideBarExpanded", false)
+            }
           >
             <BackArrowIcon />
           </div>
@@ -65,8 +65,8 @@ const SideBar = () => {
         title={sideBarStrings.numberOfImages}
         options={numberOfImagesOptions}
         columns={COLUMN_OPTIONS.FOUR}
-        value={settings.numberOfImages}
-        setValue={(x) => setSetting(SETTINGS_KEY.NUMBER_OF_IMAGES, x)}
+        value={generationRequest.num_images ? generationRequest.num_images : 4}
+        setValue={(x) => setKeyOfGenerationRequest("num_images", x as number)}
       />
       <SideBarSwitchOptions />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-van-gogh-spacing-ml" />
@@ -84,20 +84,27 @@ const SideBar = () => {
       </div>
       <div className="flex gap-3 mb-1">
         <RangeSlider
-          value={settings.guidanceScale}
-          setValue={(x) => setSetting(SETTINGS_KEY.GUIDANCE_SCALE, x)}
+          value={
+            generationRequest.guidance_scale
+              ? generationRequest.guidance_scale
+              : 7
+          }
+          setValue={(x) => setKeyOfGenerationRequest("guidance_scale", x)}
           min={GUIDANCE_SCALE_STRENGTH.MIN}
           max={GUIDANCE_SCALE_STRENGTH.MAX}
         />
         <div className="flex items-center justify-center font-semibold w-8 text-van-gogh-xs select-none">
-          {settings.guidanceScale}
+          {generationRequest.guidance_scale}
         </div>
       </div>
       <OptionWithSwitch
         title={sideBarStrings.tiling}
         tooltipText={tooltipText.tiling}
-        enabled={settings.tiling}
-        toggle={() => setSetting(SETTINGS_KEY.TILING, !settings.tiling)}
+        // To-do: need logic for checking these are the required type... maybe remove the null options from definition?
+        enabled={generationRequest.tiling}
+        toggle={() =>
+          setKeyOfGenerationRequest("tiling", !generationRequest.tiling)
+        }
       />
       <SideBarAdvancedSettings />
       <button

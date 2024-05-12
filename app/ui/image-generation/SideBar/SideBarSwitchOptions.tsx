@@ -6,13 +6,17 @@ import {
 import OptionWithSwitch from "../../components/OptionWithSwitch";
 import { useSettings } from "@/app/context/SettingsContext";
 import { transformDimensions } from "@/app/lib/helpers";
-import { SETTINGS_KEY } from "@/app/lib/definitions";
 
 const SideBarSwitchOptions = () => {
-  const { settings, setSetting, handlePhotoReal, handleAlchemy } = useSettings();
+  const {
+    generationRequest,
+    setKeyOfGenerationRequest,
+    handlePhotoReal,
+    handleAlchemy,
+  } = useSettings();
   const outputDimensions = transformDimensions({
-    width: settings.aspectRatioWidth,
-    height: settings.aspectRatioHeight,
+    width: generationRequest.width,
+    height: generationRequest.height,
   });
   return (
     <>
@@ -21,16 +25,16 @@ const SideBarSwitchOptions = () => {
         title={sideBarStrings.photoReal}
         badgeText={badgeText.v2}
         tooltipText={tooltipText.photoReal}
-        enabled={settings.photoReal}
-        toggle={() => handlePhotoReal(!settings.photoReal)}
+        enabled={generationRequest.photoReal}
+        toggle={() => handlePhotoReal(!generationRequest.photoReal)}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.alchemy}
         badgeText={badgeText.v2}
         tooltipText={tooltipText.alchemy}
-        enabled={settings.alchemy}
-        toggle={() => handleAlchemy(!settings.alchemy)}
+        enabled={generationRequest.alchemy}
+        toggle={() => handleAlchemy(!generationRequest.alchemy)}
       />
       <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-md bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-van-gogh-spacing-m">
         <span className="text-van-gogh-grey-m">
@@ -42,29 +46,35 @@ const SideBarSwitchOptions = () => {
       <OptionWithSwitch
         title={sideBarStrings.promptMagic}
         tooltipText={tooltipText.promptMagic}
-        enabled={settings.promptMagic}
+        enabled={generationRequest.promptMagic}
         toggle={() =>
-          setSetting(SETTINGS_KEY.PROMPT_MAGIC, !settings.promptMagic)
+          setKeyOfGenerationRequest(
+            "promptMagic",
+            !generationRequest.promptMagic
+          )
         }
-        hidden={settings.alchemy}
+        hidden={generationRequest.alchemy}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.transparency}
         badgeText={badgeText.beta}
         tooltipText={tooltipText.transparency}
-        enabled={settings.transparency}
-        toggle={() =>
-          setSetting(SETTINGS_KEY.TRANSPARENCY, !settings.transparency)
-        }
+        enabled={generationRequest.transparency}
+        toggle={() => {
+          setKeyOfGenerationRequest(
+            "transparency",
+            !generationRequest.transparency
+          );
+        }}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.publicImages}
         tooltipText={tooltipText.publicImages}
-        enabled={settings.publicImages}
+        enabled={generationRequest.public}
         toggle={() =>
-          setSetting(SETTINGS_KEY.PUBLIC_IMAGES, !settings.publicImages)
+          setKeyOfGenerationRequest("public", !generationRequest.public)
         }
       />
     </>

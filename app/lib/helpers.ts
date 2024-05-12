@@ -1,9 +1,9 @@
 import { defaultAspectRatioConversion } from "./dataConstants";
 import {
   Dimension,
+  GenerationRequestState,
   LeonardoGenerationRequestBody,
   PresetStyle,
-  SettingsState,
 } from "./definitions";
 
 export function transformDimensions(input: Dimension): Dimension {
@@ -82,10 +82,12 @@ export function constructDateString(createdAt: Date) {
   const date = new Date(createdAt);
 
   // Check if the year, month, and day are the same
-  if (date.getFullYear() === currentDate.getFullYear() &&
-      date.getMonth() === currentDate.getMonth() &&
-      date.getDate() === currentDate.getDate()) {
-    return 'today';
+  if (
+    date.getFullYear() === currentDate.getFullYear() &&
+    date.getMonth() === currentDate.getMonth() &&
+    date.getDate() === currentDate.getDate()
+  ) {
+    return "today";
   }
 
   const options: Intl.DateTimeFormatOptions = {
@@ -97,7 +99,7 @@ export function constructDateString(createdAt: Date) {
   return new Intl.DateTimeFormat("en-GB", options).format(date);
 }
 
-function convertStringToPresetStyle(style: string): PresetStyle | null {
+export function convertStringToPresetStyle(style: string): PresetStyle {
   switch (style.toLowerCase()) {
     case "anime":
       return "ANIME";
@@ -130,24 +132,46 @@ function convertStringToPresetStyle(style: string): PresetStyle | null {
   }
 }
 
-export function extractRequestBodyFromSettings(
-  settings: SettingsState
+export function convertPresetStyleToString(presetStyle: PresetStyle): string {
+  switch (presetStyle) {
+    case "ANIME":
+      return "Anime";
+    case "CINEMATIC":
+      return "Cinematic";
+    case "CREATIVE":
+      return "Creative";
+    case "DYNAMIC":
+      return "Dynamic";
+    case "ENVIRONMENT":
+      return "Environment";
+    case "GENERAL":
+      return "General";
+    case "ILLUSTRATION":
+      return "Illustration";
+    case "PHOTOGRAPHY":
+      return "Photography";
+    case "RAYTRACED":
+      return "Raytraced";
+    case "RENDER_3D":
+      return "3D Render";
+    case "SKETCH_BW":
+      return "Sketch B/W";
+    case "SKETCH_COLOR":
+      return "Sketch Color";
+    case "VIBRANT":
+      return "Vibrant";
+    case "NONE":
+    default:
+      return "None";
+  }
+}
+
+export function extractRequestBody(
+  state: GenerationRequestState
 ): LeonardoGenerationRequestBody {
+  // This can be expanded to handle various other API features not currently implemented
   return {
-    alchemy: settings.alchemy,
-    photoReal: settings.photoReal,
-    prompt: settings.prompt,
-    public: settings.publicImages,
-    height: settings.aspectRatioHeight,
-    width: settings.aspectRatioWidth,
-    guidance_scale: settings.guidanceScale,
-    tiling: settings.tiling,
-    seed: settings.useFixedSeed ? settings.fixedSeed : null,
-    negative_prompt: settings.enableNegativePrompt
-      ? settings.negativePrompt
-      : null,
-    num_images: parseInt(settings.numberOfImages, 10),
-    presetStyle: convertStringToPresetStyle(settings.imageStyle),
-    modelId: settings.modelId,
+    ...state,
+    transparency: state.transparency ? "foreground_only" : "disabled",
   };
 }

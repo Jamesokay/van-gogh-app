@@ -1,9 +1,7 @@
 "use client";
 
-import { Heading } from "@chakra-ui/react";
 import DiceIcon from "../svg/DiceIcon";
 import { imageStyles, modelData, routes } from "@/app/lib/dataConstants";
-import { SETTINGS_KEY } from "@/app/lib/definitions";
 import ModelDropdownMenu from "../components/ModelDropdownMenu";
 import DropdownMenu from "../components/DropdownMenu";
 import FlaskIcon from "../svg/FlaskIcon";
@@ -22,12 +20,13 @@ import GenerateButton from "../components/GenerateButton";
 import TokenHeader from "../components/TokenHeader";
 import SettingsIcon from "../svg/SettingsIcon";
 import Image from "next/image";
+import { convertPresetStyleToString, convertStringToPresetStyle } from "@/app/lib/helpers";
 
 export default function ImageGenerationHeader() {
-  const { settings, setSetting, setMobileSideBarExpanded } = useSettings();
+  const { generationRequest, setKeyOfGenerationRequest, interfaceState, setKeyOfInterfaceState } = useSettings();
   const pathname = usePathname();
   const selectedModel =
-    modelData.find((x) => x.modelId === settings.modelId) || modelData[0];
+    modelData.find((x) => x.modelId === generationRequest.modelId) || modelData[0];
   const text = imageGenerationHeaderStrings;
 
   return (
@@ -53,7 +52,7 @@ export default function ImageGenerationHeader() {
           <TokenHeader />
           <button
             className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey"
-            onClick={() => setMobileSideBarExpanded(true)}
+            onClick={() => setKeyOfInterfaceState('mobileSideBarExpanded', true)}
           >
             <SettingsIcon />
           </button>
@@ -66,14 +65,14 @@ export default function ImageGenerationHeader() {
         <TextareaAutoResize
           maxLength={1000}
           placeholder={text.promptInputPlaceholder}
-          value={settings.prompt}
-          handleChange={(e) => setSetting(SETTINGS_KEY.PROMPT, e.target.value)}
+          value={generationRequest.prompt}
+          handleChange={(e) => setKeyOfGenerationRequest('prompt', e.target.value)}
         />
         <GenerateButton mobile={false} />
       </div>
       <div
         className={
-          settings.enableNegativePrompt
+          interfaceState.enableNegativePrompt
             ? "overflow-hidden px-4 md:px-8 mb-4"
             : "hidden"
         }
@@ -81,9 +80,9 @@ export default function ImageGenerationHeader() {
         <TextareaAutoResize
           maxLength={1000}
           placeholder={text.negPromptInputPlaceholder}
-          value={settings.negativePrompt}
+          value={generationRequest.negative_prompt ? generationRequest.negative_prompt : ''}
           handleChange={(e) =>
-            setSetting(SETTINGS_KEY.NEGATIVE_PROMPT, e.target.value)
+            setKeyOfGenerationRequest('negative_prompt', e.target.value)
           }
         />
       </div>
@@ -91,13 +90,13 @@ export default function ImageGenerationHeader() {
         <ModelDropdownMenu
           options={modelData}
           value={selectedModel}
-          setValue={(x) => setSetting(SETTINGS_KEY.MODEL_ID, x)}
+          setValue={(x) => setKeyOfGenerationRequest('modelId', x)}
         />
         <div className="min-w-[10rem]">
           <DropdownMenu
             options={imageStyles}
-            value={settings.imageStyle}
-            setValue={(x) => setSetting(SETTINGS_KEY.IMAGE_STYLE, x)}
+            value={convertPresetStyleToString(generationRequest.presetStyle)}
+            setValue={(x) => setKeyOfGenerationRequest('presetStyle', convertStringToPresetStyle(x) )}
             isDisabled={false}
             leftIcon={<FlaskIcon />}
             headerTheme={true}
@@ -114,11 +113,11 @@ export default function ImageGenerationHeader() {
         </div>
         <div className="flex gap-2 items-center">
           <Switch
-            enabled={settings.enableNegativePrompt}
+            enabled={interfaceState.enableNegativePrompt}
             handleToggle={() =>
-              setSetting(
-                SETTINGS_KEY.ENABLE_NEGATIVE_PROMPT,
-                !settings.enableNegativePrompt
+              setKeyOfInterfaceState(
+                'enableNegativePrompt',
+                !interfaceState.enableNegativePrompt
               )
             }
           />
@@ -144,13 +143,13 @@ export default function ImageGenerationHeader() {
               {route.title === "Image Guidance" && (
                 <div
                   className={`flex justify-center min-w-8 px-1.5 py-1 text-van-gogh-3xs rounded-md ${
-                    settings.imageGuidance
+                    interfaceState.enableImageGuidance
                       ? "bg-green-gradient"
                       : "bg-van-gogh-badge-grey"
                   }`}
                 >
                   <span className="text-white">
-                    {settings.imageGuidance ? "ON" : "OFF"}
+                    {interfaceState.enableImageGuidance ? "ON" : "OFF"}
                   </span>
                 </div>
               )}

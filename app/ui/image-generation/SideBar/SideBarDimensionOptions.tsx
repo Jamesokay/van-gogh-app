@@ -4,7 +4,6 @@ import {
   AspectRatioKey,
   COLUMN_OPTIONS,
   INPUT_DIMENSIONS,
-  SETTINGS_KEY,
 } from "@/app/lib/definitions";
 import { findApproximateAspectRatio } from "@/app/lib/helpers";
 import { aspectRatioOptions, dimensionOptions } from "@/app/lib/dataConstants";
@@ -16,19 +15,19 @@ import DimensionInput from "../../components/DimensionInput";
 
 const SideBarDimensionOptions = () => {
   const {
-    settings,
-    aspectRatioLocked,
+    generationRequest,
+    interfaceState,
     handleDimensionOption,
     handleAspectRatioChange,
     handleAspectRatioOptionClick,
-    setAspectRatioLocked,
+    setKeyOfInterfaceState,
   } = useSettings();
 
   const aspectRatioValue = findApproximateAspectRatio({
-    width: settings.aspectRatioWidth,
-    height: settings.aspectRatioHeight,
+    width: generationRequest.width,
+    height: generationRequest.height,
   });
-  const dimensionOptionsArray = settings.alchemy
+  const dimensionOptionsArray = generationRequest.alchemy
     ? dimensionOptions.alchemy
     : dimensionOptions.default;
 
@@ -39,8 +38,8 @@ const SideBarDimensionOptions = () => {
         options={dimensionOptionsArray}
         columns={COLUMN_OPTIONS.TWO}
         tooltipText={tooltipText.inputDimensions}
-        value={`${settings.aspectRatioWidth} x ${settings.aspectRatioHeight}`}
-        setValue={(x) => handleDimensionOption(x)}
+        value={`${generationRequest.width} x ${generationRequest.height}`}
+        setValue={(x) => handleDimensionOption(x as string)}
       />
       <p className="text-van-gogh-sm font-light mb-van-gogh-spacing-m">
         {sideBarStrings.advancedControls}
@@ -48,12 +47,12 @@ const SideBarDimensionOptions = () => {
       <div className="flex gap-2 mb-van-gogh-spacing-ml">
         <button
           className={`flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue ${
-            aspectRatioLocked ? "border-van-gogh-purple" : ""
+            interfaceState.aspectRatioLocked ? "border-van-gogh-purple" : ""
           }`}
-          onClick={() => setAspectRatioLocked(!aspectRatioLocked)}
+          onClick={() => setKeyOfInterfaceState('aspectRatioLocked', !interfaceState.aspectRatioLocked)}
         >
-          <LockIcon display={aspectRatioLocked ? "flex" : "none"} />
-          <UnlockIcon display={aspectRatioLocked ? "none" : "flex"} />
+          <LockIcon display={interfaceState.aspectRatioLocked ? "flex" : "none"} />
+          <UnlockIcon display={interfaceState.aspectRatioLocked ? "none" : "flex"} />
         </button>
         <DropdownMenu
           value={aspectRatioValue}
@@ -66,18 +65,18 @@ const SideBarDimensionOptions = () => {
       </div>
       <div className="flex items-center gap-van-gogh-spacing-m mb-2">
         <RangeSlider
-          value={settings.aspectRatioWidth}
+          value={generationRequest.width}
           setValue={(x) =>
-            handleAspectRatioChange(SETTINGS_KEY.ASPECT_RATIO_WIDTH, x)
+            handleAspectRatioChange('width', x)
           }
           max={INPUT_DIMENSIONS.MAX}
           min={INPUT_DIMENSIONS.MIN}
         />
         <DimensionInput
           dimension="W"
-          value={settings.aspectRatioWidth}
+          value={generationRequest.width}
           setValue={(x) =>
-            handleAspectRatioChange(SETTINGS_KEY.ASPECT_RATIO_WIDTH, x)
+            handleAspectRatioChange('width', x)
           }
           max={INPUT_DIMENSIONS.MAX}
           min={INPUT_DIMENSIONS.MIN}
@@ -86,18 +85,18 @@ const SideBarDimensionOptions = () => {
       </div>
       <div className="flex items-center gap-van-gogh-spacing-m mb-2">
         <RangeSlider
-          value={settings.aspectRatioHeight}
+          value={generationRequest.height}
           setValue={(x) =>
-            handleAspectRatioChange(SETTINGS_KEY.ASPECT_RATIO_HEIGHT, x)
+            handleAspectRatioChange('height', x)
           }
           max={INPUT_DIMENSIONS.MAX}
           min={INPUT_DIMENSIONS.MIN}
         />
         <DimensionInput
           dimension="H"
-          value={settings.aspectRatioHeight}
+          value={generationRequest.height}
           setValue={(x) =>
-            handleAspectRatioChange(SETTINGS_KEY.ASPECT_RATIO_HEIGHT, x)
+            handleAspectRatioChange('height', x)
           }
           max={INPUT_DIMENSIONS.MAX}
           min={INPUT_DIMENSIONS.MIN}

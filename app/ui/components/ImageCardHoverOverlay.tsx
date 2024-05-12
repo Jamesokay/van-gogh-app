@@ -14,17 +14,16 @@ import ImageCardButton from "./ImageCardButton";
 import BadgeWrapper from "./BadgeWrapper";
 import { FC } from "react";
 import { useSettings } from "@/app/context/SettingsContext";
-import { SETTINGS_KEY } from "@/app/lib/definitions";
 import { useRouter } from "next/navigation";
 
 const ImageCardHoverOverlay: FC<{ src: string, hidden: boolean }> = ({ src, hidden }) => {
-  const { settings, setSetting } = useSettings();
+  const { setKeyOfGenerationRequest, interfaceState, setKeyOfInterfaceState } = useSettings();
   const router = useRouter();
 
   const handleImageGuidanceInput = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_SRC, src);
-    if (!settings.imageGuidance) setSetting(SETTINGS_KEY.IMAGE_GUIDANCE, true);
+    setKeyOfGenerationRequest('init_generation_image', src);
+    if (!interfaceState.enableImageGuidance) setKeyOfInterfaceState('enableImageGuidance', true);
     router.push("/image-guidance");
   };
 

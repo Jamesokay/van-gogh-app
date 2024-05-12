@@ -7,7 +7,7 @@ import ImageCardSkeleton from "../components/ImageCardSkeleton";
 import { useEffect, useRef, useState } from "react";
 
 const NewGenerationLoading = () => {
-  const { settings, generating } = useSettings();
+  const { generationRequest, interfaceState } = useSettings();
   const [genTime, setGenTime] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -15,7 +15,7 @@ const NewGenerationLoading = () => {
     // Logic for setting and displaying timer
     // generating is a loading state that exists in context, allowing synchronisation
     // of loading state across components
-    if (!generating) {
+    if (!interfaceState.generating) {
       if (genTime > 0) setGenTime(0);
       return;
     }
@@ -28,30 +28,30 @@ const NewGenerationLoading = () => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [generating]);
+  }, [interfaceState.generating]);
 
   return (
-    <div className={generating ? "flex flex-col" : "hidden"}>
+    <div className={interfaceState.generating ? "flex flex-col" : "hidden"}>
       <PanelHeader
-        prompt={settings.prompt}
-        generationLength={parseInt(settings.numberOfImages)}
-        modelId={settings.modelId}
-        presetStyle={settings.imageStyle}
-        imageHeight={settings.aspectRatioHeight}
-        imageWidth={settings.aspectRatioWidth}
+        prompt={generationRequest.prompt}
+        generationLength={generationRequest.num_images}
+        modelId={generationRequest.modelId}
+        presetStyle={generationRequest.presetStyle}
+        imageHeight={generationRequest.height}
+        imageWidth={generationRequest.width}
       />
       <div
         className={`grid grid-cols-1 ${
-          settings.aspectRatioHeight > settings.aspectRatioWidth
+          generationRequest.height > generationRequest.width
             ? "lg:grid-cols-auto-fit-minmax-16"
             : "lg:grid-cols-auto-fit-minmax-24"
         } gap-4`}
       >
-        {generating &&
-          [...Array(parseInt(settings.numberOfImages))].map((_, index) => (
+        {interfaceState.generating &&
+          [...Array(generationRequest.num_images)].map((_, index) => (
             <AspectRatio
               key={`loading-${index}`}
-              ratio={settings.aspectRatioWidth / settings.aspectRatioHeight}
+              ratio={generationRequest.width / generationRequest.height}
             >
               <ImageCardSkeleton elapsedTime={genTime} />
             </AspectRatio>

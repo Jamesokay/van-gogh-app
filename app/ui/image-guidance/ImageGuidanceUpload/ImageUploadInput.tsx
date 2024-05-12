@@ -9,13 +9,13 @@ import { useSettings } from "@/app/context/SettingsContext";
 const ImageUploadInput: FC<{
   openFileSystem: () => void;
 }> = ({ openFileSystem }) => {
-  const { settings } = useSettings();
+  const { generationRequest } = useSettings();
   const text = imageGuidanceStrings.uploadStrings;
 
   return (
     <div
       className={
-        settings.imageGuidanceSrc
+        generationRequest.init_generation_image
           ? "hidden"
           : "flex flex-col gap-1.5 py-2.5 px-4"
       }

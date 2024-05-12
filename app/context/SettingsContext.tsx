@@ -3,64 +3,58 @@
 import { createContext, useContext, useState } from "react";
 import {
   AspectRatioKey,
+  GenerationRequestState,
   InputDimension,
-  SETTINGS_KEY,
+  InterfaceState,
   SettingsContextProps,
   SettingsProviderProps,
-  SettingsState,
 } from "../lib/definitions";
 import { calculateProportionalHeight, parseDimension } from "../lib/helpers";
 import { defaultAspectRatioConversion } from "../lib/dataConstants";
 
-const defaultState: SettingsState = {
-  numberOfImages: "4",
+// State for the API request
+const defaultGenerationRequest: GenerationRequestState = {
+  alchemy: false,
+  guidance_scale: 7,
+  num_images: 4,
   photoReal: false,
-  alchemy: true,
   promptMagic: false,
   transparency: false,
-  publicImages: false,
-  aspectRatioWidth: 768,
-  aspectRatioHeight: 512,
-  guidanceScale: 7,
+  public: false,
+  height: 1024,
+  width: 768,
   tiling: false,
-  recommendedSizes: true,
-  useFixedSeed: false,
-  fixedSeed: null,
   prompt: "",
-  enableNegativePrompt: false,
-  negativePrompt: "",
+  negative_prompt: "",
+  presetStyle: "LEONARDO",
   modelId: "b24e16ff-06e3-43eb-8d33-4416c2d75876",
-  imageStyle: "LEONARDO",
-  imageGuidance: false,
-  credits: 150,
-  // Note: imageGuidanceSrc will be a base64 encoded string.
-  // Unsure of whether keeping this in Context is a performance concern,
-  // but just rolling with it for now.
-  // Once db is implemented, can probably add some auto-upload on image selection,
-  // then just use the hosted src here instead.
-  imageGuidanceSrc: "",
-  imageGuidanceType: "Image to Image",
-  imageGuidanceStrength: 30,
+};
+
+// State for user interface
+const defaultInterfaceState: InterfaceState = {
+  aspectRatioLocked: false,
+  aspectRatio: "3:2",
+  mobileSideBarExpanded: false,
+  enableNegativePrompt: false,
+  enableImageGuidance: false,
+  enableSeed: false,
+  generating: false,
 };
 
 const SettingsContext = createContext<SettingsContextProps>({
-  settings: defaultState,
-  setSetting: () => {},
+  generationRequest: defaultGenerationRequest,
+  setKeyOfGenerationRequest: () => {},
+  interfaceState: defaultInterfaceState,
+  setKeyOfInterfaceState: () => {},
   handlePhotoReal: () => {},
   handleAlchemy: () => {},
   handleAspectRatioChange: () => {},
   handleDimensionOption: () => {},
   handleAspectRatioOptionClick: () => {},
   handleReset: () => {},
-  aspectRatioLocked: false,
-  setAspectRatioLocked: () => {},
   clearImageGuidance: () => {},
-  mobileSideBarExpanded: false,
-  setMobileSideBarExpanded: () => {},
   newGenerationId: "",
   setNewGenerationId: () => {},
-  generating: false,
-  setGenerating: () => {},
 });
 
 export const useSettings = () => useContext(SettingsContext);
@@ -68,43 +62,54 @@ export const useSettings = () => useContext(SettingsContext);
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   children,
 }) => {
-  const [settings, setSettings] = useState<SettingsState>(defaultState);
-  const [aspectRatioLocked, setAspectRatioLocked] = useState(false);
-  const [aspectRatio, setAspectRatio] = useState<AspectRatioKey>("3:2");
-  const [mobileSideBarExpanded, setMobileSideBarExpanded] = useState(false);
+  const [generationRequest, setGenerationRequest] =
+    useState<GenerationRequestState>(defaultGenerationRequest);
+  const [interfaceState, setInterfaceState] = useState<InterfaceState>(
+    defaultInterfaceState
+  );
   const [newGenerationId, setNewGenerationId] = useState("");
-  const [generating, setGenerating] = useState(false);
 
-  const setSetting = <K extends keyof SettingsState>(
-    settingKey: K,
-    value: SettingsState[K]
+  const setKeyOfGenerationRequest = <K extends keyof GenerationRequestState>(
+    key: K,
+    value: GenerationRequestState[K]
   ): void => {
-    setSettings((prevSettings) => ({
-      ...prevSettings,
-      [settingKey]: value,
+    setGenerationRequest((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const setKeyOfInterfaceState = <K extends keyof InterfaceState>(
+    key: K,
+    value: InterfaceState[K]
+  ): void => {
+    setInterfaceState((prev) => ({
+      ...prev,
+      [key]: value,
     }));
   };
 
   // Functions for handling interdependent updates to dimensions/aspectRatio
   const handleDimensionOption = (option: string) => {
-    if (aspectRatioLocked) setAspectRatioLocked(false);
+    if (interfaceState.aspectRatioLocked)
+      setKeyOfInterfaceState("aspectRatioLocked", false);
     const dimensions = parseDimension(option);
     if (!dimensions?.width || !dimensions?.height) return;
-    setSettings((prev) => ({
+    setGenerationRequest((prev) => ({
       ...prev,
-      [SETTINGS_KEY.ASPECT_RATIO_WIDTH]: dimensions.width,
-      [SETTINGS_KEY.ASPECT_RATIO_HEIGHT]: dimensions.height,
+      width: dimensions.width,
+      height: dimensions.height,
     }));
   };
 
   const handleAspectRatioOptionClick = (option: AspectRatioKey) => {
     const result = defaultAspectRatioConversion[option];
     if (!result) return;
-    setAspectRatio(option);
-    setSettings((prev) => ({
+    setKeyOfInterfaceState("aspectRatio", option);
+    setGenerationRequest((prev) => ({
       ...prev,
-      [SETTINGS_KEY.ASPECT_RATIO_WIDTH]: result.width,
-      [SETTINGS_KEY.ASPECT_RATIO_HEIGHT]: result.height,
+      width: result.width,
+      height: result.height,
     }));
   };
 
@@ -112,25 +117,25 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     dimension: InputDimension,
     value: number
   ) => {
-    if (dimension === SETTINGS_KEY.ASPECT_RATIO_WIDTH) {
+    if (dimension === "width") {
       const correspondingHeight = calculateProportionalHeight(
-        aspectRatio,
+        interfaceState.aspectRatio,
         value
       );
-      setSettings((prev) => ({
+      setGenerationRequest((prev) => ({
         ...prev,
-        [SETTINGS_KEY.ASPECT_RATIO_WIDTH]: value,
-        [SETTINGS_KEY.ASPECT_RATIO_HEIGHT]: correspondingHeight,
+        width: value,
+        height: correspondingHeight,
       }));
     } else {
       const correspondingWidth = calculateProportionalHeight(
-        aspectRatio,
+        interfaceState.aspectRatio,
         value
       );
-      setSettings((prev) => ({
+      setGenerationRequest((prev) => ({
         ...prev,
-        [SETTINGS_KEY.ASPECT_RATIO_HEIGHT]: value,
-        [SETTINGS_KEY.ASPECT_RATIO_WIDTH]: correspondingWidth,
+        height: value,
+        width: correspondingWidth,
       }));
     }
   };
@@ -139,62 +144,64 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     dimension: InputDimension,
     value: number
   ) => {
-    if (aspectRatioLocked) handleLockedAspectRatio(dimension, value);
-    else setSetting(dimension, value);
+    if (interfaceState.aspectRatioLocked)
+      handleLockedAspectRatio(dimension, value);
+    else setKeyOfGenerationRequest(dimension, value);
   };
 
   // Functions for updating interdependent states (photoReal, alchemy, promptMagic)
 
   const handleAlchemy = (toggleOn: boolean) => {
     if (toggleOn) {
-      if (settings.promptMagic) setSetting(SETTINGS_KEY.PROMPT_MAGIC, false);
-      setSetting(SETTINGS_KEY.ALCHEMY, true);
+      if (generationRequest.promptMagic)
+        setKeyOfGenerationRequest("promptMagic", false);
+      setKeyOfGenerationRequest("alchemy", true);
     } else {
-      if (settings.photoReal) setSetting(SETTINGS_KEY.PHOTO_REAL, false);
-      setSetting(SETTINGS_KEY.ALCHEMY, false);
+      if (generationRequest.photoReal)
+        setKeyOfGenerationRequest("photoReal", false);
+      setKeyOfGenerationRequest("alchemy", false);
     }
   };
 
   const handlePhotoReal = (toggleOn: boolean) => {
     if (toggleOn) {
-      if (!settings.alchemy) setSetting(SETTINGS_KEY.ALCHEMY, true);
-      if (settings.promptMagic) setSetting(SETTINGS_KEY.PROMPT_MAGIC, false);
-      setSetting(SETTINGS_KEY.PHOTO_REAL, true);
-    } else setSetting(SETTINGS_KEY.PHOTO_REAL, false);
+      if (!generationRequest.alchemy)
+        setKeyOfGenerationRequest("alchemy", true);
+      if (generationRequest.promptMagic)
+        setKeyOfGenerationRequest("promptMagic", false);
+      setKeyOfGenerationRequest("photoReal", true);
+    } else setKeyOfGenerationRequest("photoReal", false);
   };
 
   const clearImageGuidance = () => {
-    setSettings((prev) => ({
-      ...prev,
-      [SETTINGS_KEY.IMAGE_GUIDANCE_SRC]: "",
-      [SETTINGS_KEY.IMAGE_GUIDANCE_STRENGTH]: 30,
-    }));
+    setKeyOfInterfaceState("enableImageGuidance", false);
+    setGenerationRequest((prev) => {
+      const { init_generation_image, init_strength, init_image_id, ...rest } =
+        prev;
+      return { ...rest };
+    });
   };
 
   // Reset SideBar state
   const handleReset = () => {
-    setAspectRatioLocked(false);
-    setSettings(defaultState);
+    setKeyOfInterfaceState("aspectRatioLocked", false);
+    setGenerationRequest(defaultGenerationRequest);
   };
 
   const context = {
-    settings,
-    setSetting,
+    generationRequest,
+    setKeyOfGenerationRequest,
+    interfaceState,
+    setKeyOfInterfaceState,
     handleAlchemy,
     handlePhotoReal,
     handleAspectRatioChange,
     handleDimensionOption,
     handleAspectRatioOptionClick,
     handleReset,
-    aspectRatioLocked,
-    setAspectRatioLocked,
     clearImageGuidance,
-    mobileSideBarExpanded,
-    setMobileSideBarExpanded,
     newGenerationId,
     setNewGenerationId,
-    generating,
-    setGenerating
   };
 
   return (

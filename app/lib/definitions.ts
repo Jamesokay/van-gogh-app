@@ -1,42 +1,20 @@
 import { ReactElement, ReactNode } from "react";
 import { defaultAspectRatioConversion } from "./dataConstants";
 
-// Settings definitions
-export interface SettingsState {
-  numberOfImages: string;
-  photoReal: boolean;
-  alchemy: boolean;
-  promptMagic: boolean;
-  transparency: boolean;
-  publicImages: boolean;
-  aspectRatioHeight: number;
-  aspectRatioWidth: number;
-  guidanceScale: number;
-  tiling: boolean;
-  recommendedSizes: boolean;
-  useFixedSeed: boolean;
-  fixedSeed: number | null;
-  prompt: string;
-  enableNegativePrompt: boolean;
-  negativePrompt: string;
-  modelId: string;
-  imageStyle: PresetStyle;
-  imageGuidance: boolean;
-  imageGuidanceSrc: string;
-  imageGuidanceType: string;
-  imageGuidanceStrength: number;
-  credits: number;
-}
-
-export interface SettingsProviderProps {
+export type SettingsProviderProps = {
   children: ReactNode;
-}
+};
 
 export type SettingsContextProps = {
-  settings: SettingsState;
-  setSetting: <K extends keyof SettingsState>(
-    settingKey: K,
-    value: SettingsState[K]
+  generationRequest: GenerationRequestState;
+  setKeyOfGenerationRequest: <K extends keyof GenerationRequestState>(
+    key: K,
+    value: GenerationRequestState[K]
+  ) => void;
+  interfaceState: InterfaceState;
+  setKeyOfInterfaceState: <K extends keyof InterfaceState>(
+    key: K,
+    value: InterfaceState[K]
   ) => void;
   handlePhotoReal: (toggleOn: boolean) => void;
   handleAlchemy: (toggleOn: boolean) => void;
@@ -44,47 +22,46 @@ export type SettingsContextProps = {
   handleDimensionOption: (option: string) => void;
   handleAspectRatioOptionClick: (option: AspectRatioKey) => void;
   handleReset: () => void;
-  aspectRatioLocked: boolean;
-  setAspectRatioLocked: (value: boolean) => void;
   clearImageGuidance: () => void;
-  mobileSideBarExpanded: boolean;
-  setMobileSideBarExpanded: (value: boolean) => void;
   newGenerationId: string;
   setNewGenerationId: (value: string) => void;
-  generating: boolean;
-  setGenerating: (value: boolean) => void;
 };
 
-export const enum SETTINGS_KEY {
-  NUMBER_OF_IMAGES = "numberOfImages",
-  PHOTO_REAL = "photoReal",
-  ALCHEMY = "alchemy",
-  PROMPT_MAGIC = "promptMagic",
-  TRANSPARENCY = "transparency",
-  PUBLIC_IMAGES = "publicImages",
-  ASPECT_RATIO_WIDTH = "aspectRatioWidth",
-  ASPECT_RATIO_HEIGHT = "aspectRatioHeight",
-  GUIDANCE_SCALE = "guidanceScale",
-  TILING = "tiling",
-  RECOMMENDED_SIZES = "recommendedSizes",
-  USE_FIXED_SEED = "useFixedSeed",
-  FIXED_SEED = "fixedSeed",
-  PROMPT = "prompt",
-  ENABLE_NEGATIVE_PROMPT = "enableNegativePrompt",
-  NEGATIVE_PROMPT = "negativePrompt",
-  IMAGE_STYLE = "imageStyle",
-  MODEL_ID = "modelId",
-  IMAGE_GUIDANCE = "imageGuidance",
-  IMAGE_GUIDANCE_SRC = "imageGuidanceSrc",
-  IMAGE_GUIDANCE_TYPE = "imageGuidanceType",
-  IMAGE_GUIDANCE_STRENGTH = "imageGuidanceStrength",
-}
+export type GenerationRequestState = {
+  alchemy: boolean;
+  guidance_scale?: number;
+  height: number;
+  init_generation_image?: string;
+  init_image_id?: string;
+  init_strength?: number;
+  modelId: string;
+  negative_prompt: string;
+  num_images: number;
+  photoReal: boolean;
+  presetStyle: PresetStyle;
+  prompt: string;
+  promptMagic: boolean;
+  public: boolean;
+  tiling: boolean;
+  transparency: boolean;
+  width: number;
+};
+
+export type InterfaceState = {
+  aspectRatioLocked: boolean;
+  aspectRatio: AspectRatioKey;
+  mobileSideBarExpanded: boolean;
+  enableNegativePrompt: boolean;
+  enableImageGuidance: boolean;
+  enableSeed: boolean;
+  generating: boolean;
+};
 
 // Component definitions
 
 export type AspectRatioKey = keyof typeof defaultAspectRatioConversion;
 
-export type InputDimension = "aspectRatioHeight" | "aspectRatioWidth";
+export type InputDimension = "height" | "width";
 
 export type OptionWithSwitchProps = {
   title: string;
@@ -97,8 +74,8 @@ export type OptionWithSwitchProps = {
 
 export type SectionWithOptionsGridProps = {
   title: string;
-  value: string;
-  setValue: (value: string) => void;
+  value: string | number;
+  setValue: (value: string | number) => void;
   options: string[];
   columns: COLUMN_OPTIONS;
   tooltipText?: string;
@@ -189,7 +166,7 @@ export const enum GUIDANCE_SCALE_STRENGTH {
   MAX = 20,
 }
 
-// API Definitions
+// Leonardo API Definitions
 
 export type PresetStyle =
   | "ANIME"
@@ -255,47 +232,48 @@ type StableDiffusionVersion =
   | "SDXL_1_0"
   | "SDXL_LIGHTNING";
 
-export type LeonardoGenerationRequestBody = {
-  alchemy?: boolean | null;
-  contrastRatio?: number | null; // Requires Alchemy
-  controlNet?: boolean | null; // Requires init img and model based on SD v1.5
-  controlNetType?: string | null;
-  elements?: { akUUID?: string | null; weight?: number | null } | null;
-  expandedDomain?: boolean | null; // Requires Alchemy
-  fantasyAvatar?: boolean | null;
-  guidance_scale?: number | null;
-  height?: number | null;
-  highContrast?: boolean | null;
-  highResolution?: boolean | null;
-  imagePrompts?: string[] | null;
-  imagePromptWeight?: number | null;
-  init_generation_image?: string | null; // For Image to Image
-  init_image_id?: string | null;
-  init_strength?: number;
-  modelId?: string | null;
-  negative_prompt?: string | null;
-  num_images?: number | null;
-  num_inference_steps?: number | null;
-  photoReal?: boolean | null;
-  photoRealVersion?: "v1" | "v2" | null;
-  photoRealStrength?: 0.55 | 0.5 | 0.45 | null;
-  presetStyle?: PresetStyle | null;
-  prompt: string;
-  promptMagic?: boolean | null;
-  promptMagicStrength?: number | null;
-  promptMagicVersion?: "v2" | "v3" | null;
-  public?: boolean | null;
-  scheduler?: Scheduler | null;
-  sd_version?: StableDiffusionVersion | null;
-  seed?: number | null;
-  tiling?: boolean | null;
-  transparency?: string | null;
-  unzoom?: boolean | null; // Requires init_image_id and unzoomAmount
-  unzoomAmount?: number | null;
-  upscaleRatio?: number | null; // Enterprise only
-  weighting?: number | null; // Requires controlNet
-  width?: number | null;
-};
+  // Request body as defined in Leonardo API documentation
+  export type LeonardoGenerationRequestBody = {
+    alchemy?: boolean | null;
+    contrastRatio?: number | null; // Requires Alchemy
+    controlNet?: boolean | null; // Requires init img and model based on SD v1.5
+    controlNetType?: string | null;
+    elements?: { akUUID?: string | null; weight?: number | null } | null;
+    expandedDomain?: boolean | null; // Requires Alchemy
+    fantasyAvatar?: boolean | null;
+    guidance_scale?: number | null;
+    height?: number | null;
+    highContrast?: boolean | null;
+    highResolution?: boolean | null;
+    imagePrompts?: string[] | null;
+    imagePromptWeight?: number | null;
+    init_generation_image?: string | null; // For Image to Image
+    init_image_id?: string | null;
+    init_strength?: number;
+    modelId?: string | null;
+    negative_prompt?: string | null;
+    num_images?: number | null;
+    num_inference_steps?: number | null;
+    photoReal?: boolean | null;
+    photoRealVersion?: "v1" | "v2" | null;
+    photoRealStrength?: 0.55 | 0.5 | 0.45 | null;
+    presetStyle?: PresetStyle | null;
+    prompt: string;
+    promptMagic?: boolean | null;
+    promptMagicStrength?: number | null;
+    promptMagicVersion?: "v2" | "v3" | null;
+    public?: boolean | null;
+    scheduler?: Scheduler | null;
+    sd_version?: StableDiffusionVersion | null;
+    seed?: number | null;
+    tiling?: boolean | null;
+    transparency?: 'disabled' | 'foreground_only' | null;
+    unzoom?: boolean | null; // Requires init_image_id and unzoomAmount
+    unzoomAmount?: number | null;
+    upscaleRatio?: number | null; // Enterprise only
+    weighting?: number | null; // Requires controlNet
+    width?: number | null;
+  };
 
 export type LeonardoGenerationJobResponse = {
   sdGenerationJob: {
@@ -363,15 +341,15 @@ export type LeonardoGenerationResponse = {
 };
 
 export type LeonardoCustomModel = {
-  description: string;
-  featured: true;
+  description: string | null;
+  featured: true | null;
   generated_image: {
-    id: string;
-    url: string;
-  };
-  id: string;
-  name: string;
-  nsfw: true;
+    id: string | null;
+    url: string | null;
+  } | null;
+  id: string | null;
+  name: string | null;
+  nsfw: true | null;
 };
 
 export type LeonardoUserResponse = {

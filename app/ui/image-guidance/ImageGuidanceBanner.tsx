@@ -4,8 +4,8 @@ import { useSettings } from "@/app/context/SettingsContext";
 import Image from "next/image";
 
 const ImageGuidanceBanner = () => {
-  const { settings } = useSettings();
-  const hidden = !!settings.imageGuidanceSrc;
+  const { generationRequest } = useSettings();
+  const hidden = !!generationRequest.init_generation_image;
   return (
     <div
       className={

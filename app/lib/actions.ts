@@ -1,6 +1,7 @@
 "use server";
 
 import {
+  LeonardoCustomModel,
   LeonardoGenerationJobResponse,
   LeonardoGenerationRequestBody,
   LeonardoGenerationResponse,
@@ -114,3 +115,26 @@ export async function fetchGeneration(generationId: string): Promise<LeonardoGen
     return null;
   }
 }
+
+export async function fetchPlatformModels(): Promise<LeonardoCustomModel[] | null> {
+  const url = "https://cloud.leonardo.ai/api/rest/v1/platformModels";
+  const token = process.env.LEONARDO_API_TOKEN;
+  const options = {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  };
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.custom_models;
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    return null;
+  }
+};

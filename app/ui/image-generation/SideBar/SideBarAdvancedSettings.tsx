@@ -10,12 +10,11 @@ import {
 } from "@chakra-ui/react";
 import OptionWithSwitch from "../../components/OptionWithSwitch";
 import { useSettings } from "@/app/context/SettingsContext";
-import { SETTINGS_KEY } from "@/app/lib/definitions";
 import QuestionMarkIcon from "../../svg/QuestionMarkIcon";
 import DropdownMenu from "../../components/DropdownMenu";
 
 const SideBarAdvancedSettings = () => {
-  const { settings, setSetting } = useSettings();
+  const { generationRequest, setKeyOfGenerationRequest, interfaceState, setKeyOfInterfaceState } = useSettings();
   return (
     <Accordion allowToggle>
       <AccordionItem border="none">
@@ -39,28 +38,25 @@ const SideBarAdvancedSettings = () => {
           <OptionWithSwitch
             title={sideBarStrings.recommendedSizes}
             tooltipText={tooltipText.recommendedSizes}
-            enabled={settings.recommendedSizes}
+            enabled={false}
             toggle={() =>
-              setSetting(
-                SETTINGS_KEY.RECOMMENDED_SIZES,
-                !settings.recommendedSizes
-              )
+              console.log('logic for setting h and w accordingly')
             }
           />
           <OptionWithSwitch
             title={sideBarStrings.useFixedSeed}
             tooltipText={tooltipText.useFixedSeed}
-            enabled={settings.useFixedSeed}
+            enabled={interfaceState.enableSeed}
             toggle={() =>
-              setSetting(SETTINGS_KEY.USE_FIXED_SEED, !settings.useFixedSeed)
+              setKeyOfInterfaceState('enableSeed', !interfaceState.enableSeed)
             }
           />
           <input
             type="number"
             className="input-number appearance-none bg-transparent rounded-md border border-van-gogh-grey-blue hover:border-van-gogh-grey-d focus:border-van-gogh-purple outline-none h-10 w-full min-w-input-width text-van-gogh-sm p-4 mb-4"
-            value={settings?.fixedSeed || ''}
+            value={generationRequest?.seed ? generationRequest?.seed : ''}
             onChange={(e) =>
-              setSetting(SETTINGS_KEY.FIXED_SEED, parseInt(e.target.value))
+              setKeyOfGenerationRequest('seed', parseInt(e.target.value))
             }
             maxLength={10}
           />

@@ -3,13 +3,12 @@
 import Switch from "../../components/Switch";
 import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
-import { SETTINGS_KEY } from "@/app/lib/definitions";
 import UploadedImageComponent from "./UploadedImageComponent";
 import ImageUploadInput from "./ImageUploadInput";
 import { useRef } from "react";
 
 const ImageGuidanceUpload = () => {
-  const { settings, setSetting } = useSettings();
+  const { setKeyOfGenerationRequest, interfaceState, setKeyOfInterfaceState } = useSettings();
   const inputRef = useRef<HTMLInputElement>(null);
   const text = imageGuidanceStrings.uploadStrings;
 
@@ -20,7 +19,7 @@ const ImageGuidanceUpload = () => {
       reader.readAsDataURL(file);
       reader.onload = () => {
         if (typeof reader.result === "string") {
-          setSetting(SETTINGS_KEY.IMAGE_GUIDANCE_SRC, reader.result);
+          setKeyOfGenerationRequest('init_generation_image', reader.result);
         }
       };
       reader.onerror = (error) => {
@@ -38,7 +37,7 @@ const ImageGuidanceUpload = () => {
     <div className="flex flex-col h-full bg-van-gogh-dark-blue-alt rounded-lg">
       <div
         className={`flex justify-between py-3.5 px-4 border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue ${
-          settings.imageGuidance ? "bg-darkblue-to-purple-gradient" : ""
+          interfaceState.enableImageGuidance ? "bg-darkblue-to-purple-gradient" : ""
         }`}
       >
         <div className="flex gap-3.5 text-van-gogh-sm">
@@ -48,9 +47,9 @@ const ImageGuidanceUpload = () => {
           <p className="font-medium">{text.title}</p>
         </div>
         <Switch
-          enabled={settings.imageGuidance}
+          enabled={interfaceState.enableImageGuidance}
           handleToggle={() =>
-            setSetting(SETTINGS_KEY.IMAGE_GUIDANCE, !settings.imageGuidance)
+            setKeyOfInterfaceState('enableImageGuidance', !interfaceState.enableImageGuidance)
           }
         />
       </div>
