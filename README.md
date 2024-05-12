@@ -252,7 +252,6 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Styling of loading states, prevent layout jumps
 - API call for deleting generations
 - Infinite scroll/fetch on Generation History
-- Ensure settings state accurately translates to request body
 - Fix button background flickering in hover overlay
 - Fix tick button very faded in hover overlay
 - Download image functionality
