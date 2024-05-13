@@ -244,14 +244,29 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - The key names of GenerationRequestState correspond to the type definition for LeonardoGenerationRequestBody (because boy was it getting confusing before)
 - This batches state in a way that seems cleaner and more maintainable
 - Also defined fetch call to retrive platform models
+
+### Day 21 (13/05/2024):
+
+<img width="1511" alt="Screenshot 2024-05-13 at 11 22 46 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/f15c41d5-f88c-48a3-89c3-423968eb3b2c">
+
+- Fetch and component for generating random prompt
+- Added newGenerationId to interfaceState
+- Added deletedGenerationIds to interfaceState
+- Added three dots dropdown for generations
+- Added API call and associated functionality for deletion and UI updates
+- Need to implement a confirmation modal for image deletion
+- Also need to resturcture things a bit to achieve 'Generate Again' functionality from within three dots dropdown
   
 ### To Do:
 
 - Error handling throughout
 - Standardise skeletons/loading states, use Suspense where appropriate
 - Styling of loading states, prevent layout jumps
-- API call for deleting generations
 - Infinite scroll/fetch on Generation History
+- Refactor the logic for textarea sizing, as it doesn't handle changes in value via GenerateRandomPrompt
+- Check all settings map correctly onto the API request body, yielding the desired response
+- Fetch models from API, construct ModelDropdown using the returned values
+- Image Guidance functionality will need to integrate initImage functionality from API
 - Fix button background flickering in hover overlay
 - Fix tick button very faded in hover overlay
 - Download image functionality
