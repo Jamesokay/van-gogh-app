@@ -2,15 +2,16 @@
 
 import { useSettings } from "@/app/context/SettingsContext";
 import { fetchGeneration } from "@/app/lib/actions";
-import { LeonardoGenerationResponse } from "@/app/lib/definitions";
+import { NonNullLeonardoGenerationResponse } from "@/app/lib/definitions";
 import { useEffect, useRef, useState } from "react";
 import GenerationHistoryPanel from "./GenerationHistoryPanel";
 import NewGenerationLoading from "./NewGenerationLoading";
+import { fillDefaults } from "@/app/lib/helpers";
 
 const NewGenerationPanels = () => {
   const { interfaceState, setKeyOfInterfaceState } = useSettings();
   const [newGenerations, setNewGenerations] = useState<
-    LeonardoGenerationResponse[]
+    NonNullLeonardoGenerationResponse[]
   >([]);
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -26,7 +27,7 @@ const NewGenerationPanels = () => {
       const data = await fetchGeneration(interfaceState.newGenerationId);
       if (data && data.status !== "PENDING") {
         if (data.status === "COMPLETE") {
-          setNewGenerations((prev) => [data, ...prev]);
+          setNewGenerations((prev) => [fillDefaults(data), ...prev]);
         }
         resetGenerationState();
       }
