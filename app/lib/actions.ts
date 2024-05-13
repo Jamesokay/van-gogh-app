@@ -1,4 +1,5 @@
 "use server";
+import { unstable_noStore as noStore } from "next/cache";
 
 import {
   LeonardoCustomModel,
@@ -62,6 +63,7 @@ export async function generateImages(
 export async function getGenerationsByUserId(
   userId: string
 ): Promise<LeonardoGenerationResponse[] | null> {
+  noStore();
   // Add functionality for offset and limit
   const url = `https://cloud.leonardo.ai/api/rest/v1/generations/user/${userId}`;
   const token = process.env.LEONARDO_API_TOKEN;
@@ -93,7 +95,9 @@ export async function getGenerationsByUserId(
 // but the url in that case would periodically reset/change, which is no bueno.
 // While it is technically doable, I believe I would have to create a new Leonardo API key every time
 // the url changed, which is impractical.
-export async function fetchGeneration(generationId: string): Promise<LeonardoGenerationResponse | null> {
+export async function fetchGeneration(
+  generationId: string
+): Promise<LeonardoGenerationResponse | null> {
   const url = `https://cloud.leonardo.ai/api/rest/v1/generations/${generationId}`;
   const token = process.env.LEONARDO_API_TOKEN;
   const options = {
@@ -101,7 +105,7 @@ export async function fetchGeneration(generationId: string): Promise<LeonardoGen
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
-    }
+    },
   };
   try {
     const response = await fetch(url, options);
@@ -116,7 +120,34 @@ export async function fetchGeneration(generationId: string): Promise<LeonardoGen
   }
 }
 
-export async function fetchPlatformModels(): Promise<LeonardoCustomModel[] | null> {
+export async function deleteGeneration(
+  generationId: string
+): Promise<string | null> {
+  const url = `https://cloud.leonardo.ai/api/rest/v1/generations/${generationId}`;
+  const token = process.env.LEONARDO_API_TOKEN;
+  const options = {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.delete_generations_by_pk?.id;
+  } catch (err) {
+    console.error("Error deleting data:", err);
+    return null;
+  }
+}
+
+export async function fetchPlatformModels(): Promise<
+  LeonardoCustomModel[] | null
+> {
   const url = "https://cloud.leonardo.ai/api/rest/v1/platformModels";
   const token = process.env.LEONARDO_API_TOKEN;
   const options = {
@@ -124,7 +155,7 @@ export async function fetchPlatformModels(): Promise<LeonardoCustomModel[] | nul
     headers: {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
-    }
+    },
   };
   try {
     const response = await fetch(url, options);
@@ -137,4 +168,27 @@ export async function fetchPlatformModels(): Promise<LeonardoCustomModel[] | nul
     console.error("Error fetching data:", err);
     return null;
   }
-};
+}
+
+export async function generateRandomPrompt(): Promise<string | null> {
+  const url = "https://cloud.leonardo.ai/api/rest/v1/prompt/random";
+  const token = process.env.LEONARDO_API_TOKEN;
+  const options = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.promptGeneration?.prompt;
+  } catch (err) {
+    console.error("Error generating prompt:", err);
+    return null;
+  }
+}

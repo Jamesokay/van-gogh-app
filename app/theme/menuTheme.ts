@@ -22,12 +22,12 @@ const baseMenuStyle = definePartsStyle({
       borderColor: "vanGoghPurple.400",
     },
     _disabled: {
-      cursor: 'not-allowed',
-      opacity: '0.5',
+      cursor: "not-allowed",
+      opacity: "0.5",
       _hover: {
         borderColor: "vanGoghGrey.400",
       },
-    }
+    },
   },
   list: {
     bg: "vanGoghBlue.900",
@@ -44,9 +44,29 @@ const baseMenuStyle = definePartsStyle({
   },
 });
 
+const threeDotsMenuStyle = definePartsStyle({
+  button: {
+    width: "1.875rem",
+    height: "1.875rem",
+    _active: {
+      borderColor: "transparent"
+    },
+    _hover: {
+      bg: "vanGoghGrey.400",
+      borderColor: "transparent"
+    }
+  },
+  item: {
+    height: '2.5rem',
+    fontSize: "0.875rem",
+    borderBottom: "0.03rem solid",
+    borderColor: "rgb(36, 44, 62)",
+  }
+})
+
 const lg = defineStyle({
   fontSize: "0.875rem",
-  minH: '2.5rem'
+  minH: "2.5rem",
 });
 
 const md = defineStyle({
@@ -55,13 +75,13 @@ const md = defineStyle({
 
 const sizes = {
   lg: definePartsStyle({ button: lg, item: lg }),
-  md: definePartsStyle({ button: md, item: md }),
+  md: definePartsStyle({ button: md, item: md })
 };
 
 const headerMenu = {
   button: {
     maxH: "3.5rem",
-    border: "transparent"
+    border: "transparent",
   }
 };
 
@@ -95,6 +115,6 @@ const modelMenu = definePartsStyle({
 
 export const menuTheme = defineMultiStyleConfig({
   baseStyle: baseMenuStyle,
-  variants: { modelMenu, headerMenu },
+  variants: { modelMenu, headerMenu, threeDotsMenuStyle },
   sizes: sizes,
 });

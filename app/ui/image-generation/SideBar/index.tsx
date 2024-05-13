@@ -65,7 +65,7 @@ const SideBar = () => {
         title={sideBarStrings.numberOfImages}
         options={numberOfImagesOptions}
         columns={COLUMN_OPTIONS.FOUR}
-        value={generationRequest.num_images ? generationRequest.num_images : 4}
+        value={generationRequest.num_images}
         setValue={(x) => setKeyOfGenerationRequest("num_images", x as number)}
       />
       <SideBarSwitchOptions />

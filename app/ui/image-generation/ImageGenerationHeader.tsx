@@ -1,6 +1,5 @@
 "use client";
 
-import DiceIcon from "../svg/DiceIcon";
 import { imageStyles, modelData, routes } from "@/app/lib/dataConstants";
 import ModelDropdownMenu from "../components/ModelDropdownMenu";
 import DropdownMenu from "../components/DropdownMenu";
@@ -20,13 +19,24 @@ import GenerateButton from "../components/GenerateButton";
 import TokenHeader from "../components/TokenHeader";
 import SettingsIcon from "../svg/SettingsIcon";
 import Image from "next/image";
-import { convertPresetStyleToString, convertStringToPresetStyle } from "@/app/lib/helpers";
+import {
+  convertPresetStyleToString,
+  convertStringToPresetStyle,
+} from "@/app/lib/helpers";
+import RandomPromptButton from "../components/RandomPromptButton";
 
 export default function ImageGenerationHeader() {
-  const { generationRequest, setKeyOfGenerationRequest, interfaceState, setKeyOfInterfaceState } = useSettings();
+  const {
+    generationRequest,
+    setKeyOfGenerationRequest,
+    interfaceState,
+    setKeyOfInterfaceState,
+  } = useSettings();
+
   const pathname = usePathname();
   const selectedModel =
-    modelData.find((x) => x.modelId === generationRequest.modelId) || modelData[0];
+    modelData.find((x) => x.modelId === generationRequest.modelId) ||
+    modelData[0];
   const text = imageGenerationHeaderStrings;
 
   return (
@@ -45,28 +55,28 @@ export default function ImageGenerationHeader() {
         </h1>
       </div>
       <div className="flex md:hidden justify-between px-4">
-        <button className="flex items-center justify-center min-w-14 w-14 h-14 bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
-          <DiceIcon id="1" />
-        </button>
+        <RandomPromptButton mobile={true} />
         <div className="flex items-center gap-3">
           <TokenHeader />
           <button
             className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey"
-            onClick={() => setKeyOfInterfaceState('mobileSideBarExpanded', true)}
+            onClick={() =>
+              setKeyOfInterfaceState("mobileSideBarExpanded", true)
+            }
           >
             <SettingsIcon />
           </button>
         </div>
       </div>
       <div className="flex w-full mt-5 mb-4 px-4 md:px-8">
-        <button className="hidden md:flex items-center justify-center min-w-[45px] w-[45px] h-[45px] bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2">
-          <DiceIcon id="2" />
-        </button>
+        <RandomPromptButton mobile={false} />
         <TextareaAutoResize
           maxLength={1000}
           placeholder={text.promptInputPlaceholder}
           value={generationRequest.prompt}
-          handleChange={(e) => setKeyOfGenerationRequest('prompt', e.target.value)}
+          handleChange={(e) =>
+            setKeyOfGenerationRequest("prompt", e.target.value)
+          }
         />
         <GenerateButton mobile={false} />
       </div>
@@ -80,9 +90,13 @@ export default function ImageGenerationHeader() {
         <TextareaAutoResize
           maxLength={1000}
           placeholder={text.negPromptInputPlaceholder}
-          value={generationRequest.negative_prompt ? generationRequest.negative_prompt : ''}
+          value={
+            generationRequest.negative_prompt
+              ? generationRequest.negative_prompt
+              : ""
+          }
           handleChange={(e) =>
-            setKeyOfGenerationRequest('negative_prompt', e.target.value)
+            setKeyOfGenerationRequest("negative_prompt", e.target.value)
           }
         />
       </div>
@@ -90,13 +104,18 @@ export default function ImageGenerationHeader() {
         <ModelDropdownMenu
           options={modelData}
           value={selectedModel}
-          setValue={(x) => setKeyOfGenerationRequest('modelId', x)}
+          setValue={(x) => setKeyOfGenerationRequest("modelId", x)}
         />
         <div className="min-w-[10rem]">
           <DropdownMenu
             options={imageStyles}
             value={convertPresetStyleToString(generationRequest.presetStyle)}
-            setValue={(x) => setKeyOfGenerationRequest('presetStyle', convertStringToPresetStyle(x) )}
+            setValue={(x) =>
+              setKeyOfGenerationRequest(
+                "presetStyle",
+                convertStringToPresetStyle(x)
+              )
+            }
             isDisabled={false}
             leftIcon={<FlaskIcon />}
             headerTheme={true}
@@ -116,7 +135,7 @@ export default function ImageGenerationHeader() {
             enabled={interfaceState.enableNegativePrompt}
             handleToggle={() =>
               setKeyOfInterfaceState(
-                'enableNegativePrompt',
+                "enableNegativePrompt",
                 !interfaceState.enableNegativePrompt
               )
             }

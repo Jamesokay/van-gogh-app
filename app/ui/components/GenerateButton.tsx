@@ -9,7 +9,7 @@ import { generateImages } from "@/app/lib/actions";
 import { extractRequestBody } from "@/app/lib/helpers";
 
 const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
-  const { generationRequest, setNewGenerationId, interfaceState, setKeyOfInterfaceState } =
+  const { generationRequest, interfaceState, setKeyOfInterfaceState } =
     useSettings();
   const disabled = !generationRequest.prompt;
   const label = disabled ? "Please type a prompt" : "This will use 8 tokens";
@@ -26,7 +26,7 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
       setKeyOfInterfaceState('generating', false)
       return;
     }
-    setNewGenerationId(generation.sdGenerationJob.generationId);
+    setKeyOfInterfaceState('newGenerationId', generation.sdGenerationJob.generationId);
   };
 
   return (

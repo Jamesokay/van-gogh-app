@@ -1,4 +1,9 @@
-const CopyOutlineIcon = () => {
+import { uniqueId } from "@/app/lib/helpers";
+import { FC, useMemo } from "react";
+
+const CopyOutlineIcon:FC<{ white?: boolean }> = ({ white }) => {
+  const gradientId = useMemo(uniqueId, []);
+
   return (
     <svg
       viewBox="0 0 16 16"
@@ -9,7 +14,7 @@ const CopyOutlineIcon = () => {
     >
       <defs>
         <linearGradient
-          id="linear-gradient-1-copy-outline-icon_:r14p:"
+          id={gradientId}
           x1="-5.94833"
           y1="0.0820286"
           x2="15.6652"
@@ -24,8 +29,8 @@ const CopyOutlineIcon = () => {
       <g
         strokeWidth="1"
         fill="none"
-        stroke="url(#linear-gradient-1-copy-outline-icon_:r14p:)"
-        stroke-miterlimit="10"
+        stroke={white? '#fff' : `url(#${gradientId})`} // Use the unique ID here
+        strokeMiterlimit="10"
         strokeLinecap="round"
         strokeLinejoin="round"
       >

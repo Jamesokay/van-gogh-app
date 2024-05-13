@@ -39,6 +39,8 @@ const defaultInterfaceState: InterfaceState = {
   enableImageGuidance: false,
   enableSeed: false,
   generating: false,
+  newGenerationId: '',
+  deletedGenerationIds: []
 };
 
 const SettingsContext = createContext<SettingsContextProps>({
@@ -52,9 +54,7 @@ const SettingsContext = createContext<SettingsContextProps>({
   handleDimensionOption: () => {},
   handleAspectRatioOptionClick: () => {},
   handleReset: () => {},
-  clearImageGuidance: () => {},
-  newGenerationId: "",
-  setNewGenerationId: () => {},
+  clearImageGuidance: () => {}
 });
 
 export const useSettings = () => useContext(SettingsContext);
@@ -67,7 +67,6 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const [interfaceState, setInterfaceState] = useState<InterfaceState>(
     defaultInterfaceState
   );
-  const [newGenerationId, setNewGenerationId] = useState("");
 
   const setKeyOfGenerationRequest = <K extends keyof GenerationRequestState>(
     key: K,
@@ -199,9 +198,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     handleDimensionOption,
     handleAspectRatioOptionClick,
     handleReset,
-    clearImageGuidance,
-    newGenerationId,
-    setNewGenerationId,
+    clearImageGuidance
   };
 
   return (

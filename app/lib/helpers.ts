@@ -6,6 +6,10 @@ import {
   PresetStyle,
 } from "./definitions";
 
+export const uniqueId = () => {
+  return `id_${Math.random().toString(36).substr(2, 9)}`;
+};
+
 export function transformDimensions(input: Dimension): Dimension {
   const scalingFactor = 1.75;
   const transformedWidth = Math.round(input.width * scalingFactor);

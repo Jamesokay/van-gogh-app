@@ -6,7 +6,7 @@ export const routes = [
   { title: "Prompt Generation", path: "/prompt-generation" },
 ];
 
-export const numberOfImagesOptions = ["1", "2", "3", "4", "5", "6", "7", "8"];
+export const numberOfImagesOptions = [1, 2, 3, 4, 5, 6, 7, 8];
 export const dimensionOptions = {
   default: [
     "512 x 512",

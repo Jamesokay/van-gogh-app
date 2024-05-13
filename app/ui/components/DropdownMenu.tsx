@@ -1,4 +1,3 @@
-import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import { DropdownMenuProps } from "@/app/lib/definitions";

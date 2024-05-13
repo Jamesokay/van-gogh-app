@@ -1,4 +1,18 @@
-const RemoveBackgroundIcon = () => {
+'use client'
+
+import { uniqueId } from '@/app/lib/helpers';
+import { FC, useMemo } from 'react';
+
+const RemoveBackgroundIcon:FC<{ white?: boolean }> = ({ white }) => {
+
+  const ids = useMemo(() => ({
+    paint0: uniqueId(),
+    paint1: uniqueId(),
+    paint2: uniqueId(),
+    paint3: uniqueId(),
+    paint4: uniqueId(),
+  }), []);
+
   return (
     <svg
       width="calc(1rem * 0.8750)"
@@ -9,21 +23,27 @@ const RemoveBackgroundIcon = () => {
     >
       <path
         d="M0.5 13.5L13.5 0.5"
-        stroke="url(#paint0_linear_2003_5947)"
+        stroke={white ? '#fff' : `url(#${ids.paint0})`}
       ></path>
-      <path d="M0.5 7.5L7.5 0.5" stroke="url(#paint1_linear_2003_5947)"></path>
-      <path d="M0.5 1.5L1.5 0.5" stroke="url(#paint2_linear_2003_5947)"></path>
+      <path
+        d="M0.5 7.5L7.5 0.5"
+        stroke={white ? '#fff' : `url(#${ids.paint1})`}
+      ></path>
+      <path
+        d="M0.5 1.5L1.5 0.5"
+        stroke={white ? '#fff' : `url(#${ids.paint2})`}
+      ></path>
       <path
         d="M6.5 13.5L13.5 6.5"
-        stroke="url(#paint3_linear_2003_5947)"
+        stroke={white ? '#fff' : `url(#${ids.paint3})`}
       ></path>
       <path
         d="M12.5 13.5L13.5 12.5"
-        stroke="url(#paint4_linear_2003_5947)"
+        stroke={white ? '#fff' : `url(#${ids.paint4})`}
       ></path>
       <defs>
         <linearGradient
-          id="paint0_linear_2003_5947"
+          id={ids.paint0}
           x1="-5.09"
           y1="0.499997"
           x2="15.2215"
@@ -35,7 +55,7 @@ const RemoveBackgroundIcon = () => {
           <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
-          id="paint1_linear_2003_5947"
+          id={ids.paint1}
           x1="-2.51"
           y1="0.499999"
           x2="8.42698"
@@ -47,7 +67,7 @@ const RemoveBackgroundIcon = () => {
           <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
-          id="paint2_linear_2003_5947"
+          id={ids.paint2}
           x1="0.07"
           y1="0.5"
           x2="1.63243"
@@ -59,7 +79,7 @@ const RemoveBackgroundIcon = () => {
           <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
-          id="paint3_linear_2003_5947"
+          id={ids.paint3}
           x1="3.49"
           y1="6.5"
           x2="14.427"
@@ -71,7 +91,7 @@ const RemoveBackgroundIcon = () => {
           <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
-          id="paint4_linear_2003_5947"
+          id={ids.paint4}
           x1="12.07"
           y1="12.5"
           x2="13.6324"

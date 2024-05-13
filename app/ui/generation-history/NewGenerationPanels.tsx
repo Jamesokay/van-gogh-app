@@ -8,8 +8,7 @@ import GenerationHistoryPanel from "./GenerationHistoryPanel";
 import NewGenerationLoading from "./NewGenerationLoading";
 
 const NewGenerationPanels = () => {
-  const { newGenerationId, setNewGenerationId, setKeyOfInterfaceState } =
-    useSettings();
+  const { interfaceState, setKeyOfInterfaceState } = useSettings();
   const [newGenerations, setNewGenerations] = useState<
     LeonardoGenerationResponse[]
   >([]);
@@ -17,14 +16,14 @@ const NewGenerationPanels = () => {
 
   const resetGenerationState = () => {
     setKeyOfInterfaceState("generating", false);
-    setNewGenerationId("");
+    setKeyOfInterfaceState("newGenerationId", "");
     if (pollingRef.current) clearInterval(pollingRef.current);
   };
 
   const fetchNewGeneration = async () => {
     // Function for polling the endpoint until image data is available
     try {
-      const data = await fetchGeneration(newGenerationId);
+      const data = await fetchGeneration(interfaceState.newGenerationId);
       if (data && data.status !== "PENDING") {
         if (data.status === "COMPLETE") {
           setNewGenerations((prev) => [data, ...prev]);
@@ -39,12 +38,12 @@ const NewGenerationPanels = () => {
 
   useEffect(() => {
     // Polling logic, initiated once we receive a generationId from the POST request
-    if (!newGenerationId) return;
+    if (!interfaceState.newGenerationId) return;
     pollingRef.current = setInterval(fetchNewGeneration, 2000);
     return () => {
       if (pollingRef.current) clearInterval(pollingRef.current);
     };
-  }, [newGenerationId]);
+  }, [interfaceState.newGenerationId]);
 
   return (
     <>

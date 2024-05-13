@@ -23,8 +23,6 @@ export type SettingsContextProps = {
   handleAspectRatioOptionClick: (option: AspectRatioKey) => void;
   handleReset: () => void;
   clearImageGuidance: () => void;
-  newGenerationId: string;
-  setNewGenerationId: (value: string) => void;
 };
 
 export type GenerationRequestState = {
@@ -56,6 +54,8 @@ export type InterfaceState = {
   enableImageGuidance: boolean;
   enableSeed: boolean;
   generating: boolean;
+  newGenerationId: string;
+  deletedGenerationIds: string[];
 };
 
 // Component definitions
@@ -77,7 +77,7 @@ export type SectionWithOptionsGridProps = {
   title: string;
   value: string | number;
   setValue: (value: string | number) => void;
-  options: string[];
+  options: string[] | number[];
   columns: COLUMN_OPTIONS;
   tooltipText?: string;
 };

@@ -90,6 +90,7 @@ export const tooltipText = {
   editCanvas: "Edit in canvas",
   premiumPrivateImages:
     "The image is public. Please subscribe to a paid plan if you wish to generate private images.",
+  randomPrompt: 'Generate a random prompt'
 };
 
 export const badgeText = {

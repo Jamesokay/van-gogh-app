@@ -39,6 +39,7 @@ const NewGenerationLoading = () => {
         presetStyle={generationRequest.presetStyle}
         imageHeight={generationRequest.height}
         imageWidth={generationRequest.width}
+        id=""
       />
       <div
         className={`grid grid-cols-1 ${

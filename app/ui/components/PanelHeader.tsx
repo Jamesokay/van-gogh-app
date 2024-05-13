@@ -12,12 +12,14 @@ import { modelData } from "@/app/lib/dataConstants";
 import CopyIcon from "../svg/CopyIcon";
 import { PresetStyle } from "@/app/lib/definitions";
 import { convertPresetStyleToString } from "@/app/lib/helpers";
+import GenerationThreeDotsDropdown from "../generation-history/GenerationThreeDotsDropdown";
 
 const PanelHeader: FC<{
   prompt: string;
   generationLength: number;
   modelId: string;
   presetStyle: PresetStyle;
+  id: string;
   imageWidth: number;
   imageHeight: number;
 }> = ({
@@ -25,16 +27,19 @@ const PanelHeader: FC<{
   modelId,
   presetStyle,
   generationLength,
+  id,
   imageHeight,
   imageWidth,
 }) => {
   const [copied, setCopied] = useState(false);
+  const [genertionId, setGenerationId] = useState('');
   const copyRef = useRef<NodeJS.Timeout | number | null>(null);
   const selectedModel =
     modelData.find((x) => x.modelId === modelId) || modelData[0];
   const reusePrompt = () => console.log("reuse prompt");
 
   useEffect(() => {
+    setGenerationId(id);
     return () => {
       if (copyRef.current !== null) clearTimeout(copyRef.current);
     };
@@ -55,7 +60,7 @@ const PanelHeader: FC<{
     }
   };
   return (
-    <div className="flex gap-8 mt-8 mb-3">
+    <div className="flex gap-8 mt-8 mb-3 z-50">
       <div className="flex flex-col lg:flex-row w-full justify-between">
         <div className="flex items-center overflow-hidden">
           <Tooltip label={prompt}>
@@ -113,6 +118,7 @@ const PanelHeader: FC<{
               <DimensionsIcon />
               <span>{`${imageWidth} x ${imageHeight}`}</span>
             </div>
+            {genertionId && <GenerationThreeDotsDropdown generationId={genertionId} />}
           </div>
         </div>
       </div>
