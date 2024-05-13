@@ -2,7 +2,7 @@
 
 import {
   LeonardoGeneratedImage,
-  LeonardoGenerationResponse,
+  NonNullLeonardoGenerationResponse,
 } from "@/app/lib/definitions";
 import { AspectRatio, Card, CardBody, useDisclosure } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
@@ -12,15 +12,7 @@ import ImageCardSkeletonRow from "../components/ImageCardSkeletonRow";
 import PanelHeader from "../components/PanelHeader";
 import { useSettings } from "@/app/context/SettingsContext";
 
-const GenerationHistoryPanel: FC<LeonardoGenerationResponse> = ({
-  prompt,
-  generated_images,
-  modelId,
-  presetStyle,
-  id,
-  imageWidth,
-  imageHeight,
-}) => {
+const GenerationHistoryPanel: FC<NonNullLeonardoGenerationResponse> = (props) => {
   const { interfaceState } = useSettings();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -28,6 +20,7 @@ const GenerationHistoryPanel: FC<LeonardoGenerationResponse> = ({
     LeonardoGeneratedImage[]
   >([]);
   const emptyDivsCount = 4 - renderedImages.length;
+  const { generated_images, id, imageWidth, imageHeight } = props;
 
   useEffect(() => {
     setRenderedImages(generated_images);
@@ -58,15 +51,7 @@ const GenerationHistoryPanel: FC<LeonardoGenerationResponse> = ({
           : "flex flex-col"
       }
     >
-      <PanelHeader
-        prompt={prompt}
-        generationLength={renderedImages.length}
-        modelId={modelId}
-        presetStyle={presetStyle}
-        imageHeight={imageHeight}
-        imageWidth={imageWidth}
-        id={id}
-      />
+      <PanelHeader {...props} />
       <ImageCardSkeletonRow
         hidden={renderedImages.length > 0}
         landscape={imageWidth > imageHeight}

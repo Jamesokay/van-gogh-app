@@ -5,11 +5,21 @@ import PanelHeader from "../components/PanelHeader";
 import { AspectRatio } from "@chakra-ui/react";
 import ImageCardSkeleton from "../components/ImageCardSkeleton";
 import { useEffect, useRef, useState } from "react";
+import { defaultLeonardoGenerationResponse } from "@/app/lib/definitions";
 
 const NewGenerationLoading = () => {
   const { generationRequest, interfaceState } = useSettings();
   const [genTime, setGenTime] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const defaultData = {
+    ...defaultLeonardoGenerationResponse,
+    prompt: generationRequest.prompt,
+    generated_images: [...Array(generationRequest.num_images)],
+    modelId: generationRequest.modelId,
+    presetStyle: generationRequest.presetStyle,
+    imageHeight: generationRequest.height,
+    imageWidth: generationRequest.width,
+  };
 
   useEffect(() => {
     // Logic for setting and displaying timer
@@ -32,15 +42,7 @@ const NewGenerationLoading = () => {
 
   return (
     <div className={interfaceState.generating ? "flex flex-col" : "hidden"}>
-      <PanelHeader
-        prompt={generationRequest.prompt}
-        generationLength={generationRequest.num_images}
-        modelId={generationRequest.modelId}
-        presetStyle={generationRequest.presetStyle}
-        imageHeight={generationRequest.height}
-        imageWidth={generationRequest.width}
-        id=""
-      />
+      <PanelHeader {...defaultData} />
       <div
         className={`grid grid-cols-1 ${
           generationRequest.height > generationRequest.width

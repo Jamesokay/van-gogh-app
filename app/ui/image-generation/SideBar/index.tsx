@@ -35,7 +35,7 @@ const SideBar = () => {
         interfaceState.mobileSideBarExpanded
           ? "translate-x-0"
           : "-translate-x-full md:translate-x-0"
-      } md:left-0 h-full max-h-full z-[100] flex-col w-full md:w-van-gogh-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto`}
+      } md:left-0 h-full max-h-full z-[150] flex-col w-full md:w-van-gogh-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto`}
     >
       <div className="flex flex-col items-center my-5 gap-3.5">
         <div className="flex gap-2 items-center w-full">

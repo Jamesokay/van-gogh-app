@@ -40,7 +40,7 @@ export default function ImageGenerationHeader() {
   const text = imageGenerationHeaderStrings;
 
   return (
-    <div className="flex flex-col w-full z-50">
+    <div className="flex flex-col w-full z-[100]">
       <div className="flex my-5 md:hidden px-4">
         <Image
           src="/leonardo-logo-text-new.svg"

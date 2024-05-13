@@ -6,7 +6,7 @@ import { FC } from "react";
 import CoinsIcon from "../svg/CoinsIcon";
 import { useSettings } from "@/app/context/SettingsContext";
 import { generateImages } from "@/app/lib/actions";
-import { extractRequestBody } from "@/app/lib/helpers";
+import { extractRequestBodyFromContext } from "@/app/lib/helpers";
 
 const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
   const { generationRequest, interfaceState, setKeyOfInterfaceState } =
@@ -18,15 +18,21 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
 
   const generate = async () => {
     // To-do: prevent spam click
-    setKeyOfInterfaceState('generating', true);
-    const body = extractRequestBody(generationRequest);
-    const generation = await generateImages(body);
-    if (!generation) {
-      // To-do: handle error gracefully
-      setKeyOfInterfaceState('generating', false)
-      return;
+    setKeyOfInterfaceState("generating", true);
+    try {
+      const body = extractRequestBodyFromContext(generationRequest);
+      const generation = await generateImages(body);
+      if (!generation) {
+        throw new Error("Failed to generate");
+      }
+      setKeyOfInterfaceState(
+        "newGenerationId",
+        generation.sdGenerationJob.generationId
+      );
+    } catch (err) {
+      console.error("Error generating:", err);
+      setKeyOfInterfaceState("generating", false);
     }
-    setKeyOfInterfaceState('newGenerationId', generation.sdGenerationJob.generationId);
   };
 
   return (
@@ -55,7 +61,11 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
           <CoinsIcon white={true} />
           <span className="text-van-gogh-sm ml-1">{credits}</span>
         </div>
-        <div className={`flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${interfaceState.generating ? "opacity-100" : "opacity-0"}`}>
+        <div
+          className={`flex absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+            interfaceState.generating ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <Spinner />
         </div>
       </button>

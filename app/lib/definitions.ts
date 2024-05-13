@@ -233,48 +233,48 @@ type StableDiffusionVersion =
   | "SDXL_1_0"
   | "SDXL_LIGHTNING";
 
-  // Request body as defined in Leonardo API documentation
-  export type LeonardoGenerationRequestBody = {
-    alchemy?: boolean | null;
-    contrastRatio?: number | null; // Requires Alchemy
-    controlNet?: boolean | null; // Requires init img and model based on SD v1.5
-    controlNetType?: string | null;
-    elements?: { akUUID?: string | null; weight?: number | null } | null;
-    expandedDomain?: boolean | null; // Requires Alchemy
-    fantasyAvatar?: boolean | null;
-    guidance_scale?: number | null;
-    height?: number | null;
-    highContrast?: boolean | null;
-    highResolution?: boolean | null;
-    imagePrompts?: string[] | null;
-    imagePromptWeight?: number | null;
-    init_generation_image?: string | null; // For Image to Image
-    init_image_id?: string | null;
-    init_strength?: number;
-    modelId?: string | null;
-    negative_prompt?: string | null;
-    num_images?: number | null;
-    num_inference_steps?: number | null;
-    photoReal?: boolean | null;
-    photoRealVersion?: "v1" | "v2" | null;
-    photoRealStrength?: 0.55 | 0.5 | 0.45 | null;
-    presetStyle?: PresetStyle | null;
-    prompt: string;
-    promptMagic?: boolean | null;
-    promptMagicStrength?: number | null;
-    promptMagicVersion?: "v2" | "v3" | null;
-    public?: boolean | null;
-    scheduler?: Scheduler | null;
-    sd_version?: StableDiffusionVersion | null;
-    seed?: number | null;
-    tiling?: boolean | null;
-    transparency?: 'disabled' | 'foreground_only' | null;
-    unzoom?: boolean | null; // Requires init_image_id and unzoomAmount
-    unzoomAmount?: number | null;
-    upscaleRatio?: number | null; // Enterprise only
-    weighting?: number | null; // Requires controlNet
-    width?: number | null;
-  };
+// Request body as defined in Leonardo API documentation
+export type LeonardoGenerationRequestBody = {
+  alchemy?: boolean | null;
+  contrastRatio?: number | null; // Requires Alchemy
+  controlNet?: boolean | null; // Requires init img and model based on SD v1.5
+  controlNetType?: string | null;
+  elements?: { akUUID?: string | null; weight?: number | null } | null;
+  expandedDomain?: boolean | null; // Requires Alchemy
+  fantasyAvatar?: boolean | null;
+  guidance_scale?: number | null;
+  height?: number | null;
+  highContrast?: boolean | null;
+  highResolution?: boolean | null;
+  imagePrompts?: string[] | null;
+  imagePromptWeight?: number | null;
+  init_generation_image?: string | null; // For Image to Image
+  init_image_id?: string | null;
+  init_strength?: number;
+  modelId?: string | null;
+  negative_prompt?: string | null;
+  num_images?: number | null;
+  num_inference_steps?: number | null;
+  photoReal?: boolean | null;
+  photoRealVersion?: "v1" | "v2" | null;
+  photoRealStrength?: 0.55 | 0.5 | 0.45 | null;
+  presetStyle?: PresetStyle | null;
+  prompt: string;
+  promptMagic?: boolean | null;
+  promptMagicStrength?: number | null;
+  promptMagicVersion?: "v2" | "v3" | null;
+  public?: boolean | null;
+  scheduler?: Scheduler | null;
+  sd_version?: StableDiffusionVersion | null;
+  seed?: number | null;
+  tiling?: boolean | null;
+  transparency?: "disabled" | "foreground_only" | null;
+  unzoom?: boolean | null; // Requires init_image_id and unzoomAmount
+  unzoomAmount?: number | null;
+  upscaleRatio?: number | null; // Enterprise only
+  weighting?: number | null; // Requires controlNet
+  width?: number | null;
+};
 
 export type LeonardoGenerationJobResponse = {
   sdGenerationJob: {
@@ -302,43 +302,98 @@ export type LeonardoGeneratedImage = {
   url: string;
 };
 
+export type LeonardoGeneratedElement = {
+  id: number;
+  lora: {
+    akUUID: string;
+    baseModel: BaseModel;
+    description: string;
+    name: string;
+    urlImage: string;
+    weightDefault: number;
+    weightMax: number;
+    weightMin: number;
+  };
+  weightApplied: number;
+};
+
 export type LeonardoGenerationResponse = {
+  createdAt: Date | null;
+  generated_images: LeonardoGeneratedImage[] | null;
+  generation_elements: LeonardoGeneratedElement[] | null;
+  guidanceScale: number | null;
+  id: string| null;
+  imageHeight: number | null;
+  imageWidth: number | null;
+  inferenceSteps: number | null;
+  initStrength: number | null;
+  modelId: string | null;
+  negativePrompt: string | null;
+  photoReal: boolean | null;
+  photoRealStrength: 0.55 | 0.5 | 0.45 | null;
+  presetStyle: PresetStyle | null;
+  prompt: string | null;
+  promptMagic: boolean | null;
+  promptMagicStrength: number | null;
+  promptMagicVersion: 'v2' | 'v3' | null;
+  public: boolean | null;
+  scheduler: Scheduler | null;
+  sdVersion: StableDiffusionVersion | null;
+  seed: number | null;
+  status: GenerationStatus | null;
+};
+
+export type NonNullLeonardoGenerationResponse = {
   createdAt: Date;
   generated_images: LeonardoGeneratedImage[];
-  generation_elements: Array<{
-    id: number;
-    lora: {
-      akUUID: string;
-      baseModel: BaseModel;
-      description: string;
-      name: string;
-      urlImage: string;
-      weightDefault: number;
-      weightMax: number;
-      weightMin: number;
-    };
-    weightApplied: number;
-  }> | null;
-  guidanceScale: number | null;
+  generation_elements: LeonardoGeneratedElement[];
+  guidanceScale: number;
   id: string;
   imageHeight: number;
   imageWidth: number;
-  inferenceSteps: number | null;
-  initStrength: number | null;
+  inferenceSteps: number;
+  initStrength: number;
   modelId: string;
-  negativePrompt: string | null;
-  photoReal: boolean | null;
-  photoRealStrength: number | null;
+  negativePrompt: string;
+  photoReal: boolean;
+  photoRealStrength: 0.55 | 0.5 | 0.45;
   presetStyle: PresetStyle;
   prompt: string;
   promptMagic: boolean;
-  promptMagicStrength: number | null;
-  promptMagicVersion: string | null;
+  promptMagicStrength: number;
+  promptMagicVersion: "v2" | "v3";
   public: boolean;
   scheduler: Scheduler;
   sdVersion: StableDiffusionVersion;
-  seed: number | null;
+  seed: number;
   status: GenerationStatus;
+};
+
+// Enforce non-null values for the purposes of rendering panels
+export const defaultLeonardoGenerationResponse: NonNullLeonardoGenerationResponse = {
+  createdAt: new Date(),
+  generated_images: [],
+  generation_elements: [],
+  guidanceScale: 7,
+  id: '',
+  imageHeight: 1,
+  imageWidth: 1,
+  inferenceSteps: 1,
+  initStrength: 1,
+  modelId: '',
+  negativePrompt: '',
+  photoReal: false,
+  photoRealStrength: 0.55,
+  presetStyle: 'NONE',
+  prompt: '',
+  promptMagic: false,
+  promptMagicStrength: 0.5,
+  promptMagicVersion: 'v2',
+  public: false,
+  scheduler: 'EULER_DISCRETE',
+  sdVersion: 'v1_5',
+  seed: 0,
+  status: 'PENDING'
 };
 
 export type LeonardoCustomModel = {

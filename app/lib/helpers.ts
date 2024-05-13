@@ -1,8 +1,11 @@
 import { defaultAspectRatioConversion } from "./dataConstants";
 import {
+  defaultLeonardoGenerationResponse,
   Dimension,
   GenerationRequestState,
   LeonardoGenerationRequestBody,
+  LeonardoGenerationResponse,
+  NonNullLeonardoGenerationResponse,
   PresetStyle,
 } from "./definitions";
 
@@ -170,12 +173,92 @@ export function convertPresetStyleToString(presetStyle: PresetStyle): string {
   }
 }
 
-export function extractRequestBody(
+// Fill in all potential null values
+export function fillDefaults(
+  response: LeonardoGenerationResponse
+): NonNullLeonardoGenerationResponse {
+  return {
+    createdAt:
+      response.createdAt ?? defaultLeonardoGenerationResponse.createdAt,
+    generated_images:
+      response.generated_images ??
+      defaultLeonardoGenerationResponse.generated_images,
+    generation_elements:
+      response.generation_elements ??
+      defaultLeonardoGenerationResponse.generation_elements,
+    guidanceScale:
+      response.guidanceScale ?? defaultLeonardoGenerationResponse.guidanceScale,
+    id: response.id ?? defaultLeonardoGenerationResponse.id,
+    imageHeight:
+      response.imageHeight ?? defaultLeonardoGenerationResponse.imageHeight,
+    imageWidth:
+      response.imageWidth ?? defaultLeonardoGenerationResponse.imageWidth,
+    inferenceSteps:
+      response.inferenceSteps ??
+      defaultLeonardoGenerationResponse.inferenceSteps,
+    initStrength:
+      response.initStrength ?? defaultLeonardoGenerationResponse.initStrength,
+    modelId: response.modelId ?? defaultLeonardoGenerationResponse.modelId,
+    negativePrompt:
+      response.negativePrompt ??
+      defaultLeonardoGenerationResponse.negativePrompt,
+    photoReal:
+      response.photoReal ?? defaultLeonardoGenerationResponse.photoReal,
+    photoRealStrength:
+      response.photoRealStrength ??
+      defaultLeonardoGenerationResponse.photoRealStrength,
+    presetStyle:
+      response.presetStyle ?? defaultLeonardoGenerationResponse.presetStyle,
+    prompt: response.prompt ?? defaultLeonardoGenerationResponse.prompt,
+    promptMagic:
+      response.promptMagic ?? defaultLeonardoGenerationResponse.promptMagic,
+    promptMagicStrength:
+      response.promptMagicStrength ??
+      defaultLeonardoGenerationResponse.promptMagicStrength,
+    promptMagicVersion:
+      response.promptMagicVersion ??
+      defaultLeonardoGenerationResponse.promptMagicVersion,
+    public: response.public ?? defaultLeonardoGenerationResponse.public,
+    scheduler:
+      response.scheduler ?? defaultLeonardoGenerationResponse.scheduler,
+    sdVersion:
+      response.sdVersion ?? defaultLeonardoGenerationResponse.sdVersion,
+    seed: response.seed ?? defaultLeonardoGenerationResponse.seed,
+    status: response.status ?? defaultLeonardoGenerationResponse.status,
+  };
+}
+
+// Extract a request object from context state
+export function extractRequestBodyFromContext(
   state: GenerationRequestState
 ): LeonardoGenerationRequestBody {
   // This can be expanded to handle various other API features not currently implemented
   return {
     ...state,
     transparency: state.transparency ? "foreground_only" : "disabled",
+  };
+}
+
+// Extract a request object from a previous generation
+export function extractRequestBodyFromPrevGeneration(state: NonNullLeonardoGenerationResponse): LeonardoGenerationRequestBody {
+  return {
+    alchemy: false,
+    guidance_scale: state.guidanceScale,
+    height: state.imageHeight,
+    modelId: state.modelId,
+    negative_prompt: state.negativePrompt,
+    num_images: state.generated_images.length,
+    photoReal: state.photoReal,
+    photoRealStrength: state.photoRealStrength,
+    presetStyle: state.presetStyle,
+    prompt: state.prompt,
+    promptMagic: state.promptMagic,
+    promptMagicStrength: state.promptMagic ? state.promptMagicStrength : null,
+    promptMagicVersion: state.promptMagic ? state.promptMagicVersion : null,
+    public: state.public,
+    scheduler: state.scheduler,
+    sd_version: state.sdVersion,
+    seed: state.seed,
+    width: state.imageWidth,
   };
 }
