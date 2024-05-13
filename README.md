@@ -254,15 +254,21 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Added deletedGenerationIds to interfaceState
 - Added three dots dropdown for generations
 - Added API call and associated functionality for deletion and UI updates
-- Need to implement a confirmation modal for image deletion
-- Also need to resturcture things a bit to achieve 'Generate Again' functionality from within three dots dropdown
-  
+
+### Day 21 (later):
+
+- Restructured types to guard against null values from API response
+- Helper function to assign default values to null keys
+- Helper function to extract new request body from previous generation response
+- Implemented function for regenerating a previous generation
+- Implemented function to copy seed from previous generation
+
 ### To Do:
 
 - Error handling throughout
+- Confirmation modal for image deletion
 - Standardise skeletons/loading states, use Suspense where appropriate
 - Styling of loading states, prevent layout jumps
-- Infinite scroll/fetch on Generation History
 - Refactor the logic for textarea sizing, as it doesn't handle changes in value via GenerateRandomPrompt
 - Check all settings map correctly onto the API request body, yielding the desired response
 - Fetch models from API, construct ModelDropdown using the returned values
