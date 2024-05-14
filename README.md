@@ -263,19 +263,24 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Implemented function for regenerating a previous generation
 - Implemented function to copy seed from previous generation
 
+### Day 22 (14/05/2024):
+
+- Fixed tick button styling
+- Fixed overlay buttons flickering on hover
+- Fixed gradient in logo text 
+- Fixed scrolling bug on inner container
+- Fixed textarea not resizing in response to random prompt generation
+- Implemented re-useable component for downloading images
+
 ### To Do:
 
 - Error handling throughout
 - Confirmation modal for image deletion
 - Standardise skeletons/loading states, use Suspense where appropriate
 - Styling of loading states, prevent layout jumps
-- Refactor the logic for textarea sizing, as it doesn't handle changes in value via GenerateRandomPrompt
 - Check all settings map correctly onto the API request body, yielding the desired response
 - Fetch models from API, construct ModelDropdown using the returned values
 - Image Guidance functionality will need to integrate initImage functionality from API
-- Fix button background flickering in hover overlay
-- Fix tick button very faded in hover overlay
-- Download image functionality
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
 - Clean-up of styles
