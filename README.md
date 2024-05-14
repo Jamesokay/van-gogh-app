@@ -274,6 +274,8 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Fixed visual bug with background colour of Chakra cards overflowing at corners
 - Adjusted border-radius of skeleton state to match that of rendered content
 - Defined function for improving a supplied prompt
+- Added glow to loading spinner
+- Updated hover styling for ImageCardButton
 
 ### To Do:
 
