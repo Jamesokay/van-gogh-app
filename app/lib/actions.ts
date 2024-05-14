@@ -192,3 +192,27 @@ export async function generateRandomPrompt(): Promise<string | null> {
     return null;
   }
 }
+
+export async function improvePrompt(prompt: string): Promise<string | null> {
+  const url = "https://cloud.leonardo.ai/api/rest/v1/prompt/improve";
+  const token = process.env.LEONARDO_API_TOKEN;
+  const options = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ prompt })
+  };
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.promptGeneration?.prompt;
+  } catch (err) {
+    console.error("Error improving prompt:", err);
+    return null;
+  }
+}

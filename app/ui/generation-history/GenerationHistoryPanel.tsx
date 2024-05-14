@@ -8,7 +8,7 @@ import { AspectRatio, Card, CardBody, useDisclosure } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 import ImageModal from "./ImageModal";
 import CardImageLoader from "../components/CardImageLoader";
-import ImageCardSkeletonRow from "../components/ImageCardSkeletonRow";
+import InitialRenderSkeleton from "../components/InitialRenderSkeleton";
 import PanelHeader from "../components/PanelHeader";
 import { useSettings } from "@/app/context/SettingsContext";
 
@@ -52,7 +52,7 @@ const GenerationHistoryPanel: FC<NonNullLeonardoGenerationResponse> = (props) =>
       }
     >
       <PanelHeader {...props} />
-      <ImageCardSkeletonRow
+      <InitialRenderSkeleton
         hidden={renderedImages.length > 0}
         landscape={imageWidth > imageHeight}
       />

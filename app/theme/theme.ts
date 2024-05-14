@@ -3,6 +3,7 @@ import { menuTheme } from "./menuTheme";
 import { textareaTheme } from "./textareaTheme";
 import { tooltipTheme } from "./tooltipTheme";
 import { modalTheme } from "./modalTheme";
+import { cardTheme } from "./cardTheme";
 
 const theme = extendTheme({
   colors: {
@@ -18,6 +19,7 @@ const theme = extendTheme({
     },
   },
   components: {
+    Card: cardTheme,
     Menu: menuTheme,
     Modal: modalTheme,
     Textarea: textareaTheme,

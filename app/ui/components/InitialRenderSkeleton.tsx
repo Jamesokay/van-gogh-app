@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const ImageCardSkeletonRow: FC<{ hidden: boolean; landscape: boolean }> = ({
+const InitialRenderSkeleton: FC<{ hidden: boolean; landscape: boolean }> = ({
   hidden,
   landscape,
 }) => {
@@ -17,22 +17,22 @@ const ImageCardSkeletonRow: FC<{ hidden: boolean; landscape: boolean }> = ({
       }
     >
       <div
-        className={`relative ${
+        className={`relative rounded-md ${
           !landscape ? "pb-[133.33%]" : "pb-[66.66%]"
         } w-full bg-van-gogh-grey-xd grayscale`}
       />
       <div
-        className={`relative ${
+        className={`relative rounded-md ${
           !landscape ? "pb-[133.33%]" : "pb-[66.66%]"
         } w-full bg-van-gogh-grey-xd grayscale`}
       />
       <div
-        className={`relative ${
+        className={`relative rounded-md ${
           !landscape ? "pb-[133.33%]" : "pb-[66.66%]"
         } w-full bg-van-gogh-grey-xd grayscale`}
       />
       <div
-        className={`relative ${
+        className={`relative rounded-md ${
           !landscape ? "pb-[133.33%]" : "pb-[66.66%]"
         } w-full bg-van-gogh-grey-xd grayscale`}
       />
@@ -40,4 +40,4 @@ const ImageCardSkeletonRow: FC<{ hidden: boolean; landscape: boolean }> = ({
   );
 };
 
-export default ImageCardSkeletonRow;
+export default InitialRenderSkeleton;
