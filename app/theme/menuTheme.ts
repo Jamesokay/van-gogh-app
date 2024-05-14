@@ -46,21 +46,27 @@ const baseMenuStyle = definePartsStyle({
 
 const threeDotsMenuStyle = definePartsStyle({
   button: {
+    bg: "transparent",
     width: "1.875rem",
     height: "1.875rem",
+    borderColor: "transparent",
     _active: {
       borderColor: "transparent"
     },
     _hover: {
-      bg: "vanGoghGrey.400",
+      bg: "vanGoghBlue.900",
       borderColor: "transparent"
     }
   },
   item: {
+    bg: "rgb(11, 15, 23)",
     height: '2.5rem',
     fontSize: "0.875rem",
     borderBottom: "0.03rem solid",
     borderColor: "rgb(36, 44, 62)",
+    _hover: {
+      bg: "rgb(22, 23, 27)",
+    }
   }
 })
 

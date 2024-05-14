@@ -75,21 +75,36 @@ const ImageModal: FC<ImageModalProps> = ({
         <ModalFooter>
           <div className="flex w-full p-4 gap-5 justify-end">
             <div className="flex gap-1">
-              <ImageDownloadButton src={src} />
-              <ImageCardButton label={tooltipText.copy}>
+              <ImageDownloadButton
+                src={src}
+                className="backdrop-brightness-150 hover:backdrop-brightness-100"
+              />
+              <ImageCardButton
+                label={tooltipText.copy}
+                className="backdrop-brightness-150 hover:backdrop-brightness-100"
+              >
                 <CopyOutlineIcon />
               </ImageCardButton>
-              <ImageCardButton label={tooltipText.removeBackground}>
+              <ImageCardButton
+                label={tooltipText.removeBackground}
+                className="backdrop-brightness-150 hover:backdrop-brightness-100"
+              >
                 <RemoveBackgroundIcon />
               </ImageCardButton>
             </div>
             <BadgeWrapper label={badgeText.new}>
-              <ImageCardButton label={tooltipText.alchemyUpscaler}>
+              <ImageCardButton
+                label={tooltipText.alchemyUpscaler}
+                className="backdrop-brightness-150 hover:backdrop-brightness-100"
+              >
                 <UpscalerIcon />
               </ImageCardButton>
             </BadgeWrapper>
             <BadgeWrapper label={badgeText.premium}>
-              <ImageCardButton label={tooltipText.premiumToDelete}>
+              <ImageCardButton
+                label={tooltipText.premiumToDelete}
+                className="backdrop-brightness-150 hover:backdrop-brightness-100"
+              >
                 <DeleteFilledIcon />
               </ImageCardButton>
             </BadgeWrapper>

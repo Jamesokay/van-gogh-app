@@ -134,6 +134,7 @@ export type ImageCardButtonProps = {
   onClick?: (e: React.MouseEvent) => void;
   rounded?: "t" | "b";
   disabled?: boolean;
+  className?: string;
 };
 
 export type BadgeWrapperProps = {

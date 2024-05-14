@@ -7,7 +7,8 @@ const ImageCardButton: FC<ImageCardButtonProps> = ({
   label,
   onClick = () => {},
   rounded = "",
-  disabled = false
+  disabled = false,
+  className = "",
 }) => {
   const roundedClassName =
     rounded === "t"
@@ -19,7 +20,7 @@ const ImageCardButton: FC<ImageCardButtonProps> = ({
     <Tooltip label={label} hasArrow>
       <button
         type="button"
-        className={`bg-van-gogh-black-opal-200 h-10 w-10 ${roundedClassName} flex items-center justify-center grayscale hover:grayscale-0 transition-all ${
+        className={`${className} bg-van-gogh-black-opal-200 h-10 w-10 ${roundedClassName} flex items-center justify-center grayscale hover:grayscale-0 hover:bg-transparent hover:bg-transparent-purple-gradient transition-all ${
           disabled ? "cursor-not-allowed" : ""
         }`}
         aria-label={label}

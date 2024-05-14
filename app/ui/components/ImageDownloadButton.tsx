@@ -3,7 +3,10 @@ import DownloadIcon from "../svg/DownloadIcon";
 import { Tooltip } from "@chakra-ui/react";
 import { tooltipText } from "@/app/lib/stringConstants";
 
-const ImageDownloadButton:FC<{ src: string }> = ({ src }) => {
+const ImageDownloadButton: FC<{ src: string; className?: string }> = ({
+  src,
+  className = "",
+}) => {
   const downloadImage = async (url: string): Promise<string> => {
     try {
       const response = await fetch(url, { mode: "cors" });
@@ -17,11 +20,13 @@ const ImageDownloadButton:FC<{ src: string }> = ({ src }) => {
   };
 
   const getFileNameFromUrl = (url: string): string => {
-    const parts = url.split('/');
+    const parts = url.split("/");
     return parts[parts.length - 1];
   };
 
-  const handleDownloadClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleDownloadClick = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -48,7 +53,7 @@ const ImageDownloadButton:FC<{ src: string }> = ({ src }) => {
     <Tooltip label={tooltipText.downloadImage}>
       <button
         onClick={handleDownloadClick}
-        className="bg-van-gogh-black-opal-200 h-10 w-10 rounded-full flex items-center justify-center grayscale hover:grayscale-0 transition-all"
+        className={`${className} bg-van-gogh-black-opal-200 h-10 w-10 rounded-full flex items-center justify-center grayscale hover:grayscale-0 hover:bg-transparent hover:bg-transparent-purple-gradient transition-all`}
       >
         <DownloadIcon />
       </button>

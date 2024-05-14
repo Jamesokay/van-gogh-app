@@ -58,7 +58,7 @@ const PanelHeader: FC<NonNullLeonardoGenerationResponse> = (props) => {
   return (
     <div className="flex gap-8 mt-8 mb-3 z-50">
       <div className="flex flex-col lg:flex-row w-full justify-between">
-        <div className="flex items-center overflow-hidden">
+        <div className="flex items-center overflow-hidden w-full">
           <Tooltip label={prompt}>
             <p className="truncate text-van-gogh-sm">{prompt}</p>
           </Tooltip>
