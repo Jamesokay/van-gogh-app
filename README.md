@@ -271,13 +271,16 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Fixed scrolling bug on inner container
 - Fixed textarea not resizing in response to random prompt generation
 - Implemented re-useable component for downloading images
+- Fixed visual bug with background colour of Chakra cards overflowing at corners
+- Adjusted border-radius of skeleton state to match that of rendered content
+- Defined function for improving a supplied prompt
 
 ### To Do:
 
 - Error handling throughout
+- Implement user details state for tracking credits
+- Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
-- Standardise skeletons/loading states, use Suspense where appropriate
-- Styling of loading states, prevent layout jumps
 - Check all settings map correctly onto the API request body, yielding the desired response
 - Fetch models from API, construct ModelDropdown using the returned values
 - Image Guidance functionality will need to integrate initImage functionality from API
