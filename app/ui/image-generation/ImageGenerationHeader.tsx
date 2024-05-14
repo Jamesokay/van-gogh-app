@@ -18,12 +18,12 @@ import TextareaAutoResize from "../components/TextareaAutoResize";
 import GenerateButton from "../components/GenerateButton";
 import TokenHeader from "../components/TokenHeader";
 import SettingsIcon from "../svg/SettingsIcon";
-import Image from "next/image";
 import {
   convertPresetStyleToString,
   convertStringToPresetStyle,
 } from "@/app/lib/helpers";
 import RandomPromptButton from "../components/RandomPromptButton";
+import LeonardoLogoText from "../svg/LeonardoLogoText";
 
 export default function ImageGenerationHeader() {
   const {
@@ -42,12 +42,7 @@ export default function ImageGenerationHeader() {
   return (
     <div className="flex flex-col w-full z-[100]">
       <div className="flex my-5 md:hidden px-4">
-        <Image
-          src="/leonardo-logo-text-new.svg"
-          alt="Leonardo Logo"
-          width={117}
-          height={34}
-        />
+        <LeonardoLogoText mobile={true} />
       </div>
       <div className="px-4 mb-8 md:mb-2 md:mt-10 md:px-8">
         <h1 className="font-medium text-van-gogh-lg md:text-van-gogh-2xl">

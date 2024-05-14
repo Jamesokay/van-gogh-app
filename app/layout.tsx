@@ -34,7 +34,7 @@ export default function RootLayout({
             >
               <main className="flex h-full">
                 <SideBar />
-                <div className="pl-0 md:pl-[17rem] flex flex-col flex-1 w-full overflow-x-hidden">
+                <div className="pl-0 md:pl-[17rem] flex flex-col flex-1 w-full">
                   <ImageGenerationHeader />
                   <div className="flex w-full border-t border-van-gogh-grey-2xd px-4 md:px-8">
                     {children}

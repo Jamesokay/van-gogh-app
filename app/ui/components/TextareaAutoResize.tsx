@@ -1,7 +1,7 @@
 "use client";
 
 import { Textarea } from "@chakra-ui/react";
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef, useCallback } from "react";
 
 const TextareaAutoResize: FC<{
   maxLength: number;
@@ -10,19 +10,34 @@ const TextareaAutoResize: FC<{
   handleChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }> = ({ maxLength, placeholder, value, handleChange }) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const rafIdRef = useRef<number | null>(null);
+
+  const adjustHeight = useCallback(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "45px";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, []);
+
+  useEffect(() => {
+    adjustHeight(); // Adjust height on initial render and when value changes
+
+    return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
+  }, [value, adjustHeight]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     handleChange(e); // Call the provided handleChange to update the state
-    adjustHeight();  // Adjust the height immediately after state update
-  };
 
-  const adjustHeight = () => {
-    if (textareaRef.current) {
-      // Temporarily reset the height to 'auto' to shrink/grow as needed
-      textareaRef.current.style.height = '45px';
-      // Set the height to scrollHeight to expand to fit content
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    // Cancel any pending animation frame request before starting a new one
+    if (rafIdRef.current !== null) {
+      cancelAnimationFrame(rafIdRef.current);
     }
+
+    rafIdRef.current = requestAnimationFrame(adjustHeight);
   };
 
   return (
@@ -33,7 +48,7 @@ const TextareaAutoResize: FC<{
       maxLength={maxLength}
       placeholder={placeholder}
       value={value}
-      onChange={handleInputChange} // Use the new handler that adjusts height
+      onChange={handleInputChange}
     />
   );
 };

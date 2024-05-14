@@ -17,6 +17,7 @@ import DeleteFilledIcon from "../svg/DeleteFilledIcon";
 import { badgeText, tooltipText } from "@/app/lib/stringConstants";
 import BadgeWrapper from "../components/BadgeWrapper";
 import ImageCardButton from "../components/ImageCardButton";
+import ImageDownloadButton from "../components/ImageDownloadButton";
 
 type ImageModalProps = {
   isOpen: boolean;
@@ -74,9 +75,7 @@ const ImageModal: FC<ImageModalProps> = ({
         <ModalFooter>
           <div className="flex w-full p-4 gap-5 justify-end">
             <div className="flex gap-1">
-              <ImageCardButton label={tooltipText.downloadImage}>
-                <DownloadIcon />
-              </ImageCardButton>
+              <ImageDownloadButton src={src} />
               <ImageCardButton label={tooltipText.copy}>
                 <CopyOutlineIcon />
               </ImageCardButton>

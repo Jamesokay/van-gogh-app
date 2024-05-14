@@ -9,7 +9,6 @@ import { numberOfImagesOptions } from "../../../lib/dataConstants";
 import SectionWithOptionsGrid from "../../components/SectionWithOptionsGrid";
 import RangeSlider from "../../components/RangeSlider";
 import QuestionMarkIcon from "../../svg/QuestionMarkIcon";
-import Image from "next/image";
 import BackArrowIcon from "../../svg/BackArrowIcon";
 import { Tooltip } from "@chakra-ui/react";
 import RefreshIcon from "../../svg/RefreshIcon";
@@ -19,6 +18,7 @@ import SideBarSwitchOptions from "./SideBarSwitchOptions";
 import SideBarDimensionOptions from "./SideBarDimensionOptions";
 import SideBarAdvancedSettings from "./SideBarAdvancedSettings";
 import TokenHeader from "../../components/TokenHeader";
+import LeonardoLogoText from "../../svg/LeonardoLogoText";
 
 const SideBar = () => {
   const {
@@ -51,12 +51,7 @@ const SideBar = () => {
           >
             <BackArrowIcon />
           </div>
-          <Image
-            src="/leonardo-logo-text-new.svg"
-            alt="Leonardo Logo"
-            width={117}
-            height={34}
-          />
+          <LeonardoLogoText mobile={false} />
         </div>
         <TokenHeader />
       </div>
