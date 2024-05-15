@@ -277,14 +277,20 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Added glow to loading spinner
 - Updated hover styling for ImageCardButton
 
+### Day 23 (15/05/2024):
+
+<img width="1512" alt="Screenshot 2024-05-15 at 2 01 01 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/b7de48f1-ded6-49b5-b26e-1bbe05d05903">
+
+- Added modelIds to model objects, enabling the use of different models for generations (e.g. 'Leonardo Anime XL')
+  
 ### To Do:
 
 - Error handling throughout
+- Logic to determine which presetStyles are available with which configurations (for a given model, and given Alchemy and PhotoReal settings)
 - Implement user details state for tracking credits
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
 - Check all settings map correctly onto the API request body, yielding the desired response
-- Fetch models from API, construct ModelDropdown using the returned values
 - Image Guidance functionality will need to integrate initImage functionality from API
 - Add further UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
