@@ -279,15 +279,21 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 
 ### Day 23 (15/05/2024):
 
-<img width="1512" alt="Screenshot 2024-05-15 at 2 01 01 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/b7de48f1-ded6-49b5-b26e-1bbe05d05903">
+<img width="1512" alt="Screenshot 2024-05-15 at 8 00 20 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/b3208c9b-11e0-4302-911f-ae72c6497b09">
+<img width="1510" alt="Screenshot 2024-05-15 at 8 00 34 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/26273122-66dc-4846-af5c-bc07f72cbb35">
+
 
 - Added IDs to model objects, enabling the use of different models for generations (e.g. 'Leonardo Anime XL')
+- Defined available presets for various configurations
+- Enforced required models for Alchemy and PhotoReal
+- Added further models
+- Can now generate images using Alchemy, PhotoReal and various preset styles
+- Added icons for Alchemy and PhotoReal to SideBar and ModelDropdownMenu
   
 ### To Do:
 
 - Error handling throughout
-- Logic to determine which presetStyles are available with which configurations (for a given model, and given Alchemy and PhotoReal settings)
-- Implement user details state for tracking credits
+- Implement user details state for tracking credits (may need to rethink the structure re where the user is fetched)
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
 - Check all settings map correctly onto the API request body, yielding the desired response
