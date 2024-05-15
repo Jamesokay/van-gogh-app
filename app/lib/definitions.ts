@@ -111,9 +111,9 @@ export type RangeSliderProps = {
 export type ImageGenModel = {
   modelId: string;
   modelName: string;
-  ModelType: string;
-  dimensions: string;
-  lightning: boolean;
+  modelWidth: number;
+  modelHeight: number;
+  baseModel: BaseModel;
   alchemy: boolean;
   img: string;
 };
@@ -323,7 +323,7 @@ export type LeonardoGenerationResponse = {
   generated_images: LeonardoGeneratedImage[] | null;
   generation_elements: LeonardoGeneratedElement[] | null;
   guidanceScale: number | null;
-  id: string| null;
+  id: string | null;
   imageHeight: number | null;
   imageWidth: number | null;
   inferenceSteps: number | null;
@@ -336,7 +336,7 @@ export type LeonardoGenerationResponse = {
   prompt: string | null;
   promptMagic: boolean | null;
   promptMagicStrength: number | null;
-  promptMagicVersion: 'v2' | 'v3' | null;
+  promptMagicVersion: "v2" | "v3" | null;
   public: boolean | null;
   scheduler: Scheduler | null;
   sdVersion: StableDiffusionVersion | null;
@@ -371,31 +371,32 @@ export type NonNullLeonardoGenerationResponse = {
 };
 
 // Enforce non-null values for the purposes of rendering panels
-export const defaultLeonardoGenerationResponse: NonNullLeonardoGenerationResponse = {
-  createdAt: new Date(),
-  generated_images: [],
-  generation_elements: [],
-  guidanceScale: 7,
-  id: '',
-  imageHeight: 1,
-  imageWidth: 1,
-  inferenceSteps: 1,
-  initStrength: 1,
-  modelId: '',
-  negativePrompt: '',
-  photoReal: false,
-  photoRealStrength: 0.55,
-  presetStyle: 'NONE',
-  prompt: '',
-  promptMagic: false,
-  promptMagicStrength: 0.5,
-  promptMagicVersion: 'v2',
-  public: false,
-  scheduler: 'EULER_DISCRETE',
-  sdVersion: 'v1_5',
-  seed: 0,
-  status: 'PENDING'
-};
+export const defaultLeonardoGenerationResponse: NonNullLeonardoGenerationResponse =
+  {
+    createdAt: new Date(),
+    generated_images: [],
+    generation_elements: [],
+    guidanceScale: 7,
+    id: "",
+    imageHeight: 1,
+    imageWidth: 1,
+    inferenceSteps: 1,
+    initStrength: 1,
+    modelId: "",
+    negativePrompt: "",
+    photoReal: false,
+    photoRealStrength: 0.55,
+    presetStyle: "NONE",
+    prompt: "",
+    promptMagic: false,
+    promptMagicStrength: 0.5,
+    promptMagicVersion: "v2",
+    public: false,
+    scheduler: "EULER_DISCRETE",
+    sdVersion: "v1_5",
+    seed: 0,
+    status: "PENDING",
+  };
 
 export type LeonardoCustomModel = {
   description: string | null;

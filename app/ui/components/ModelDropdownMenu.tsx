@@ -26,10 +26,10 @@ const ModelDropdownMenu: FC<{
           />
           <div className="flex flex-col w-full items-start gap-1">
             <div className="flex justify-between w-full text-van-gogh-xs text-van-gogh-grey-m">
-              <span>{value.ModelType}</span>
+              <span>Finetuned</span>
               <div className="flex">
                 <DimensionsIcon />
-                {value.dimensions}
+                {`${value.modelWidth}x${value.modelHeight}`}
               </div>
             </div>
             <p className="text-van-gogh-sm">{value.modelName}</p>
@@ -46,7 +46,7 @@ const ModelDropdownMenu: FC<{
             <div className="flex justify-between w-full items-center">
               <p>{model.modelName}</p>
               <div className="flex items-center">
-                <div className={model.lightning ? "flex ml-2" : "hidden"}>
+                <div className={model.baseModel === 'SDXL_LIGHTNING' ? "flex ml-2" : "hidden"}>
                   <LightningIcon />
                 </div>
                 <div

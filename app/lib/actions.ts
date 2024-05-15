@@ -145,31 +145,6 @@ export async function deleteGeneration(
   }
 }
 
-export async function fetchPlatformModels(): Promise<
-  LeonardoCustomModel[] | null
-> {
-  const url = "https://cloud.leonardo.ai/api/rest/v1/platformModels";
-  const token = process.env.LEONARDO_API_TOKEN;
-  const options = {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data.custom_models;
-  } catch (err) {
-    console.error("Error fetching data:", err);
-    return null;
-  }
-}
-
 export async function generateRandomPrompt(): Promise<string | null> {
   const url = "https://cloud.leonardo.ai/api/rest/v1/prompt/random";
   const token = process.env.LEONARDO_API_TOKEN;
@@ -202,7 +177,7 @@ export async function improvePrompt(prompt: string): Promise<string | null> {
       Accept: "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ prompt })
+    body: JSON.stringify({ prompt }),
   };
   try {
     const response = await fetch(url, options);
