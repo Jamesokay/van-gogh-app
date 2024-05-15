@@ -282,8 +282,7 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 <img width="1512" alt="Screenshot 2024-05-15 at 8 00 20 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/b3208c9b-11e0-4302-911f-ae72c6497b09">
 <img width="1510" alt="Screenshot 2024-05-15 at 8 00 34 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/26273122-66dc-4846-af5c-bc07f72cbb35">
 
-
-- Added IDs to model objects, enabling the use of different models for generations (e.g. 'Leonardo Anime XL')
+- Added IDs to model objects, enabling the use of different models for generations (e.g. 'Leonardo Vision XL')
 - Defined available presets for various configurations
 - Enforced required models for Alchemy and PhotoReal
 - Added further models
