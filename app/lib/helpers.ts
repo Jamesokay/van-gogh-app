@@ -112,6 +112,8 @@ export function convertStringToPresetStyle(style: string): PresetStyle {
       return "ANIME";
     case "cinematic":
       return "CINEMATIC";
+    case "cinematic (closeup)":
+      return "CINEMATIC_CLOSEUP";
     case "creative":
       return "CREATIVE";
     case "dynamic":
@@ -134,6 +136,36 @@ export function convertStringToPresetStyle(style: string): PresetStyle {
       return "SKETCH_COLOR";
     case "vibrant":
       return "VIBRANT";
+    case "bokeh":
+      return "BOKEH";
+    case "fashion":
+      return "FASHION";
+    case "film":
+      return "FILM";
+    case "food":
+      return "FOOD";
+    case "hdr":
+      return "HDR";
+    case "long exposure":
+      return "LONG_EXPOSURE";
+    case "macro":
+      return "MACRO";
+    case "minimalistic":
+      return "MINIMALISTIC";
+    case "monochrome":
+      return "MONOCHROME";
+    case "moody":
+      return "MOODY";
+    case "neutral":
+      return "NEUTRAL";
+    case "portrait":
+      return "PORTRAIT";
+    case "retro":
+      return "RETRO";
+    case "stock photo":
+      return "STOCK_PHOTO";
+    case "unprocessed":
+      return "UNPROCESSED";
     default:
       return "NONE";
   }
@@ -145,6 +177,8 @@ export function convertPresetStyleToString(presetStyle: PresetStyle): string {
       return "Anime";
     case "CINEMATIC":
       return "Cinematic";
+    case "CINEMATIC_CLOSEUP":
+      return "Cinematic (Closeup)";
     case "CREATIVE":
       return "Creative";
     case "DYNAMIC":
@@ -167,6 +201,36 @@ export function convertPresetStyleToString(presetStyle: PresetStyle): string {
       return "Sketch Color";
     case "VIBRANT":
       return "Vibrant";
+    case "BOKEH":
+      return "Bokeh";
+    case "FASHION":
+      return "Fashion";
+    case "FILM":
+      return "Film";
+    case "FOOD":
+      return "Food";
+    case "HDR":
+      return "HDR";
+    case "LONG_EXPOSURE":
+      return "Long Exposure";
+    case "MACRO":
+      return "Macro";
+    case "MINIMALISTIC":
+      return "Minimalistic";
+    case "MONOCHROME":
+      return "Monochrome";
+    case "MOODY":
+      return "Moody";
+    case "NEUTRAL":
+      return "Neutral";
+    case "PORTRAIT":
+      return "Portrait";
+    case "RETRO":
+      return "Retro";
+    case "STOCK_PHOTO":
+      return "Stock Photo";
+    case "UNPROCESSED":
+      return "Unprocessed";
     case "NONE":
     default:
       return "None";
@@ -240,7 +304,9 @@ export function extractRequestBodyFromContext(
 }
 
 // Extract a request object from a previous generation
-export function extractRequestBodyFromPrevGeneration(state: NonNullLeonardoGenerationResponse): LeonardoGenerationRequestBody {
+export function extractRequestBodyFromPrevGeneration(
+  state: NonNullLeonardoGenerationResponse
+): LeonardoGenerationRequestBody {
   return {
     alchemy: false,
     guidance_scale: state.guidanceScale,

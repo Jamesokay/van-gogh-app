@@ -36,6 +36,7 @@ export type GenerationRequestState = {
   negative_prompt: string;
   num_images: number;
   photoReal: boolean;
+  photoRealVersion: 'v1' | 'v2',
   presetStyle: PresetStyle;
   prompt: string;
   promptMagic: boolean;
@@ -71,6 +72,7 @@ export type OptionWithSwitchProps = {
   enabled: boolean;
   toggle: (value: boolean) => void;
   hidden?: boolean;
+  icon?: ReactNode;
 };
 
 export type SectionWithOptionsGridProps = {

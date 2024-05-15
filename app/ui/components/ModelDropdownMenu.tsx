@@ -6,7 +6,10 @@ import DimensionsIcon from "../svg/DimensionsIcon";
 import PageIcon from "../svg/PageIcon";
 import { TriangleDownIcon } from "@chakra-ui/icons";
 import LightningIcon from "../svg/LightningIcon";
-import { badgeText } from "@/app/lib/stringConstants";
+import {
+  badgeText,
+  imageGenerationHeaderStrings,
+} from "@/app/lib/stringConstants";
 
 const ModelDropdownMenu: FC<{
   options: ImageGenModel[];
@@ -26,7 +29,7 @@ const ModelDropdownMenu: FC<{
           />
           <div className="flex flex-col w-full items-start gap-1">
             <div className="flex justify-between w-full text-van-gogh-xs text-van-gogh-grey-m">
-              <span>Finetuned</span>
+              <span>{imageGenerationHeaderStrings.finetunedModel}</span>
               <div className="flex">
                 <DimensionsIcon />
                 {`${value.modelWidth}x${value.modelHeight}`}
@@ -46,7 +49,13 @@ const ModelDropdownMenu: FC<{
             <div className="flex justify-between w-full items-center">
               <p>{model.modelName}</p>
               <div className="flex items-center">
-                <div className={model.baseModel === 'SDXL_LIGHTNING' ? "flex ml-2" : "hidden"}>
+                <div
+                  className={
+                    model.baseModel === "SDXL_LIGHTNING"
+                      ? "flex ml-2"
+                      : "hidden"
+                  }
+                >
                   <LightningIcon />
                 </div>
                 <div

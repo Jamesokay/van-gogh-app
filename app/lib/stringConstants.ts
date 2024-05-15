@@ -25,6 +25,7 @@ export const imageGenerationHeaderStrings = {
   addNegPrompt: "Add negative prompt",
   addElements: "Add Elements",
   buttonText: "Generate",
+  finetunedModel: "Finetuned Model"
 };
 
 export const generationHistoryStrings = {
@@ -63,8 +64,8 @@ export const promptGenerationStrings = {
 };
 
 export const tooltipText = {
-  photoReal: "Enhanced photorealism.",
-  alchemy: "Stylize images with AI.",
+  photoReal: "Enhanced photorealism. Requires Leonardo Kino XL, Leonardo Diffusion XL or Leonardo Vision XL to be selected.",
+  alchemy: "Powerful new image generation pipeline. Requires an XL model to be selected.",
   promptMagic: "Prompt Magic tooltip text",
   transparency: "Adds transparency to the generated images.",
   publicImages: "Send your generations to the community feed.",

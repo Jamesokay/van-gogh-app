@@ -11,6 +11,7 @@ const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
   enabled,
   toggle,
   hidden = false,
+  icon = null
 }) => {
   const handleToggle = () => {
     toggle(!enabled);
@@ -28,6 +29,7 @@ const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
           {badgeText}
         </div>
       )}
+      {icon && icon}
       <Tooltip label={tooltipText}>
         <span>
           <QuestionMarkIcon />

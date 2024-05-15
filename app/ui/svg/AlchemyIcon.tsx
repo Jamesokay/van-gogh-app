@@ -1,4 +1,4 @@
-const FlaskIcon = () => {
+const AlchemyIcon = () => {
   return (
     <svg
       width="calc(1rem * 1.5)"
@@ -147,4 +147,4 @@ const FlaskIcon = () => {
   );
 };
 
-export default FlaskIcon;
+export default AlchemyIcon;

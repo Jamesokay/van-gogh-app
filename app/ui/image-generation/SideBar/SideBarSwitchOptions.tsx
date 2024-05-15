@@ -6,6 +6,9 @@ import {
 import OptionWithSwitch from "../../components/OptionWithSwitch";
 import { useSettings } from "@/app/context/SettingsContext";
 import { transformDimensions } from "@/app/lib/helpers";
+import { alchemyModels, photoRealModels } from "@/app/lib/dataConstants";
+import AlchemyIcon from "../../svg/AlchemyIcon";
+import PhotoRealIcon from "../../svg/PhotoRealIcon";
 
 const SideBarSwitchOptions = () => {
   const {
@@ -18,6 +21,8 @@ const SideBarSwitchOptions = () => {
     width: generationRequest.width,
     height: generationRequest.height,
   });
+  const photoRealModel = photoRealModels.includes(generationRequest.modelId);
+  const alchemyModel = alchemyModels.includes(generationRequest.modelId);
   return (
     <>
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
@@ -25,16 +30,20 @@ const SideBarSwitchOptions = () => {
         title={sideBarStrings.photoReal}
         badgeText={badgeText.v2}
         tooltipText={tooltipText.photoReal}
-        enabled={generationRequest.photoReal}
-        toggle={() => handlePhotoReal(!generationRequest.photoReal)}
+        enabled={photoRealModel && generationRequest.photoReal}
+        toggle={() =>
+          photoRealModel && handlePhotoReal(!generationRequest.photoReal)
+        }
+        icon={<PhotoRealIcon id="sideBar" />}
       />
       <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.alchemy}
         badgeText={badgeText.v2}
         tooltipText={tooltipText.alchemy}
-        enabled={generationRequest.alchemy}
-        toggle={() => handleAlchemy(!generationRequest.alchemy)}
+        enabled={alchemyModel && generationRequest.alchemy}
+        toggle={() => alchemyModel && handleAlchemy(!generationRequest.alchemy)}
+        icon={<AlchemyIcon />}
       />
       <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-md bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-van-gogh-spacing-m">
         <span className="text-van-gogh-grey-m">

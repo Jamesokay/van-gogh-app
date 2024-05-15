@@ -18,6 +18,7 @@ const defaultGenerationRequest: GenerationRequestState = {
   guidance_scale: 7,
   num_images: 4,
   photoReal: false,
+  photoRealVersion: 'v2',
   promptMagic: false,
   transparency: false,
   public: false,

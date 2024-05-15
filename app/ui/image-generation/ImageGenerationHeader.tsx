@@ -1,9 +1,14 @@
 "use client";
 
-import { imageStyles, modelData, routes } from "@/app/lib/dataConstants";
+import {
+  alchemyPresets,
+  defaultPresets,
+  modelData,
+  photoRealPresets,
+  routes,
+} from "@/app/lib/dataConstants";
 import ModelDropdownMenu from "../components/ModelDropdownMenu";
 import DropdownMenu from "../components/DropdownMenu";
-import FlaskIcon from "../svg/FlaskIcon";
 import AtomicIcon from "../svg/AtomicIcon";
 import CirclePlusIcon from "../svg/CirclePlusIcon";
 import Link from "next/link";
@@ -24,6 +29,8 @@ import {
 } from "@/app/lib/helpers";
 import RandomPromptButton from "../components/RandomPromptButton";
 import LeonardoLogoText from "../svg/LeonardoLogoText";
+import AlchemyIcon from "../svg/AlchemyIcon";
+import PhotoRealIcon from "../svg/PhotoRealIcon";
 
 export default function ImageGenerationHeader() {
   const {
@@ -38,6 +45,16 @@ export default function ImageGenerationHeader() {
     modelData.find((x) => x.modelId === generationRequest.modelId) ||
     modelData[0];
   const text = imageGenerationHeaderStrings;
+  const presetStyles = generationRequest.photoReal
+    ? photoRealPresets
+    : generationRequest.alchemy
+    ? alchemyPresets
+    : defaultPresets;
+  const dropdownIcon = () => {
+    if (generationRequest.photoReal) return <PhotoRealIcon id="header" />;
+    else if (generationRequest.alchemy) return <AlchemyIcon />;
+    else return <span></span>;
+  };
 
   return (
     <div className="flex flex-col w-full z-[100]">
@@ -103,7 +120,7 @@ export default function ImageGenerationHeader() {
         />
         <div className="min-w-[10rem]">
           <DropdownMenu
-            options={imageStyles}
+            options={presetStyles}
             value={convertPresetStyleToString(generationRequest.presetStyle)}
             setValue={(x) =>
               setKeyOfGenerationRequest(
@@ -112,7 +129,7 @@ export default function ImageGenerationHeader() {
               )
             }
             isDisabled={false}
-            leftIcon={<FlaskIcon />}
+            leftIcon={dropdownIcon()}
             headerTheme={true}
             large={true}
           />
