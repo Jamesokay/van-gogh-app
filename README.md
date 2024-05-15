@@ -281,7 +281,7 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 
 <img width="1512" alt="Screenshot 2024-05-15 at 2 01 01 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/b7de48f1-ded6-49b5-b26e-1bbe05d05903">
 
-- Added modelIds to model objects, enabling the use of different models for generations (e.g. 'Leonardo Anime XL')
+- Added IDs to model objects, enabling the use of different models for generations (e.g. 'Leonardo Anime XL')
   
 ### To Do:
 
