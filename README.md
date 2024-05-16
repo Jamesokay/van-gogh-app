@@ -294,12 +294,19 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Added user details to state
 - Token count now accurately displayed
 - Token count updated upon generation
-- Updated custom tailwind naming conventions (still need to standardise all shades of grey) 
+- Updated custom tailwind naming conventions (still need to standardise all shades of grey)
+
+### Day 24 (later):
+
+- Restructured routes such that ‘/‘ redirects to ‘/ai-generations’
+- Generation history is now the page component for ‘/ai-generations’
+- ‘/image-guidance’ and ‘/prompt-generation’ are now nested routes within ‘/ai-generations’
+- This will permit more granular error handling (via the error.tsx file)
+- Still need to implement the exact logic for handling errors, but these changes will provide the basic architecture for doing so
   
 ### To Do:
 
-- Graceful rror handling throughout
-- Implement user details state for tracking credits (may need to rethink the structure re where the user is fetched)
+- Graceful error handling throughout
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
 - Check all settings map correctly onto the API request body, yielding the desired response
