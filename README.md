@@ -303,6 +303,9 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - ‘/image-guidance’ and ‘/prompt-generation’ are now nested routes within ‘/ai-generations’
 - This will permit more granular error handling (via the error.tsx file)
 - Still need to implement the exact logic for handling errors, but these changes will provide the basic architecture for doing so
+- Removed photoRealVersion from request when photoReal not enabled
+- Show/hide Alchemy output resolution
+- Moved UI elements into new folder
   
 ### To Do:
 
