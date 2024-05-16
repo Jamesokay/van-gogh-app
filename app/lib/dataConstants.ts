@@ -1,9 +1,9 @@
 import { ImageGenModel } from "./definitions";
 
 export const routes = [
-  { title: "Generation History", path: "/" },
-  { title: "Image Guidance", path: "/image-guidance" },
-  { title: "Prompt Generation", path: "/prompt-generation" },
+  { title: "Generation History", path: "/ai-generations" },
+  { title: "Image Guidance", path: "/ai-generations/image-guidance" },
+  { title: "Prompt Generation", path: "/ai-generations/prompt-generation" },
 ];
 
 export const numberOfImagesOptions = [1, 2, 3, 4, 5, 6, 7, 8];

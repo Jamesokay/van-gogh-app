@@ -12,7 +12,7 @@ import { modelData } from "@/app/lib/dataConstants";
 import CopyIcon from "../svg/CopyIcon";
 import { NonNullLeonardoGenerationResponse } from "@/app/lib/definitions";
 import { convertPresetStyleToString } from "@/app/lib/helpers";
-import GenerationThreeDotsDropdown from "../generation-history/GenerationThreeDotsDropdown";
+import GenerationThreeDotsDropdown from "../ai-generations/GenerationThreeDotsDropdown";
 
 const PanelHeader: FC<NonNullLeonardoGenerationResponse> = (props) => {
   const [copied, setCopied] = useState(false);

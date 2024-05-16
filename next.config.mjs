@@ -16,6 +16,15 @@ const nextConfig = {
           },
         ],
       },
+      async redirects() {
+        return [
+          {
+            source: "/",
+            destination: "/ai-generations",
+            permanent: true,
+          },
+        ];
+      }
 };
 
 export default nextConfig;
