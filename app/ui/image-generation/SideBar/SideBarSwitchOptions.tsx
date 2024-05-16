@@ -25,7 +25,7 @@ const SideBarSwitchOptions = () => {
   const alchemyModel = alchemyModels.includes(generationRequest.modelId);
   return (
     <>
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.photoReal}
         badgeText={badgeText.v2}
@@ -36,7 +36,7 @@ const SideBarSwitchOptions = () => {
         }
         icon={<PhotoRealIcon id="sideBar" />}
       />
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.alchemy}
         badgeText={badgeText.v2}
@@ -45,13 +45,13 @@ const SideBarSwitchOptions = () => {
         toggle={() => alchemyModel && handleAlchemy(!generationRequest.alchemy)}
         icon={<AlchemyIcon />}
       />
-      <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-md bg-van-gogh-dark-blue border-van-gogh-grey-blue mb-van-gogh-spacing-m">
-        <span className="text-van-gogh-grey-m">
+      <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-md bg-van-gogh-blue-500 border-van-gogh-grey-800 mb-van-gogh-spacing-m">
+        <span className="text-van-gogh-grey-700">
           {sideBarStrings.outputResolution}
         </span>
         <span>{`${outputDimensions.width} x ${outputDimensions.height}`}</span>
       </div>
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.promptMagic}
         tooltipText={tooltipText.promptMagic}
@@ -64,7 +64,7 @@ const SideBarSwitchOptions = () => {
         }
         hidden={generationRequest.alchemy}
       />
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.transparency}
         badgeText={badgeText.beta}
@@ -77,7 +77,7 @@ const SideBarSwitchOptions = () => {
           );
         }}
       />
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60" />
       <OptionWithSwitch
         title={sideBarStrings.publicImages}
         tooltipText={tooltipText.publicImages}

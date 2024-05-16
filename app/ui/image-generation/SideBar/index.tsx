@@ -52,16 +52,16 @@ const SideBar = () => {
         interfaceState.mobileSideBarExpanded
           ? "translate-x-0"
           : "-translate-x-full md:translate-x-0"
-      } md:left-0 h-full max-h-full z-[150] flex-col w-full md:w-van-gogh-sidebar-width bg-grey-400 bg-darkblue-to-darkerblue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto`}
+      } md:left-0 h-full max-h-full z-[150] flex-col w-full md:w-van-gogh-sidebar-width bg-grey-400 bg-van-gogh-dark-blue-gradient px-5 pt-van-gogh-spacing-m overflow-y-auto`}
     >
       <div className="flex flex-col items-center my-5 gap-3.5">
         <div className="flex gap-2 items-center w-full">
-          <span className="hidden md:flex text-van-gogh-icon-grey">
+          <span className="hidden md:flex text-van-gogh-icon-grey-900">
             <BackArrowIcon />
           </span>
           <div
             role="button"
-            className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey md:hidden"
+            className="flex justify-center items-center border border-van-gogh-grey-100 rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey-800 md:hidden"
             onClick={() =>
               setKeyOfInterfaceState("mobileSideBarExpanded", false)
             }
@@ -72,7 +72,7 @@ const SideBar = () => {
         </div>
         <TokenHeader />
       </div>
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60" />
       <SectionWithOptionsGrid
         title={sideBarStrings.numberOfImages}
         options={numberOfImagesOptions}
@@ -81,9 +81,9 @@ const SideBar = () => {
         setValue={(x) => setKeyOfGenerationRequest("num_images", x as number)}
       />
       <SideBarSwitchOptions />
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-van-gogh-spacing-ml" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60 mb-van-gogh-spacing-ml" />
       <SideBarDimensionOptions />
-      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue opacity-60 mb-van-gogh-spacing-m" />
+      <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60 mb-van-gogh-spacing-m" />
       <div className="flex gap-2 items-center mb-1">
         <p className="text-van-gogh-md font-semibold">
           {sideBarStrings.guidanceScale}
@@ -120,7 +120,7 @@ const SideBar = () => {
       />
       <SideBarAdvancedSettings />
       <button
-        className="flex items-center justify-center gap-1 rounded-md border border-van-gogh-grey-blue hover:border-van-gogh-grey-d text-van-gogh-xs min-h-8 mt-20 mb-4"
+        className="flex items-center justify-center gap-1 rounded-md border border-van-gogh-grey-800 hover:border-van-gogh-grey-600 text-van-gogh-xs min-h-8 mt-20 mb-4"
         onClick={() => handleReset()}
       >
         <RefreshIcon />

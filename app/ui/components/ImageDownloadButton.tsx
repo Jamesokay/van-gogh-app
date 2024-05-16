@@ -53,7 +53,7 @@ const ImageDownloadButton: FC<{ src: string; className?: string }> = ({
     <Tooltip label={tooltipText.downloadImage}>
       <button
         onClick={handleDownloadClick}
-        className={`${className} bg-van-gogh-black-opal-200 h-10 w-10 rounded-full flex items-center justify-center grayscale hover:grayscale-0 hover:bg-transparent hover:bg-transparent-purple-gradient transition-all`}
+        className={`${className} bg-van-gogh-black-opal-500 h-10 w-10 rounded-full flex items-center justify-center grayscale hover:grayscale-0 hover:bg-transparent hover:bg-van-gogh-transparent-purple-gradient transition-all`}
       >
         <DownloadIcon />
       </button>

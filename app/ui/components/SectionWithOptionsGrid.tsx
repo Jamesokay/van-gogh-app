@@ -23,7 +23,7 @@ const SectionWithOptionsGrid: FC<SectionWithOptionsGridProps> = ({
           </Tooltip>
         )}
       </div>
-      <div className={`grid grid-cols-${columns} gap-y-grid-row-gap gap-x-2`}>
+      <div className={`grid grid-cols-${columns} gap-y-van-gogh-grid-row-gap gap-x-2`}>
         {options.map((option) => (
           <label
             key={option}
@@ -32,10 +32,10 @@ const SectionWithOptionsGrid: FC<SectionWithOptionsGridProps> = ({
           >
             <input className="absolute h-px w-px m-[-1px]" type="radio" />
             <div
-              className={`border text-center text-van-gogh-xs py-2 rounded-md bg-van-gogh-dark-blue hover:border-van-gogh-purple ${
+              className={`border text-center text-van-gogh-xs py-2 rounded-md bg-van-gogh-blue-500 hover:border-van-gogh-purple-400 ${
                 value === option
-                  ? "border-van-gogh-purple"
-                  : "border-van-gogh-grey-blue"
+                  ? "border-van-gogh-purple-400"
+                  : "border-van-gogh-grey-800"
               }`}
             >
               {option}

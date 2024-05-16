@@ -18,7 +18,7 @@ const ImageGuidanceCTA = () => {
             {text.imageGuidance}
           </p>
         </div>
-        <button className="flex items-center w-fit justify-center h-8 py-1 px-2 font-semibold bg-purple-gradient text-van-gogh-xs rounded-md">
+        <button className="flex items-center w-fit justify-center h-8 py-1 px-2 font-semibold bg-van-gogh-purple-gradient text-van-gogh-xs rounded-md">
           {text.buttonText}
         </button>
       </div>

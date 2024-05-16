@@ -32,7 +32,7 @@ const CardImageLoader: FC<{
           className={
             !loaded
               ? "hidden"
-              : "absolute z-20 right-4 top-4 rounded-full h-10 w-10 flex justify-center items-center bg-van-gogh-grey-opal backdrop-blur-md text-white"
+              : "absolute z-20 right-4 top-4 rounded-full h-10 w-10 flex justify-center items-center bg-van-gogh-grey-opal-300 backdrop-blur-md text-white"
           }
         >
           <EyeIcon />

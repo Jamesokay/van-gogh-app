@@ -53,7 +53,7 @@ const SideBarAdvancedSettings = () => {
           />
           <input
             type="number"
-            className="input-number appearance-none bg-transparent rounded-md border border-van-gogh-grey-blue hover:border-van-gogh-grey-d focus:border-van-gogh-purple outline-none h-10 w-full min-w-input-width text-van-gogh-sm p-4 mb-4"
+            className="input-number appearance-none bg-transparent rounded-md border border-van-gogh-grey-800 hover:border-van-gogh-grey-600 focus:border-van-gogh-purple-400 outline-none h-10 w-full min-w-van-gogh-input-width text-van-gogh-sm p-4 mb-4"
             value={generationRequest?.seed ? generationRequest?.seed : ''}
             onChange={(e) =>
               setKeyOfGenerationRequest('seed', parseInt(e.target.value))

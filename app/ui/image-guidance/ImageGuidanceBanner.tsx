@@ -11,7 +11,7 @@ const ImageGuidanceBanner = () => {
       className={
         hidden
           ? "hidden"
-          : "flex w-full overflow-hidden p-[1px] rounded-md min-h-16 bg-pink-gradient"
+          : "flex w-full overflow-hidden p-[1px] rounded-md min-h-16 bg-van-gogh-pink-gradient"
       }
     >
       <div className="flex bg-black rounded-md items-center w-full font-medium md:text-van-gogh-sm">

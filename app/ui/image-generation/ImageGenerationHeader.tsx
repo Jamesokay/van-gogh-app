@@ -71,7 +71,7 @@ export default function ImageGenerationHeader() {
         <div className="flex items-center gap-3">
           <TokenHeader />
           <button
-            className="flex justify-center items-center border border-van-gogh-border-grey rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey"
+            className="flex justify-center items-center border border-van-gogh-grey-100 rounded-md w-9 h-9 hover:bg-van-gogh-hover-grey-800"
             onClick={() =>
               setKeyOfInterfaceState("mobileSideBarExpanded", true)
             }
@@ -134,11 +134,11 @@ export default function ImageGenerationHeader() {
             large={true}
           />
         </div>
-        <div className="flex h-14 items-center gap-2.5 px-3.5 rounded-md bg-van-gogh-dark-blue hover:bg-van-gogh-dark-blue-hover cursor-pointer">
+        <div className="flex h-14 items-center gap-2.5 px-3.5 rounded-md bg-van-gogh-blue-500 hover:bg-van-gogh-blue-800 cursor-pointer">
           <AtomicIcon />
           <p className="text-van-gogh-sm font-medium">{text.addElements}</p>
           <CirclePlusIcon />
-          <div className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-purple-gradient text-van-gogh-sm rounded-full">
+          <div className="flex items-center justify-center h-8 py-1 px-4 font-semibold bg-van-gogh-purple-gradient text-van-gogh-sm rounded-full">
             {badgeText.new}
           </div>
         </div>
@@ -166,7 +166,7 @@ export default function ImageGenerationHeader() {
               href={route.path}
               className={`flex flex-1 md:flex-none gap-1 items-center justify-center text-center md:mr-8 py-2 text-[0.8175rem] md:text-van-gogh-md font-medium ${
                 pathname !== route.path
-                  ? "text-van-gogh-grey-m hover:text-white"
+                  ? "text-van-gogh-grey-700 hover:text-white"
                   : "van-gogh-header-link"
               }`}
             >
@@ -175,8 +175,8 @@ export default function ImageGenerationHeader() {
                 <div
                   className={`flex justify-center min-w-8 px-1.5 py-1 text-van-gogh-3xs rounded-md ${
                     interfaceState.enableImageGuidance
-                      ? "bg-green-gradient"
-                      : "bg-van-gogh-badge-grey"
+                      ? "bg-van-gogh-green-gradient"
+                      : "bg-van-gogh-grey-900"
                   }`}
                 >
                   <span className="text-white">

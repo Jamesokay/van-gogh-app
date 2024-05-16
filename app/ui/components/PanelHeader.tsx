@@ -66,7 +66,7 @@ const PanelHeader: FC<NonNullLeonardoGenerationResponse> = (props) => {
             <Tooltip label="Copy prompt">
               <button
                 onClick={() => copyPrompt()}
-                className="relative text-van-gogh-grey-subdued w-8 h-8"
+                className="relative text-van-gogh-grey-subdued-500 w-8 h-8"
               >
                 <span
                   className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
@@ -86,7 +86,7 @@ const PanelHeader: FC<NonNullLeonardoGenerationResponse> = (props) => {
             </Tooltip>
             <Tooltip label="Reuse prompt">
               <button
-                className="flex justify-center items-center h-8 w-8 bg-van-gogh-white-opal rounded-md border border-van-gogh-border-grey hover:bg-van-gogh-white-opal-hover"
+                className="flex justify-center items-center h-8 w-8 bg-van-gogh-white-opal-100 rounded-md border border-van-gogh-grey-100 hover:bg-van-gogh-white-opal-200"
                 onClick={() => reusePrompt()}
               >
                 <ArrowUpIcon />
@@ -97,7 +97,7 @@ const PanelHeader: FC<NonNullLeonardoGenerationResponse> = (props) => {
         <div className="flex-none w-auto justify-end h-8 self-end">
           <div className="pl-2 flex flex-nowrap gap-1 items-center text-van-gogh-xs">
             <div className="flex gap-1.5 items-center pl-1 pr-2">
-              <div className="flex w-4.5 h-4.5">
+              <div className="flex w-van-gogh-van-gogh-4.5 h-van-gogh-4.5">
                 <Image width={15} height={15} src={selectedModel.img} alt="" />
               </div>
               <p>{selectedModel.modelName}</p>

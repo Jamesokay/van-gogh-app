@@ -17,7 +17,7 @@ const Page = async () => {
         className={
           history?.length
             ? "hidden"
-            : "flex items-center w-full p-4 min-h-16 border border-van-gogh-purple rounded-md"
+            : "flex items-center w-full p-4 min-h-16 border border-van-gogh-purple-400 rounded-md"
         }
       >
         {generationHistoryStrings.emptyState}

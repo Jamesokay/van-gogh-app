@@ -42,13 +42,13 @@ const ImageModal: FC<ImageModalProps> = ({
       <ModalContent>
         <ModalCloseButton />
         <button
-          className="bg-van-gogh-black-opal-200 left-image-nav flex justify-center items-center rounded-full bg-black w-8 h-8 absolute top-1/2 hover:shadow-purple-glow"
+          className="bg-van-gogh-black-opal-500 left-image-nav flex justify-center items-center rounded-full bg-black w-8 h-8 absolute top-1/2 hover:shadow-van-gogh-purple-glow"
           onClick={() => handleImageNav("back")}
         >
           <TriangleNavIcon />
         </button>
         <button
-          className="bg-van-gogh-black-opal-200 right-image-nav flex justify-center items-center rounded-full bg-black w-8 h-8 absolute top-1/2 hover:shadow-purple-glow"
+          className="bg-van-gogh-black-opal-500 right-image-nav flex justify-center items-center rounded-full bg-black w-8 h-8 absolute top-1/2 hover:shadow-van-gogh-purple-glow"
           onClick={() => handleImageNav("forward")}
         >
           <TriangleNavIcon className="rotate-180" />

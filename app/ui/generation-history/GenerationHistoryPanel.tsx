@@ -59,8 +59,8 @@ const GenerationHistoryPanel: FC<NonNullLeonardoGenerationResponse> = (props) =>
       <div
         className={`grid grid-cols-1 ${
           imageHeight > imageWidth
-            ? "lg:grid-cols-auto-fit-minmax-16"
-            : "lg:grid-cols-auto-fit-minmax-24"
+            ? "lg:grid-cols-van-gogh-auto-fit-minmax-16"
+            : "lg:grid-cols-van-gogh-auto-fit-minmax-24"
         } gap-4`}
       >
         {renderedImages.map((image, index) => (

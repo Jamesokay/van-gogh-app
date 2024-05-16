@@ -30,8 +30,8 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
       <button
         className={
           mobile
-            ? "flex items-center justify-center min-w-14 w-14 h-14 bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2"
-            : "hidden md:flex items-center justify-center min-w-[45px] w-[45px] h-[45px] bg-van-gogh-dark-blue hover:bg-van-gogh-grey-xd rounded-md mr-2"
+            ? "flex items-center justify-center min-w-14 w-14 h-14 bg-van-gogh-blue-500 hover:bg-van-gogh-grey-500 rounded-md mr-2"
+            : "hidden md:flex items-center justify-center min-w-[45px] w-[45px] h-[45px] bg-van-gogh-blue-500 hover:bg-van-gogh-grey-500 rounded-md mr-2"
         }
         onClick={() => handleRandomPrompt()}
         disabled={promptLoading}

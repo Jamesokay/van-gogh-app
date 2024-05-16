@@ -15,7 +15,7 @@ const ImageCardSkeleton: FC<{ elapsedTime?: number }> = ({ elapsedTime }) => {
         <Spinner w={5} h={5} />
         <span className="text-van-gogh-xs font-medium">{elapsedTime}</span>
       </div>
-      <div className="flex justify-center items-center rounded-md w-full h-full z-20 bg-van-gogh-grey-xd grayscale animate-pulse">
+      <div className="flex justify-center items-center rounded-md w-full h-full z-20 bg-van-gogh-grey-500 grayscale animate-pulse">
         <div className="flex w-40 h-40">
           <LeonardoIcon />
         </div>

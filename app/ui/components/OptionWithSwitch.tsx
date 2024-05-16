@@ -25,7 +25,7 @@ const OptionWithSwitch: FC<OptionWithSwitchProps> = ({
     >
       <span className="text-van-gogh-md font-semibold">{title}</span>
       {badgeText && (
-        <div className="flex items-center bg-purple-gradient text-van-gogh-2xs py-van-gogh-spacing-1px px-van-gogh-spacing-xs rounded-md">
+        <div className="flex items-center bg-van-gogh-purple-gradient text-van-gogh-2xs py-van-gogh-spacing-1px px-van-gogh-spacing-xs rounded-md">
           {badgeText}
         </div>
       )}

@@ -41,10 +41,10 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
       <button
         className={
           mobile
-            ? `flex md:hidden relative h-14 w-full  bg-purple-gradient px-12 rounded-lg ${
+            ? `flex md:hidden relative h-14 w-full  bg-van-gogh-purple-gradient px-12 rounded-lg ${
                 disabled ? "grayscale opacity-30 cursor-not-allowed" : ""
               }`
-            : `hidden md:flex relative h-[45px] bg-purple-gradient px-12 rounded-lg ml-4 ${
+            : `hidden md:flex relative h-[45px] bg-van-gogh-purple-gradient px-12 rounded-lg ml-4 ${
                 disabled ? "grayscale opacity-30 cursor-not-allowed" : ""
               }`
         }

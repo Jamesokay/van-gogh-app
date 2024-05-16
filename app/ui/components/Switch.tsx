@@ -12,15 +12,15 @@ const Switch: FC<{ enabled: boolean; handleToggle: () => void }> = ({
       onClick={handleToggle}
       onKeyDown={(e) => e.key === "Enter" && handleToggle()}
       className={`${
-        enabled ? "bg-purple-gradient" : "bg-van-gogh-grey-d"
-      } ml-auto relative inline-flex items-center h-6 rounded-full w-switch-track-width cursor-pointer transition-colors focus:outline-none`}
+        enabled ? "bg-van-gogh-purple-gradient" : "bg-van-gogh-grey-600"
+      } ml-auto relative inline-flex items-center h-6 rounded-full w-van-gogh-switch-track-width cursor-pointer transition-colors focus:outline-none`}
     >
       <span
         className={`${
           enabled
-            ? "translate-x-switch-track-x-enable"
-            : "translate-x-switch-track-x-disable"
-        } inline-block w-switch-track-height h-switch-track-height transform bg-white rounded-full transition-transform`}
+            ? "translate-x-van-gogh-switch-track-x-enable"
+            : "translate-x-van-gogh-switch-track-x-disable"
+        } inline-block w-van-gogh-switch-track-height h-van-gogh-switch-track-height transform bg-white rounded-full transition-transform`}
       />
     </div>
   );

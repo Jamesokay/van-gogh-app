@@ -46,8 +46,8 @@ const SideBarDimensionOptions = () => {
       </p>
       <div className="flex gap-2 mb-van-gogh-spacing-ml">
         <button
-          className={`flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue ${
-            interfaceState.aspectRatioLocked ? "border-van-gogh-purple" : ""
+          className={`flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-blue-500  hover:bg-van-gogh-grey-500 border-van-gogh-grey-800 ${
+            interfaceState.aspectRatioLocked ? "border-van-gogh-purple-400" : ""
           }`}
           onClick={() => setKeyOfInterfaceState('aspectRatioLocked', !interfaceState.aspectRatioLocked)}
         >

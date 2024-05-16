@@ -46,8 +46,8 @@ const NewGenerationLoading = () => {
       <div
         className={`grid grid-cols-1 ${
           generationRequest.height > generationRequest.width
-            ? "lg:grid-cols-auto-fit-minmax-16"
-            : "lg:grid-cols-auto-fit-minmax-24"
+            ? "lg:grid-cols-van-gogh-auto-fit-minmax-16"
+            : "lg:grid-cols-van-gogh-auto-fit-minmax-24"
         } gap-4`}
       >
         {interfaceState.generating &&

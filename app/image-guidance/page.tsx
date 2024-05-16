@@ -8,7 +8,7 @@ const Page = () => {
   return (
     <div className="flex flex-col gap-6 py-9 w-full">
       <ImageGuidanceBanner />
-      <div className="grid grid-cols-1 sm:grid-cols-auto-fit-minmax-35 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-van-gogh-auto-fit-minmax-35 gap-6">
         <ImageGuidanceUpload />
         <ImageGuidanceCTA />
       </div>

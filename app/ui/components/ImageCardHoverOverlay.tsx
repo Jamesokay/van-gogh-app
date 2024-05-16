@@ -41,13 +41,13 @@ const ImageCardHoverOverlay: FC<{ src: string; hidden: boolean }> = ({
       className={
         hidden
           ? "hidden"
-          : "hover-child bg-image-overlay-gradient flex flex-col justify-between rounded-md absolute left-0 top-0 cursor-pointer z-10 w-full h-full opacity-0 transition-opacity duration-300"
+          : "hover-child bg-van-gogh-image-overlay-gradient flex flex-col justify-between rounded-md absolute left-0 top-0 cursor-pointer z-10 w-full h-full opacity-0 transition-opacity duration-300"
       }
     >
       <Tooltip label="Select image" hasArrow>
         <button
           type="button"
-          className="flex justify-center items-center p-2 w-fit rounded-full ml-4 mt-4 bg-van-gogh-grey-opal grayscale brightness-150 hover:brightness-100 hover:bg-transparent hover:bg-transparent-purple-gradient hover:grayscale-0 hover:backdrop-blur-[3px] hover:backdrop-brightness-95 transition-all"
+          className="flex justify-center items-center p-2 w-fit rounded-full ml-4 mt-4 bg-van-gogh-grey-opal-300 grayscale brightness-150 hover:brightness-100 hover:bg-transparent hover:bg-van-gogh-transparent-purple-gradient hover:grayscale-0 hover:backdrop-blur-[3px] hover:backdrop-brightness-95 transition-all"
           aria-label="Select image"
         >
           <TickIcon />
@@ -57,7 +57,7 @@ const ImageCardHoverOverlay: FC<{ src: string; hidden: boolean }> = ({
         <div className="flex items-end gap-3">
           <ImageDownloadButton src={src} />
           <div className="flex flex-col">
-            <div className="border border-transparent border-b-van-gogh-border-white-alpha">
+            <div className="border border-transparent border-b-van-gogh-grey-200">
               <ImageCardButton label={tooltipText.removeBackground} rounded="t">
                 <RemoveBackgroundIcon />
               </ImageCardButton>
@@ -76,7 +76,7 @@ const ImageCardHoverOverlay: FC<{ src: string; hidden: boolean }> = ({
             </BadgeWrapper>
           </div>
           <div className="flex flex-col">
-            <div className="border border-transparent border-b-van-gogh-border-white-alpha">
+            <div className="border border-transparent border-b-van-gogh-grey-200">
               <ImageCardButton
                 onClick={(e) => handleImageGuidanceInput(e)}
                 label={tooltipText.imageGuidance}

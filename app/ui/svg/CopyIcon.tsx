@@ -1,7 +1,7 @@
 const CopyIcon = () => {
   return (
     <svg
-      className="h-4.5 w-4.5"
+      className="h-van-gogh-4.5 w-van-gogh-van-gogh-4.5"
       viewBox="0 0 18 18"
       focusable="false"
       aria-hidden="true"

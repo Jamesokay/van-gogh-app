@@ -56,12 +56,12 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           : "flex flex-col sm:flex-row gap-6 py-2.5 px-4"
       }
     >
-      <div className="flex flex-col gap-1.5 flex-1-1-0">
+      <div className="flex flex-col gap-1.5 flex-van-gogh-1-1-0">
         <div className="flex gap-1 items-center text-van-gogh-xs">
           <p>{text.titleLeft}</p>
           <QuestionIcon opacity={0.3} />
         </div>
-        <div className="flex justify-center w-full h-60 bg-black border border-van-gogh-grey-blue rounded-lg overflow-hidden">
+        <div className="flex justify-center w-full h-60 bg-black border border-van-gogh-grey-800 rounded-lg overflow-hidden">
           {generationRequest.init_generation_image && (
             <div>
               <img
@@ -77,7 +77,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           <div className="flex gap-2.5">
             <Tooltip label={tooltipText.setAspectRatio}>
               <button
-                className="flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue"
+                className="flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-blue-500  hover:bg-van-gogh-grey-500 border-van-gogh-grey-800"
                 onClick={() => setAspectRatioToUploadedValues()}
               >
                 <AspectRatioIcon />
@@ -99,7 +99,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           <div className="flex gap-2.5">
             <Tooltip label={tooltipText.uploadInput}>
               <button
-                className="flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue"
+                className="flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-blue-500  hover:bg-van-gogh-grey-500 border-van-gogh-grey-800"
                 onClick={() => openFileSystem()}
               >
                 <UploadIcon size="calc(1rem * 1.125)" />
@@ -107,7 +107,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
             </Tooltip>
             <Tooltip label={tooltipText.deleteInput}>
               <button
-                className="flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-dark-blue  hover:bg-van-gogh-grey-xd border-van-gogh-grey-blue"
+                className="flex justify-center items-center border h-10 min-w-10 rounded-md bg-van-gogh-blue-500  hover:bg-van-gogh-grey-500 border-van-gogh-grey-800"
                 onClick={() => clearImageGuidance()}
               >
                 <DeleteIcon />
@@ -116,7 +116,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-6 py-2.5 px-4 flex-1-1-0">
+      <div className="flex flex-col gap-6 py-2.5 px-4 flex-van-gogh-1-1-0">
         <div className="flex flex-col gap-1.5">
           <div className="flex gap-1 items-center text-van-gogh-xs">
             <p>{text.titleRight}</p>

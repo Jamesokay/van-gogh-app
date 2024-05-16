@@ -34,14 +34,14 @@ const ImageGuidanceUpload = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-van-gogh-dark-blue-alt rounded-lg">
+    <div className="flex flex-col h-full bg-van-gogh-blue-700 rounded-lg">
       <div
-        className={`flex justify-between py-3.5 px-4 border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-blue ${
-          interfaceState.enableImageGuidance ? "bg-darkblue-to-purple-gradient" : ""
+        className={`flex justify-between py-3.5 px-4 border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 ${
+          interfaceState.enableImageGuidance ? "bg-van-gogh-blue-to-purple-gradient" : ""
         }`}
       >
         <div className="flex gap-3.5 text-van-gogh-sm">
-          <div className="flex items-center justify-center w-5 h-5 bg-van-gogh-dark-blue rounded-md text-van-gogh-3xs">
+          <div className="flex items-center justify-center w-5 h-5 bg-van-gogh-blue-500 rounded-md text-van-gogh-3xs">
             1
           </div>
           <p className="font-medium">{text.title}</p>

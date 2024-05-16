@@ -28,7 +28,7 @@ const ModelDropdownMenu: FC<{
             className="object-cover mr-2 min-h-[30px] rounded-md"
           />
           <div className="flex flex-col w-full items-start gap-1">
-            <div className="flex justify-between w-full text-van-gogh-xs text-van-gogh-grey-m">
+            <div className="flex justify-between w-full text-van-gogh-xs text-van-gogh-grey-700">
               <span>{imageGenerationHeaderStrings.finetunedModel}</span>
               <div className="flex">
                 <DimensionsIcon />
@@ -61,7 +61,7 @@ const ModelDropdownMenu: FC<{
                 <div
                   className={
                     model.alchemy
-                      ? "flex ml-2 bg-van-gogh-black-opal rounded-full py-1 px-2.5"
+                      ? "flex ml-2 bg-van-gogh-black-opal-300 rounded-full py-1 px-2.5"
                       : "hidden"
                   }
                 >

@@ -22,12 +22,12 @@ const ImageUploadInput: FC<{
     >
       <p className="text-van-gogh-xs font-medium">{text.description}</p>
       <button
-        className="flex flex-col items-center justify-center gap-2.5 px-2 py-4 bg-van-gogh-dark-blue border border-van-gogh-grey-blue rounded-lg"
+        className="flex flex-col items-center justify-center gap-2.5 px-2 py-4 bg-van-gogh-blue-500 border border-van-gogh-grey-800 rounded-lg"
         onClick={() => openFileSystem()}
       >
         <UploadIcon size="calc(1rem * 2.875)" />
         <p className="text-van-gogh-sm font-medium">{text.description}</p>
-        <p className="text-van-gogh-xs text-van-gogh-text-grey">
+        <p className="text-van-gogh-xs text-van-gogh-text-grey-600">
           {text.formatAndSize}
         </p>
       </button>

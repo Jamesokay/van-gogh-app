@@ -20,7 +20,7 @@ const ImageCardButton: FC<ImageCardButtonProps> = ({
     <Tooltip label={label} hasArrow>
       <button
         type="button"
-        className={`${className} bg-van-gogh-black-opal-200 h-10 w-10 ${roundedClassName} flex items-center justify-center grayscale hover:grayscale-0 hover:bg-transparent hover:bg-transparent-purple-gradient transition-all ${
+        className={`${className} bg-van-gogh-black-opal-500 h-10 w-10 ${roundedClassName} flex items-center justify-center grayscale hover:grayscale-0 hover:bg-transparent hover:bg-van-gogh-transparent-purple-gradient transition-all ${
           disabled ? "cursor-not-allowed" : ""
         }`}
         aria-label={label}

@@ -23,7 +23,7 @@ const DimensionInput: FC<DimensionInputProps> = ({
           {dimension}
         </div>
         <input
-          className="input-number appearance-none bg-transparent rounded-md border border-transparent focus:border-van-gogh-purple outline-none text-center h-full w-full min-w-input-width text-van-gogh-sm py-4 px-8"
+          className="input-number appearance-none bg-transparent rounded-md border border-transparent focus:border-van-gogh-purple-400 outline-none text-center h-full w-full min-w-van-gogh-input-width text-van-gogh-sm py-4 px-8"
           type="number"
           max={max}
           min={min}
@@ -31,7 +31,7 @@ const DimensionInput: FC<DimensionInputProps> = ({
           onChange={(e) => setValue(parseInt(e.target.value))}
           onBlur={resetToValueInRange}
         />
-        <div className="absolute right-0 top-0 h-10 w-10 flex items-center justify-center text-van-gogh-xs text-van-gogh-grey-m">
+        <div className="absolute right-0 top-0 h-10 w-10 flex items-center justify-center text-van-gogh-xs text-van-gogh-grey-700">
           {unit}
         </div>
       </div>
