@@ -45,7 +45,13 @@ const SideBarSwitchOptions = () => {
         toggle={() => alchemyModel && handleAlchemy(!generationRequest.alchemy)}
         icon={<AlchemyIcon />}
       />
-      <div className="flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-md bg-van-gogh-blue-500 border-van-gogh-grey-800 mb-van-gogh-spacing-m">
+      <div
+        className={
+          generationRequest.alchemy
+            ? "flex justify-between border text-center text-van-gogh-xs py-2 pr-2 pl-2.5 rounded-md bg-van-gogh-blue-500 border-van-gogh-grey-800 mb-2"
+            : "hidden"
+        }
+      >
         <span className="text-van-gogh-grey-700">
           {sideBarStrings.outputResolution}
         </span>

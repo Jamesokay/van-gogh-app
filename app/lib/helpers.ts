@@ -124,6 +124,8 @@ export function convertStringToPresetStyle(style: string): PresetStyle {
       return "GENERAL";
     case "illustration":
       return "ILLUSTRATION";
+    case "leonardo":
+      return "LEONARDO";
     case "photography":
       return "PHOTOGRAPHY";
     case "raytraced":
@@ -189,6 +191,8 @@ export function convertPresetStyleToString(presetStyle: PresetStyle): string {
       return "General";
     case "ILLUSTRATION":
       return "Illustration";
+    case "LEONARDO":
+      return "Leonardo";
     case "PHOTOGRAPHY":
       return "Photography";
     case "RAYTRACED":
@@ -299,6 +303,7 @@ export function extractRequestBodyFromContext(
   // This can be expanded to handle various other API features not currently implemented
   return {
     ...state,
+    photoRealVersion: state.photoReal ? state.photoRealVersion : null,
     transparency: state.transparency ? "foreground_only" : "disabled",
   };
 }

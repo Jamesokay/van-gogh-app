@@ -1,7 +1,7 @@
 import { SettingsProvider } from "../context/SettingsContext";
 import { Providers } from "../providers";
-import ImageGenerationHeader from "../ui/image-generation/ImageGenerationHeader";
-import SideBar from "../ui/image-generation/SideBar";
+import ImageGenerationHeader from "../ui/ai-generations/ImageGenerationHeader";
+import SideBar from "../ui/ai-generations/SideBar";
 
 export default function Layout({
   children,
