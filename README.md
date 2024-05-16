@@ -288,15 +288,21 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Added further models
 - Can now generate images using Alchemy, PhotoReal and various preset styles
 - Added icons for Alchemy and PhotoReal to SideBar and ModelDropdownMenu
+
+### Day 24 (16/05/2024):
+
+- Added user details to state
+- Token count now accurately displayed
+- Token count updated upon generation
+- Updated custom tailwind naming conventions (still need to standardise all shades of grey) 
   
 ### To Do:
 
-- Error handling throughout
+- Graceful rror handling throughout
 - Implement user details state for tracking credits (may need to rethink the structure re where the user is fetched)
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
 - Check all settings map correctly onto the API request body, yielding the desired response
 - Image Guidance functionality will need to integrate initImage functionality from API
-- Add further UI elements for when Image Guidance is enabled
+- Add SideBar UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
-- Clean-up of styles
