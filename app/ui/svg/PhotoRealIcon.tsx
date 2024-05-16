@@ -88,9 +88,9 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="5.75591"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#252D48"></stop>
-          <stop offset="0.394168" stop-color="#273353"></stop>
-          <stop offset="1" stop-color="#2A3C63"></stop>
+          <stop stopColor="#252D48"></stop>
+          <stop offset="0.394168" stopColor="#273353"></stop>
+          <stop offset="1" stopColor="#2A3C63"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-2-photoreal-icon-:r313:${id}`}
@@ -100,8 +100,8 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="4.06815"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#272F4B"></stop>
-          <stop offset="1" stop-color="#272F4A"></stop>
+          <stop stopColor="#272F4B"></stop>
+          <stop offset="1" stopColor="#272F4A"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-3-photoreal-icon-:r313:${id}`}
@@ -111,8 +111,8 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="6.14206"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#2A344E"></stop>
-          <stop offset="1" stop-color="#263963"></stop>
+          <stop stopColor="#2A344E"></stop>
+          <stop offset="1" stopColor="#263963"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-4-photoreal-icon-:r313:${id}`}
@@ -122,10 +122,10 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="15.2152"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#324570"></stop>
-          <stop offset="0.2367" stop-color="#485777"></stop>
-          <stop offset="0.6651" stop-color="#2E3951"></stop>
-          <stop offset="1" stop-color="#222C42"></stop>
+          <stop stopColor="#324570"></stop>
+          <stop offset="0.2367" stopColor="#485777"></stop>
+          <stop offset="0.6651" stopColor="#2E3951"></stop>
+          <stop offset="1" stopColor="#222C42"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-5-photoreal-icon-:r313:${id}`}
@@ -135,13 +135,13 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="9.91436"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#15134A" stop-opacity="0"></stop>
+          <stop stopColor="#15134A" stopOpacity="0"></stop>
           <stop
             offset="0.2944"
-            stop-color="#202541"
-            stop-opacity="0.294"
+            stopColor="#202541"
+            stopOpacity="0.294"
           ></stop>
-          <stop offset="1" stop-color="#202541"></stop>
+          <stop offset="1" stopColor="#202541"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-6-photoreal-icon-:r313:${id}`}
@@ -151,8 +151,8 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="7.6242"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F8F6FB"></stop>
-          <stop offset="1" stop-color="#EFDCFB"></stop>
+          <stop stopColor="#F8F6FB"></stop>
+          <stop offset="1" stopColor="#EFDCFB"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-7-photoreal-icon-:r313:${id}`}
@@ -162,13 +162,13 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="9.88946"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#EFDCFB" stop-opacity="0"></stop>
+          <stop stopColor="#EFDCFB" stopOpacity="0"></stop>
           <stop
             offset="0.4856"
-            stop-color="#BAAAD6"
-            stop-opacity="0.486"
+            stopColor="#BAAAD6"
+            stopOpacity="0.486"
           ></stop>
-          <stop offset="1" stop-color="#0D0528"></stop>
+          <stop offset="1" stopColor="#0D0528"></stop>
         </linearGradient>
         <radialGradient
           id={`radial-gradient-1-photoreal-icon-${id}`}
@@ -178,11 +178,11 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.28139 9.16958) scale(2.50509)"
         >
-          <stop stop-color="#F0F5FF"></stop>
-          <stop offset="0.4735" stop-color="#A1B9EF"></stop>
-          <stop offset="0.7132" stop-color="#90A7DD"></stop>
-          <stop offset="0.8997" stop-color="#839DDA"></stop>
-          <stop offset="1" stop-color="#728ABF"></stop>
+          <stop stopColor="#F0F5FF"></stop>
+          <stop offset="0.4735" stopColor="#A1B9EF"></stop>
+          <stop offset="0.7132" stopColor="#90A7DD"></stop>
+          <stop offset="0.8997" stopColor="#839DDA"></stop>
+          <stop offset="1" stopColor="#728ABF"></stop>
         </radialGradient>
         <linearGradient
           id={`linear-gradient-8-photoreal-icon-:r313:${id}`}
@@ -192,9 +192,9 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="4.23149"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#202541" stop-opacity="0"></stop>
-          <stop offset="0.313381" stop-color="#202541"></stop>
-          <stop offset="1" stop-color="#15134A"></stop>
+          <stop stopColor="#202541" stopOpacity="0"></stop>
+          <stop offset="0.313381" stopColor="#202541"></stop>
+          <stop offset="1" stopColor="#15134A"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-9-photoreal-icon-:r313:${id}`}
@@ -204,10 +204,10 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="7.38257"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD945"></stop>
-          <stop offset="0.3043" stop-color="#FFCD3E"></stop>
-          <stop offset="0.8558" stop-color="#FFAD2B"></stop>
-          <stop offset="1" stop-color="#FFA325"></stop>
+          <stop stopColor="#FFD945"></stop>
+          <stop offset="0.3043" stopColor="#FFCD3E"></stop>
+          <stop offset="0.8558" stopColor="#FFAD2B"></stop>
+          <stop offset="1" stopColor="#FFA325"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-10-photoreal-icon-:r313:${id}`}
@@ -217,10 +217,10 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="5.46367"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD945"></stop>
-          <stop offset="0.3043" stop-color="#FFCD3E"></stop>
-          <stop offset="0.8558" stop-color="#FFAD2B"></stop>
-          <stop offset="1" stop-color="#FFA325"></stop>
+          <stop stopColor="#FFD945"></stop>
+          <stop offset="0.3043" stopColor="#FFCD3E"></stop>
+          <stop offset="0.8558" stopColor="#FFAD2B"></stop>
+          <stop offset="1" stopColor="#FFA325"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-11-photoreal-icon-:r313:${id}`}
@@ -230,8 +230,8 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="-27.1763"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-12-photoreal-icon-:r313:${id}`}
@@ -241,8 +241,8 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="5.8337"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-13-photoreal-icon-:r313:${id}`}
@@ -252,8 +252,8 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="6.39303"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-14-photoreal-icon-:r313:${id}`}
@@ -263,9 +263,9 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="1.60918"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
         <linearGradient
           id={`linear-gradient-15-photoreal-icon-:r313:${id}`}
@@ -275,9 +275,9 @@ const PhotoRealIcon: FC<{ id: string }> = ({ id }) => {
           y2="1.60918"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.0001" stop-color="#FA5560"></stop>
-          <stop offset="0.499028" stop-color="#B14BF4"></stop>
-          <stop offset="1" stop-color="#4D91FF"></stop>
+          <stop offset="0.0001" stopColor="#FA5560"></stop>
+          <stop offset="0.499028" stopColor="#B14BF4"></stop>
+          <stop offset="1" stopColor="#4D91FF"></stop>
         </linearGradient>
       </defs>
     </svg>

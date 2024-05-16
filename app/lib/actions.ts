@@ -2,7 +2,6 @@
 import { unstable_noStore as noStore } from "next/cache";
 
 import {
-  LeonardoCustomModel,
   LeonardoGenerationJobResponse,
   LeonardoGenerationRequestBody,
   LeonardoGenerationResponse,

@@ -14,7 +14,7 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
   const disabled = !generationRequest.prompt;
   const label = disabled ? "Please type a prompt" : "This will use 8 tokens";
   // To-do: state for credits/user
-  const credits = 150;
+  const credits = 8;
 
   const generate = async () => {
     // To-do: prevent spam click
@@ -29,6 +29,7 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
         "newGenerationId",
         generation.sdGenerationJob.generationId
       );
+      setKeyOfInterfaceState('tokens', interfaceState.tokens - generation.sdGenerationJob.apiCreditCost);
     } catch (err) {
       console.error("Error generating:", err);
       setKeyOfInterfaceState("generating", false);

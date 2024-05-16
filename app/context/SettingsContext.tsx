@@ -41,7 +41,8 @@ const defaultInterfaceState: InterfaceState = {
   enableSeed: false,
   generating: false,
   newGenerationId: '',
-  deletedGenerationIds: []
+  deletedGenerationIds: [],
+  tokens: 0
 };
 
 const SettingsContext = createContext<SettingsContextProps>({

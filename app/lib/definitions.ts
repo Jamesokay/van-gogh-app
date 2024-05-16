@@ -57,6 +57,7 @@ export type InterfaceState = {
   generating: boolean;
   newGenerationId: string;
   deletedGenerationIds: string[];
+  tokens: number;
 };
 
 // Component definitions

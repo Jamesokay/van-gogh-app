@@ -80,7 +80,7 @@ const GenerationThreeDotsDropdown: FC<NonNullLeonardoGenerationResponse> = (
     },
   ];
   return (
-    <Menu variant="threeDotsMenuStyle">
+    <Menu variant="threeDotsMenu">
       <MenuButton>
         <div className="flex items-center px-2">
           <ThreeDotsIcon />

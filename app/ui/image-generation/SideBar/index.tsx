@@ -19,6 +19,8 @@ import SideBarDimensionOptions from "./SideBarDimensionOptions";
 import SideBarAdvancedSettings from "./SideBarAdvancedSettings";
 import TokenHeader from "../../components/TokenHeader";
 import LeonardoLogoText from "../../svg/LeonardoLogoText";
+import { useEffect } from "react";
+import { getUserInformation } from "@/app/lib/actions";
 
 const SideBar = () => {
   const {
@@ -28,6 +30,21 @@ const SideBar = () => {
     interfaceState,
     setKeyOfInterfaceState,
   } = useSettings();
+
+  useEffect(() => {
+    const fetchTokens = async () => {
+      try {
+        const user = await getUserInformation();
+        if (!user) {
+          throw new Error("Failed to fetch user information");
+        }
+        setKeyOfInterfaceState("tokens", user.apiSubscriptionTokens);
+      } catch (err) {
+        console.error("Failed to fetch user information:", err);
+      }
+    };
+    fetchTokens();
+  }, []);
 
   return (
     <div

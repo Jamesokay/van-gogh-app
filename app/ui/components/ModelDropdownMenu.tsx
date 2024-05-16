@@ -17,7 +17,7 @@ const ModelDropdownMenu: FC<{
   setValue: (modelId: string) => void;
 }> = ({ options, value, setValue }) => {
   return (
-    <Menu variant="modelMenu">
+    <Menu variant="headerMenu">
       <MenuButton>
         <div className="flex items-center">
           <Image

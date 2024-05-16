@@ -44,7 +44,7 @@ const baseMenuStyle = definePartsStyle({
   },
 });
 
-const threeDotsMenuStyle = definePartsStyle({
+const threeDotsMenu = definePartsStyle({
   button: {
     bg: "transparent",
     width: "1.875rem",
@@ -70,28 +70,7 @@ const threeDotsMenuStyle = definePartsStyle({
   }
 })
 
-const lg = defineStyle({
-  fontSize: "0.875rem",
-  minH: "2.5rem",
-});
-
-const md = defineStyle({
-  fontSize: "0.75rem",
-});
-
-const sizes = {
-  lg: definePartsStyle({ button: lg, item: lg }),
-  md: definePartsStyle({ button: md, item: md })
-};
-
-const headerMenu = {
-  button: {
-    maxH: "3.5rem",
-    border: "transparent",
-  }
-};
-
-const modelMenu = definePartsStyle({
+const headerMenu = definePartsStyle({
   button: {
     maxH: "3.5rem",
     maxW: "20rem",
@@ -119,8 +98,22 @@ const modelMenu = definePartsStyle({
   },
 });
 
+const lg = defineStyle({
+  fontSize: "0.875rem",
+  minH: "2.5rem",
+});
+
+const md = defineStyle({
+  fontSize: "0.75rem",
+});
+
+const sizes = {
+  lg: definePartsStyle({ button: lg, item: lg }),
+  md: definePartsStyle({ button: md, item: md })
+};
+
 export const menuTheme = defineMultiStyleConfig({
   baseStyle: baseMenuStyle,
-  variants: { modelMenu, headerMenu, threeDotsMenuStyle },
+  variants: { headerMenu, threeDotsMenu },
   sizes: sizes,
 });
