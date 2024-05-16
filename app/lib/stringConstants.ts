@@ -89,8 +89,9 @@ export const tooltipText = {
   motionVideo: "Generate a Motion video",
   imageGuidance: "Use as Image Guidance input",
   editCanvas: "Edit in canvas",
-  premiumPrivateImages:
-    "The image is public. Please subscribe to a paid plan if you wish to generate private images.",
+  publicImage:
+    "The image is public.",
+  privateImage: "This image is private.",
   randomPrompt: 'Generate a random prompt'
 };
 

@@ -6,11 +6,13 @@ import { Tooltip } from "@chakra-ui/react";
 import { tooltipText } from "@/app/lib/stringConstants";
 import EyeIcon from "../svg/EyeIcon";
 import ImageCardHoverOverlay from "./ImageCardHoverOverlay";
+import EyeStrokeIcon from "../svg/EyeStrokeIcon";
 
 const CardImageLoader: FC<{
   src: string;
   alt: string;
-}> = ({ src, alt }) => {
+  publicImage: boolean;
+}> = ({ src, alt, publicImage }) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -25,7 +27,11 @@ const CardImageLoader: FC<{
       <Tooltip
         placement="left"
         hasArrow
-        label={tooltipText.premiumPrivateImages}
+        label={
+          publicImage
+            ? tooltipText.publicImage
+            : tooltipText.privateImage
+        }
       >
         <div
           role="button"
@@ -35,7 +41,7 @@ const CardImageLoader: FC<{
               : "absolute z-20 right-4 top-4 rounded-full h-10 w-10 flex justify-center items-center bg-van-gogh-grey-opal-300 backdrop-blur-md text-white"
           }
         >
-          <EyeIcon />
+          {publicImage ? <EyeIcon /> : <EyeStrokeIcon />}
         </div>
       </Tooltip>
       <ImageCardHoverOverlay src={src} hidden={!loaded} />
