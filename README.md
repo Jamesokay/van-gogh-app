@@ -306,10 +306,18 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Removed photoRealVersion from request when photoReal not enabled
 - Show/hide Alchemy output resolution
 - Moved UI elements into new folder
-  
+- Added icon for private images
+
+### Day 25 (17/05/2024):
+
+- Graceful error handling
+- Refactored actions.ts (added helper functions: getHeaders, handleResponse and handleError)
+- Defined custom error classes
+- Added error.tsx files for all routes/nested routes
+- Removed redundant error handling logic in components calling fetch functions
+
 ### To Do:
 
-- Graceful error handling throughout
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
 - Check all settings map correctly onto the API request body, yielding the desired response
