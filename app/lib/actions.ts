@@ -1,192 +1,138 @@
 "use server";
 import { unstable_noStore as noStore } from "next/cache";
-
 import {
+  ClientError,
   LeonardoGenerationJobResponse,
   LeonardoGenerationRequestBody,
   LeonardoGenerationResponse,
   LeonardoUserResponse,
+  NetworkError,
+  ServerError,
 } from "./definitions";
 
-export async function getUserInformation(): Promise<LeonardoUserResponse | null> {
-  const url = "https://cloud.leonardo.ai/api/rest/v1/me";
-  const token = process.env.LEONARDO_API_TOKEN;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  };
+const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
+const token = process.env.LEONARDO_API_TOKEN;
 
+const getHeaders = (method: string) => ({
+  method,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  },
+});
+
+const handleResponse = async (response: Response) => {
+  if (!response.ok) {
+    throw new Error(
+      `HTTP error! status: ${response.status} - ${response.statusText}`
+    );
+  }
+  return response.json();
+};
+
+const handleError = (err: unknown, contextMessage: string) => {
+  if (
+    err instanceof NetworkError ||
+    err instanceof ServerError ||
+    err instanceof ClientError
+  ) {
+    console.error(`${contextMessage}: Custom Error:`, err.message);
+  } else if (err instanceof Error) {
+    console.error(`${contextMessage}: Unexpected error:`, err.message);
+  } else {
+    console.error(`${contextMessage}: Unexpected error:`, err);
+  }
+  throw err;
+};
+
+export async function getUserInformation(): Promise<LeonardoUserResponse> {
+  const options = getHeaders("GET");
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
+    const response = await fetch(`${API_URL}/me`, options);
+    const data = await handleResponse(response);
     return data.user_details[0];
   } catch (err) {
-    console.error("Error fetching data:", err);
-    return null;
+    return handleError(err, "Error fetching user information");
   }
 }
 
 export async function generateImages(
   body: LeonardoGenerationRequestBody
-): Promise<LeonardoGenerationJobResponse | null> {
-  const url = "https://cloud.leonardo.ai/api/rest/v1/generations";
-  const token = process.env.LEONARDO_API_TOKEN;
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(body),
-  };
-
+): Promise<LeonardoGenerationJobResponse> {
+  const options = { ...getHeaders("POST"), body: JSON.stringify(body) };
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
+    const response = await fetch(`${API_URL}/generations`, options);
+    return await handleResponse(response);
   } catch (err) {
-    console.error("Error fetching data:", err);
-    return null;
+    return handleError(err, "Error generating images");
   }
 }
 
 export async function getGenerationsByUserId(
   userId: string
-): Promise<LeonardoGenerationResponse[] | null> {
+): Promise<LeonardoGenerationResponse[]> {
   noStore();
-  // Add functionality for offset and limit
-  const url = `https://cloud.leonardo.ai/api/rest/v1/generations/user/${userId}`;
-  const token = process.env.LEONARDO_API_TOKEN;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  };
-
+  const options = getHeaders("GET");
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
+    const response = await fetch(
+      `${API_URL}/generations/user/${userId}`,
+      options
+    );
+    const data = await handleResponse(response);
     return data.generations;
   } catch (err) {
-    console.error("Error fetching data:", err);
-    return null;
+    return handleError(err, "Error fetching generations by user ID");
   }
 }
 
-// NOTE: Before anyone goes judging me for polling this endpoint, let me just say:
-// In an ideal world, I would use webhooks for getting the generated images but
-// this requires a consistent callback url, which I cannot supply locally.
-// Investigated using ngrok, for instance, which could tunnel traffic to my local server,
-// but the url in that case would periodically reset/change, which is no bueno.
-// While it is technically doable, I believe I would have to create a new Leonardo API key every time
-// the url changed, which is impractical.
 export async function fetchGeneration(
   generationId: string
-): Promise<LeonardoGenerationResponse | null> {
-  const url = `https://cloud.leonardo.ai/api/rest/v1/generations/${generationId}`;
-  const token = process.env.LEONARDO_API_TOKEN;
-  const options = {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
+): Promise<LeonardoGenerationResponse> {
+  const options = getHeaders("GET");
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
+    const response = await fetch(
+      `${API_URL}/generations/${generationId}`,
+      options
+    );
+    const data = await handleResponse(response);
     return data.generations_by_pk;
   } catch (err) {
-    console.error("Error fetching data:", err);
-    return null;
+    return handleError(err, "Error fetching generation");
   }
 }
 
-export async function deleteGeneration(
-  generationId: string
-): Promise<string | null> {
-  const url = `https://cloud.leonardo.ai/api/rest/v1/generations/${generationId}`;
-  const token = process.env.LEONARDO_API_TOKEN;
-  const options = {
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
+export async function deleteGeneration(generationId: string): Promise<string> {
+  const options = getHeaders("DELETE");
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
+    const response = await fetch(
+      `${API_URL}/generations/${generationId}`,
+      options
+    );
+    const data = await handleResponse(response);
     return data.delete_generations_by_pk?.id;
   } catch (err) {
-    console.error("Error deleting data:", err);
-    return null;
+    return handleError(err, "Error deleting generation");
   }
 }
 
-export async function generateRandomPrompt(): Promise<string | null> {
-  const url = "https://cloud.leonardo.ai/api/rest/v1/prompt/random";
-  const token = process.env.LEONARDO_API_TOKEN;
-  const options = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
+export async function generateRandomPrompt(): Promise<string> {
+  const options = getHeaders("POST");
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
+    const response = await fetch(`${API_URL}/prompt/random`, options);
+    const data = await handleResponse(response);
     return data.promptGeneration?.prompt;
   } catch (err) {
-    console.error("Error generating prompt:", err);
-    return null;
+    return handleError(err, "Error generating random prompt");
   }
 }
 
-export async function improvePrompt(prompt: string): Promise<string | null> {
-  const url = "https://cloud.leonardo.ai/api/rest/v1/prompt/improve";
-  const token = process.env.LEONARDO_API_TOKEN;
-  const options = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ prompt }),
-  };
+export async function improvePrompt(prompt: string): Promise<string> {
+  const options = { ...getHeaders("POST"), body: JSON.stringify({ prompt }) };
   try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const data = await response.json();
+    const response = await fetch(`${API_URL}/prompt/improve`, options);
+    const data = await handleResponse(response);
     return data.promptGeneration?.prompt;
   } catch (err) {
-    console.error("Error improving prompt:", err);
-    return null;
+    return handleError(err, "Error improving prompt");
   }
 }

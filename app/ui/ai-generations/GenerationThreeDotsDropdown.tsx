@@ -25,9 +25,6 @@ const GenerationThreeDotsDropdown: FC<NonNullLeonardoGenerationResponse> = (
     try {
       const body = extractRequestBodyFromPrevGeneration(props);
       const generation = await generateImages(body);
-      if (!generation) {
-        throw new Error("Failed to generate");
-      }
       setKeyOfInterfaceState(
         "newGenerationId",
         generation.sdGenerationJob.generationId
@@ -50,9 +47,6 @@ const GenerationThreeDotsDropdown: FC<NonNullLeonardoGenerationResponse> = (
     if (!props.id) return;
     try {
       const deletedId = await deleteGeneration(props.id);
-      if (!deletedId) {
-        throw new Error("Failed to delete generation");
-      }
       setKeyOfInterfaceState("deletedGenerationIds", [
         ...interfaceState.deletedGenerationIds,
         deletedId,

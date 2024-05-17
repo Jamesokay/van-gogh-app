@@ -13,7 +13,7 @@ export default function Layout({
       <SettingsProvider>
         <main className="flex h-full">
           <SideBar />
-          <div className="pl-0 md:pl-[17rem] flex flex-col flex-1 w-full">
+          <div className="pl-0 md:pl-[17rem] flex flex-col flex-1 w-full h-full">
             <ImageGenerationHeader />
             <div className="flex w-full border-t border-van-gogh-grey-400 px-4 md:px-8">
               {children}

@@ -6,11 +6,8 @@ import NewGenerationPanels from "../ui/ai-generations/NewGenerationPanels";
 
 const Page = async () => {
   const userDetails = await getUserInformation();
-  if (!userDetails) return null;
   const history = await getGenerationsByUserId(userDetails.user.id);
-  const safeHistory = history
-    ? history.map((generation) => fillDefaults(generation))
-    : [];
+  const safeHistory = history.map((generation) => fillDefaults(generation))
 
   return (
     <div className="flex flex-col pt-9 pb-4 w-full">

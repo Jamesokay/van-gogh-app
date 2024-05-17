@@ -15,9 +15,6 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
     setPromptLoading(true);
     try {
       const randomPrompt = await generateRandomPrompt();
-      if (!randomPrompt) {
-        throw new Error("Failed to generate prompt");
-      }
       setKeyOfGenerationRequest("prompt", randomPrompt);
       setPromptLoading(false);
     } catch (err) {
@@ -25,6 +22,7 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
       setPromptLoading(false);
     }
   };
+
   return (
     <Tooltip label={tooltipText.randomPrompt}>
       <button

@@ -36,7 +36,7 @@ export type GenerationRequestState = {
   negative_prompt: string;
   num_images: number;
   photoReal: boolean;
-  photoRealVersion: 'v1' | 'v2',
+  photoRealVersion: "v1" | "v2";
   presetStyle: PresetStyle;
   prompt: string;
   promptMagic: boolean;
@@ -146,6 +146,7 @@ export type BadgeWrapperProps = {
 };
 
 // Action type definitions
+
 export type Dimension = {
   width: number;
   height: number;
@@ -169,6 +170,31 @@ export const enum IMAGE_GUIDANCE_STRENGTH {
 export const enum GUIDANCE_SCALE_STRENGTH {
   MIN = 1,
   MAX = 20,
+}
+
+// Custom Error classes
+
+export class NetworkError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "NetworkError";
+  }
+}
+
+export class ServerError extends Error {
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = "ServerError";
+    this.status = status;
+  }
+  status: number;
+}
+
+export class ClientError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ClientError";
+  }
 }
 
 // Leonardo API Definitions

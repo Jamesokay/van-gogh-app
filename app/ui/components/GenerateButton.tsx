@@ -17,14 +17,11 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
   const credits = 8;
 
   const generate = async () => {
-    // To-do: prevent spam click
+    if (interfaceState.generating) return;
     setKeyOfInterfaceState("generating", true);
     try {
       const body = extractRequestBodyFromContext(generationRequest);
       const generation = await generateImages(body);
-      if (!generation) {
-        throw new Error("Failed to generate");
-      }
       setKeyOfInterfaceState(
         "newGenerationId",
         generation.sdGenerationJob.generationId

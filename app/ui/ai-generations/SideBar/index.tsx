@@ -35,9 +35,6 @@ const SideBar = () => {
     const fetchTokens = async () => {
       try {
         const user = await getUserInformation();
-        if (!user) {
-          throw new Error("Failed to fetch user information");
-        }
         setKeyOfInterfaceState("tokens", user.apiSubscriptionTokens);
       } catch (err) {
         console.error("Failed to fetch user information:", err);
