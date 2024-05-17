@@ -21,7 +21,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
     useSettings();
   const currentAspectRatio = findApproximateAspectRatio({
     width: generationRequest.width,
-    height: generationRequest.height
+    height: generationRequest.height,
   });
   const [uploadedAspectRatio, setUploadedAspectRatio] =
     useState(currentAspectRatio);
@@ -51,7 +51,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
   return (
     <div
       className={
-        !generationRequest.init_generation_image
+        !generationRequest.init_generation_image_id
           ? "hidden"
           : "flex flex-col sm:flex-row gap-6 py-2.5 px-4"
       }
@@ -62,11 +62,11 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           <QuestionIcon opacity={0.3} />
         </div>
         <div className="flex justify-center w-full h-60 bg-black border border-van-gogh-grey-800 rounded-lg overflow-hidden">
-          {generationRequest.init_generation_image && (
+          {generationRequest.init_generation_image_id && (
             <div>
               <img
                 className="h-60 w-full object-contain"
-                src={generationRequest.init_generation_image}
+                src={generationRequest.init_generation_image_id}
                 alt=""
                 onLoad={handleImageLoaded}
               />
@@ -127,7 +127,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
               options={imageGuidanceTypes}
               value={"Image to Image"}
               setValue={(x) => {
-                console.log('investigate if this is possible via API');
+                console.log("investigate if this is possible via API");
                 return x;
               }}
               isDisabled={false}
@@ -150,10 +150,12 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           </div>
           <div className="w-full">
             <RangeSlider
-              value={generationRequest.init_strength ? generationRequest.init_strength : 30}
-              setValue={(x) =>
-                setKeyOfGenerationRequest('init_strength', x)
+              value={
+                generationRequest.init_strength
+                  ? generationRequest.init_strength
+                  : 30
               }
+              setValue={(x) => setKeyOfGenerationRequest("init_strength", x)}
               max={IMAGE_GUIDANCE_STRENGTH.MAX}
               min={IMAGE_GUIDANCE_STRENGTH.MIN}
             />

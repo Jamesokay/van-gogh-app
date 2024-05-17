@@ -5,9 +5,9 @@ import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import UploadedImageComponent from "./UploadedImageComponent";
 import ImageUploadInput from "./ImageUploadInput";
-import { useRef } from "react";
+import { FC, useRef } from "react";
 
-const ImageGuidanceUpload = () => {
+const ImageGuidanceUpload:FC<{ recentImages: string[] }> = ({ recentImages }) => {
   const { setKeyOfGenerationRequest, interfaceState, setKeyOfInterfaceState } = useSettings();
   const inputRef = useRef<HTMLInputElement>(null);
   const text = imageGuidanceStrings.uploadStrings;
@@ -19,7 +19,7 @@ const ImageGuidanceUpload = () => {
       reader.readAsDataURL(file);
       reader.onload = () => {
         if (typeof reader.result === "string") {
-          setKeyOfGenerationRequest('init_generation_image', reader.result);
+          setKeyOfGenerationRequest('init_generation_image_id', reader.result);
         }
       };
       reader.onerror = (error) => {
@@ -60,7 +60,7 @@ const ImageGuidanceUpload = () => {
         className="hidden"
         onChange={handleFileChange}
       ></input>
-      <ImageUploadInput openFileSystem={openFileSystem} />
+      <ImageUploadInput recentImages={recentImages} openFileSystem={openFileSystem} />
       <UploadedImageComponent openFileSystem={openFileSystem} />
     </div>
   );

@@ -177,7 +177,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const clearImageGuidance = () => {
     setKeyOfInterfaceState("enableImageGuidance", false);
     setGenerationRequest((prev) => {
-      const { init_generation_image, init_strength, init_image_id, ...rest } =
+      const { init_generation_image_id, init_strength, init_image_id, ...rest } =
         prev;
       return { ...rest };
     });

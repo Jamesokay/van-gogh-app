@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const ImageGuidanceBanner = () => {
   const { generationRequest } = useSettings();
-  const hidden = !!generationRequest.init_generation_image;
+  const hidden = !!generationRequest.init_generation_image_id;
   return (
     <div
       className={

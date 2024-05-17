@@ -28,7 +28,7 @@ const ImageCardHoverOverlay: FC<{ src: string; hidden: boolean }> = ({
 
   const handleImageGuidanceInput = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setKeyOfGenerationRequest("init_generation_image", src);
+    setKeyOfGenerationRequest("init_generation_image_id", src);
     if (!interfaceState.enableImageGuidance)
       setKeyOfInterfaceState("enableImageGuidance", true);
     router.push("/image-guidance");

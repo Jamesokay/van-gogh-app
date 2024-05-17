@@ -2,20 +2,21 @@
 
 import { FC } from "react";
 import UploadIcon from "../../svg/UploadIcon";
-import DropdownMenu from "../../components/DropdownMenu";
 import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
+import RecentImagesDropdown from "../../components/RecentImagesDropdown";
 
 const ImageUploadInput: FC<{
+  recentImages: string[];
   openFileSystem: () => void;
-}> = ({ openFileSystem }) => {
-  const { generationRequest } = useSettings();
+}> = ({ recentImages, openFileSystem }) => {
+  const { generationRequest, setKeyOfGenerationRequest } = useSettings();
   const text = imageGuidanceStrings.uploadStrings;
 
   return (
     <div
       className={
-        generationRequest.init_generation_image
+        generationRequest.init_generation_image_id
           ? "hidden"
           : "flex flex-col gap-1.5 py-2.5 px-4"
       }
@@ -32,13 +33,11 @@ const ImageUploadInput: FC<{
         </p>
       </button>
       <div className="h-10 w-full">
-        <DropdownMenu
-          options={[""]}
-          value={"Select from Recent Images"}
-          setValue={() => {}}
-          isDisabled={false}
-          headerTheme={false}
-          large={true}
+        <RecentImagesDropdown
+          images={recentImages}
+          setValue={(x) =>
+            setKeyOfGenerationRequest("init_generation_image_id", x)
+          }
         />
       </div>
     </div>

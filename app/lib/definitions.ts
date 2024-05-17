@@ -29,7 +29,7 @@ export type GenerationRequestState = {
   alchemy: boolean;
   guidance_scale?: number;
   height: number;
-  init_generation_image?: string;
+  init_generation_image_id?: string;
   init_image_id?: string;
   init_strength?: number;
   modelId: string;
@@ -278,7 +278,7 @@ export type LeonardoGenerationRequestBody = {
   highResolution?: boolean | null;
   imagePrompts?: string[] | null;
   imagePromptWeight?: number | null;
-  init_generation_image?: string | null; // For Image to Image
+  init_generation_image_id?: string | null; // For Image to Image
   init_image_id?: string | null;
   init_strength?: number;
   modelId?: string | null;

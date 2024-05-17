@@ -1,5 +1,5 @@
 "use server";
-import { unstable_noStore as noStore } from "next/cache";
+
 import {
   ClientError,
   LeonardoGenerationJobResponse,
@@ -88,7 +88,6 @@ export async function getGenerationsByUserId(
     console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
     return null;
   }
-  noStore();
   const options = getHeaders("GET");
   try {
     const response = await fetch(
