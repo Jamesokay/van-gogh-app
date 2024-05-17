@@ -316,11 +316,20 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Added error.tsx files for all routes/nested routes
 - Removed redundant error handling logic in components calling fetch functions
 
+### Day 25 (later):
+
+<img width="1511" alt="Screenshot 2024-05-17 at 7 44 17 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/064df3db-566e-4378-ba64-dd1c6842adc8">
+
+- A down and dirty filthy Friday night implementation of Recent Images dropdown functionality
+- Deplorable use of inline styles which will definitely be cleaned up but hey, it's a working prototype
+
 ### To Do:
 
+- Clean up of styles for RecentImagesDropdown
+- Add logic for using uploaded images for Image Guidance
+- Figure out controlNet logic and the relevant state to set
+- Deep(er) dive in Server Actions in Next 14 (am I using them correctly? Are my API calls being deduped as expected?)
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
 - Check all settings map correctly onto the API request body, yielding the desired response
-- Image Guidance functionality will need to integrate initImage functionality from API
-- Add SideBar UI elements for when Image Guidance is enabled
 - Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
