@@ -25,7 +25,7 @@ const NewGenerationPanels = () => {
     // Function for polling the endpoint until image data is available
     try {
       const data = await fetchGeneration(interfaceState.newGenerationId);
-      if (data.status !== "PENDING") {
+      if (data && data.status !== "PENDING") {
         if (data.status === "COMPLETE") {
           setNewGenerations((prev) => [fillDefaults(data), ...prev]);
         }

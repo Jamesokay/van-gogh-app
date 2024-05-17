@@ -15,6 +15,10 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
     setPromptLoading(true);
     try {
       const randomPrompt = await generateRandomPrompt();
+      if (!randomPrompt) {
+        setPromptLoading(false);
+        return;
+      }
       setKeyOfGenerationRequest("prompt", randomPrompt);
       setPromptLoading(false);
     } catch (err) {

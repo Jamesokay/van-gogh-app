@@ -6,7 +6,9 @@ import NewGenerationPanels from "../ui/ai-generations/NewGenerationPanels";
 
 const Page = async () => {
   const userDetails = await getUserInformation();
+  if (!userDetails) return null;
   const history = await getGenerationsByUserId(userDetails.user.id);
+  if (!history) return null;
   const safeHistory = history.map((generation) => fillDefaults(generation))
 
   return (

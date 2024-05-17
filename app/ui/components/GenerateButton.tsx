@@ -22,6 +22,10 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
     try {
       const body = extractRequestBodyFromContext(generationRequest);
       const generation = await generateImages(body);
+      if (!generation) {
+        setKeyOfInterfaceState("generating", false);
+        return;
+      }
       setKeyOfInterfaceState(
         "newGenerationId",
         generation.sdGenerationJob.generationId

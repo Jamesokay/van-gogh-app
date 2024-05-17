@@ -13,13 +13,18 @@ import {
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
 
-const getHeaders = (method: string) => ({
-  method,
-  headers: {
+const getHeaders = (method: string) => {
+  const headers: HeadersInit = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  },
-});
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+  return {
+    method,
+    headers,
+  };
+};
 
 const handleResponse = async (response: Response) => {
   if (!response.ok) {
@@ -45,7 +50,11 @@ const handleError = (err: unknown, contextMessage: string) => {
   throw err;
 };
 
-export async function getUserInformation(): Promise<LeonardoUserResponse> {
+export async function getUserInformation(): Promise<LeonardoUserResponse | null> {
+  if (!token) {
+    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
+    return null;
+  }
   const options = getHeaders("GET");
   try {
     const response = await fetch(`${API_URL}/me`, options);
@@ -58,7 +67,11 @@ export async function getUserInformation(): Promise<LeonardoUserResponse> {
 
 export async function generateImages(
   body: LeonardoGenerationRequestBody
-): Promise<LeonardoGenerationJobResponse> {
+): Promise<LeonardoGenerationJobResponse | null> {
+  if (!token) {
+    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
+    return null;
+  }
   const options = { ...getHeaders("POST"), body: JSON.stringify(body) };
   try {
     const response = await fetch(`${API_URL}/generations`, options);
@@ -70,7 +83,11 @@ export async function generateImages(
 
 export async function getGenerationsByUserId(
   userId: string
-): Promise<LeonardoGenerationResponse[]> {
+): Promise<LeonardoGenerationResponse[] | null> {
+  if (!token) {
+    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
+    return null;
+  }
   noStore();
   const options = getHeaders("GET");
   try {
@@ -87,7 +104,11 @@ export async function getGenerationsByUserId(
 
 export async function fetchGeneration(
   generationId: string
-): Promise<LeonardoGenerationResponse> {
+): Promise<LeonardoGenerationResponse | null> {
+  if (!token) {
+    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
+    return null;
+  }
   const options = getHeaders("GET");
   try {
     const response = await fetch(
@@ -101,7 +122,11 @@ export async function fetchGeneration(
   }
 }
 
-export async function deleteGeneration(generationId: string): Promise<string> {
+export async function deleteGeneration(generationId: string): Promise<string | null> {
+  if (!token) {
+    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
+    return null;
+  }
   const options = getHeaders("DELETE");
   try {
     const response = await fetch(
@@ -115,7 +140,11 @@ export async function deleteGeneration(generationId: string): Promise<string> {
   }
 }
 
-export async function generateRandomPrompt(): Promise<string> {
+export async function generateRandomPrompt(): Promise<string | null> {
+  if (!token) {
+    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
+    return null;
+  }
   const options = getHeaders("POST");
   try {
     const response = await fetch(`${API_URL}/prompt/random`, options);
@@ -126,7 +155,11 @@ export async function generateRandomPrompt(): Promise<string> {
   }
 }
 
-export async function improvePrompt(prompt: string): Promise<string> {
+export async function improvePrompt(prompt: string): Promise<string | null> {
+  if (!token) {
+    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
+    return null;
+  }
   const options = { ...getHeaders("POST"), body: JSON.stringify({ prompt }) };
   try {
     const response = await fetch(`${API_URL}/prompt/improve`, options);
