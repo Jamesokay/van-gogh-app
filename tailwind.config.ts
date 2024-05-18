@@ -55,6 +55,7 @@ const config: Config = {
         "van-gogh-white-opal-100": "rgba(255, 255, 255, 0.06)",
         "van-gogh-white-opal-200": "rgba(255, 255, 255, 0.16)",
         "van-gogh-grey-opal-300": "rgba(170, 170, 170, 0.28)",
+        "van-gogh-grey-250": "rgb(11, 15, 23)",
         "van-gogh-grey-400": "rgb(32, 33, 37)",
         "van-gogh-grey-500": "rgb(40, 40, 40)",
         "van-gogh-grey-600": "rgb(81, 81, 81)",

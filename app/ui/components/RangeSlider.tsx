@@ -3,14 +3,26 @@
 import { RangeSliderProps } from "@/app/lib/definitions";
 import { FC, useEffect, useRef } from "react";
 
-const RangeSlider: FC<RangeSliderProps> = ({ value, setValue, max, min }) => {
+const RangeSlider: FC<RangeSliderProps> = ({
+  value,
+  setValue,
+  max,
+  min,
+  small,
+}) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const range = max - min;
   const filledWidthPercentage = ((value - min) / (max - min)) * 100;
-  const clampedFilledWidthPercentage = Math.max(0, Math.min(filledWidthPercentage, 100));
+  const clampedFilledWidthPercentage = Math.max(
+    0,
+    Math.min(filledWidthPercentage, 100)
+  );
   const filledWidth = `${clampedFilledWidthPercentage}%`;
   const thumbPositionPercentage = ((value - min) / (max - min)) * 100;
-  const clampedThumbPositionPercentage = Math.max(0, Math.min(thumbPositionPercentage, 100));
+  const clampedThumbPositionPercentage = Math.max(
+    0,
+    Math.min(thumbPositionPercentage, 100)
+  );
   const thumbPosition = `calc(${clampedThumbPositionPercentage}% - 0.5rem)`;
 
   const handleMouseMove = (event: MouseEvent) => {
@@ -45,14 +57,18 @@ const RangeSlider: FC<RangeSliderProps> = ({ value, setValue, max, min }) => {
       ref={sliderRef}
       onMouseDown={handleMouseDown}
     >
-      <div className="slider-track h-4 w-full bg-van-gogh-grey-500 rounded-full overflow-hidden">
+      <div
+        className={`slider-track ${
+          small ? "h-3" : "h-4"
+        } w-full bg-van-gogh-grey-500 rounded-full overflow-hidden`}
+      >
         <div
           className="slider-track-filled h-full bg-van-gogh-blue-gradient"
           style={{ width: filledWidth }}
         />
       </div>
       <div
-        className="slider-thumb absolute top-0 h-4 w-4 rounded-full bg-white"
+        className="slider-thumb absolute top-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-white"
         style={{ left: thumbPosition }}
       />
     </div>

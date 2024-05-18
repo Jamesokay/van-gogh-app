@@ -31,6 +31,7 @@ import RandomPromptButton from "../components/RandomPromptButton";
 import LeonardoLogoText from "../svg/LeonardoLogoText";
 import AlchemyIcon from "../svg/AlchemyIcon";
 import PhotoRealIcon from "../svg/PhotoRealIcon";
+import ImageGuidanceHeaderControls from "../components/ImageGuidanceHeaderControls";
 
 export default function ImageGenerationHeader() {
   const {
@@ -159,6 +160,7 @@ export default function ImageGenerationHeader() {
         <GenerateButton mobile={true} />
       </div>
       <div className="mt-8 px-0 md:mt-5 md:px-8 ">
+        <ImageGuidanceHeaderControls />
         <div className="flex">
           {routes.map((route) => (
             <Link

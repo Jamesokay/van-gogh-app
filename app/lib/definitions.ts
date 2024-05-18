@@ -113,6 +113,7 @@ export type RangeSliderProps = {
   setValue: (value: number) => void;
   max: number;
   min: number;
+  small?: boolean;
 };
 
 export type ImageGenModel = {
