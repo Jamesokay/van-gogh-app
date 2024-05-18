@@ -1,9 +1,10 @@
 import { FC } from "react";
 
-const Switch: FC<{ enabled: boolean; handleToggle: () => void }> = ({
-  enabled,
-  handleToggle,
-}) => {
+const Switch: FC<{
+  enabled: boolean;
+  handleToggle: () => void;
+  inactive?: boolean;
+}> = ({ enabled, handleToggle, inactive = false }) => {
   return (
     <div
       role="checkbox"
@@ -13,7 +14,9 @@ const Switch: FC<{ enabled: boolean; handleToggle: () => void }> = ({
       onKeyDown={(e) => e.key === "Enter" && handleToggle()}
       className={`${
         enabled ? "bg-van-gogh-purple-gradient" : "bg-van-gogh-grey-600"
-      } ml-auto relative inline-flex items-center h-6 rounded-full w-van-gogh-switch-track-width cursor-pointer transition-colors focus:outline-none`}
+      } 
+      ${inactive ? "opacity-30 cursor-not-allowed" : ""}
+      ml-auto relative inline-flex items-center h-6 rounded-full w-van-gogh-switch-track-width cursor-pointer transition-colors focus:outline-none`}
     >
       <span
         className={`${

@@ -3,6 +3,7 @@ import {
   defaultLeonardoGenerationResponse,
   Dimension,
   GenerationRequestState,
+  InterfaceState,
   LeonardoGenerationRequestBody,
   LeonardoGenerationResponse,
   NonNullLeonardoGenerationResponse,
@@ -104,6 +105,10 @@ export function constructDateString(createdAt: Date) {
     year: "numeric",
   };
   return new Intl.DateTimeFormat("en-GB", options).format(date);
+}
+
+export function divideAndRound(num: number): number {
+  return Math.round((num / 100) * 10) / 10;
 }
 
 export function convertStringToPresetStyle(style: string): PresetStyle {
@@ -298,13 +303,30 @@ export function fillDefaults(
 
 // Extract a request object from context state
 export function extractRequestBodyFromContext(
-  state: GenerationRequestState
+  requestState: GenerationRequestState,
+  interfaceState: InterfaceState
 ): LeonardoGenerationRequestBody {
-  // This can be expanded to handle various other API features not currently implemented
   return {
-    ...state,
-    photoRealVersion: state.photoReal ? state.photoRealVersion : null,
-    transparency: state.transparency ? "foreground_only" : "disabled",
+    ...requestState,
+    init_generation_image_id: interfaceState.enableImageGuidance
+      ? requestState.init_generation_image_id
+      : null,
+    init_image_id: interfaceState.enableImageGuidance
+      ? requestState.init_image_id
+      : null,
+    init_strength: interfaceState.enableImageGuidance
+      ? divideAndRound(requestState.init_strength || 30)
+      : null,
+    controlNet: interfaceState.enableImageGuidance
+      ? requestState.controlNet
+      : null,
+    controlNetType: interfaceState.enableImageGuidance
+      ? requestState.controlNetType
+      : null,
+    photoRealVersion: requestState.photoReal
+      ? requestState.photoRealVersion
+      : null,
+    transparency: requestState.transparency ? "foreground_only" : "disabled",
   };
 }
 

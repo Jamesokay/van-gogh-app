@@ -4,6 +4,7 @@ import { createContext, useContext, useState } from "react";
 import {
   AspectRatioKey,
   GenerationRequestState,
+  ImageGuidanceType,
   InputDimension,
   InterfaceState,
   SettingsContextProps,
@@ -15,10 +16,15 @@ import { defaultAspectRatioConversion } from "../lib/dataConstants";
 // State for the API request
 const defaultGenerationRequest: GenerationRequestState = {
   alchemy: false,
+  controlNet: null,
+  controlNetType: null,
   guidance_scale: 7,
+  init_generation_image_id: null,
+  init_image_id: null,
+  init_strength: null,
   num_images: 4,
   photoReal: false,
-  photoRealVersion: 'v2',
+  photoRealVersion: "v2",
   promptMagic: false,
   transparency: false,
   public: false,
@@ -40,9 +46,10 @@ const defaultInterfaceState: InterfaceState = {
   enableImageGuidance: false,
   enableSeed: false,
   generating: false,
-  newGenerationId: '',
+  newGenerationId: "",
   deletedGenerationIds: [],
-  tokens: 0
+  tokens: 0,
+  imageGuidanceType: 'Image to Image'
 };
 
 const SettingsContext = createContext<SettingsContextProps>({
@@ -56,7 +63,8 @@ const SettingsContext = createContext<SettingsContextProps>({
   handleDimensionOption: () => {},
   handleAspectRatioOptionClick: () => {},
   handleReset: () => {},
-  clearImageGuidance: () => {}
+  handleImageGuidance: () => {},
+  clearImageGuidance: () => {},
 });
 
 export const useSettings = () => useContext(SettingsContext);
@@ -176,17 +184,50 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
 
   const clearImageGuidance = () => {
     setKeyOfInterfaceState("enableImageGuidance", false);
-    setGenerationRequest((prev) => {
-      const { init_generation_image_id, init_strength, init_image_id, ...rest } =
-        prev;
-      return { ...rest };
-    });
+    setGenerationRequest((prev) => ({
+        ...prev,
+        init_generation_image_id: null,
+        init_strength: null,
+        init_image_id: null,
+        controlNet: null,
+        controlNetType: null
+    }));
   };
 
   // Reset SideBar state
   const handleReset = () => {
     setKeyOfInterfaceState("aspectRatioLocked", false);
     setGenerationRequest(defaultGenerationRequest);
+  };
+
+  // Handle various options for Image Guidance
+  const handleImageGuidance = (type: ImageGuidanceType) => {
+    setKeyOfInterfaceState('imageGuidanceType', type);
+    if (type === "Depth to Image") {
+      setGenerationRequest((prev) => ({
+        ...prev,
+        controlNet: true,
+        controlNetType: "DEPTH",
+      }));
+    } else if (type === "Pose to Image") {
+      setGenerationRequest((prev) => ({
+        ...prev,
+        controlNet: true,
+        controlNetType: "POSE",
+      }));
+    } else if (type === "Edge to Image") {
+      setGenerationRequest((prev) => ({
+        ...prev,
+        controlNet: true,
+        controlNetType: "CANNY",
+      }));
+    } else {
+      setGenerationRequest((prev) => ({
+        ...prev,
+        controlNet: false,
+        controlNetType: null,
+      }));
+    }
   };
 
   const context = {
@@ -200,7 +241,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     handleDimensionOption,
     handleAspectRatioOptionClick,
     handleReset,
-    clearImageGuidance
+    handleImageGuidance,
+    clearImageGuidance,
   };
 
   return (

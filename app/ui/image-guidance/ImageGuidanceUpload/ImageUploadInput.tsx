@@ -10,7 +10,11 @@ const ImageUploadInput: FC<{
   recentImages: string[];
   openFileSystem: () => void;
 }> = ({ recentImages, openFileSystem }) => {
-  const { generationRequest, setKeyOfGenerationRequest } = useSettings();
+  const {
+    generationRequest,
+    setKeyOfGenerationRequest,
+    setKeyOfInterfaceState,
+  } = useSettings();
   const text = imageGuidanceStrings.uploadStrings;
 
   return (
@@ -35,9 +39,10 @@ const ImageUploadInput: FC<{
       <div className="h-10 w-full">
         <RecentImagesDropdown
           images={recentImages}
-          setValue={(x) =>
-            setKeyOfGenerationRequest("init_generation_image_id", x)
-          }
+          setValue={(x) => {
+            setKeyOfInterfaceState("enableImageGuidance", true);
+            setKeyOfGenerationRequest("init_generation_image_id", x);
+          }}
         />
       </div>
     </div>

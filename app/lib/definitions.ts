@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { defaultAspectRatioConversion } from "./dataConstants";
+import { defaultAspectRatioConversion, imageGuidanceTypes } from "./dataConstants";
 
 export type SettingsProviderProps = {
   children: ReactNode;
@@ -22,6 +22,7 @@ export type SettingsContextProps = {
   handleDimensionOption: (option: string) => void;
   handleAspectRatioOptionClick: (option: AspectRatioKey) => void;
   handleReset: () => void;
+  handleImageGuidance: (type: ImageGuidanceType) => void;
   clearImageGuidance: () => void;
 };
 
@@ -29,9 +30,11 @@ export type GenerationRequestState = {
   alchemy: boolean;
   guidance_scale?: number;
   height: number;
-  init_generation_image_id?: string;
-  init_image_id?: string;
-  init_strength?: number;
+  controlNet: boolean | null;
+  controlNetType: "POSE" | "CANNY" | "DEPTH" | null;
+  init_generation_image_id: string | null;
+  init_image_id: string | null;
+  init_strength: number | null;
   modelId: string;
   negative_prompt: string;
   num_images: number;
@@ -58,6 +61,7 @@ export type InterfaceState = {
   newGenerationId: string;
   deletedGenerationIds: string[];
   tokens: number;
+  imageGuidanceType: ImageGuidanceType;
 };
 
 // Component definitions
@@ -172,6 +176,8 @@ export const enum GUIDANCE_SCALE_STRENGTH {
   MAX = 20,
 }
 
+export type ImageGuidanceType = typeof imageGuidanceTypes[number];
+
 // Custom Error classes
 
 export class NetworkError extends Error {
@@ -268,7 +274,7 @@ export type LeonardoGenerationRequestBody = {
   alchemy?: boolean | null;
   contrastRatio?: number | null; // Requires Alchemy
   controlNet?: boolean | null; // Requires init img and model based on SD v1.5
-  controlNetType?: string | null;
+  controlNetType?: "POSE" | "CANNY" | "DEPTH" | null;
   elements?: { akUUID?: string | null; weight?: number | null } | null;
   expandedDomain?: boolean | null; // Requires Alchemy
   fantasyAvatar?: boolean | null;
@@ -280,7 +286,7 @@ export type LeonardoGenerationRequestBody = {
   imagePromptWeight?: number | null;
   init_generation_image_id?: string | null; // For Image to Image
   init_image_id?: string | null;
-  init_strength?: number;
+  init_strength?: number | null;
   modelId?: string | null;
   negative_prompt?: string | null;
   num_images?: number | null;

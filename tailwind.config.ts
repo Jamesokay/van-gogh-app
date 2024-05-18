@@ -77,7 +77,8 @@ const config: Config = {
       gridTemplateColumns: {
         "van-gogh-auto-fit-minmax-35": "repeat(auto-fit, minmax(calc(35.75rem), 1fr))",
         "van-gogh-auto-fit-minmax-16": "repeat(auto-fit, minmax(calc(16rem), 1fr))",
-        "van-gogh-auto-fit-minmax-24": "repeat(auto-fit, minmax(calc(24rem), 1fr))"
+        "van-gogh-auto-fit-minmax-24": "repeat(auto-fit, minmax(calc(24rem), 1fr))",
+        "van-gogh-auto-fit-minmax-75px": "repeat(auto-fill, minmax(75px, 1fr))"
       },
       maxHeight: {
         "van-gogh-modal-height": "calc(-10rem + 100vh)",

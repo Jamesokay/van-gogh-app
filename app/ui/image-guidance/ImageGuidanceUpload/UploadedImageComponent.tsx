@@ -11,13 +11,13 @@ import AspectRatioIcon from "../../svg/AspectRatioIcon";
 import UploadIcon from "../../svg/UploadIcon";
 import DeleteIcon from "../../svg/DeleteIcon";
 import { FC, useRef, useState } from "react";
-import { findApproximateAspectRatio } from "@/app/lib/helpers";
+import { divideAndRound, findApproximateAspectRatio } from "@/app/lib/helpers";
 import { Tooltip } from "@chakra-ui/react";
 
 const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
   openFileSystem,
 }) => {
-  const { generationRequest, setKeyOfGenerationRequest, clearImageGuidance } =
+  const { interfaceState, generationRequest, setKeyOfGenerationRequest, handleImageGuidance, clearImageGuidance } =
     useSettings();
   const currentAspectRatio = findApproximateAspectRatio({
     width: generationRequest.width,
@@ -125,11 +125,8 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           <div className="h-10">
             <DropdownMenu
               options={imageGuidanceTypes}
-              value={"Image to Image"}
-              setValue={(x) => {
-                console.log("investigate if this is possible via API");
-                return x;
-              }}
+              value={interfaceState.imageGuidanceType}
+              setValue={(x) => handleImageGuidance(x)}
               isDisabled={false}
               headerTheme={false}
               large={true}
@@ -146,7 +143,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
               <p>{text.strength}</p>
               <QuestionIcon opacity={0.3} />
             </div>
-            <p>{(generationRequest.init_strength || 30) / 100}</p>
+            <p>{divideAndRound(generationRequest.init_strength || 30)}</p>
           </div>
           <div className="w-full">
             <RangeSlider

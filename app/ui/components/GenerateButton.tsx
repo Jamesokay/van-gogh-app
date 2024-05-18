@@ -20,7 +20,7 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
     if (interfaceState.generating) return;
     setKeyOfInterfaceState("generating", true);
     try {
-      const body = extractRequestBodyFromContext(generationRequest);
+      const body = extractRequestBodyFromContext(generationRequest, interfaceState);
       const generation = await generateImages(body);
       if (!generation) {
         setKeyOfInterfaceState("generating", false);

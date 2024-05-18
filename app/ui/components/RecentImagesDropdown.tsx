@@ -1,4 +1,4 @@
-import { TriangleDownIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import {
   Menu,
   MenuButton,
@@ -13,8 +13,8 @@ const RecentImagesDropdown: FC<{
   images: string[];
 }> = ({ setValue, images }) => {
   return (
-    <Menu>
-      <MenuButton textAlign="left">
+    <Menu variant="recentImagesMenu">
+      <MenuButton>
         <div className="flex w-full justify-between items-center px-3 py-2">
           <span className="text-van-gogh-sm font-light">
             Select from&nbsp;<span className="font-medium">Recent Images</span>
@@ -23,41 +23,34 @@ const RecentImagesDropdown: FC<{
           <TriangleDownIcon w={2.5} />
         </div>
       </MenuButton>
-      <MenuList maxH="18rem" w="584px" overflowY="scroll">
-        <MenuGroup>
-          <p className="py-1.5 px-2.5 text-van-gogh-xs text-van-gogh-grey-700">
-            Generations
-          </p>
-          <div
-            className="px-2.5 pb-2.5 gap-2.5"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(75px, 1fr)",
-            }}
-          >
-            {images.map((image) => (
-              <MenuItem
-                key={image}
-                onClick={() => setValue(image)}
-                h="75px"
-                w="100%"
-                minW="75px"
-                p="0"
-              >
-                <div
-                  role="button"
-                  className="relative w-full h-full overflow-hidden rounded-md"
-                >
-                  <img
-                    src={image}
-                    className="absolute w-full h-full object-cover"
-                    alt="recent image"
-                  />
-                </div>
-              </MenuItem>
-            ))}
-          </div>
-        </MenuGroup>
+      <MenuList>
+        <div className="flex flex-col max-h-[18rem] overflow-y-auto">
+          <MenuGroup>
+            <p className="py-1.5 px-2.5 text-van-gogh-xs text-van-gogh-grey-700">
+              Generations
+            </p>
+            <div className="grid grid-cols-van-gogh-auto-fit-minmax-75px px-2.5 pb-2.5 gap-2.5">
+              {images.map((image) => (
+                <MenuItem key={image} onClick={() => setValue(image)}>
+                  <div
+                    role="button"
+                    className="relative w-full h-full overflow-hidden rounded-md"
+                  >
+                    <img
+                      src={image}
+                      className="absolute w-full h-full object-cover"
+                      alt="recent image"
+                    />
+                  </div>
+                </MenuItem>
+              ))}
+            </div>
+          </MenuGroup>
+        </div>
+        <button className="flex justify-center items-center gap-1 w-full h-8 bg-van-gogh-blue-500">
+          <span className="text-van-gogh-sm font-medium">Show more</span>
+          <ArrowForwardIcon />
+        </button>
       </MenuList>
     </Menu>
   );
