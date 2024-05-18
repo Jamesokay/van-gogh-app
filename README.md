@@ -323,11 +323,17 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - A down and dirty filthy Friday night implementation of Recent Images dropdown functionality
 - Deplorable use of inline styles which will definitely be cleaned up but hey, it's a working prototype
 
+### Day 26 (18/05/2024):
+
+- Cleaned up Recent Images dropdown styles, added Show More button
+- Integrated controlNet and controlNetType into construction of request body
+- Updated type definitions
+- Logic for enabling/disabling imageGuidance based on presence of image id
+- Updated extractRequestBodyFromContext function to cross-reference InterfaceState
+
 ### To Do:
 
-- Clean up of styles for RecentImagesDropdown
 - Add logic for using uploaded images for Image Guidance
-- Figure out controlNet logic and the relevant state to set
 - Deep(er) dive in Server Actions in Next 14 (am I using them correctly? Are my API calls being deduped as expected?)
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
