@@ -7,6 +7,7 @@ import {
   LeonardoGenerationResponse,
   LeonardoUserResponse,
   NetworkError,
+  PresignedDetails,
   ServerError,
 } from "./definitions";
 
@@ -50,11 +51,13 @@ const handleError = (err: unknown, contextMessage: string) => {
   throw err;
 };
 
+const handleNoToken = (): null => {
+  console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
+  return null;
+};
+
 export async function getUserInformation(): Promise<LeonardoUserResponse | null> {
-  if (!token) {
-    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
-    return null;
-  }
+  if (!token) return handleNoToken();
   const options = getHeaders("GET");
   try {
     const response = await fetch(`${API_URL}/me`, options);
@@ -68,10 +71,7 @@ export async function getUserInformation(): Promise<LeonardoUserResponse | null>
 export async function generateImages(
   body: LeonardoGenerationRequestBody
 ): Promise<LeonardoGenerationJobResponse | null> {
-  if (!token) {
-    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
-    return null;
-  }
+  if (!token) return handleNoToken();
   const options = { ...getHeaders("POST"), body: JSON.stringify(body) };
   try {
     const response = await fetch(`${API_URL}/generations`, options);
@@ -84,10 +84,7 @@ export async function generateImages(
 export async function getGenerationsByUserId(
   userId: string
 ): Promise<LeonardoGenerationResponse[] | null> {
-  if (!token) {
-    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
-    return null;
-  }
+  if (!token) return handleNoToken();
   const options = getHeaders("GET");
   try {
     const response = await fetch(
@@ -104,10 +101,7 @@ export async function getGenerationsByUserId(
 export async function fetchGeneration(
   generationId: string
 ): Promise<LeonardoGenerationResponse | null> {
-  if (!token) {
-    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
-    return null;
-  }
+  if (!token) return handleNoToken();
   const options = getHeaders("GET");
   try {
     const response = await fetch(
@@ -121,11 +115,10 @@ export async function fetchGeneration(
   }
 }
 
-export async function deleteGeneration(generationId: string): Promise<string | null> {
-  if (!token) {
-    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
-    return null;
-  }
+export async function deleteGeneration(
+  generationId: string
+): Promise<string | null> {
+  if (!token) return handleNoToken();
   const options = getHeaders("DELETE");
   try {
     const response = await fetch(
@@ -140,10 +133,7 @@ export async function deleteGeneration(generationId: string): Promise<string | n
 }
 
 export async function generateRandomPrompt(): Promise<string | null> {
-  if (!token) {
-    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
-    return null;
-  }
+  if (!token) return handleNoToken();
   const options = getHeaders("POST");
   try {
     const response = await fetch(`${API_URL}/prompt/random`, options);
@@ -155,10 +145,7 @@ export async function generateRandomPrompt(): Promise<string | null> {
 }
 
 export async function improvePrompt(prompt: string): Promise<string | null> {
-  if (!token) {
-    console.warn("LEONARDO_API_TOKEN is not defined. Returning null.");
-    return null;
-  }
+  if (!token) return handleNoToken();
   const options = { ...getHeaders("POST"), body: JSON.stringify({ prompt }) };
   try {
     const response = await fetch(`${API_URL}/prompt/improve`, options);
@@ -168,3 +155,34 @@ export async function improvePrompt(prompt: string): Promise<string | null> {
     return handleError(err, "Error improving prompt");
   }
 }
+
+export async function getPresignedUrl(): Promise<PresignedDetails | null> {
+  if (!token) return handleNoToken();
+  const options = {
+    ...getHeaders("POST"),
+    body: JSON.stringify({ extension: "jpg" }),
+  };
+  try {
+    const response = await fetch(`${API_URL}/init-image`, options);
+    const data = await handleResponse(response);
+    return data.uploadInitImage;
+  } catch (err) {
+    return handleError(err, "Error improving prompt");
+  }
+}
+
+// export async function uploadViaPresignedUrl(
+//   presignedUrl: string
+// ): Promise<PresignedDetails | null> {
+//   if (!token) return handleNoToken();
+//   const options = {
+//     ...getHeaders("POST"),
+//   };
+//   try {
+//     const response = await fetch(presignedUrl, options);
+//     const data = await handleResponse(response);
+//     return data.uploadInitImage;
+//   } catch (err) {
+//     return handleError(err, "Error improving prompt");
+//   }
+// }

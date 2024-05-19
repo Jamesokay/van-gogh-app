@@ -1,5 +1,8 @@
 import { ReactElement, ReactNode } from "react";
-import { defaultAspectRatioConversion, imageGuidanceTypes } from "./dataConstants";
+import {
+  defaultAspectRatioConversion,
+  imageGuidanceTypes,
+} from "./dataConstants";
 
 export type SettingsProviderProps = {
   children: ReactNode;
@@ -179,7 +182,7 @@ export const enum GUIDANCE_SCALE_STRENGTH {
   MAX = 20,
 }
 
-export type ImageGuidanceType = typeof imageGuidanceTypes[number];
+export type ImageGuidanceType = (typeof imageGuidanceTypes)[number];
 
 // Custom Error classes
 
@@ -462,4 +465,11 @@ export type LeonardoUserResponse = {
   apiPaidTokens: 0;
   apiSubscriptionTokens: 0;
   apiPlanTokenRenewalDate: string;
+};
+
+export type PresignedDetails = {
+  fields: string | null;
+  id: string | null;
+  key: string | null;
+  url: string | null;
 };
