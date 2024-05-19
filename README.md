@@ -331,6 +331,17 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Logic for enabling/disabling imageGuidance based on presence of image id
 - Updated extractRequestBodyFromContext function to cross-reference InterfaceState
 
+### Day 27 (19/05/2024):
+
+<img width="1512" alt="Screenshot 2024-05-19 at 10 53 20 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/c2d59a9f-29ff-4c2f-a0b7-f3ed734d15df">
+<img width="1512" alt="Screenshot 2024-05-19 at 10 53 43 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/d8b486f9-46bf-4dbc-8e70-b599630a407b">
+
+- Implemented ImageGuidanceHeaderControls, which appear in header section when Image Guidance is enabled
+- Functionality for setting guidance strength via ImageGuidanceHeaderControls
+- Added alert element which appears in header when Image Guidance is enabled
+- Updated context to account for both image src and image id
+- Added UI state for when Image Guidance is disabled, but a selected image is still present
+
 ### To Do:
 
 - Add logic for using uploaded images for Image Guidance
@@ -338,4 +349,3 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
 - Check all settings map correctly onto the API request body, yielding the desired response
-- Implement Recent Images state and components (dropdown in ImageGuidanceUpload)
