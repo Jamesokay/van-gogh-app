@@ -49,7 +49,8 @@ const defaultInterfaceState: InterfaceState = {
   newGenerationId: "",
   deletedGenerationIds: [],
   tokens: 0,
-  imageGuidanceType: 'Image to Image'
+  imageGuidanceType: 'Image to Image',
+  imageGuidanceSrc: ''
 };
 
 const SettingsContext = createContext<SettingsContextProps>({
@@ -196,7 +197,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
 
   // Reset SideBar state
   const handleReset = () => {
-    setKeyOfInterfaceState("aspectRatioLocked", false);
+    setInterfaceState(prev => ({ ...defaultInterfaceState, tokens: prev.tokens}));
     setGenerationRequest(defaultGenerationRequest);
   };
 

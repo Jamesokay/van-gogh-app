@@ -62,6 +62,7 @@ export type InterfaceState = {
   deletedGenerationIds: string[];
   tokens: number;
   imageGuidanceType: ImageGuidanceType;
+  imageGuidanceSrc: string;
 };
 
 // Component definitions
@@ -114,6 +115,7 @@ export type RangeSliderProps = {
   max: number;
   min: number;
   small?: boolean;
+  purple?: boolean;
 };
 
 export type ImageGenModel = {

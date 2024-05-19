@@ -108,7 +108,7 @@ export function constructDateString(createdAt: Date) {
 }
 
 export function divideAndRound(num: number): number {
-  return Math.round((num / 100) * 10) / 10;
+  return Math.round((num / 100) * 100) / 100;
 }
 
 export function convertStringToPresetStyle(style: string): PresetStyle {

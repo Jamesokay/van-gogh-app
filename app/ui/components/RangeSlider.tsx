@@ -9,6 +9,7 @@ const RangeSlider: FC<RangeSliderProps> = ({
   max,
   min,
   small,
+  purple
 }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const range = max - min;
@@ -63,7 +64,7 @@ const RangeSlider: FC<RangeSliderProps> = ({
         } w-full bg-van-gogh-grey-500 rounded-full overflow-hidden`}
       >
         <div
-          className="slider-track-filled h-full bg-van-gogh-blue-gradient"
+          className={`slider-track-filled h-full ${purple ? "bg-van-gogh-purple-gradient" : "bg-van-gogh-blue-gradient"}`}
           style={{ width: filledWidth }}
         />
       </div>

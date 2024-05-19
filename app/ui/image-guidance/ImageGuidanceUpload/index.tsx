@@ -7,8 +7,9 @@ import UploadedImageComponent from "./UploadedImageComponent";
 import ImageUploadInput from "./ImageUploadInput";
 import { FC, useRef } from "react";
 import { Tooltip } from "@chakra-ui/react";
+import { LeonardoGeneratedImage } from "@/app/lib/definitions";
 
-const ImageGuidanceUpload: FC<{ recentImages: string[] }> = ({
+const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
   recentImages,
 }) => {
   const {

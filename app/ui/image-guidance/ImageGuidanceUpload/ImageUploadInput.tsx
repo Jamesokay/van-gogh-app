@@ -5,9 +5,10 @@ import UploadIcon from "../../svg/UploadIcon";
 import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import RecentImagesDropdown from "../../components/RecentImagesDropdown";
+import { LeonardoGeneratedImage } from "@/app/lib/definitions";
 
 const ImageUploadInput: FC<{
-  recentImages: string[];
+  recentImages: LeonardoGeneratedImage[];
   openFileSystem: () => void;
 }> = ({ recentImages, openFileSystem }) => {
   const {
@@ -39,9 +40,10 @@ const ImageUploadInput: FC<{
       <div className="h-10 w-full">
         <RecentImagesDropdown
           images={recentImages}
-          setValue={(x) => {
+          setValue={(img) => {
             setKeyOfInterfaceState("enableImageGuidance", true);
-            setKeyOfGenerationRequest("init_generation_image_id", x);
+            setKeyOfInterfaceState("imageGuidanceSrc", img.url)
+            setKeyOfGenerationRequest("init_generation_image_id", img.id);
           }}
         />
       </div>

@@ -32,6 +32,7 @@ import LeonardoLogoText from "../svg/LeonardoLogoText";
 import AlchemyIcon from "../svg/AlchemyIcon";
 import PhotoRealIcon from "../svg/PhotoRealIcon";
 import ImageGuidanceHeaderControls from "../components/ImageGuidanceHeaderControls";
+import { InfoIcon } from "@chakra-ui/icons";
 
 export default function ImageGenerationHeader() {
   const {
@@ -66,6 +67,20 @@ export default function ImageGenerationHeader() {
         <h1 className="font-medium text-van-gogh-lg md:text-van-gogh-2xl">
           {text.title}
         </h1>
+      </div>
+      <div
+        className={
+          interfaceState.enableImageGuidance
+            ? "flex mt-4 px-4 md:px-8"
+            : "hidden"
+        }
+      >
+        <div className="flex items-center gap-2 w-fit bg-van-gogh-dark-blue-gradient px-4 py-2 border border-van-gogh-grey-blue-400 rounded-lg">
+          <InfoIcon color="#6A6AFB" h={5} w={5} />
+          <span className="text-van-gogh-grey-700">
+            Note that image guidance is on and will be affecting your output.
+          </span>
+        </div>
       </div>
       <div className="flex md:hidden justify-between px-4">
         <RandomPromptButton mobile={true} />

@@ -55,6 +55,7 @@ const config: Config = {
         "van-gogh-white-opal-100": "rgba(255, 255, 255, 0.06)",
         "van-gogh-white-opal-200": "rgba(255, 255, 255, 0.16)",
         "van-gogh-grey-opal-300": "rgba(170, 170, 170, 0.28)",
+        "van-gogh-grey-blue-400": "#282C42",
         "van-gogh-grey-250": "rgb(11, 15, 23)",
         "van-gogh-grey-400": "rgb(32, 33, 37)",
         "van-gogh-grey-500": "rgb(40, 40, 40)",
@@ -62,6 +63,7 @@ const config: Config = {
         "van-gogh-grey-700": "rgb(144, 148, 166)",
         "van-gogh-grey-800": "#242C3E",
         "van-gogh-purple-400": "rgb(114, 88, 242)",
+        "van-gogh-blue-200": "#101622",
         "van-gogh-blue-500": "rgb(16, 22, 34)",
         "van-gogh-blue-700": "#0B0F17",
         "van-gogh-blue-800": "rgb(22, 29, 45)",
@@ -77,6 +79,7 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "van-gogh-auto-fit-minmax-35": "repeat(auto-fit, minmax(calc(35.75rem), 1fr))",
+        "van-gogh-auto-fill-minmax-0-31": "repeat(auto-fill, minmax(0px, calc(31.875rem)))",
         "van-gogh-auto-fit-minmax-16": "repeat(auto-fit, minmax(calc(16rem), 1fr))",
         "van-gogh-auto-fit-minmax-24": "repeat(auto-fit, minmax(calc(24rem), 1fr))",
         "van-gogh-auto-fit-minmax-75px": "repeat(auto-fill, minmax(75px, 1fr))"

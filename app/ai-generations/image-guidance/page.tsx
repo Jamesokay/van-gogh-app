@@ -10,7 +10,6 @@ const Page = async () => {
   if (!history) return null;
   const recentImages = history
     .flatMap((generation) => generation.generated_images || [])
-    .map((x) => x.url);
 
   return (
     <div className="flex flex-col gap-6 py-9 w-full">

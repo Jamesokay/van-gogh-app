@@ -1,3 +1,4 @@
+import { LeonardoGeneratedImage } from "@/app/lib/definitions";
 import { ArrowForwardIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import {
   Menu,
@@ -9,8 +10,8 @@ import {
 import { FC } from "react";
 
 const RecentImagesDropdown: FC<{
-  setValue: (value: string) => void;
-  images: string[];
+  setValue: (value: LeonardoGeneratedImage) => void;
+  images: LeonardoGeneratedImage[];
 }> = ({ setValue, images }) => {
   return (
     <Menu variant="recentImagesMenu">
@@ -31,13 +32,13 @@ const RecentImagesDropdown: FC<{
             </p>
             <div className="grid grid-cols-van-gogh-auto-fit-minmax-75px px-2.5 pb-2.5 gap-2.5">
               {images.map((image) => (
-                <MenuItem key={image} onClick={() => setValue(image)}>
+                <MenuItem key={image.id} onClick={() => setValue(image)}>
                   <div
                     role="button"
                     className="relative w-full h-full overflow-hidden rounded-md"
                   >
                     <img
-                      src={image}
+                      src={image.url}
                       className="absolute w-full h-full object-cover"
                       alt="recent image"
                     />

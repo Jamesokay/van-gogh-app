@@ -17,8 +17,13 @@ import { Tooltip } from "@chakra-ui/react";
 const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
   openFileSystem,
 }) => {
-  const { interfaceState, generationRequest, setKeyOfGenerationRequest, handleImageGuidance, clearImageGuidance } =
-    useSettings();
+  const {
+    interfaceState,
+    generationRequest,
+    setKeyOfGenerationRequest,
+    handleImageGuidance,
+    clearImageGuidance,
+  } = useSettings();
   const currentAspectRatio = findApproximateAspectRatio({
     width: generationRequest.width,
     height: generationRequest.height,
@@ -48,12 +53,15 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
     setKeyOfGenerationRequest("height", uploadedDimensions.current.height);
   };
 
+  // To-do: Add tooltips
   return (
     <div
       className={
         !generationRequest.init_generation_image_id
           ? "hidden"
-          : "flex flex-col sm:flex-row gap-6 py-2.5 px-4"
+          : `flex flex-col sm:flex-row gap-6 py-2.5 px-4 transition-opacity ${
+              interfaceState.enableImageGuidance ? "opacity-100" : "opacity-30"
+            }`
       }
     >
       <div className="flex flex-col gap-1.5 flex-van-gogh-1-1-0">
@@ -62,11 +70,11 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
           <QuestionIcon opacity={0.3} />
         </div>
         <div className="flex justify-center w-full h-60 bg-black border border-van-gogh-grey-800 rounded-lg overflow-hidden">
-          {generationRequest.init_generation_image_id && (
+          {interfaceState.imageGuidanceSrc && (
             <div>
               <img
                 className="h-60 w-full object-contain"
-                src={generationRequest.init_generation_image_id}
+                src={interfaceState.imageGuidanceSrc}
                 alt=""
                 onLoad={handleImageLoaded}
               />
@@ -143,7 +151,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
               <p>{text.strength}</p>
               <QuestionIcon opacity={0.3} />
             </div>
-            <p>{divideAndRound(generationRequest.init_strength || 30)}</p>
+            <p className="rounded-md bg-van-gogh-blue-200 px-1.5 py-1">{divideAndRound(generationRequest.init_strength || 30).toFixed(2)}</p>
           </div>
           <div className="w-full">
             <RangeSlider
@@ -155,6 +163,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
               setValue={(x) => setKeyOfGenerationRequest("init_strength", x)}
               max={IMAGE_GUIDANCE_STRENGTH.MAX}
               min={IMAGE_GUIDANCE_STRENGTH.MIN}
+              purple={true}
             />
           </div>
         </div>
