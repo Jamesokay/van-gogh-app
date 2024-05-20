@@ -4,12 +4,11 @@ import { useSettings } from "@/app/context/SettingsContext";
 import Image from "next/image";
 
 const ImageGuidanceBanner = () => {
-  const { generationRequest } = useSettings();
-  const hidden = !!generationRequest.init_generation_image_id;
+  const { interfaceState } = useSettings();
   return (
     <div
       className={
-        hidden
+        interfaceState.imageGuidanceSrc
           ? "hidden"
           : "flex w-full overflow-hidden p-[1px] rounded-md min-h-16 bg-van-gogh-pink-gradient"
       }

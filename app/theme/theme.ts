@@ -1,9 +1,10 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, Popover } from "@chakra-ui/react";
 import { menuTheme } from "./menuTheme";
 import { textareaTheme } from "./textareaTheme";
 import { tooltipTheme } from "./tooltipTheme";
 import { modalTheme } from "./modalTheme";
 import { cardTheme } from "./cardTheme";
+import { popoverTheme } from "./popoverTheme";
 
 const theme = extendTheme({
   colors: {
@@ -22,6 +23,7 @@ const theme = extendTheme({
     Card: cardTheme,
     Menu: menuTheme,
     Modal: modalTheme,
+    Popover: popoverTheme,
     Textarea: textareaTheme,
     Tooltip: tooltipTheme,
   },

@@ -71,7 +71,7 @@ export default function ImageGenerationHeader() {
       <div
         className={
           interfaceState.enableImageGuidance
-            ? "flex mt-4 px-4 md:px-8"
+            ? "flex mb-4 md:mb-0 md:mt-4 px-4 md:px-8"
             : "hidden"
         }
       >

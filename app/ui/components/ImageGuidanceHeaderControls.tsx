@@ -8,14 +8,13 @@ import { IMAGE_GUIDANCE_STRENGTH } from "@/app/lib/definitions";
 import { divideAndRound } from "@/app/lib/helpers";
 
 const ImageGuidanceHeaderControls = () => {
-  // To-do: mobile styles
   const { interfaceState, generationRequest, setKeyOfGenerationRequest, setKeyOfInterfaceState } =
     useSettings();
   return (
     <div
       className={
         interfaceState.enableImageGuidance
-          ? "grid grid-cols-van-gogh-auto-fill-minmax-0-31 gap-3 w-full mb-4"
+          ? "grid grid-cols-van-gogh-auto-fill-minmax-0-31 gap-3 w-full mb-4 px-4 md:px-0"
           : "hidden"
       }
     >
