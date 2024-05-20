@@ -8,6 +8,7 @@ import ImageUploadInput from "./ImageUploadInput";
 import { FC, useRef } from "react";
 import { Tooltip } from "@chakra-ui/react";
 import { LeonardoGeneratedImage } from "@/app/lib/definitions";
+import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
 
 const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
   recentImages,
@@ -24,24 +25,54 @@ const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
     !generationRequest.init_generation_image_id &&
     !generationRequest.init_image_id;
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const readFileToLocalState = (file: File) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        if (!interfaceState.enableImageGuidance) {
+          setKeyOfInterfaceState("enableImageGuidance", true);
+        }
+        setKeyOfInterfaceState("imageGuidanceSrc", reader.result);
+      }
+    };
+    reader.onerror = (error) => {
+      console.error("Error reading file:", error);
+    };
+  };
+
+
+  const uploadFileToAPI = async (file: File) => {
+    try {
+      const details = await getPresignedUrl();
+      if (!details?.url || !details?.fields) return;
+      const { url, fields, id } = details;
+      const parsedFields = JSON.parse(fields);
+      const formData = new FormData();
+      for (const key in parsedFields) {
+        formData.append(key, parsedFields[key]);
+      }
+      formData.append('file', file);
+  
+      await uploadImageViaPresignedURL(formData, url);
+      setKeyOfGenerationRequest("init_image_id", id);
+      setKeyOfGenerationRequest("init_generation_image_id", null);
+    } catch (err) {
+      console.error("Error during upload process:", err);
+    }
+  };
+
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        if (typeof reader.result === "string") {
-          setKeyOfGenerationRequest("init_generation_image_id", reader.result);
-        }
-      };
-      reader.onerror = (error) => {
-        console.error("Error reading file:", error);
-      };
+      readFileToLocalState(file);
+      uploadFileToAPI(file);
     }
   };
 
   const openFileSystem = () => {
-    // To-do: logic for generating presigned URL/id for uploaded image
     if (!inputRef.current) return;
     inputRef.current.click();
   };

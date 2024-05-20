@@ -49,8 +49,8 @@ const defaultInterfaceState: InterfaceState = {
   newGenerationId: "",
   deletedGenerationIds: [],
   tokens: 0,
-  imageGuidanceType: 'Image to Image',
-  imageGuidanceSrc: ''
+  imageGuidanceType: "Image to Image",
+  imageGuidanceSrc: "",
 };
 
 const SettingsContext = createContext<SettingsContextProps>({
@@ -185,25 +185,34 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
 
   const clearImageGuidance = () => {
     setKeyOfInterfaceState("enableImageGuidance", false);
+    setInterfaceState((prev) => ({
+      ...prev,
+      enableImageGuidance: false,
+      imageGuidanceType: "Image to Image",
+      imageGuidanceSrc: "",
+    }));
     setGenerationRequest((prev) => ({
-        ...prev,
-        init_generation_image_id: null,
-        init_strength: null,
-        init_image_id: null,
-        controlNet: null,
-        controlNetType: null
+      ...prev,
+      init_generation_image_id: null,
+      init_strength: null,
+      init_image_id: null,
+      controlNet: null,
+      controlNetType: null,
     }));
   };
 
   // Reset SideBar state
   const handleReset = () => {
-    setInterfaceState(prev => ({ ...defaultInterfaceState, tokens: prev.tokens}));
+    setInterfaceState((prev) => ({
+      ...defaultInterfaceState,
+      tokens: prev.tokens,
+    }));
     setGenerationRequest(defaultGenerationRequest);
   };
 
   // Handle various options for Image Guidance
   const handleImageGuidance = (type: ImageGuidanceType) => {
-    setKeyOfInterfaceState('imageGuidanceType', type);
+    setKeyOfInterfaceState("imageGuidanceType", type);
     if (type === "Depth to Image") {
       setGenerationRequest((prev) => ({
         ...prev,

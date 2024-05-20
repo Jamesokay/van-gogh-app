@@ -12,7 +12,7 @@ const ImageUploadInput: FC<{
   openFileSystem: () => void;
 }> = ({ recentImages, openFileSystem }) => {
   const {
-    generationRequest,
+    interfaceState,
     setKeyOfGenerationRequest,
     setKeyOfInterfaceState,
   } = useSettings();
@@ -21,7 +21,7 @@ const ImageUploadInput: FC<{
   return (
     <div
       className={
-        generationRequest.init_generation_image_id
+        interfaceState.imageGuidanceSrc
           ? "hidden"
           : "flex flex-col gap-1.5 py-2.5 px-4"
       }

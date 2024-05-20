@@ -57,7 +57,7 @@ const UploadedImageComponent: FC<{ openFileSystem: () => void }> = ({
   return (
     <div
       className={
-        !generationRequest.init_generation_image_id
+        !interfaceState.imageGuidanceSrc
           ? "hidden"
           : `flex flex-col sm:flex-row gap-6 py-2.5 px-4 transition-opacity ${
               interfaceState.enableImageGuidance ? "opacity-100" : "opacity-30"

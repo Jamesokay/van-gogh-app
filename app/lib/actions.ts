@@ -10,6 +10,7 @@ import {
   PresignedDetails,
   ServerError,
 } from "./definitions";
+import { unstable_noStore as noStore } from "next/cache";
 
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
@@ -84,6 +85,7 @@ export async function generateImages(
 export async function getGenerationsByUserId(
   userId: string
 ): Promise<LeonardoGenerationResponse[] | null> {
+  noStore();
   if (!token) return handleNoToken();
   const options = getHeaders("GET");
   try {
@@ -171,18 +173,18 @@ export async function getPresignedUrl(): Promise<PresignedDetails | null> {
   }
 }
 
-// export async function uploadViaPresignedUrl(
-//   presignedUrl: string
-// ): Promise<PresignedDetails | null> {
-//   if (!token) return handleNoToken();
-//   const options = {
-//     ...getHeaders("POST"),
-//   };
-//   try {
-//     const response = await fetch(presignedUrl, options);
-//     const data = await handleResponse(response);
-//     return data.uploadInitImage;
-//   } catch (err) {
-//     return handleError(err, "Error improving prompt");
-//   }
-// }
+export async function uploadImageViaPresignedURL(
+  formData: FormData,
+  url: string
+) {
+  const response = await fetch(url, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error(`Upload failed with status: ${response.status}`);
+  }
+
+  console.log(`Upload image via presigned URL: ${response.status}`);
+}
