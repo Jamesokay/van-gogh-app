@@ -73,7 +73,7 @@ const GenerationHistoryPanel: FC<NonNullLeonardoGenerationResponse> = (props) =>
               }}
             >
               <CardBody padding={0} h={"100%"} w={"100%"}>
-                <CardImageLoader src={image.url} alt="" publicImage={props.public} />
+                <CardImageLoader id={image.id} src={image.url} alt="" publicImage={props.public} />
               </CardBody>
             </Card>
           </AspectRatio>

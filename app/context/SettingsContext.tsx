@@ -166,10 +166,12 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       if (generationRequest.promptMagic)
         setKeyOfGenerationRequest("promptMagic", false);
       setKeyOfGenerationRequest("alchemy", true);
+      setKeyOfGenerationRequest("presetStyle", "DYNAMIC");
     } else {
       if (generationRequest.photoReal)
         setKeyOfGenerationRequest("photoReal", false);
       setKeyOfGenerationRequest("alchemy", false);
+      setKeyOfGenerationRequest("presetStyle", "LEONARDO");
     }
   };
 
@@ -180,7 +182,12 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       if (generationRequest.promptMagic)
         setKeyOfGenerationRequest("promptMagic", false);
       setKeyOfGenerationRequest("photoReal", true);
-    } else setKeyOfGenerationRequest("photoReal", false);
+      setKeyOfGenerationRequest("presetStyle", "CINEMATIC");
+    } else {
+      setKeyOfGenerationRequest("photoReal", false);
+      if (generationRequest.alchemy) setKeyOfGenerationRequest("presetStyle", "DYNAMIC");
+      else setKeyOfGenerationRequest("presetStyle", "LEONARDO");
+    }
   };
 
   const clearImageGuidance = () => {

@@ -16,10 +16,7 @@ const imageModal = definePartsStyle({
   closeButton: {
     bg: "rgba(0, 0, 0, 0.34)",
     borderRadius: "999px",
-    zIndex: 50,
-    _focus: {
-      outline: "none",
-    },
+    zIndex: 50
   },
   dialog: {
     bg: "rgb(23, 23, 23)",

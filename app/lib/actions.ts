@@ -10,7 +10,6 @@ import {
   PresignedDetails,
   ServerError,
 } from "./definitions";
-import { unstable_noStore as noStore } from "next/cache";
 
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
@@ -85,7 +84,6 @@ export async function generateImages(
 export async function getGenerationsByUserId(
   userId: string
 ): Promise<LeonardoGenerationResponse[] | null> {
-  noStore();
   if (!token) return handleNoToken();
   const options = getHeaders("GET");
   try {

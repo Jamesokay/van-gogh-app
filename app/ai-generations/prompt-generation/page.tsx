@@ -44,7 +44,7 @@ const Page = () => {
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
         />
-        <button className="relative flex text-van-gogh-sm h-10 bg-van-gogh-pink-gradient p-[1px] rounded-lg hover:shadow-van-gogh-purple-glow">
+        <div className="relative flex text-van-gogh-sm h-10 bg-van-gogh-pink-gradient p-[1px] rounded-lg hover:shadow-van-gogh-purple-glow">
           <p className="hidden md:block absolute text-center w-full pb-1 bottom-full text-van-gogh-2xs text-van-gogh-text-grey-600">
             {`${remainingPrompts} ${text.promptsRemaining}`}
           </p>
@@ -52,7 +52,7 @@ const Page = () => {
             <LightBulbIcon />
             {text.buttonText}
           </button>
-        </button>
+        </div>
       </div>
     </div>
   );

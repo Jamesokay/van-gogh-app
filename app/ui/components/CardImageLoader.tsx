@@ -10,9 +10,10 @@ import EyeStrokeIcon from "../svg/EyeStrokeIcon";
 
 const CardImageLoader: FC<{
   src: string;
+  id: string;
   alt: string;
   publicImage: boolean;
-}> = ({ src, alt, publicImage }) => {
+}> = ({ src, id, alt, publicImage }) => {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -27,11 +28,7 @@ const CardImageLoader: FC<{
       <Tooltip
         placement="left"
         hasArrow
-        label={
-          publicImage
-            ? tooltipText.publicImage
-            : tooltipText.privateImage
-        }
+        label={publicImage ? tooltipText.publicImage : tooltipText.privateImage}
       >
         <div
           role="button"
@@ -44,7 +41,7 @@ const CardImageLoader: FC<{
           {publicImage ? <EyeIcon /> : <EyeStrokeIcon />}
         </div>
       </Tooltip>
-      <ImageCardHoverOverlay src={src} hidden={!loaded} />
+      <ImageCardHoverOverlay id={id} src={src} hidden={!loaded} />
       <img
         src={src}
         alt={alt}

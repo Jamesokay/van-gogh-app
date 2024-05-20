@@ -17,24 +17,24 @@ import { useSettings } from "@/app/context/SettingsContext";
 import { useRouter } from "next/navigation";
 import ImageDownloadButton from "./ImageDownloadButton";
 
-const ImageCardHoverOverlay: FC<{ src: string; hidden: boolean }> = ({
-  src,
-  hidden,
-}) => {
+const ImageCardHoverOverlay: FC<{
+  src: string;
+  id: string;
+  hidden: boolean;
+}> = ({ src, id, hidden }) => {
   const { setKeyOfGenerationRequest, interfaceState, setKeyOfInterfaceState } =
     useSettings();
-  
+
   const router = useRouter();
 
   const handleImageGuidanceInput = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setKeyOfGenerationRequest("init_generation_image_id", src);
+    setKeyOfGenerationRequest("init_generation_image_id", id);
+    setKeyOfInterfaceState("imageGuidanceSrc", src)
     if (!interfaceState.enableImageGuidance)
       setKeyOfInterfaceState("enableImageGuidance", true);
-    router.push("/image-guidance");
+    router.push("/ai-generations/image-guidance");
   };
-
-
 
   return (
     <div

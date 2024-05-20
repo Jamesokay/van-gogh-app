@@ -26,8 +26,9 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
     try {
       const newPrompt =
         action === "improve"
-          ? await generateRandomPrompt()
-          : await improvePrompt(generationRequest.prompt);
+          ? await improvePrompt(generationRequest.prompt)
+          : await generateRandomPrompt();
+
       if (!newPrompt) {
         setPromptLoading(false);
         return;
@@ -42,7 +43,7 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
 
   return (
     <Popover initialFocusRef={popoverRef} placement="bottom-start" gutter={0}>
-      {({ isOpen }) => (
+      {({ isOpen, onClose }) => (
         <>
           <PopoverTrigger>
             <button
@@ -75,7 +76,10 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
             <PopoverBody>
               <button
                 className="w-full py-2 px-5 flex gap-2 items-center font-medium text-van-gogh-white-opal-900 text-van-gogh-sm border-b transition-all border-van-gogh-grey-800 bg-van-gogh-white-opal-150 hover:bg-van-gogh-white-opal-200"
-                onClick={() => handlePromptAction("generate")}
+                onClick={() => {
+                  handlePromptAction("generate");
+                  onClose();
+                }}
               >
                 <HelixArrowsIcon />
                 {/* To-do: define strings elsewhere */}
@@ -90,6 +94,7 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
                 onClick={() => {
                   if (disableImprove) return;
                   handlePromptAction("improve");
+                  onClose();
                 }}
               >
                 <div className="flex gap-2 items-center">
@@ -98,7 +103,9 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
                 </div>
                 <p
                   className={
-                    generationRequest.prompt.length > 200 ? "text-van-gogh-grey-700" : "hidden"
+                    generationRequest.prompt.length > 200
+                      ? "text-van-gogh-grey-700"
+                      : "hidden"
                   }
                 >
                   Only works on prompts with less than 200 characters
