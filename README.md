@@ -342,9 +342,17 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Updated context to account for both image src and image id
 - Added UI state for when Image Guidance is disabled, but a selected image is still present
 
+### Day 28 (20/05/2024):
+
+<img width="1512" alt="Screenshot 2024-05-20 at 9 26 47 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/3ae6edf0-2867-4fb4-9701-e344a8f1c08c">
+<img width="1511" alt="Screenshot 2024-05-20 at 9 26 34 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/62907c1d-af3b-4526-b00d-af69ef41a073">
+
+- Working implementation of Image Guidance using user uploaded images
+- Logic for getting presigned details and uploading image to presigned URL
+- Logic for using the presigned ID in generation request
+
 ### To Do:
 
-- Add logic for using uploaded images for Image Guidance
 - Deep(er) dive in Server Actions in Next 14 (am I using them correctly? Are my API calls being deduped as expected?)
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
