@@ -351,6 +351,13 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Logic for getting presigned details and uploading image to presigned URL
 - Logic for using the presigned ID in generation request
 
+### Day 28 (later):
+
+<img width="1228" alt="Screenshot 2024-05-20 at 11 48 17 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/9a348af2-a631-4cad-b377-566943b09013">
+
+- Popover for Prompt Button, with options for generate and improve
+- Implemented functionality for improving supplied prompt
+
 ### To Do:
 
 - Deep(er) dive in Server Actions in Next 14 (am I using them correctly? Are my API calls being deduped as expected?)
