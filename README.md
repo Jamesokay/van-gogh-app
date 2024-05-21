@@ -1,4 +1,16 @@
-## Development Log
+# Clone of Leonardo.Ai Image Generation Interface (Next.js 14, Tailwind, Chakra UI)
+
+## Progress Thus Far (28 Days In)
+<img width="1919" alt="Screenshot 2024-05-21 at 10 42 53 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/ee3b8807-0913-444b-aa9b-684fd1a53a19">
+<img width="1919" alt="Screenshot 2024-05-21 at 10 43 28 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/ca9da2a4-6bcf-4cd1-9852-05ed856911c0">
+<img width="1920" alt="Screenshot 2024-05-21 at 10 43 48 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/37700785-1211-4021-bfdd-d21c594f39ae">
+
+- Basic functionality achieved. Users can generate images with a variety of different models and apply different settings.
+- Support for Image Guidance, with both generated images and user uploads.
+- Support for Prompt Generation and Prompt Improvement.
+- Work still to be done on optimisation and leveraging the latest features of Next.js 14 to full effect.
+
+## Development Log (From Beginning to Present)
 
 ### Day 4 (26/04/2024):
 
