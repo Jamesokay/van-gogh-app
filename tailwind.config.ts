@@ -75,6 +75,7 @@ const config: Config = {
         "van-gogh-input-grey-700": "rgb(23, 23, 23)",
         "van-gogh-hover-grey-800": "rgb(19, 25, 38)",
         "van-gogh-icon-grey-900": "rgb(73, 78, 91)",
+        "van-gogh-border-grey-300": "#26272C"
       },
       flex: {
         "van-gogh-1-1-0": "1 1 0%",

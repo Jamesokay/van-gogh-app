@@ -6,13 +6,16 @@ import {
   MenuGroup,
   MenuItem,
   MenuList,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { FC } from "react";
+import ImageInputModal from "./ImageInputModal";
 
 const RecentImagesDropdown: FC<{
   setValue: (value: LeonardoGeneratedImage) => void;
   images: LeonardoGeneratedImage[];
 }> = ({ setValue, images }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Menu variant="recentImagesMenu">
       <MenuButton>
@@ -48,10 +51,14 @@ const RecentImagesDropdown: FC<{
             </div>
           </MenuGroup>
         </div>
-        <button className="flex justify-center items-center gap-1 w-full h-8 bg-van-gogh-blue-500">
+        <button
+          className="flex justify-center items-center gap-1 w-full h-8 bg-van-gogh-blue-500"
+          onClick={onOpen}
+        >
           <span className="text-van-gogh-sm font-medium">Show more</span>
           <ArrowForwardIcon />
         </button>
+        <ImageInputModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       </MenuList>
     </Menu>
   );

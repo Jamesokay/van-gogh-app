@@ -4,7 +4,7 @@ import { FC } from "react";
 import UploadIcon from "../../svg/UploadIcon";
 import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
-import RecentImagesDropdown from "../../components/RecentImagesDropdown";
+import RecentImagesDropdown from "./RecentImagesDropdown";
 import { LeonardoGeneratedImage } from "@/app/lib/definitions";
 
 const ImageUploadInput: FC<{

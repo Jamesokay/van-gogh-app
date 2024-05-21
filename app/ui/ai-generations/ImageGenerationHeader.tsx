@@ -33,6 +33,7 @@ import AlchemyIcon from "../svg/AlchemyIcon";
 import PhotoRealIcon from "../svg/PhotoRealIcon";
 import ImageGuidanceHeaderControls from "../components/ImageGuidanceHeaderControls";
 import { InfoIcon } from "@chakra-ui/icons";
+import { Collapse, useDisclosure } from "@chakra-ui/react";
 
 export default function ImageGenerationHeader() {
   const {
@@ -43,6 +44,7 @@ export default function ImageGenerationHeader() {
   } = useSettings();
 
   const pathname = usePathname();
+  const { isOpen, onToggle } = useDisclosure();
   const selectedModel =
     modelData.find((x) => x.modelId === generationRequest.modelId) ||
     modelData[0];
@@ -108,26 +110,24 @@ export default function ImageGenerationHeader() {
         />
         <GenerateButton mobile={false} />
       </div>
-      <div
-        className={
-          interfaceState.enableNegativePrompt
-            ? "overflow-hidden px-4 md:px-8 mb-4"
-            : "hidden"
-        }
-      >
-        <TextareaAutoResize
-          maxLength={1000}
-          placeholder={text.negPromptInputPlaceholder}
-          value={
-            generationRequest.negative_prompt
-              ? generationRequest.negative_prompt
-              : ""
-          }
-          handleChange={(e) =>
-            setKeyOfGenerationRequest("negative_prompt", e.target.value)
-          }
-        />
-      </div>
+
+      <Collapse in={isOpen}>
+        <div className="overflow-hidden px-4 md:px-8 mb-4">
+          <TextareaAutoResize
+            maxLength={1000}
+            placeholder={text.negPromptInputPlaceholder}
+            value={
+              generationRequest.negative_prompt
+                ? generationRequest.negative_prompt
+                : ""
+            }
+            handleChange={(e) =>
+              setKeyOfGenerationRequest("negative_prompt", e.target.value)
+            }
+          />
+        </div>
+      </Collapse>
+
       <div className="flex flex-wrap gap-4 px-4 mb-8 md:mb-0 md:px-8">
         <ModelDropdownMenu
           options={modelData}
@@ -161,12 +161,13 @@ export default function ImageGenerationHeader() {
         <div className="flex gap-2 items-center">
           <Switch
             enabled={interfaceState.enableNegativePrompt}
-            handleToggle={() =>
+            handleToggle={() => {
               setKeyOfInterfaceState(
                 "enableNegativePrompt",
                 !interfaceState.enableNegativePrompt
-              )
-            }
+              );
+              onToggle();
+            }}
           />
           {text.addNegPrompt}
         </div>
