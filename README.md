@@ -370,8 +370,14 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Popover for Prompt Button, with options for generate and improve
 - Implemented functionality for improving supplied prompt
 
+### Day 29 (21/05/2024):
+
+- Basic component for ImageInputModal
+- Placed Negative Prompt textarea inside of Chakra collapse transition
+
 ### To Do:
 
+- ImageInputModal
 - Deep(er) dive in Server Actions in Next 14 (am I using them correctly? Are my API calls being deduped as expected?)
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
