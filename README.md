@@ -386,9 +386,21 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Need to hook up functionality for setting state of generationRequest
 - Need to implement content of other tabs (insofar as this is possible via API)
 
+### Day 30 (later):
+
+<img width="1512" alt="Screenshot 2024-05-22 at 5 48 42 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/53bad360-465e-475b-9af9-ce147396e4ff">
+<img width="1512" alt="Screenshot 2024-05-22 at 5 48 55 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/319ea43f-ae2a-48dc-8678-561a20414915">
+<img width="1512" alt="Screenshot 2024-05-22 at 5 49 05 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/fb451618-3d0a-415d-9a37-1ae124730662">
+<img width="1512" alt="Screenshot 2024-05-22 at 5 49 19 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/fe0aa38e-a1ee-4c5f-bbb7-55414ab78265">
+<img width="1512" alt="Screenshot 2024-05-22 at 5 49 55 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/df27b605-b11c-4e54-8511-c07595caf174">
+
+- Further implementation of ImageInputModal
+- Logic for selecting image and confirming selection
+- Hover styles and selected styles
+
 ### To Do:
 
-- ImageInputModal
+- Continue implementing ImageInputModal
 - Deep(er) dive in Server Actions in Next 14 (am I using them correctly? Are my API calls being deduped as expected?)
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
