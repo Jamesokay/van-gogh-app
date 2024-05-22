@@ -382,8 +382,9 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Basic implementation of ImageInputModal (styling, logic for constructing grid layout dynamically)
 - Need to consider logic for fetching images inside of modal
 - Need to ensure mobile responsiveness
-- Need to implement styles/logic for selcting image and confirming selection
+- Need to implement styles/logic for selecting image and confirming selection (confirm button disabled prior to selection)
 - Need to hook up functionality for setting state of generationRequest
+- Need to implement content of other tabs (insofar as this is possible via API)
 
 ### To Do:
 
