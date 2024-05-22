@@ -1,3 +1,5 @@
+'use client'
+
 import { LeonardoGeneratedImage } from "@/app/lib/definitions";
 import { ArrowForwardIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import {
@@ -58,7 +60,7 @@ const RecentImagesDropdown: FC<{
           <span className="text-van-gogh-sm font-medium">Show more</span>
           <ArrowForwardIcon />
         </button>
-        <ImageInputModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+        <ImageInputModal isOpen={isOpen} onClose={onClose} images={images} />
       </MenuList>
     </Menu>
   );

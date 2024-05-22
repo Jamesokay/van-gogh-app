@@ -47,6 +47,7 @@ const config: Config = {
         "van-gogh-purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)",
       },
       colors: {
+        "van-gogh-grey-50": "rgb(23, 23, 23)",
         "van-gogh-grey-100": "rgb(36, 44, 62)",
         "van-gogh-grey-200": "rgba(255, 255, 255, 0.24)",
         "van-gogh-black-opal-300": "rgba(0, 0, 0, 0.34)",

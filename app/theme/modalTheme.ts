@@ -35,13 +35,14 @@ const imageModal = definePartsStyle({
 
 const imageInputModal = definePartsStyle({
   header: {
-    padding: '1.75rem 1.5rem',
+    padding: 0,
     background: 'rgb(17, 17, 17)',
     borderBottom: "1px solid rgb(38, 39, 44)"
   },
   body: {
-    padding: 0,
+    padding: '1.75rem',
     marginTop: 0,
+    overflowY: "scroll"
   },
   overlay: {
     bg: "rgba(0, 0, 0, 0.48)",
@@ -58,14 +59,23 @@ const imageInputModal = definePartsStyle({
     width: "auto",
     margin: "auto",
     maxW: "1150px",
-    boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px,rgba(0, 0, 0, 0.2) 0px 5px 10px,rgba(0, 0, 0, 0.4) 0px 15px 40px"
+    maxH: "calc(-2.5rem + 100vh)",
+    boxShadow: "rgba(0, 0, 0, 0.1) 0px 0px 0px 1px,rgba(0, 0, 0, 0.2) 0px 5px 10px,rgba(0, 0, 0, 0.4) 0px 15px 40px",
+    borderRadius: '1rem',
+    overflow: 'hidden'
   },
   // content container
   dialogContainer: {
-    overflow: "hidden",
+    overflow: "hidden"
   },
   footer: {
-    padding: 0,
+    background: 'rgb(17, 17, 17)',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "0.75rem",
+    padding: "1.75rem",
+    borderTop: "1px solid rgb(38, 39, 44)"
   },
 });
 

@@ -5,6 +5,7 @@ import { tooltipTheme } from "./tooltipTheme";
 import { modalTheme } from "./modalTheme";
 import { cardTheme } from "./cardTheme";
 import { popoverTheme } from "./popoverTheme";
+import { inputTheme } from "./inputTheme";
 
 const theme = extendTheme({
   colors: {
@@ -21,6 +22,7 @@ const theme = extendTheme({
   },
   components: {
     Card: cardTheme,
+    Input: inputTheme,
     Menu: menuTheme,
     Modal: modalTheme,
     Popover: popoverTheme,
