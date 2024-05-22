@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { LeonardoGeneratedImage } from "@/app/lib/definitions";
 import { ArrowForwardIcon, TriangleDownIcon } from "@chakra-ui/icons";

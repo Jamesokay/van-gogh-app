@@ -41,7 +41,7 @@ const config: Config = {
         "van-gogh-image-overlay-gradient":
           "linear-gradient(rgba(18, 19, 21, 0) -2.43%, rgb(18, 19, 21) 97.57%)",
         "van-gogh-loading-spinner-gradient":
-          "conic-gradient(rgb(23, 38, 44), rgb(250, 85, 96), rgb(177, 75, 244), rgb(23, 38, 44), rgb(23, 38, 44), rgb(177, 75, 244), rgb(77, 145, 255), rgb(23, 38, 44), rgb(23, 38, 44))",
+          "conic-gradient(rgb(23, 38, 44), rgb(250, 85, 96), rgb(177, 75, 244), rgb(23, 38, 44), rgb(23, 38, 44), rgb(177, 75, 244), rgb(77, 145, 255), rgb(23, 38, 44), rgb(23, 38, 44))"
       },
       boxShadow: {
         "van-gogh-purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)",
@@ -53,6 +53,7 @@ const config: Config = {
         "van-gogh-black-opal-300": "rgba(0, 0, 0, 0.34)",
         "van-gogh-black-opal-400": "rgba(0, 0, 0, 0.48)",
         "van-gogh-black-opal-500": "rgba(25, 25, 25, 0.5)",
+        "van-gogh-black-opal-600" : "rgba(0, 0, 0, 0.65)",
         "van-gogh-white-opal-100": "rgba(255, 255, 255, 0.06)",
         "van-gogh-white-opal-150": "rgba(255, 255, 255, 0.08)",
         "van-gogh-white-opal-200": "rgba(255, 255, 255, 0.16)",

@@ -17,13 +17,16 @@ import { FC, useEffect, useState } from "react";
 import RangeSlider from "../../components/RangeSlider";
 import GridIcon from "../../svg/GridIcon";
 import { LeonardoGeneratedImage } from "@/app/lib/definitions";
+import TickIcon from "../../svg/TickIcon";
+import { useSettings } from "@/app/context/SettingsContext";
 
 const ImageInputModal: FC<{
   isOpen: boolean;
   onClose: () => void;
   images: LeonardoGeneratedImage[];
 }> = ({ isOpen, onClose, images }) => {
-  const [selectedTab, setSelectedTab] = useState("Your Uploads");
+  const { setKeyOfGenerationRequest, setKeyOfInterfaceState } = useSettings();
+  const [selectedTab, setSelectedTab] = useState("Your Generations");
   const tabs = [
     "Your Uploads",
     "Your Generations",
@@ -37,6 +40,10 @@ const ImageInputModal: FC<{
     []
   );
   const [columns, setColumns] = useState(4);
+  const [selected, setSelected] = useState<{ id: string; url: string }>({
+    id: "",
+    url: "",
+  });
 
   useEffect(() => {
     const array: LeonardoGeneratedImage[][] = Array.from(
@@ -44,10 +51,29 @@ const ImageInputModal: FC<{
       () => []
     );
     images.forEach((image, index) => {
-      array[index % columns].push(image);
+      array[index % columns]?.push(image);
     });
     setColumnImages(array);
   }, [columns]);
+
+  const handleToggle = (current: number, dir: "plus" | "minus") => {
+    if (dir === "minus") {
+      if (current === 1) return;
+      setColumns(current - 1);
+    } else {
+      if (current === 5) return;
+      setColumns(current + 1);
+    }
+  };
+
+  const handleSelect = (
+    currentId: string,
+    newImage: LeonardoGeneratedImage
+  ) => {
+    if (currentId !== newImage.id)
+      setSelected({ id: newImage.id, url: newImage.url });
+    else setSelected({ id: "", url: "" });
+  };
 
   return (
     <Modal variant="imageInputModal" isOpen={isOpen} onClose={onClose}>
@@ -122,7 +148,7 @@ const ImageInputModal: FC<{
               </div>
               <div className="flex gap-3 items-center">
                 <GridIcon />
-                <button>
+                <button onClick={() => handleToggle(columns, "minus")}>
                   <MinusIcon w={3} />
                 </button>
                 <div className="w-36">
@@ -134,7 +160,7 @@ const ImageInputModal: FC<{
                     purple
                   />
                 </div>
-                <button>
+                <button onClick={() => handleToggle(columns, "plus")}>
                   <AddIcon w={3} />
                 </button>
               </div>
@@ -143,17 +169,42 @@ const ImageInputModal: FC<{
         </ModalHeader>
         <ModalBody>
           <div
+            className="grid gap-4"
             style={{
-              display: "grid",
-              gap: "1rem",
               gridTemplateColumns: `repeat(${columns}, minmax(0px, 1fr))`,
             }}
           >
             {columnImages.map((col, colIndex) => (
-              <div key={colIndex} className="flex flex-col">
+              <div key={colIndex} className="flex flex-col items-center">
                 {col.map((image, imgIndex) => (
-                  <div key={imgIndex} className="mb-4 rounded-2xl overflow-hidden">
-                    <img src={image.url} alt="Generated image" />
+                  <div
+                    key={imgIndex}
+                    role="button"
+                    className={`${
+                      selected.id === image.id
+                        ? "selected-image-with-border"
+                        : "image-with-border"
+                    } relative border-transparent border-4 flex justify-center mb-4 w-full rounded-2xl`}
+                    onClick={() => handleSelect(selected.id, image)}
+                  >
+                    <div className="absolute w-full h-full bg-van-gogh-black-opal-600 z-10 rounded-2xl"></div>
+                    <div
+                      className={`image-interior transition-all z-20 rounded-2xl w-full ${
+                        columns === 1 ? "max-w-[512px]" : ""
+                      }`}
+                    >
+                      <img
+                        src={image.url}
+                        alt="Generated image"
+                        className="rounded-2xl"
+                      />
+                    </div>
+                    <div
+                      className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-14 w-14 bg-van-gogh-purple-gradient rounded-full z-50 flex justify-center items-center transition-all
+                    ${selected.id === image.id ? "opacity-100" : "opacity-0"}`}
+                    >
+                      <TickIcon fill={"#fff"} className="h-10 w-10" />
+                    </div>
                   </div>
                 ))}
               </div>
@@ -167,7 +218,22 @@ const ImageInputModal: FC<{
           >
             Cancel
           </button>
-          <button className="font-semibold w-80 h-12 bg-van-gogh-purple-gradient rounded-md hover:shadow-van-gogh-purple-glow">
+          <button
+            disabled={!selected.id}
+            className={`font-semibold w-80 h-12 bg-van-gogh-purple-gradient rounded-md hover:shadow-van-gogh-purple-glow transition-all ${
+              !selected.id ? "grayscale cursor-not-allowed opacity-40" : ""
+            }`}
+            onClick={() => {
+              setKeyOfInterfaceState("enableImageGuidance", true);
+              setKeyOfInterfaceState("imageGuidanceSrc", selected.url);
+              setKeyOfGenerationRequest(
+                "init_generation_image_id",
+                selected.url
+              );
+              setSelected({ id: "", url: "" });
+              onClose();
+            }}
+          >
             Confirm
           </button>
         </ModalFooter>

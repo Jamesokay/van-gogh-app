@@ -5,7 +5,7 @@ import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import UploadedImageComponent from "./UploadedImageComponent";
 import ImageUploadInput from "./ImageUploadInput";
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { Tooltip } from "@chakra-ui/react";
 import { LeonardoGeneratedImage } from "@/app/lib/definitions";
 import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
@@ -19,11 +19,16 @@ const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
     interfaceState,
     setKeyOfInterfaceState,
   } = useSettings();
+  const [images, setImages] = useState<LeonardoGeneratedImage[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const text = imageGuidanceStrings.uploadStrings;
   const noImageProvided =
     !generationRequest.init_generation_image_id &&
     !generationRequest.init_image_id;
+
+  useEffect(() => {
+    setImages(recentImages);
+  }, []);
 
   const readFileToLocalState = (file: File) => {
     const reader = new FileReader();
@@ -41,7 +46,6 @@ const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
     };
   };
 
-
   const uploadFileToAPI = async (file: File) => {
     try {
       const details = await getPresignedUrl();
@@ -52,8 +56,8 @@ const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
       for (const key in parsedFields) {
         formData.append(key, parsedFields[key]);
       }
-      formData.append('file', file);
-  
+      formData.append("file", file);
+
       await uploadImageViaPresignedURL(formData, url);
       setKeyOfGenerationRequest("init_image_id", id);
       setKeyOfGenerationRequest("init_generation_image_id", null);
@@ -117,11 +121,15 @@ const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
         className="hidden"
         onChange={handleFileChange}
       ></input>
-      <ImageUploadInput
-        recentImages={recentImages}
-        openFileSystem={openFileSystem}
-      />
-      <UploadedImageComponent openFileSystem={openFileSystem} />
+      {images.length > 0 && (
+        <ImageUploadInput
+          recentImages={images}
+          openFileSystem={openFileSystem}
+        />
+      )}
+      {!!interfaceState.imageGuidanceSrc && (
+        <UploadedImageComponent openFileSystem={openFileSystem} />
+      )}
     </div>
   );
 };

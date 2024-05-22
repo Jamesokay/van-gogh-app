@@ -85,6 +85,34 @@ body {
   border-image-slice: 1;
 }
 
+.selected-image-with-border {
+  background: linear-gradient(black, black) padding-box padding-box,
+    linear-gradient(
+        rgb(250, 85, 96) -23.47%,
+        rgb(177, 75, 244) 45.52%,
+        rgb(77, 145, 255) 114.8%
+      )
+      border-box border-box;
+}
+
+.selected-image-with-border .image-interior {
+  opacity: 0.4;
+}
+
+.image-with-border {
+  background: transparent;
+}
+
+.image-with-border:hover {
+  background: linear-gradient(black, black) padding-box padding-box,
+    linear-gradient(
+        rgb(250, 85, 96) -23.47%,
+        rgb(177, 75, 244) 45.52%,
+        rgb(77, 145, 255) 114.8%
+      )
+      border-box border-box;
+}
+
 .empty-selections-bg {
   background-image: url("/empty-selections.webp");
   background-size: contain; /* Cover the entire area of the element */
@@ -107,29 +135,6 @@ body {
 .right-image-nav {
   right: calc(3rem * -1);
 }
-
-/* Styles for dynamically resizing textarea, may implement later
-.grow-wrap {
-  display: grid;
-  width: 100%;
-}
-.grow-wrap::after {
-  content: attr(data-replicated-value) " ";
-  white-space: pre-wrap;
-  visibility: hidden;
-}
-.grow-wrap > textarea {
-  resize: none;
-  overflow: hidden;
-}
-.grow-wrap > textarea,
-.grow-wrap::after {
-  border-radius: 0.5rem;
-  padding: 0.154rem;
-  font: inherit;
-  grid-area: 1 / 1 / 2 / 2;
-  background: rgb(16, 22, 34);
-} */
 
 @layer utilities {
   .text-balance {

@@ -56,7 +56,7 @@ const imageInputModal = definePartsStyle({
   // content
   dialog: {
     bg: "rgb(23, 23, 23)",
-    width: "auto",
+    width: "100%",
     margin: "auto",
     maxW: "1150px",
     maxH: "calc(-2.5rem + 100vh)",

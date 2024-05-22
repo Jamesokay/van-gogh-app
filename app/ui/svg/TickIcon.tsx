@@ -1,13 +1,16 @@
 import { uniqueId } from "@/app/lib/helpers";
 import { FC, useMemo } from "react";
 
-const TickIcon: FC<{ fill?: string }> = ({ fill = "" }) => {
+const TickIcon: FC<{ fill?: string; className?: string }> = ({
+  fill = "",
+  className = "",
+}) => {
   const gradientId = useMemo(uniqueId, []);
   return (
     <svg
       viewBox="0 0 24 24"
       focusable="false"
-      className="h-6 w-6"
+      className={className ? className : "h-6 w-6"}
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
