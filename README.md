@@ -375,6 +375,16 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Basic component for ImageInputModal
 - Placed Negative Prompt textarea inside of Chakra collapse transition
 
+### Day 30 (22/05/2024):
+
+<img width="1511" alt="Screenshot 2024-05-22 at 10 56 59 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/b4483b3c-005b-45dc-9c29-9838f9e645dc">
+
+- Basic implementation of ImageInputModal (styling, logic for constructing grid layout dynamically)
+- Need to consider logic for fetching images inside of modal
+- Need to ensure mobile responsiveness
+- Need to implement styles/logic for selcting image and confirming selection
+- Need to hook up functionality for setting state of generationRequest
+
 ### To Do:
 
 - ImageInputModal
