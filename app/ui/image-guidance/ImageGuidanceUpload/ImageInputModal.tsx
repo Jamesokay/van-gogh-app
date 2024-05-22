@@ -19,6 +19,7 @@ import GridIcon from "../../svg/GridIcon";
 import { LeonardoGeneratedImage } from "@/app/lib/definitions";
 import TickIcon from "../../svg/TickIcon";
 import { useSettings } from "@/app/context/SettingsContext";
+import { imageInputTabs } from "@/app/lib/dataConstants";
 
 const ImageInputModal: FC<{
   isOpen: boolean;
@@ -27,12 +28,6 @@ const ImageInputModal: FC<{
 }> = ({ isOpen, onClose, images }) => {
   const { setKeyOfGenerationRequest, setKeyOfInterfaceState } = useSettings();
   const [selectedTab, setSelectedTab] = useState("Your Generations");
-  const tabs = [
-    "Your Uploads",
-    "Your Generations",
-    "Community Feed",
-    "Follower Feed",
-  ];
   const [selectedFilter, setSelectedFilter] = useState<"All" | "Upscaled">(
     "All"
   );
@@ -61,7 +56,7 @@ const ImageInputModal: FC<{
       if (current === 1) return;
       setColumns(current - 1);
     } else {
-      if (current === 5) return;
+      if (current === 5) return; // To-do: prop in max
       setColumns(current + 1);
     }
   };
@@ -75,6 +70,14 @@ const ImageInputModal: FC<{
     else setSelected({ id: "", url: "" });
   };
 
+  const handleConfirm = () => {
+    setKeyOfInterfaceState("enableImageGuidance", true);
+    setKeyOfInterfaceState("imageGuidanceSrc", selected.url);
+    setKeyOfGenerationRequest("init_generation_image_id", selected.url);
+    setSelected({ id: "", url: "" });
+    onClose();
+  };
+
   return (
     <Modal variant="imageInputModal" isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -86,7 +89,7 @@ const ImageInputModal: FC<{
           </div>
           <div className="flex border-b border-van-gogh-border-grey-300 px-6">
             <div className="flex gap-7 text-van-gogh-md w-full">
-              {tabs.map((tab) => (
+              {imageInputTabs.map((tab) => (
                 <button
                   key={tab}
                   className={`py-3 ${
@@ -148,10 +151,14 @@ const ImageInputModal: FC<{
               </div>
               <div className="flex gap-3 items-center">
                 <GridIcon />
-                <button onClick={() => handleToggle(columns, "minus")}>
+                <button
+                  className="w-10"
+                  onClick={() => handleToggle(columns, "minus")}
+                >
                   <MinusIcon w={3} />
                 </button>
                 <div className="w-36">
+                  {/* To-do: seperate version for mobile view with max of 2 */}
                   <RangeSlider
                     value={columns}
                     min={1}
@@ -160,7 +167,10 @@ const ImageInputModal: FC<{
                     purple
                   />
                 </div>
-                <button onClick={() => handleToggle(columns, "plus")}>
+                <button
+                  className="w-10"
+                  onClick={() => handleToggle(columns, "plus")}
+                >
                   <AddIcon w={3} />
                 </button>
               </div>
@@ -223,16 +233,7 @@ const ImageInputModal: FC<{
             className={`font-semibold w-80 h-12 bg-van-gogh-purple-gradient rounded-md hover:shadow-van-gogh-purple-glow transition-all ${
               !selected.id ? "grayscale cursor-not-allowed opacity-40" : ""
             }`}
-            onClick={() => {
-              setKeyOfInterfaceState("enableImageGuidance", true);
-              setKeyOfInterfaceState("imageGuidanceSrc", selected.url);
-              setKeyOfGenerationRequest(
-                "init_generation_image_id",
-                selected.url
-              );
-              setSelected({ id: "", url: "" });
-              onClose();
-            }}
+            onClick={() => handleConfirm()}
           >
             Confirm
           </button>

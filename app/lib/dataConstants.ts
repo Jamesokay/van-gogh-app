@@ -187,7 +187,14 @@ export const imageGuidanceTypes = [
   "Image to Image",
   "Depth to Image",
   "Edge to Image",
-  "Pose to Image"
+  "Pose to Image",
 ];
 
 export const numberOfPromptsOptions = [2, 4, 6, 8];
+
+export const imageInputTabs = [
+  "Your Uploads",
+  "Your Generations",
+  "Community Feed",
+  "Follower Feed",
+];
