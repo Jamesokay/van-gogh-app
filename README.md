@@ -404,9 +404,12 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Investigation into on-demand revalidation (not yet working as desired)
 - Investigation into Ngrok, which as of recently can provide a consistent callback URL. Initially it seemed the URL would reset every few hours, thus making a local implementation of webhooks unfeasible. This appears to no longer be the case, so I will be getting that up and running, and replacing the logic for API polling with a webhook.
 
+### Day 31 (literally minutes later):
+
+- Have set up Ngrok with a static URL, which was amazingly easy.
+
 ### To Do:
 
-- Set up Ngrok
 - Replace polling with webhook
 - Continue implementing ImageInputModal
 - Deep(er) dive in Server Actions in Next 14 (am I using them correctly? Are my API calls being deduped as expected?)
