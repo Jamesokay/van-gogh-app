@@ -1,4 +1,4 @@
-import { getGenerationsByUserId, getUserInformation } from "../lib/actions";
+import { fetchGenerationsByUserId, getUserInformation } from "../lib/actions";
 import { fillDefaults } from "../lib/helpers";
 import { generationHistoryStrings } from "../lib/stringConstants";
 import GenerationHistoryPanel from "../ui/ai-generations/GenerationHistoryPanel";
@@ -7,7 +7,7 @@ import NewGenerationPanels from "../ui/ai-generations/NewGenerationPanels";
 const Page = async () => {
   const userDetails = await getUserInformation();
   if (!userDetails) return null;
-  const history = await getGenerationsByUserId(userDetails.user.id);
+  const history = await fetchGenerationsByUserId(userDetails.user.id);
   if (!history) return null;
   const safeHistory = history.map((generation) => fillDefaults(generation))
 

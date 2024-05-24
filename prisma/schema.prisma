@@ -1,0 +1,66 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                        String   @id @default(uuid())
+  username                  String
+  tokenRenewalDate          DateTime? @db.Timestamp
+  paidTokens                Int?
+  subscriptionTokens        Int?
+  subscriptionGptTokens     Int?
+  subscriptionModelTokens   Int?
+  apiConcurrencySlots       Int?
+  apiPaidTokens             Int?
+  apiSubscriptionTokens     Int?
+  apiPlanTokenRenewalDate   DateTime? @db.Timestamp
+  generations               Generation[]
+}
+
+model Generation {
+  id                        String   @id @default(uuid())
+  createdAt                 DateTime? @db.Timestamp
+  generated_images          Json?    // Store generated images as JSON
+  generation_elements       Json?
+  guidanceScale             Float?
+  imageHeight               Int?
+  imageWidth                Int?
+  inferenceSteps            Int?
+  initStrength              Float?
+  modelId                   String?
+  negativePrompt            String?
+  photoReal                 Boolean?
+  photoRealStrength         Float?
+  presetStyle               String?
+  prompt                    String?
+  promptMagic               Boolean?
+  promptMagicStrength       Float?
+  promptMagicVersion        String?
+  public                    Boolean?
+  scheduler                 String?
+  sdVersion                 String?
+  seed                      Int?
+  status                    String?
+  userId                    String
+  user                      User      @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+enum GenerationStatus {
+  COMPLETE
+  IN_PROGRESS
+  FAILED
+}
+
+enum PresetStyle {
+  LEONARDO
+  NONE
+  DYNAMIC
+}
+

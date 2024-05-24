@@ -244,16 +244,7 @@ export type PresetStyle =
   | "VIBRANT"
   | "UNPROCESSED";
 
-type Scheduler =
-  | "KLMS"
-  | "EULER_ANCESTRAL_DISCRETE"
-  | "EULER_DISCRETE"
-  | "DDIM"
-  | "DPM_SOLVER"
-  | "PNDM"
-  | "LEONARDO";
-
-type GenerationStatus = "PENDING" | "COMPLETE" | "FAILED";
+export type GenerationStatus = "PENDING" | "COMPLETE" | "FAILED";
 
 type BaseModel =
   | "v1_5"
@@ -266,14 +257,6 @@ type BaseModel =
 
 type TransformType = "OUTPAINT" | "INPAINT" | "UPSCALE" | "UNZOOM" | "NOBG";
 
-type StableDiffusionVersion =
-  | "v1_5"
-  | "v2"
-  | "v3"
-  | "SDXL_0_8"
-  | "SDXL_0_9"
-  | "SDXL_1_0"
-  | "SDXL_LIGHTNING";
 
 // Request body as defined in Leonardo API documentation
 export type LeonardoGenerationRequestBody = {
@@ -306,8 +289,8 @@ export type LeonardoGenerationRequestBody = {
   promptMagicStrength?: number | null;
   promptMagicVersion?: "v2" | "v3" | null;
   public?: boolean | null;
-  scheduler?: Scheduler | null;
-  sd_version?: StableDiffusionVersion | null;
+  scheduler?: string | null;
+  sd_version?: string | null;
   seed?: number | null;
   tiling?: boolean | null;
   transparency?: "disabled" | "foreground_only" | null;
@@ -379,8 +362,8 @@ export type LeonardoGenerationResponse = {
   promptMagicStrength: number | null;
   promptMagicVersion: "v2" | "v3" | null;
   public: boolean | null;
-  scheduler: Scheduler | null;
-  sdVersion: StableDiffusionVersion | null;
+  scheduler: string | null;
+  sdVersion: string | null;
   seed: number | null;
   status: GenerationStatus | null;
 };
@@ -405,8 +388,8 @@ export type NonNullLeonardoGenerationResponse = {
   promptMagicStrength: number;
   promptMagicVersion: "v2" | "v3";
   public: boolean;
-  scheduler: Scheduler;
-  sdVersion: StableDiffusionVersion;
+  scheduler: string;
+  sdVersion: string;
   seed: number;
   status: GenerationStatus;
 };

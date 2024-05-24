@@ -1,4 +1,4 @@
-import { getGenerationsByUserId, getUserInformation } from "@/app/lib/actions";
+import { fetchGenerationsByUserId, getUserInformation } from "@/app/lib/actions";
 import ImageGuidanceBanner from "@/app/ui/image-guidance/ImageGuidanceBanner";
 import ImageGuidanceCTA from "@/app/ui/image-guidance/ImageGuidanceCTA";
 import ImageGuidanceUpload from "@/app/ui/image-guidance/ImageGuidanceUpload";
@@ -6,7 +6,7 @@ import ImageGuidanceUpload from "@/app/ui/image-guidance/ImageGuidanceUpload";
 const Page = async () => {
   const userDetails = await getUserInformation();
   if (!userDetails) return null;
-  const history = await getGenerationsByUserId(userDetails.user.id);
+  const history = await fetchGenerationsByUserId(userDetails.user.id);
   if (!history) return null;
   const recentImages = history
     .flatMap((generation) => generation.generated_images || [])

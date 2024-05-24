@@ -1,5 +1,7 @@
 "use server";
 
+// import { revalidatePath } from "next/cache";
+
 import {
   ClientError,
   LeonardoGenerationJobResponse,
@@ -11,7 +13,8 @@ import {
   ServerError,
 } from "./definitions";
 import { unstable_noStore as noStore } from "next/cache";
-
+import { transformGeneration } from "./helpers";
+import { sql } from "@vercel/postgres";
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
 
@@ -76,7 +79,8 @@ export async function generateImages(
   const options = { ...getHeaders("POST"), body: JSON.stringify(body) };
   try {
     const response = await fetch(`${API_URL}/generations`, options);
-    return await handleResponse(response);
+    const data = await handleResponse(response);
+    return data;
   } catch (err) {
     return handleError(err, "Error generating images");
   }
@@ -100,6 +104,82 @@ export async function getGenerationsByUserId(
   }
 }
 
+export async function fetchGenerationsByUserId(userId: string): Promise<LeonardoGenerationResponse[] | null> {
+  try {
+    console.time('SQL Query');
+    const { rows } = await sql`
+      SELECT
+        id,
+        "createdAt",
+        "generated_images",
+        "generation_elements",
+        "guidanceScale",
+        "imageHeight",
+        "imageWidth",
+        "inferenceSteps",
+        "initStrength",
+        "modelId",
+        "negativePrompt",
+        "photoReal",
+        "photoRealStrength",
+        "presetStyle",
+        "prompt",
+        "promptMagic",
+        "promptMagicStrength",
+        "promptMagicVersion",
+        "public",
+        "scheduler",
+        "sdVersion",
+        "seed",
+        "status",
+        "userId"
+      FROM
+        "Generation"
+      WHERE
+        "userId" = ${userId}
+      LIMIT 10
+    `;
+    console.timeEnd('SQL Query');
+
+    // Adjust the data structure to match what transformGeneration expects
+    const adjustedGenerations = rows.map(row => ({
+      id: row.id,
+      createdAt: row.createdAt,
+      generated_images: JSON.parse(row.generated_images),
+      generation_elements: JSON.parse(row.generation_elements),
+      guidanceScale: row.guidanceScale,
+      imageHeight: row.imageHeight,
+      imageWidth: row.imageWidth,
+      inferenceSteps: row.inferenceSteps,
+      initStrength: row.initStrength,
+      modelId: row.modelId,
+      negativePrompt: row.negativePrompt,
+      photoReal: row.photoReal,
+      photoRealStrength: row.photoRealStrength,
+      presetStyle: row.presetStyle,
+      prompt: row.prompt,
+      promptMagic: row.promptMagic,
+      promptMagicStrength: row.promptMagicStrength,
+      promptMagicVersion: row.promptMagicVersion,
+      public: row.public,
+      scheduler: row.scheduler,
+      sdVersion: row.sdVersion,
+      seed: row.seed,
+      status: row.status,
+      userId: row.userId,
+    }));
+
+    console.time('Transformation');
+    const transformedGenerations = await Promise.all(adjustedGenerations.map(transformGeneration));
+    console.timeEnd('Transformation');
+
+    return transformedGenerations;
+  } catch (err) {
+    console.error('Error fetching generations by user ID:', err);
+    return null;
+  }
+}
+
 export async function fetchGeneration(
   generationId: string
 ): Promise<LeonardoGenerationResponse | null> {
@@ -111,6 +191,15 @@ export async function fetchGeneration(
       options
     );
     const data = await handleResponse(response);
+    // if (data.generations_by_pk?.status === "COMPLETE") {
+    //   // Once new generation has come through, ensure that we fetch
+    //   // updated generations on next page visit (not cached data).
+    //   // Note: There appears to be a reported issue with revalidateTag/revalidatePath at present
+    //   // whereby they trigger an immediate page reload rather than on next visit,
+    //   // as per the docs: https://nextjs.org/docs/app/api-reference/functions/revalidateTag
+    //   revalidatePath("/ai-generations", "layout");
+    // }
+
     return data.generations_by_pk;
   } catch (err) {
     return handleError(err, "Error fetching generation");
