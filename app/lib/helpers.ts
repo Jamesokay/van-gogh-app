@@ -5,7 +5,6 @@ import {
   GenerationRequestState,
   GenerationStatus,
   InterfaceState,
-  LeonardoGeneratedImage,
   LeonardoGenerationRequestBody,
   LeonardoGenerationResponse,
   NonNullLeonardoGenerationResponse,
@@ -111,35 +110,6 @@ export function constructDateString(createdAt: Date) {
 
 export function divideAndRound(num: number): number {
   return Math.round((num / 100) * 100) / 100;
-}
-
-export async function transformGeneration(generation): Promise<LeonardoGenerationResponse> {
-
-  return {
-    createdAt: generation.createdAt,
-    generated_images: generation.generated_images,
-    generation_elements: generation.generation_elements,
-    guidanceScale: generation.guidanceScale,
-    id: generation.id,
-    imageHeight: generation.imageHeight,
-    imageWidth: generation.imageWidth,
-    inferenceSteps: generation.inferenceSteps,
-    initStrength: generation.initStrength,
-    modelId: generation.modelId,
-    negativePrompt: generation.negativePrompt,
-    photoReal: generation.photoReal,
-    photoRealStrength: generation.photoRealStrength as 0.55 | 0.5 | 0.45 | null,
-    presetStyle: generation.presetStyle as PresetStyle,
-    prompt: generation.prompt,
-    promptMagic: generation.promptMagic,
-    promptMagicStrength: generation.promptMagicStrength,
-    promptMagicVersion: generation.promptMagicVersion as "v2" | "v3" | null,
-    public: generation.public,
-    scheduler: generation.scheduler,
-    sdVersion: generation.sdVersion,
-    seed: generation.seed,
-    status: generation.status as GenerationStatus,
-  };
 }
 
 export function convertStringToPresetStyle(style: string): PresetStyle {

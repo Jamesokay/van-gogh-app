@@ -13,7 +13,6 @@ import {
   ServerError,
 } from "./definitions";
 import { unstable_noStore as noStore } from "next/cache";
-import { transformGeneration } from "./helpers";
 import { sql } from "@vercel/postgres";
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
@@ -142,6 +141,7 @@ export async function fetchGenerationsByUserId(userId: string): Promise<Leonardo
     console.timeEnd('SQL Query');
 
     // Adjust the data structure to match what transformGeneration expects
+    console.time('Transformation');
     const adjustedGenerations = rows.map(row => ({
       id: row.id,
       createdAt: row.createdAt,
@@ -168,12 +168,8 @@ export async function fetchGenerationsByUserId(userId: string): Promise<Leonardo
       status: row.status,
       userId: row.userId,
     }));
-
-    console.time('Transformation');
-    const transformedGenerations = await Promise.all(adjustedGenerations.map(transformGeneration));
     console.timeEnd('Transformation');
-
-    return transformedGenerations;
+    return adjustedGenerations;
   } catch (err) {
     console.error('Error fetching generations by user ID:', err);
     return null;
