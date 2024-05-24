@@ -408,6 +408,15 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 
 - Have set up Ngrok with a static URL, which was amazingly easy.
 
+### Day 32 (24/05/2024):
+
+- Have brought back the postgres database and seeded it
+- Have implemented an API endpoint that receives data from the Leonardo webhook, via a Ngrok tunnel
+- Have replaced logic for fetching generations from Leonardo API with logic for fetching from db using SQL
+- Will implement logic for updating db with data from webhook
+- Will then get rid of polling logic
+- Will then implement revalidation
+
 ### To Do:
 
 - Replace polling with webhook
