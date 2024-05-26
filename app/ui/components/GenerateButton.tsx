@@ -26,10 +26,6 @@ const GenerateButton: FC<{ mobile: boolean }> = ({ mobile }) => {
         setKeyOfInterfaceState("generating", false);
         return;
       }
-      setKeyOfInterfaceState(
-        "newGenerationId",
-        generation.sdGenerationJob.generationId
-      );
       setKeyOfInterfaceState('tokens', interfaceState.tokens - generation.sdGenerationJob.apiCreditCost);
     } catch (err) {
       console.error("Error generating:", err);

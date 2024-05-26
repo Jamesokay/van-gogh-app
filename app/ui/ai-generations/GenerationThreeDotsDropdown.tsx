@@ -29,10 +29,6 @@ const GenerationThreeDotsDropdown: FC<NonNullLeonardoGenerationResponse> = (
         setKeyOfInterfaceState("generating", false);
         return;
       }
-      setKeyOfInterfaceState(
-        "newGenerationId",
-        generation.sdGenerationJob.generationId
-      );
     } catch (err) {
       console.error("Error generating:", err);
       setKeyOfInterfaceState("generating", false);

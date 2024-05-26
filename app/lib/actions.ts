@@ -85,9 +85,7 @@ export async function generateImages(
 }
 
 export async function fetchGenerationsByUserId(userId: string): Promise<LeonardoGenerationResponse[] | null> {
-  console.log(userId)
   try {
-    // Perform a query to fetch generations by userId
     const { data, error } = await supabase
       .from('Generation')
       .select(`
@@ -117,8 +115,8 @@ export async function fetchGenerationsByUserId(userId: string): Promise<Leonardo
         userId
       `)
       .eq('userId', userId)
+      .order('createdAt', { ascending: false })
       .limit(10);
-    console.log('DB fetch complete')
     if (error) {
       console.error('Error fetching data:', error);
       throw error
@@ -126,32 +124,6 @@ export async function fetchGenerationsByUserId(userId: string): Promise<Leonardo
     return data;
   } catch (err) {
     return handleError(err, 'Error fetching generations by user ID');
-  }
-}
-
-export async function fetchGeneration(
-  generationId: string
-): Promise<LeonardoGenerationResponse | null> {
-  if (!token) return handleNoToken();
-  const options = getHeaders("GET");
-  try {
-    const response = await fetch(
-      `${API_URL}/generations/${generationId}`,
-      options
-    );
-    const data = await handleResponse(response);
-    // if (data.generations_by_pk?.status === "COMPLETE") {
-    //   // Once new generation has come through, ensure that we fetch
-    //   // updated generations on next page visit (not cached data).
-    //   // Note: There appears to be a reported issue with revalidateTag/revalidatePath at present
-    //   // whereby they trigger an immediate page reload rather than on next visit,
-    //   // as per the docs: https://nextjs.org/docs/app/api-reference/functions/revalidateTag
-    //   revalidatePath("/ai-generations", "layout");
-    // }
-
-    return data.generations_by_pk;
-  } catch (err) {
-    return handleError(err, "Error fetching generation");
   }
 }
 
