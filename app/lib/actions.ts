@@ -12,8 +12,7 @@ import {
   PresignedDetails,
   ServerError,
 } from "./definitions";
-import { unstable_noStore as noStore } from "next/cache";
-import { sql } from "@vercel/postgres";
+import { supabase } from "./supabase";
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
 
@@ -85,94 +84,48 @@ export async function generateImages(
   }
 }
 
-export async function getGenerationsByUserId(
-  userId: string
-): Promise<LeonardoGenerationResponse[] | null> {
-  noStore();
-  if (!token) return handleNoToken();
-  const options = getHeaders("GET");
-  try {
-    const response = await fetch(
-      `${API_URL}/generations/user/${userId}`,
-      options
-    );
-    const data = await handleResponse(response);
-    return data.generations;
-  } catch (err) {
-    return handleError(err, "Error fetching generations by user ID");
-  }
-}
-
 export async function fetchGenerationsByUserId(userId: string): Promise<LeonardoGenerationResponse[] | null> {
+  console.log(userId)
   try {
-    console.time('SQL Query');
-    const { rows } = await sql`
-      SELECT
+    // Perform a query to fetch generations by userId
+    const { data, error } = await supabase
+      .from('Generation')
+      .select(`
         id,
-        "createdAt",
-        "generated_images",
-        "generation_elements",
-        "guidanceScale",
-        "imageHeight",
-        "imageWidth",
-        "inferenceSteps",
-        "initStrength",
-        "modelId",
-        "negativePrompt",
-        "photoReal",
-        "photoRealStrength",
-        "presetStyle",
-        "prompt",
-        "promptMagic",
-        "promptMagicStrength",
-        "promptMagicVersion",
-        "public",
-        "scheduler",
-        "sdVersion",
-        "seed",
-        "status",
-        "userId"
-      FROM
-        "Generation"
-      WHERE
-        "userId" = ${userId}
-      LIMIT 10
-    `;
-    console.timeEnd('SQL Query');
-
-    // Adjust the data structure to match what transformGeneration expects
-    console.time('Transformation');
-    const adjustedGenerations = rows.map(row => ({
-      id: row.id,
-      createdAt: row.createdAt,
-      generated_images: JSON.parse(row.generated_images),
-      generation_elements: JSON.parse(row.generation_elements),
-      guidanceScale: row.guidanceScale,
-      imageHeight: row.imageHeight,
-      imageWidth: row.imageWidth,
-      inferenceSteps: row.inferenceSteps,
-      initStrength: row.initStrength,
-      modelId: row.modelId,
-      negativePrompt: row.negativePrompt,
-      photoReal: row.photoReal,
-      photoRealStrength: row.photoRealStrength,
-      presetStyle: row.presetStyle,
-      prompt: row.prompt,
-      promptMagic: row.promptMagic,
-      promptMagicStrength: row.promptMagicStrength,
-      promptMagicVersion: row.promptMagicVersion,
-      public: row.public,
-      scheduler: row.scheduler,
-      sdVersion: row.sdVersion,
-      seed: row.seed,
-      status: row.status,
-      userId: row.userId,
-    }));
-    console.timeEnd('Transformation');
-    return adjustedGenerations;
+        createdAt,
+        generated_images,
+        generation_elements,
+        guidanceScale,
+        imageHeight,
+        imageWidth,
+        inferenceSteps,
+        initStrength,
+        modelId,
+        negativePrompt,
+        photoReal,
+        photoRealStrength,
+        presetStyle,
+        prompt,
+        promptMagic,
+        promptMagicStrength,
+        promptMagicVersion,
+        public,
+        scheduler,
+        sdVersion,
+        seed,
+        status,
+        userId
+      `)
+      .eq('userId', userId)
+      .limit(10);
+    console.log('DB fetch complete')
+    if (error) {
+      console.error('Error fetching data:', error);
+      throw error
+    }
+    return data;
   } catch (err) {
-    console.error('Error fetching generations by user ID:', err);
-    return null;
+    return handleError(err, 'Error fetching generations by user ID');
   }
 }
 

@@ -456,3 +456,78 @@ export type PresignedDetails = {
   key: string | null;
   url: string | null;
 };
+
+export interface WebhookGenerationData {
+  id: string | null;
+  createdAt: string | null;
+  userId: string | null;
+  public: boolean | null;
+  flagged: boolean | null;
+  nsfw: boolean | null;
+  status: string | null;
+  coreModel: string | null;
+  guidanceScale: number | null;
+  imageHeight: number | null;
+  imageWidth: number | null;
+  inferenceSteps: number | null;
+  initGeneratedImageId: string | null;
+  initImageId: string | null;
+  initStrength: number | null;
+  initType: string | null;
+  initUpscaledImageId: string | null;
+  modelId: string | null;
+  negativePrompt: string | null;
+  prompt: string | null;
+  quantity: number | null;
+  sdVersion: string | null;
+  tiling: boolean | null;
+  imageAspectRatio: string | null;
+  tokenCost: number | null;
+  negativeStylePrompt: string | null;
+  seed: string | null;
+  scheduler: string | null;
+  presetStyle: string | null;
+  promptMagic: boolean | null;
+  canvasInitImageId: string | null;
+  canvasMaskImageId: string | null;
+  canvasRequest: boolean | null;
+  api: boolean | null;
+  poseImage2Image: boolean | null;
+  imagePromptStrength: number | null;
+  category: string | null;
+  poseImage2ImageType: string | null;
+  highContrast: boolean | null;
+  apiDollarCost: string | null;
+  poseImage2ImageWeight: number | null;
+  alchemy: string | null;
+  contrastRatio: string | null;
+  highResolution: string | null;
+  expandedDomain: string | null;
+  promptMagicVersion: string | null;
+  unzoom: string | null;
+  unzoomAmount: string | null;
+  apiKeyId: string | null;
+  photoReal: boolean | null;
+  promptMagicStrength: number | null;
+  photoRealStrength: number | null;
+  imageToImage: boolean | null;
+  controlnetsUsed: boolean | null;
+  images: WebhookGenerationImage[] | null;
+}
+
+export interface WebhookGenerationImage {
+  id: string | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  userId: string | null;
+  url: string | null;
+  generationId: string | null;
+  nobgId: string | null;
+  nsfw: boolean | null;
+  likeCount: number | null;
+  trendingScore: number | null;
+  public: boolean | null;
+  motionGIFURL: string | null;
+  motionMP4URL: string | null;
+  teamId: string | null;
+}
