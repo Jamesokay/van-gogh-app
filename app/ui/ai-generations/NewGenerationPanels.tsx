@@ -9,10 +9,11 @@ import { fillDefaults } from "@/app/lib/helpers";
 import { supabase } from "@/app/lib/supabase";
 
 const NewGenerationPanels = () => {
-  const { setKeyOfInterfaceState } = useSettings();
+  const { interfaceState, setKeyOfInterfaceState } = useSettings();
   const [newGenerations, setNewGenerations] = useState<
     NonNullLeonardoGenerationResponse[]
   >([]);
+  const filteredGenerations = newGenerations.filter(gen => !interfaceState.deletedGenerationIds.includes(gen?.id));
 
   useEffect(() => {
     const handleInserts = (payload: any) => {
@@ -21,7 +22,8 @@ const NewGenerationPanels = () => {
         setKeyOfInterfaceState("generating", false);
       }
     };
-    supabase
+
+    const subscription = supabase
       .channel("Generation")
       .on(
         "postgres_changes",
@@ -29,12 +31,17 @@ const NewGenerationPanels = () => {
         handleInserts
       )
       .subscribe();
+
+    // To-do: Error handling for Realtime
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   return (
     <>
       <NewGenerationLoading />
-      {newGenerations?.map((generation) => (
+      {filteredGenerations.map((generation) => (
         <GenerationHistoryPanel key={generation.id} {...generation} />
       ))}
     </>

@@ -1,7 +1,5 @@
 "use server";
 
-// import { revalidatePath } from "next/cache";
-
 import {
   ClientError,
   LeonardoGenerationJobResponse,
@@ -58,31 +56,7 @@ const handleNoToken = (): null => {
   return null;
 };
 
-export async function getUserInformation(): Promise<LeonardoUserResponse | null> {
-  if (!token) return handleNoToken();
-  const options = getHeaders("GET");
-  try {
-    const response = await fetch(`${API_URL}/me`, options);
-    const data = await handleResponse(response);
-    return data.user_details[0];
-  } catch (err) {
-    return handleError(err, "Error fetching user information");
-  }
-}
-
-export async function generateImages(
-  body: LeonardoGenerationRequestBody
-): Promise<LeonardoGenerationJobResponse | null> {
-  if (!token) return handleNoToken();
-  const options = { ...getHeaders("POST"), body: JSON.stringify(body) };
-  try {
-    const response = await fetch(`${API_URL}/generations`, options);
-    const data = await handleResponse(response);
-    return data;
-  } catch (err) {
-    return handleError(err, "Error generating images");
-  }
-}
+// Supabase DB actions
 
 export async function fetchGenerationsByUserId(userId: string): Promise<LeonardoGenerationResponse[] | null> {
   try {
@@ -127,20 +101,53 @@ export async function fetchGenerationsByUserId(userId: string): Promise<Leonardo
   }
 }
 
-export async function deleteGeneration(
-  generationId: string
-): Promise<string | null> {
-  if (!token) return handleNoToken();
-  const options = getHeaders("DELETE");
+export async function deleteGeneration(generationId: string): Promise<string | null> {
   try {
-    const response = await fetch(
-      `${API_URL}/generations/${generationId}`,
-      options
-    );
-    const data = await handleResponse(response);
-    return data.delete_generations_by_pk?.id;
+    const { data, error } = await supabase
+      .from('Generation')
+      .delete()
+      .eq('id', generationId);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    // To-do: Need to define Supabase types, then return id of actual deleted data
+    if (data) {
+      return generationId;
+    } else {
+      return null;
+    }
   } catch (err) {
-    return handleError(err, "Error deleting generation");
+    return handleError(err, 'Error deleting generation')
+  }
+}
+
+// Leonardo API actions
+
+export async function getUserInformation(): Promise<LeonardoUserResponse | null> {
+  if (!token) return handleNoToken();
+  const options = getHeaders("GET");
+  try {
+    const response = await fetch(`${API_URL}/me`, options);
+    const data = await handleResponse(response);
+    return data.user_details[0];
+  } catch (err) {
+    return handleError(err, "Error fetching user information");
+  }
+}
+
+export async function generateImages(
+  body: LeonardoGenerationRequestBody
+): Promise<LeonardoGenerationJobResponse | null> {
+  if (!token) return handleNoToken();
+  const options = { ...getHeaders("POST"), body: JSON.stringify(body) };
+  try {
+    const response = await fetch(`${API_URL}/generations`, options);
+    const data = await handleResponse(response);
+    return data;
+  } catch (err) {
+    return handleError(err, "Error generating images");
   }
 }
 
