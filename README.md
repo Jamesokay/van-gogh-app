@@ -417,7 +417,7 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Will then get rid of polling logic
 - Will then implement revalidation
 
-### Day 33 && Day 36 (25/05/2024 - 26/05/2024):
+### Day 33 && Day 34 (25/05/2024 - 26/05/2024):
 
 - So after Vercel postgres briefly made me hate my life, and after several failed implementations, I discovered Supabase and everything is swell now
 - Implemented Supabase DB with tables for Users and Generations
@@ -428,6 +428,7 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 ### To Do:
 
 - Replace polling logic with (I think) realtime update from Supabase
+- Integrate realtime update with logic for Generation loading state/UI
 - Implement Supabase Authentication
 - Implement actual RLS policies for accessing DB
 - Continue implementing ImageInputModal
