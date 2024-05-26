@@ -417,11 +417,20 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Will then get rid of polling logic
 - Will then implement revalidation
 
+### Day 33 && Day 36 (25/05/2024 - 26/05/2024):
+
+- So after Vercel postgres briefly made me hate my life, and after several failed implementations, I discovered Supabase and everything is swell now
+- Implemented Supabase DB with tables for Users and Generations
+- Implemented logic for fetching generations from Supabase DB
+- Implemented logic for inserting the data provided by Leonardo webhook into the Supabase DB
+- Implemented revalidation upon successful DB insertion
+
 ### To Do:
 
-- Replace polling with webhook
+- Replace polling logic with (I think) realtime update from Supabase
+- Implement Supabase Authentication
+- Implement actual RLS policies for accessing DB
 - Continue implementing ImageInputModal
-- Deep(er) dive in Server Actions in Next 14 (am I using them correctly? Are my API calls being deduped as expected?)
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
 - Check all settings map correctly onto the API request body, yielding the desired response
