@@ -4,7 +4,7 @@ import {
   WebhookGenerationData,
   WebhookGenerationImage,
 } from "@/app/lib/definitions";
-import { supabase } from "@/app/lib/supabase";
+import { supabase } from "@/app/lib/supabaseClient";
 import { revalidatePath } from "next/cache";
 
 const WEBHOOK_API_KEY = process.env.VAN_GOGH_WEBHOOK_API_KEY;

@@ -1,17 +1,17 @@
 "use client";
 
 import { useSettings } from "@/app/context/SettingsContext";
-import { NonNullLeonardoGenerationResponse } from "@/app/lib/definitions";
+import { NonNullGenerationRow } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
 import GenerationHistoryPanel from "./GenerationHistoryPanel";
 import NewGenerationLoading from "./NewGenerationLoading";
 import { fillDefaults } from "@/app/lib/helpers";
-import { supabase } from "@/app/lib/supabase";
+import { supabase } from "@/app/lib/supabaseClient";
 
 const NewGenerationPanels = () => {
   const { interfaceState, setKeyOfInterfaceState } = useSettings();
   const [newGenerations, setNewGenerations] = useState<
-    NonNullLeonardoGenerationResponse[]
+    NonNullGenerationRow[]
   >([]);
   const filteredGenerations = newGenerations.filter(gen => !interfaceState.deletedGenerationIds.includes(gen?.id));
 

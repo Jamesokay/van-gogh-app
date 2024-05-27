@@ -10,11 +10,11 @@ import TickIcon from "../svg/TickIcon";
 import { FC, useEffect, useRef, useState } from "react";
 import { modelData } from "@/app/lib/dataConstants";
 import CopyIcon from "../svg/CopyIcon";
-import { NonNullLeonardoGenerationResponse } from "@/app/lib/definitions";
+import { NonNullGenerationRow } from "@/app/lib/definitions";
 import { convertPresetStyleToString } from "@/app/lib/helpers";
 import GenerationThreeDotsDropdown from "../ai-generations/GenerationThreeDotsDropdown";
 
-const PanelHeader: FC<NonNullLeonardoGenerationResponse> = (props) => {
+const PanelHeader: FC<NonNullGenerationRow> = (props) => {
   const [copied, setCopied] = useState(false);
   const [generationId, setGenerationId] = useState("");
   const copyRef = useRef<NodeJS.Timeout | number | null>(null);

@@ -16,7 +16,7 @@ import {
 import { FC, useEffect, useState } from "react";
 import RangeSlider from "../../components/RangeSlider";
 import GridIcon from "../../svg/GridIcon";
-import { LeonardoGeneratedImage } from "@/app/lib/definitions";
+import { GeneratedImage } from "@/app/lib/definitions";
 import TickIcon from "../../svg/TickIcon";
 import { useSettings } from "@/app/context/SettingsContext";
 import { imageInputTabs } from "@/app/lib/dataConstants";
@@ -24,14 +24,14 @@ import { imageInputTabs } from "@/app/lib/dataConstants";
 const ImageInputModal: FC<{
   isOpen: boolean;
   onClose: () => void;
-  images: LeonardoGeneratedImage[];
+  images: GeneratedImage[];
 }> = ({ isOpen, onClose, images }) => {
   const { setKeyOfGenerationRequest, setKeyOfInterfaceState } = useSettings();
   const [selectedTab, setSelectedTab] = useState("Your Generations");
   const [selectedFilter, setSelectedFilter] = useState<"All" | "Upscaled">(
     "All"
   );
-  const [columnImages, setColumnImages] = useState<LeonardoGeneratedImage[][]>(
+  const [columnImages, setColumnImages] = useState<GeneratedImage[][]>(
     []
   );
   const [columns, setColumns] = useState(4);
@@ -41,7 +41,7 @@ const ImageInputModal: FC<{
   });
 
   useEffect(() => {
-    const array: LeonardoGeneratedImage[][] = Array.from(
+    const array: GeneratedImage[][] = Array.from(
       { length: columns },
       () => []
     );
@@ -63,7 +63,7 @@ const ImageInputModal: FC<{
 
   const handleSelect = (
     currentId: string,
-    newImage: LeonardoGeneratedImage
+    newImage: GeneratedImage
   ) => {
     if (currentId !== newImage.id)
       setSelected({ id: newImage.id, url: newImage.url });

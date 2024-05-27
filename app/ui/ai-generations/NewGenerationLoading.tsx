@@ -5,14 +5,14 @@ import PanelHeader from "../components/PanelHeader";
 import { AspectRatio } from "@chakra-ui/react";
 import ImageCardSkeleton from "../components/ImageCardSkeleton";
 import { useEffect, useRef, useState } from "react";
-import { defaultLeonardoGenerationResponse } from "@/app/lib/definitions";
+import { defaultGenerationRow } from "@/app/lib/definitions";
 
 const NewGenerationLoading = () => {
   const { generationRequest, interfaceState } = useSettings();
   const [genTime, setGenTime] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const defaultData = {
-    ...defaultLeonardoGenerationResponse,
+    ...defaultGenerationRow,
     prompt: generationRequest.prompt,
     generated_images: [...Array(generationRequest.num_images)],
     modelId: generationRequest.modelId,

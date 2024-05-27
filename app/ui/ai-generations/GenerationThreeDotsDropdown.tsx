@@ -8,10 +8,10 @@ import ThreeDotsIcon from "../svg/ThreeDotsIcon";
 import { useSettings } from "@/app/context/SettingsContext";
 import { deleteGeneration, generateImages } from "@/app/lib/actions";
 import { FC } from "react";
-import { NonNullLeonardoGenerationResponse } from "@/app/lib/definitions";
+import { NonNullGenerationRow } from "@/app/lib/definitions";
 import { extractRequestBodyFromPrevGeneration } from "@/app/lib/helpers";
 
-const GenerationThreeDotsDropdown: FC<NonNullLeonardoGenerationResponse> = (
+const GenerationThreeDotsDropdown: FC<NonNullGenerationRow> = (
   props
 ) => {
   const { interfaceState, setKeyOfInterfaceState, setKeyOfGenerationRequest } =

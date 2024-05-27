@@ -1,8 +1,8 @@
 "use client";
 
 import {
-  LeonardoGeneratedImage,
-  NonNullLeonardoGenerationResponse,
+  GeneratedImage,
+  NonNullGenerationRow,
 } from "@/app/lib/definitions";
 import { AspectRatio, Card, CardBody, useDisclosure } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
@@ -12,12 +12,12 @@ import InitialRenderSkeleton from "../components/InitialRenderSkeleton";
 import PanelHeader from "../components/PanelHeader";
 import { useSettings } from "@/app/context/SettingsContext";
 
-const GenerationHistoryPanel: FC<NonNullLeonardoGenerationResponse> = (props) => {
+const GenerationHistoryPanel: FC<NonNullGenerationRow> = (props) => {
   const { interfaceState } = useSettings();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [renderedImages, setRenderedImages] = useState<
-    LeonardoGeneratedImage[]
+    GeneratedImage[]
   >([]);
   const emptyDivsCount = 4 - renderedImages.length;
   const { generated_images, id, imageWidth, imageHeight } = props;

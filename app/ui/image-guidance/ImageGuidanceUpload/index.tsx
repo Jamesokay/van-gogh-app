@@ -7,10 +7,10 @@ import UploadedImageComponent from "./UploadedImageComponent";
 import ImageUploadInput from "./ImageUploadInput";
 import { FC, useEffect, useRef, useState } from "react";
 import { Tooltip } from "@chakra-ui/react";
-import { LeonardoGeneratedImage } from "@/app/lib/definitions";
+import { GeneratedImage } from "@/app/lib/definitions";
 import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
 
-const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
+const ImageGuidanceUpload: FC<{ recentImages: GeneratedImage[] }> = ({
   recentImages,
 }) => {
   const {
@@ -19,7 +19,7 @@ const ImageGuidanceUpload: FC<{ recentImages: LeonardoGeneratedImage[] }> = ({
     interfaceState,
     setKeyOfInterfaceState,
   } = useSettings();
-  const [images, setImages] = useState<LeonardoGeneratedImage[]>([]);
+  const [images, setImages] = useState<GeneratedImage[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const text = imageGuidanceStrings.uploadStrings;
   const noImageProvided =

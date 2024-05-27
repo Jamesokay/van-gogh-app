@@ -5,10 +5,10 @@ import UploadIcon from "../../svg/UploadIcon";
 import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import RecentImagesDropdown from "./RecentImagesDropdown";
-import { LeonardoGeneratedImage } from "@/app/lib/definitions";
+import { GeneratedImage } from "@/app/lib/definitions";
 
 const ImageUploadInput: FC<{
-  recentImages: LeonardoGeneratedImage[];
+  recentImages: GeneratedImage[];
   openFileSystem: () => void;
 }> = ({ recentImages, openFileSystem }) => {
   const {

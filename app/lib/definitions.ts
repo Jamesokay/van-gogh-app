@@ -3,6 +3,7 @@ import {
   defaultAspectRatioConversion,
   imageGuidanceTypes,
 } from "./dataConstants";
+import { Database } from "./supabase";
 
 export type SettingsProviderProps = {
   children: ReactNode;
@@ -126,7 +127,7 @@ export type ImageGenModel = {
   modelName: string;
   modelWidth: number;
   modelHeight: number;
-  baseModel: BaseModel;
+  baseModel: string;
   alchemy: boolean;
   img: string;
 };
@@ -163,8 +164,8 @@ export type Dimension = {
 };
 
 export const enum COLUMN_OPTIONS {
-  TWO = "2",
-  FOUR = "4",
+  TWO = 2,
+  FOUR = 4,
 }
 
 export const enum INPUT_DIMENSIONS {
@@ -246,15 +247,6 @@ export type PresetStyle =
 
 export type GenerationStatus = "PENDING" | "COMPLETE" | "FAILED";
 
-type BaseModel =
-  | "v1_5"
-  | "v2"
-  | "v3"
-  | "SDXL_0_8"
-  | "SDXL_0_9"
-  | "SDXL_1_0"
-  | "SDXL_LIGHTNING";
-
 type TransformType = "OUTPAINT" | "INPAINT" | "UPSCALE" | "UNZOOM" | "NOBG";
 
 
@@ -281,13 +273,13 @@ export type LeonardoGenerationRequestBody = {
   num_images?: number | null;
   num_inference_steps?: number | null;
   photoReal?: boolean | null;
-  photoRealVersion?: "v1" | "v2" | null;
-  photoRealStrength?: 0.55 | 0.5 | 0.45 | null;
-  presetStyle?: PresetStyle | null;
+  photoRealVersion?: string | null;
+  photoRealStrength?: number | null;
+  presetStyle?: string | null;
   prompt: string;
   promptMagic?: boolean | null;
   promptMagicStrength?: number | null;
-  promptMagicVersion?: "v2" | "v3" | null;
+  promptMagicVersion?: string | null;
   public?: boolean | null;
   scheduler?: string | null;
   sd_version?: string | null;
@@ -308,70 +300,10 @@ export type LeonardoGenerationJobResponse = {
   };
 };
 
-export type LeonardoGeneratedImage = {
-  generated_image_variation_generics?: Array<{
-    id: string;
-    status: GenerationStatus;
-    transformType: TransformType;
-    url: string;
-  }> | null;
-  fantasyAvatar?: boolean;
-  id: string;
-  imageToVideo: boolean;
-  likeCount: number;
-  motion: boolean;
-  motionModel: string | null;
-  motionMP4URL: string | null;
-  motionStrength: number | null;
-  nsfw: boolean;
-  url: string;
-};
-
-export type LeonardoGeneratedElement = {
-  id: number;
-  lora: {
-    akUUID: string;
-    baseModel: BaseModel;
-    description: string;
-    name: string;
-    urlImage: string;
-    weightDefault: number;
-    weightMax: number;
-    weightMin: number;
-  };
-  weightApplied: number;
-};
-
-export type LeonardoGenerationResponse = {
-  createdAt: Date | null;
-  generated_images: LeonardoGeneratedImage[] | null;
-  generation_elements: LeonardoGeneratedElement[] | null;
-  guidanceScale: number | null;
-  id: string | null;
-  imageHeight: number | null;
-  imageWidth: number | null;
-  inferenceSteps: number | null;
-  initStrength: number | null;
-  modelId: string | null;
-  negativePrompt: string | null;
-  photoReal: boolean | null;
-  photoRealStrength: 0.55 | 0.5 | 0.45 | null;
-  presetStyle: PresetStyle | null;
-  prompt: string | null;
-  promptMagic: boolean | null;
-  promptMagicStrength: number | null;
-  promptMagicVersion: "v2" | "v3" | null;
-  public: boolean | null;
-  scheduler: string | null;
-  sdVersion: string | null;
-  seed: number | null;
-  status: GenerationStatus | null;
-};
-
-export type NonNullLeonardoGenerationResponse = {
-  createdAt: Date;
-  generated_images: LeonardoGeneratedImage[];
-  generation_elements: LeonardoGeneratedElement[];
+export type NonNullGenerationRow = {
+  createdAt: string;
+  generated_images: GeneratedImage[];
+  generation_elements: GenerationElement[];
   guidanceScale: number;
   id: string;
   imageHeight: number;
@@ -381,23 +313,23 @@ export type NonNullLeonardoGenerationResponse = {
   modelId: string;
   negativePrompt: string;
   photoReal: boolean;
-  photoRealStrength: 0.55 | 0.5 | 0.45;
-  presetStyle: PresetStyle;
+  photoRealStrength: number;
+  presetStyle: string;
   prompt: string;
   promptMagic: boolean;
   promptMagicStrength: number;
-  promptMagicVersion: "v2" | "v3";
+  promptMagicVersion: string;
   public: boolean;
   scheduler: string;
   sdVersion: string;
   seed: number;
-  status: GenerationStatus;
+  status: string;
 };
 
 // Enforce non-null values for the purposes of rendering panels
-export const defaultLeonardoGenerationResponse: NonNullLeonardoGenerationResponse =
+export const defaultGenerationRow: NonNullGenerationRow =
   {
-    createdAt: new Date(),
+    createdAt: '',
     generated_images: [],
     generation_elements: [],
     guidanceScale: 7,
@@ -531,3 +463,40 @@ export interface WebhookGenerationImage {
   motionMP4URL: string | null;
   teamId: string | null;
 }
+
+// Database types and custom types for JSON data
+
+export type GeneratedImage = {
+  generated_image_variation_generics?: Array<{
+    id: string;
+    status: GenerationStatus;
+    transformType: TransformType;
+    url: string;
+  }> | null;
+  fantasyAvatar?: boolean;
+  id: string;
+  likeCount: number;
+  motionMP4URL: string | null;
+  nsfw: boolean;
+  url: string;
+};
+
+type GenerationElement = {
+  id: number;
+  lora: {
+    akUUID: string;
+    baseModel: string;
+    description: string;
+    name: string;
+    urlImage: string;
+    weightDefault: number;
+    weightMax: number;
+    weightMin: number;
+  };
+  weightApplied: number;
+};
+
+export type GenerationRow = Omit<Database['public']['Tables']['Generation']['Row'], 'generated_images' | 'generation_elements'> & {
+  generated_images: GeneratedImage[] | null;
+  generation_elements: GenerationElement[] | null;
+};

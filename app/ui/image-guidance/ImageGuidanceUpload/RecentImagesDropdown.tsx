@@ -1,6 +1,6 @@
 "use client";
 
-import { LeonardoGeneratedImage } from "@/app/lib/definitions";
+import { GeneratedImage } from "@/app/lib/definitions";
 import { ArrowForwardIcon, TriangleDownIcon } from "@chakra-ui/icons";
 import {
   Menu,
@@ -14,8 +14,8 @@ import { FC } from "react";
 import ImageInputModal from "./ImageInputModal";
 
 const RecentImagesDropdown: FC<{
-  setValue: (value: LeonardoGeneratedImage) => void;
-  images: LeonardoGeneratedImage[];
+  setValue: (value: GeneratedImage) => void;
+  images: GeneratedImage[];
 }> = ({ setValue, images }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (

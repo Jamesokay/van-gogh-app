@@ -1,13 +1,12 @@
 import { defaultAspectRatioConversion } from "./dataConstants";
 import {
-  defaultLeonardoGenerationResponse,
+  defaultGenerationRow,
   Dimension,
   GenerationRequestState,
-  GenerationStatus,
   InterfaceState,
   LeonardoGenerationRequestBody,
-  LeonardoGenerationResponse,
-  NonNullLeonardoGenerationResponse,
+  NonNullGenerationRow,
+  GenerationRow,
   PresetStyle
 } from "./definitions";
 
@@ -84,28 +83,6 @@ export function calculateProportionalWidth(
 ): number {
   const [numerator, denominator] = ratio.split(":").map(Number);
   return Math.round((numerator / denominator) * height);
-}
-
-export function constructDateString(createdAt: Date) {
-  const currentDate = new Date();
-  const date = new Date(createdAt);
-
-  // Check if the year, month, and day are the same
-  if (
-    date.getFullYear() === currentDate.getFullYear() &&
-    date.getMonth() === currentDate.getMonth() &&
-    date.getDate() === currentDate.getDate()
-  ) {
-    return "today";
-  }
-
-  const options: Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  };
-  return new Intl.DateTimeFormat("en-GB", options).format(date);
 }
 
 export function divideAndRound(num: number): number {
@@ -249,56 +226,56 @@ export function convertPresetStyleToString(presetStyle: PresetStyle): string {
 
 // Fill in all potential null values
 export function fillDefaults(
-  response: LeonardoGenerationResponse
-): NonNullLeonardoGenerationResponse {
+  response: GenerationRow
+): NonNullGenerationRow {
   return {
     createdAt:
-      response.createdAt ?? defaultLeonardoGenerationResponse.createdAt,
+      response.createdAt ?? defaultGenerationRow.createdAt,
     generated_images:
       response.generated_images ??
-      defaultLeonardoGenerationResponse.generated_images,
+      defaultGenerationRow.generated_images,
     generation_elements:
       response.generation_elements ??
-      defaultLeonardoGenerationResponse.generation_elements,
+      defaultGenerationRow.generation_elements,
     guidanceScale:
-      response.guidanceScale ?? defaultLeonardoGenerationResponse.guidanceScale,
-    id: response.id ?? defaultLeonardoGenerationResponse.id,
+      response.guidanceScale ?? defaultGenerationRow.guidanceScale,
+    id: response.id ?? defaultGenerationRow.id,
     imageHeight:
-      response.imageHeight ?? defaultLeonardoGenerationResponse.imageHeight,
+      response.imageHeight ?? defaultGenerationRow.imageHeight,
     imageWidth:
-      response.imageWidth ?? defaultLeonardoGenerationResponse.imageWidth,
+      response.imageWidth ?? defaultGenerationRow.imageWidth,
     inferenceSteps:
       response.inferenceSteps ??
-      defaultLeonardoGenerationResponse.inferenceSteps,
+      defaultGenerationRow.inferenceSteps,
     initStrength:
-      response.initStrength ?? defaultLeonardoGenerationResponse.initStrength,
-    modelId: response.modelId ?? defaultLeonardoGenerationResponse.modelId,
+      response.initStrength ?? defaultGenerationRow.initStrength,
+    modelId: response.modelId ?? defaultGenerationRow.modelId,
     negativePrompt:
       response.negativePrompt ??
-      defaultLeonardoGenerationResponse.negativePrompt,
+      defaultGenerationRow.negativePrompt,
     photoReal:
-      response.photoReal ?? defaultLeonardoGenerationResponse.photoReal,
+      response.photoReal ?? defaultGenerationRow.photoReal,
     photoRealStrength:
       response.photoRealStrength ??
-      defaultLeonardoGenerationResponse.photoRealStrength,
+      defaultGenerationRow.photoRealStrength,
     presetStyle:
-      response.presetStyle ?? defaultLeonardoGenerationResponse.presetStyle,
-    prompt: response.prompt ?? defaultLeonardoGenerationResponse.prompt,
+      response.presetStyle ?? defaultGenerationRow.presetStyle,
+    prompt: response.prompt ?? defaultGenerationRow.prompt,
     promptMagic:
-      response.promptMagic ?? defaultLeonardoGenerationResponse.promptMagic,
+      response.promptMagic ?? defaultGenerationRow.promptMagic,
     promptMagicStrength:
       response.promptMagicStrength ??
-      defaultLeonardoGenerationResponse.promptMagicStrength,
+      defaultGenerationRow.promptMagicStrength,
     promptMagicVersion:
       response.promptMagicVersion ??
-      defaultLeonardoGenerationResponse.promptMagicVersion,
-    public: response.public ?? defaultLeonardoGenerationResponse.public,
+      defaultGenerationRow.promptMagicVersion,
+    public: response.public ?? defaultGenerationRow.public,
     scheduler:
-      response.scheduler ?? defaultLeonardoGenerationResponse.scheduler,
+      response.scheduler ?? defaultGenerationRow.scheduler,
     sdVersion:
-      response.sdVersion ?? defaultLeonardoGenerationResponse.sdVersion,
-    seed: response.seed ?? defaultLeonardoGenerationResponse.seed,
-    status: response.status ?? defaultLeonardoGenerationResponse.status,
+      response.sdVersion ?? defaultGenerationRow.sdVersion,
+    seed: response.seed ?? defaultGenerationRow.seed,
+    status: response.status ?? defaultGenerationRow.status,
   };
 }
 
@@ -333,7 +310,7 @@ export function extractRequestBodyFromContext(
 
 // Extract a request object from a previous generation
 export function extractRequestBodyFromPrevGeneration(
-  state: NonNullLeonardoGenerationResponse
+  state: NonNullGenerationRow
 ): LeonardoGenerationRequestBody {
   return {
     alchemy: false,

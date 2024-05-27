@@ -1,16 +1,18 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import {
   ClientError,
+  GenerationRow,
   LeonardoGenerationJobResponse,
   LeonardoGenerationRequestBody,
-  LeonardoGenerationResponse,
   LeonardoUserResponse,
   NetworkError,
   PresignedDetails,
   ServerError,
 } from "./definitions";
-import { supabase } from "./supabase";
+import { supabase } from "./supabaseClient";
+
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
 
@@ -58,11 +60,14 @@ const handleNoToken = (): null => {
 
 // Supabase DB actions
 
-export async function fetchGenerationsByUserId(userId: string): Promise<LeonardoGenerationResponse[] | null> {
+export async function fetchGenerationsByUserId(
+  userId: string
+): Promise<GenerationRow[] | null> {
   try {
     const { data, error } = await supabase
-      .from('Generation')
-      .select(`
+      .from("Generation")
+      .select(
+        `
         id,
         createdAt,
         generated_images,
@@ -87,39 +92,34 @@ export async function fetchGenerationsByUserId(userId: string): Promise<Leonardo
         seed,
         status,
         userId
-      `)
-      .eq('userId', userId)
-      .order('createdAt', { ascending: false })
+      `
+      )
+      .eq("userId", userId)
+      .order("createdAt", { ascending: false })
       .limit(10);
     if (error) {
-      console.error('Error fetching data:', error);
-      throw error
+      console.error("Error fetching data:", error);
+      throw error;
     }
-    return data;
+    return data as GenerationRow[];
   } catch (err) {
-    return handleError(err, 'Error fetching generations by user ID');
+    return handleError(err, "Error fetching generations by user ID");
   }
 }
 
-export async function deleteGeneration(generationId: string): Promise<string | null> {
+export async function deleteGeneration(
+  generationId: string
+): Promise<string | null> {
   try {
-    const { data, error } = await supabase
-      .from('Generation')
+    const { error } = await supabase
+      .from("Generation")
       .delete()
-      .eq('id', generationId);
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    // To-do: Need to define Supabase types, then return id of actual deleted data
-    if (data) {
-      return generationId;
-    } else {
-      return null;
-    }
+      .eq("id", generationId);
+    if (error) throw new Error(error.message);
+    revalidatePath("/ai-generations");
+    return generationId;
   } catch (err) {
-    return handleError(err, 'Error deleting generation')
+    return handleError(err, "Error deleting generation");
   }
 }
 
@@ -198,10 +198,7 @@ export async function uploadImageViaPresignedURL(
     method: "POST",
     body: formData,
   });
-
   if (!response.ok) {
     throw new Error(`Upload failed with status: ${response.status}`);
   }
-
-  console.log(`Upload image via presigned URL: ${response.status}`);
 }
