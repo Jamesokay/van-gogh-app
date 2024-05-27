@@ -5,7 +5,7 @@ import PanelHeader from "../components/PanelHeader";
 import { AspectRatio } from "@chakra-ui/react";
 import ImageCardSkeleton from "../components/ImageCardSkeleton";
 import { useEffect, useRef, useState } from "react";
-import { defaultGenerationRow } from "@/app/lib/definitions";
+import { defaultGenerationRow } from "@/app/lib/dataConstants";
 
 const NewGenerationLoading = () => {
   const { generationRequest, interfaceState } = useSettings();

@@ -6,9 +6,9 @@ import {
   GenerationRow,
   LeonardoGenerationJobResponse,
   LeonardoGenerationRequestBody,
+  LeonardoPresignedDetails,
   LeonardoUserResponse,
   NetworkError,
-  PresignedDetails,
   ServerError,
 } from "./definitions";
 import { supabase } from "./supabaseClient";
@@ -175,7 +175,7 @@ export async function improvePrompt(prompt: string): Promise<string | null> {
   }
 }
 
-export async function getPresignedUrl(): Promise<PresignedDetails | null> {
+export async function getPresignedUrl(): Promise<LeonardoPresignedDetails | null> {
   if (!token) return handleNoToken();
   const options = {
     ...getHeaders("POST"),

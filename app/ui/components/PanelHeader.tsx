@@ -10,7 +10,7 @@ import TickIcon from "../svg/TickIcon";
 import { FC, useEffect, useRef, useState } from "react";
 import { modelData } from "@/app/lib/dataConstants";
 import CopyIcon from "../svg/CopyIcon";
-import { NonNullGenerationRow } from "@/app/lib/definitions";
+import { LeonardoPresetStyle, NonNullGenerationRow } from "@/app/lib/definitions";
 import { convertPresetStyleToString } from "@/app/lib/helpers";
 import GenerationThreeDotsDropdown from "../ai-generations/GenerationThreeDotsDropdown";
 
@@ -104,7 +104,7 @@ const PanelHeader: FC<NonNullGenerationRow> = (props) => {
             </div>
             <div className="hidden md:flex px-2 gap-1 items-center">
               <PaintDropIcon />
-              <p>{convertPresetStyleToString(presetStyle)}</p>
+              <p>{convertPresetStyleToString(presetStyle as LeonardoPresetStyle)}</p>
             </div>
             <div className="p-2 flex gap-1 items-center">
               <ImagesIcon />

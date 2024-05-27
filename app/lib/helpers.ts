@@ -1,13 +1,12 @@
-import { defaultAspectRatioConversion } from "./dataConstants";
+import { defaultAspectRatioConversion, defaultGenerationRow } from "./dataConstants";
 import {
-  defaultGenerationRow,
   Dimension,
   GenerationRequestState,
   InterfaceState,
   LeonardoGenerationRequestBody,
   NonNullGenerationRow,
   GenerationRow,
-  PresetStyle
+  LeonardoPresetStyle
 } from "./definitions";
 
 export const uniqueId = () => {
@@ -89,7 +88,7 @@ export function divideAndRound(num: number): number {
   return Math.round((num / 100) * 100) / 100;
 }
 
-export function convertStringToPresetStyle(style: string): PresetStyle {
+export function convertStringToPresetStyle(style: string): LeonardoPresetStyle {
   switch (style.toLowerCase()) {
     case "anime":
       return "ANIME";
@@ -156,7 +155,7 @@ export function convertStringToPresetStyle(style: string): PresetStyle {
   }
 }
 
-export function convertPresetStyleToString(presetStyle: PresetStyle): string {
+export function convertPresetStyleToString(presetStyle: LeonardoPresetStyle): string {
   switch (presetStyle) {
     case "ANIME":
       return "Anime";
