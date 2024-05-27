@@ -425,13 +425,20 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Implemented logic for inserting the data provided by Leonardo webhook into the Supabase DB
 - Implemented revalidation upon successful DB insertion
 
+### Day 35 (27/05/2024):
+
+- Replaced polling logic with Realtime update from Supabase
+- Integrated Realtime update with logic for Generation loading state/UI
+- Implemented Supabase type definitions
+- Cleaned-up/removed existing type definitions
+- Updated deleteGeneration server action to delete row from database (rather than via the Leonardo API), and revalidate data upon success
+
 ### To Do:
 
-- Replace polling logic with (I think) realtime update from Supabase
-- Integrate realtime update with logic for Generation loading state/UI
+- Further refine type definitions, with particular reference to the Supabase types
+- Evaluate database structure: how can it be improved/optimised?
+- ImageInputModal (mobile responsiveness)
 - Implement Supabase Authentication
 - Implement actual RLS policies for accessing DB
-- Continue implementing ImageInputModal
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
-- Check all settings map correctly onto the API request body, yielding the desired response
