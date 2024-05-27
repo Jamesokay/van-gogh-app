@@ -1,4 +1,4 @@
-# Clone of Leonardo.Ai Image Generation Interface (Next.js 14, Tailwind, Chakra UI)
+# Clone of Leonardo.Ai Image Generation Interface (Next.js 14, Supabase, Tailwind, Chakra UI)
 
 ## Progress Thus Far (28 Days In)
 <img width="1919" alt="Screenshot 2024-05-21 at 10 42 53 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/ee3b8807-0913-444b-aa9b-684fd1a53a19">
