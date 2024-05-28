@@ -105,39 +105,11 @@ function transformWebhookData(generation: WebhookGenerationData) {
 
 
 async function insertGenerationIntoDatabase(generation: any) {
-    console.log("Inserting into db")
     try {
       const { data, error } = await supabase
         .from('Generation')
-        .insert([
-          {
-            id: generation.id,
-            createdAt: generation.createdAt,
-            generated_images: generation.generated_images,
-            generation_elements: generation.generation_elements, // assuming this is already JSON or null
-            guidanceScale: generation.guidanceScale,
-            imageHeight: generation.imageHeight,
-            imageWidth: generation.imageWidth,
-            inferenceSteps: generation.inferenceSteps,
-            initStrength: generation.initStrength,
-            modelId: generation.modelId,
-            negativePrompt: generation.negativePrompt,
-            photoReal: generation.photoReal,
-            photoRealStrength: generation.photoRealStrength,
-            presetStyle: generation.presetStyle,
-            prompt: generation.prompt,
-            promptMagic: generation.promptMagic,
-            promptMagicStrength: generation.promptMagicStrength,
-            promptMagicVersion: generation.promptMagicVersion,
-            public: generation.public,
-            scheduler: generation.scheduler,
-            sdVersion: generation.sdVersion,
-            seed: generation.seed,
-            status: generation.status,
-            userId: generation.userId
-          }
-        ]);
-        revalidatePath("/ai-generations")
+        .insert([generation]);
+        revalidatePath("/ai-generations", "layout")
       if (error) {
         console.error("Error inserting generation into database:", error);
         throw error;

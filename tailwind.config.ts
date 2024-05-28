@@ -66,6 +66,8 @@ const config: Config = {
         "van-gogh-grey-600": "rgb(81, 81, 81)",
         "van-gogh-grey-700": "rgb(144, 148, 166)",
         "van-gogh-grey-800": "#242C3E",
+        "van-gogh-purple-200": "#6B66FF",
+        "van-gogh-purple-300": "#807cff",
         "van-gogh-purple-400": "rgb(114, 88, 242)",
         "van-gogh-blue-200": "#101622",
         "van-gogh-blue-500": "rgb(16, 22, 34)",
@@ -77,7 +79,11 @@ const config: Config = {
         "van-gogh-input-grey-700": "rgb(23, 23, 23)",
         "van-gogh-hover-grey-800": "rgb(19, 25, 38)",
         "van-gogh-icon-grey-900": "rgb(73, 78, 91)",
-        "van-gogh-border-grey-300": "#26272C"
+        "van-gogh-border-grey-300": "#26272C",
+        "van-gogh-auth-form-grey": "#171717",
+        "van-gogh-input-black": "#111111",
+        "van-gogh-input-text-grey": "#BDBDBD",
+        "van-gogh-policy-text-grey": "#A7B2C1"
       },
       flex: {
         "van-gogh-1-1-0": "1 1 0%",

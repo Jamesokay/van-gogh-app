@@ -29,7 +29,7 @@ html {
 
 body {
   height: 100dvh;
-  color: rgb(var(--foreground-rgb));
+  color: rgba(255, 255, 255, 0.92)
 }
 
 .input-number::-webkit-inner-spin-button,

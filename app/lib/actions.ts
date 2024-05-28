@@ -116,7 +116,7 @@ export async function deleteGeneration(
       .delete()
       .eq("id", generationId);
     if (error) throw new Error(error.message);
-    revalidatePath("/ai-generations");
+    revalidatePath("/ai-generations", "layout");
     return generationId;
   } catch (err) {
     return handleError(err, "Error deleting generation");
