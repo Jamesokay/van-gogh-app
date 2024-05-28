@@ -433,12 +433,22 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Cleaned-up/removed existing type definitions
 - Updated deleteGeneration server action to delete row from database (rather than via the Leonardo API), and revalidate data upon success
 
+### Day 36 (28/05/2024):
+
+<img width="1512" alt="Screenshot 2024-05-28 at 2 24 26 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/12494cc7-e5ff-4a70-8231-a4d6251a97d1">
+<img width="878" alt="Screenshot 2024-05-28 at 2 24 46 PM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/0518ffc9-3d75-4c74-9452-4fa6cfc283ad">
+
+- Built Auth page display layer
+- Responsive on web and tablet, still need to review mobile
+
 ### To Do:
 
+- Mobile view of Auth page display
+- Alternate hero images for Auth page
+- Implement Supabase Authentication
+- Implement actual RLS policies for accessing DB
 - Further refine type definitions, with particular reference to the Supabase types
 - Evaluate database structure: how can it be improved/optimised?
 - ImageInputModal (mobile responsiveness)
-- Implement Supabase Authentication
-- Implement actual RLS policies for accessing DB
 - Function to calculate individual generation cost and display in GenerateButton
 - Confirmation modal for image deletion
