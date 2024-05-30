@@ -15,15 +15,6 @@ const nextConfig = {
             pathname: '/_next/**',
           },
         ],
-      },
-      async redirects() {
-        return [
-          {
-            source: "/",
-            destination: "/ai-generations",
-            permanent: true,
-          },
-        ];
       }
 };
 

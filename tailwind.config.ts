@@ -41,10 +41,11 @@ const config: Config = {
         "van-gogh-image-overlay-gradient":
           "linear-gradient(rgba(18, 19, 21, 0) -2.43%, rgb(18, 19, 21) 97.57%)",
         "van-gogh-loading-spinner-gradient":
-          "conic-gradient(rgb(23, 38, 44), rgb(250, 85, 96), rgb(177, 75, 244), rgb(23, 38, 44), rgb(23, 38, 44), rgb(177, 75, 244), rgb(77, 145, 255), rgb(23, 38, 44), rgb(23, 38, 44))"
+          "conic-gradient(rgb(23, 38, 44), rgb(250, 85, 96), rgb(177, 75, 244), rgb(23, 38, 44), rgb(23, 38, 44), rgb(177, 75, 244), rgb(77, 145, 255), rgb(23, 38, 44), rgb(23, 38, 44))",
       },
       boxShadow: {
-        "van-gogh-purple-glow": "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)",
+        "van-gogh-purple-glow":
+          "rgba(143, 0, 255, 0.6) 0px 0px calc(0.9375rem)",
       },
       colors: {
         "van-gogh-grey-50": "rgb(23, 23, 23)",
@@ -53,7 +54,7 @@ const config: Config = {
         "van-gogh-black-opal-300": "rgba(0, 0, 0, 0.34)",
         "van-gogh-black-opal-400": "rgba(0, 0, 0, 0.48)",
         "van-gogh-black-opal-500": "rgba(25, 25, 25, 0.5)",
-        "van-gogh-black-opal-600" : "rgba(0, 0, 0, 0.65)",
+        "van-gogh-black-opal-600": "rgba(0, 0, 0, 0.65)",
         "van-gogh-white-opal-100": "rgba(255, 255, 255, 0.06)",
         "van-gogh-white-opal-150": "rgba(255, 255, 255, 0.08)",
         "van-gogh-white-opal-200": "rgba(255, 255, 255, 0.16)",
@@ -83,17 +84,22 @@ const config: Config = {
         "van-gogh-auth-form-grey": "#171717",
         "van-gogh-input-black": "#111111",
         "van-gogh-input-text-grey": "#BDBDBD",
-        "van-gogh-policy-text-grey": "#A7B2C1"
+        "van-gogh-policy-text-grey": "#A7B2C1",
+        "van-gogh-border-green": "rgb(104, 211, 145)",
       },
       flex: {
         "van-gogh-1-1-0": "1 1 0%",
       },
       gridTemplateColumns: {
-        "van-gogh-auto-fit-minmax-35": "repeat(auto-fit, minmax(calc(35.75rem), 1fr))",
-        "van-gogh-auto-fill-minmax-0-31": "repeat(auto-fill, minmax(0px, calc(31.875rem)))",
-        "van-gogh-auto-fit-minmax-16": "repeat(auto-fit, minmax(calc(16rem), 1fr))",
-        "van-gogh-auto-fit-minmax-24": "repeat(auto-fit, minmax(calc(24rem), 1fr))",
-        "van-gogh-auto-fit-minmax-75px": "repeat(auto-fill, minmax(75px, 1fr))"
+        "van-gogh-auto-fit-minmax-35":
+          "repeat(auto-fit, minmax(calc(35.75rem), 1fr))",
+        "van-gogh-auto-fill-minmax-0-31":
+          "repeat(auto-fill, minmax(0px, calc(31.875rem)))",
+        "van-gogh-auto-fit-minmax-16":
+          "repeat(auto-fit, minmax(calc(16rem), 1fr))",
+        "van-gogh-auto-fit-minmax-24":
+          "repeat(auto-fit, minmax(calc(24rem), 1fr))",
+        "van-gogh-auto-fit-minmax-75px": "repeat(auto-fill, minmax(75px, 1fr))",
       },
       maxHeight: {
         "van-gogh-modal-height": "calc(-10rem + 100vh)",
@@ -142,7 +148,8 @@ const config: Config = {
         "van-gogh-grid-row-gap": "0.625rem",
         "van-gogh-switch-track-width": "calc(1rem * 2.625)",
         "van-gogh-switch-track-height": "calc(1rem * 1.25)",
-        "van-gogh-switch-track-x-enable": "calc(1rem * 2.625 - 1rem * 1.25 - 0.125rem)",
+        "van-gogh-switch-track-x-enable":
+          "calc(1rem * 2.625 - 1rem * 1.25 - 0.125rem)",
         "van-gogh-switch-track-x-disable": "0.125rem",
       },
     },

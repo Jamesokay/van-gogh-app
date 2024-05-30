@@ -9,7 +9,7 @@ const Page = async () => {
   if (!userDetails) return null;
   const history = await fetchGenerationsByUserId(userDetails.user.id);
   if (!history) return null;
-  const safeHistory = history.map((generation) => fillDefaults(generation))
+  const safeHistory = history.map((generation) => fillDefaults(generation));
 
   return (
     <div className="flex flex-col pt-9 pb-4 w-full">

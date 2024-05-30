@@ -20,7 +20,7 @@ import SideBarAdvancedSettings from "./SideBarAdvancedSettings";
 import TokenHeader from "../../components/TokenHeader";
 import LeonardoLogoText from "../../svg/LeonardoLogoText";
 import { useEffect } from "react";
-import { getUserInformation } from "@/app/lib/actions";
+import { getUserInformation, signOut } from "@/app/lib/actions";
 
 const SideBar = () => {
   const {
@@ -44,6 +44,7 @@ const SideBar = () => {
     fetchTokens();
   }, []);
 
+
   return (
     <div
       className={`flex fixed top-0 transition-transform ${
@@ -54,7 +55,11 @@ const SideBar = () => {
     >
       <div className="flex flex-col items-center my-5 gap-3.5">
         <div className="flex gap-2 items-center w-full">
-          <span className="hidden md:flex text-van-gogh-icon-grey-900">
+          <span
+            role="button"
+            className="hidden md:flex text-van-gogh-icon-grey-900"
+            onClick={() => signOut()}
+          >
             <BackArrowIcon />
           </span>
           <div

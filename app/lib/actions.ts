@@ -12,6 +12,9 @@ import {
   ServerError,
 } from "./definitions";
 import { supabase } from "./supabaseClient";
+import { redirect } from "next/navigation";
+import { AuthError } from "@supabase/supabase-js";
+import { createClient } from "../utils/supabase/server";
 
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
@@ -59,6 +62,68 @@ const handleNoToken = (): null => {
 };
 
 // Supabase DB actions
+
+export async function login(prevState: void | string, formData: FormData) {
+  const supabaseClient = createClient();
+  try {
+    console.log("login");
+    const credentials = {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+    };
+    const { data, error } = await supabaseClient.auth.signInWithPassword(
+      credentials
+    );
+
+    if (error) {
+      throw error; // Properly throw an error with the message
+    }
+    revalidatePath("/", "layout");
+  } catch (error) {
+    console.error(error);
+    if (error instanceof AuthError) {
+      return error.message;
+    } else {
+      return "An unexpected error occurred";
+    }
+  }
+  redirect("/");
+}
+
+export async function signup(prevState: void | string, formData: FormData) {
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+  const supabaseClient = createClient();
+  try {
+    console.log("sign up");
+    const data = {
+      email: formData.get("email") as string,
+      password: formData.get("password") as string,
+    };
+
+    const { error } = await supabaseClient.auth.signUp(data);
+
+    if (error) {
+      console.error("Error signing up:", error);
+      throw error;
+    }
+    console.log("signed up");
+    redirect("/");
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function signOut() {
+  const supabase = createClient();
+  try {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+  } catch (err) {
+    console.error(err);
+  }
+  redirect("/auth");
+}
 
 export async function fetchGenerationsByUserId(
   userId: string
