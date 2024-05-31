@@ -441,12 +441,16 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Built Auth page display layer
 - Responsive on web and tablet, still need to review mobile
 
+### Day 37, 38 & 39:
+
+- Implemented Supabase authentication flow for both sign in and sign up
+- Implemented RLS for Generation table
+- Implemented protected routes based on auth, using middleware
+
 ### To Do:
 
 - Mobile view of Auth page display
 - Alternate hero images for Auth page
-- Implement Supabase Authentication
-- Implement actual RLS policies for accessing DB
 - Further refine type definitions, with particular reference to the Supabase types
 - Evaluate database structure: how can it be improved/optimised?
 - ImageInputModal (mobile responsiveness)
