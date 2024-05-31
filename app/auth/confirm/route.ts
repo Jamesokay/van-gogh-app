@@ -1,9 +1,10 @@
-import { createClient } from '@/app/utils/supabase/server'
+import { createServerClient } from '@/app/utils/supabase/server'
 import { type EmailOtpType } from '@supabase/supabase-js'
 import { type NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
+  const requestUrl = new URL(request.url);;
   const token_hash = searchParams.get('token_hash')
   const type = searchParams.get('type') as EmailOtpType | null
   const next = searchParams.get('next') ?? '/'
@@ -14,21 +15,15 @@ export async function GET(request: NextRequest) {
   redirectTo.searchParams.delete('type')
 
   if (token_hash && type) {
-    console.log("doing stuff")
-    const supabase = createClient();
+    const supabase = createServerClient();
     const { error } = await supabase.auth.verifyOtp({
       type,
       token_hash,
     })
-    console.error(error)
     if (!error) {
-      console.log("hello")
-      console.log(redirectTo)
-      redirectTo.searchParams.delete('next')
-      return NextResponse.redirect(redirectTo)
+      return NextResponse.redirect(requestUrl.origin)
     }
   }
-  console.log("no token_hash etc")
 
   // return the user to an error page with some instructions
   // To-do: error page

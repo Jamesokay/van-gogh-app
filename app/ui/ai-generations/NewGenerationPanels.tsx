@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import GenerationHistoryPanel from "./GenerationHistoryPanel";
 import NewGenerationLoading from "./NewGenerationLoading";
 import { fillDefaults } from "@/app/lib/helpers";
-import { supabase } from "@/app/lib/supabaseClient";
+import { createBrowserClient } from "@/app/utils/supabase/client";
 
 const NewGenerationPanels = () => {
   const { interfaceState, setKeyOfInterfaceState } = useSettings();
@@ -23,6 +23,7 @@ const NewGenerationPanels = () => {
       }
     };
 
+    const supabase = createBrowserClient();
     const subscription = supabase
       .channel("Generation")
       .on(

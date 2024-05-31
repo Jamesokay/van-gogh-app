@@ -1,12 +1,14 @@
-import { fetchGenerationsByUserId, getUserInformation } from "@/app/lib/actions";
+import { fetchGenerationsByUserId } from "@/app/lib/actions";
 import ImageGuidanceBanner from "@/app/ui/image-guidance/ImageGuidanceBanner";
 import ImageGuidanceCTA from "@/app/ui/image-guidance/ImageGuidanceCTA";
 import ImageGuidanceUpload from "@/app/ui/image-guidance/ImageGuidanceUpload";
+import { createServerClient } from "@/app/utils/supabase/server";
 
 const Page = async () => {
-  const userDetails = await getUserInformation();
-  if (!userDetails) return null;
-  const history = await fetchGenerationsByUserId(userDetails.user.id);
+  const supabase = createServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null;
+  const history = await fetchGenerationsByUserId(user.id);
   if (!history) return null;
   const recentImages = history
     .flatMap((generation) => generation.generated_images || [])

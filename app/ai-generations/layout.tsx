@@ -3,7 +3,7 @@ import { Providers } from "../providers";
 import ImageGenerationHeader from "../ui/ai-generations/ImageGenerationHeader";
 import SideBar from "../ui/ai-generations/SideBar";
 
-export default function Layout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;

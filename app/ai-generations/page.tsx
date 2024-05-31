@@ -1,13 +1,15 @@
-import { fetchGenerationsByUserId, getUserInformation } from "../lib/actions";
+import { fetchGenerationsByUserId } from "../lib/actions";
 import { fillDefaults } from "../lib/helpers";
 import { generationHistoryStrings } from "../lib/stringConstants";
 import GenerationHistoryPanel from "../ui/ai-generations/GenerationHistoryPanel";
 import NewGenerationPanels from "../ui/ai-generations/NewGenerationPanels";
+import { createServerClient } from "../utils/supabase/server";
 
 const Page = async () => {
-  const userDetails = await getUserInformation();
-  if (!userDetails) return null;
-  const history = await fetchGenerationsByUserId(userDetails.user.id);
+  const supabase = createServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null;
+  const history = await fetchGenerationsByUserId(user.id);
   if (!history) return null;
   const safeHistory = history.map((generation) => fillDefaults(generation));
 

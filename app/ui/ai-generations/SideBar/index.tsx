@@ -20,7 +20,7 @@ import SideBarAdvancedSettings from "./SideBarAdvancedSettings";
 import TokenHeader from "../../components/TokenHeader";
 import LeonardoLogoText from "../../svg/LeonardoLogoText";
 import { useEffect } from "react";
-import { getUserInformation, signOut } from "@/app/lib/actions";
+import { getLeonardoUserInformation, signOut } from "@/app/lib/actions";
 
 const SideBar = () => {
   const {
@@ -34,7 +34,7 @@ const SideBar = () => {
   useEffect(() => {
     const fetchTokens = async () => {
       try {
-        const user = await getUserInformation();
+        const user = await getLeonardoUserInformation();
         if (!user) return;
         setKeyOfInterfaceState("tokens", user.apiSubscriptionTokens);
       } catch (err) {

@@ -11,10 +11,9 @@ import {
   NetworkError,
   ServerError,
 } from "./definitions";
-import { supabase } from "./supabaseClient";
 import { redirect } from "next/navigation";
 import { AuthError } from "@supabase/supabase-js";
-import { createClient } from "../utils/supabase/server";
+import { createServerClient } from "../utils/supabase/server";
 
 const API_URL = "https://cloud.leonardo.ai/api/rest/v1";
 const token = process.env.LEONARDO_API_TOKEN;
@@ -64,16 +63,13 @@ const handleNoToken = (): null => {
 // Supabase DB actions
 
 export async function login(prevState: void | string, formData: FormData) {
-  const supabaseClient = createClient();
+  const supabaseServerClient = createServerClient();
   try {
-    console.log("login");
     const credentials = {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     };
-    const { data, error } = await supabaseClient.auth.signInWithPassword(
-      credentials
-    );
+    const { error } = await supabaseServerClient.auth.signInWithPassword(credentials);
 
     if (error) {
       throw error; // Properly throw an error with the message
@@ -87,37 +83,38 @@ export async function login(prevState: void | string, formData: FormData) {
       return "An unexpected error occurred";
     }
   }
-  redirect("/");
+  redirect("/ai-generations");
 }
 
 export async function signup(prevState: void | string, formData: FormData) {
   // type-casting here for convenience
   // in practice, you should validate your inputs
-  const supabaseClient = createClient();
   try {
-    console.log("sign up");
-    const data = {
+    const supabaseServerClient = createServerClient();
+    const credentials = {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     };
 
-    const { error } = await supabaseClient.auth.signUp(data);
+    const { error } = await supabaseServerClient.auth.signUp(credentials);
 
     if (error) {
-      console.error("Error signing up:", error);
       throw error;
     }
-    console.log("signed up");
-    redirect("/");
   } catch (error) {
-    throw error;
+    if (error instanceof AuthError) {
+      return error.message;
+    } else {
+      return "An unexpected error occurred";
+    }
   }
+  redirect("/ai-generations");
 }
 
 export async function signOut() {
-  const supabase = createClient();
   try {
-    const { error } = await supabase.auth.signOut();
+    const supabaseServerClient = createServerClient();
+    const { error } = await supabaseServerClient.auth.signOut();
     if (error) throw error;
   } catch (err) {
     console.error(err);
@@ -129,7 +126,8 @@ export async function fetchGenerationsByUserId(
   userId: string
 ): Promise<GenerationRow[] | null> {
   try {
-    const { data, error } = await supabase
+    const supabaseServerClient = createServerClient();
+    const { data, error } = await supabaseServerClient
       .from("Generation")
       .select(
         `
@@ -176,7 +174,8 @@ export async function deleteGeneration(
   generationId: string
 ): Promise<string | null> {
   try {
-    const { error } = await supabase
+    const supabaseServerClient = createServerClient();
+    const { error } = await supabaseServerClient
       .from("Generation")
       .delete()
       .eq("id", generationId);
@@ -190,7 +189,7 @@ export async function deleteGeneration(
 
 // Leonardo API actions
 
-export async function getUserInformation(): Promise<LeonardoUserResponse | null> {
+export async function getLeonardoUserInformation(): Promise<LeonardoUserResponse | null> {
   if (!token) return handleNoToken();
   const options = getHeaders("GET");
   try {

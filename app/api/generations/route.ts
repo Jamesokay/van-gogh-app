@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sql } from "@vercel/postgres";
 import {
   WebhookGenerationData,
   WebhookGenerationImage,
 } from "@/app/lib/definitions";
-import { supabase } from "@/app/lib/supabaseClient";
 import { revalidatePath } from "next/cache";
+import { createServerClient } from "@/app/utils/supabase/server";
 
 const WEBHOOK_API_KEY = process.env.VAN_GOGH_WEBHOOK_API_KEY;
 
@@ -106,7 +105,8 @@ function transformWebhookData(generation: WebhookGenerationData) {
 
 async function insertGenerationIntoDatabase(generation: any) {
     try {
-      const { data, error } = await supabase
+      const supabaseServerClient = createServerClient();
+      const { data, error } = await supabaseServerClient
         .from('Generation')
         .insert([generation]);
         revalidatePath("/ai-generations", "layout")
