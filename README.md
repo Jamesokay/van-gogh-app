@@ -441,7 +441,7 @@ https://github.com/Jamesokay/van-gogh-app/assets/78640728/2aea4896-2ac8-4537-be2
 - Built Auth page display layer
 - Responsive on web and tablet, still need to review mobile
 
-### Day 37, 38 & 39:
+### Day 37, 38 & 39 (29/05/2024 - 31/05/2024):
 
 - Implemented Supabase authentication flow for both sign in and sign up
 - Implemented RLS for Generation table
