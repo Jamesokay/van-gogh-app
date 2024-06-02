@@ -4,7 +4,9 @@ import {
   WebhookGenerationImage,
 } from "@/app/lib/definitions";
 import { revalidatePath } from "next/cache";
-import { createServerClient } from "@/app/utils/supabase/server";
+import {
+  getServiceSupabase,
+} from "@/app/utils/supabase/server";
 
 const WEBHOOK_API_KEY = process.env.VAN_GOGH_WEBHOOK_API_KEY;
 
@@ -61,7 +63,6 @@ async function handleGenerationComplete(generation: WebhookGenerationData) {
 }
 
 function transformWebhookData(generation: WebhookGenerationData) {
-  console.log("transformWebhookData called");
   const mappedImages = generation.images?.map(
     (image: WebhookGenerationImage) => ({
       url: image.url,
@@ -97,27 +98,26 @@ function transformWebhookData(generation: WebhookGenerationData) {
     sdVersion: generation.sdVersion,
     seed: generation.seed ? parseInt(generation.seed) : null,
     status: generation.status,
-    userId: generation.userId,
+    userId: process.env.SUPABASE_USER_ID,
   };
   return transformed;
 }
 
-
 async function insertGenerationIntoDatabase(generation: any) {
-    try {
-      const supabaseServerClient = createServerClient();
-      const { data, error } = await supabaseServerClient
-        .from('Generation')
-        .insert([generation]);
-        revalidatePath("/ai-generations", "layout")
-      if (error) {
-        console.error("Error inserting generation into database:", error);
-        throw error;
-      }
-  
-      return data; // returns inserted data
-    } catch (err) {
-      console.error("Database insertion failed:", err);
-      throw err;
+  try {
+    const supabase = getServiceSupabase();
+    const { data, error } = await supabase
+      .from("Generation")
+      .insert([generation]);
+    revalidatePath("/ai-generations", "layout");
+    if (error) {
+      console.error("Error inserting generation into database:", error);
+      throw error;
     }
+
+    return data; // returns inserted data
+  } catch (err) {
+    console.error("Database insertion failed:", err);
+    throw err;
   }
+}

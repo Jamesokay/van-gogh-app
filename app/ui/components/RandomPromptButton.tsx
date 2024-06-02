@@ -49,7 +49,7 @@ const RandomPromptButton: FC<{ mobile: boolean }> = ({ mobile }) => {
             <button
               className={
                 mobile
-                  ? `flex min-w-14 w-14 h-14 rounded-md mr-2 p-px bg-van-gogh-purple-gradient transition-all ${
+                  ? `flex min-w-14 w-14 h-14 rounded-md mr-2 p-px transition-all ${
                       isOpen
                         ? "bg-van-gogh-purple-gradient"
                         : "bg-van-gogh-blue-500"

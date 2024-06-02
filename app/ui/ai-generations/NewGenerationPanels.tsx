@@ -23,7 +23,7 @@ const NewGenerationPanels = () => {
       }
     };
 
-    const supabase = createBrowserClient();
+    const supabase = createBrowserClient()
     const subscription = supabase
       .channel("Generation")
       .on(

@@ -2,6 +2,9 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "./app/utils/supabase/middleware";
 
 export async function middleware(request: NextRequest) {
+  if (request.nextUrl.pathname === "/api/generations") {
+    return NextResponse.next();
+  }
   const { supabase, response } = createClient(request);
   const {
     data: { user },
