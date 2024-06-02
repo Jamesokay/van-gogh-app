@@ -14,6 +14,8 @@
 - Implement Universal Upscaler feature
 - Configure Vercel environment variables to support production deployment
 
+### Screenshots
+
 <img width="1919" alt="Screenshot 2024-06-02 at 11 18 37 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/b34f7dd9-b093-40a3-b3d1-8e3874e1d149">
 <br/><br/>
 <img width="1920" alt="Screenshot 2024-06-02 at 11 18 58 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/0659c04b-6df9-404c-85a7-79bffdc043e5">
