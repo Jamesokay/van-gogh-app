@@ -12,7 +12,6 @@ const WEBHOOK_API_KEY = process.env.VAN_GOGH_WEBHOOK_API_KEY;
 
 export const POST = async (req: NextRequest) => {
   try {
-    console.log("Request received");
 
     const authorizationHeader = req.headers.get("authorization");
 
@@ -29,10 +28,8 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Process the request if the API key is valid
     const data = await req.json();
 
-    // Check if the data type is 'image_generation.complete'
     if (
       data.type === "image_generation.complete" &&
       data.object === "generation"
