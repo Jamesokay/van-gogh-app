@@ -26,7 +26,7 @@ const SignInForm = () => {
     email: "",
     password: "",
   });
-  const [errorMessage, dispatch] = useFormState(login, undefined);
+  const [errorMessage, dispatch] = useFormState(login, null);
   return (
     <form action={dispatch}>
       <div className="flex flex-col w-full items-start gap-3 pb-1.5">
@@ -73,7 +73,7 @@ const SignInForm = () => {
         </div>
         <SignInButton />
         {errorMessage && (
-          <div className="error-message text-red-500">{errorMessage}</div>
+          <div className="self-center text-red-500">{errorMessage}</div>
         )}
       </div>
     </form>

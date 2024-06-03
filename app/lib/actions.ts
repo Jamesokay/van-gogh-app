@@ -31,6 +31,21 @@ const getHeaders = (method: string) => {
   };
 };
 
+const checkUserAuthorization = async (): Promise<void> => {
+  const supabaseServerClient = createServerClient();
+  const {
+    data: { user },
+  } = await supabaseServerClient.auth.getUser();
+
+  if (!user) {
+    throw new Error("User not authenticated");
+  }
+
+  if (user.id !== process.env.SUPABASE_USER_ID) {
+    throw new Error("Unauthorized access");
+  }
+};
+
 const handleResponse = async (response: Response) => {
   if (!response.ok) {
     throw new Error(
@@ -62,14 +77,19 @@ const handleNoToken = (): null => {
 
 // Supabase DB actions
 
-export async function login(prevState: void | string, formData: FormData) {
+export async function login(
+  prevState: string | undefined | null,
+  formData: FormData
+) {
   const supabaseServerClient = createServerClient();
   try {
     const credentials = {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
     };
-    const { error } = await supabaseServerClient.auth.signInWithPassword(credentials);
+    const { error } = await supabaseServerClient.auth.signInWithPassword(
+      credentials
+    );
 
     if (error) {
       throw error; // Properly throw an error with the message
@@ -86,7 +106,12 @@ export async function login(prevState: void | string, formData: FormData) {
   redirect("/ai-generations");
 }
 
-export async function signup(prevState: void | string, formData: FormData) {
+type SignUpFormType = {
+  success: boolean;
+  message: string;
+};
+
+export async function signup(prevState: SignUpFormType, formData: FormData) {
   // type-casting here for convenience
   // in practice, you should validate your inputs
   try {
@@ -101,14 +126,14 @@ export async function signup(prevState: void | string, formData: FormData) {
     if (error) {
       throw error;
     }
+    return { success: true, message: "Check your email" };
   } catch (error) {
     if (error instanceof AuthError) {
-      return error.message;
+      return { success: false, message: error.message };
     } else {
-      return "An unexpected error occurred";
+      return { success: false, message: "An unexpected error occurred" };
     }
   }
-  redirect("/ai-generations");
 }
 
 export async function signOut() {
@@ -191,6 +216,7 @@ export async function deleteGeneration(
 
 export async function getLeonardoUserInformation(): Promise<LeonardoUserResponse | null> {
   if (!token) return handleNoToken();
+  await checkUserAuthorization();
   const options = getHeaders("GET");
   try {
     const response = await fetch(`${API_URL}/me`, options);
@@ -205,6 +231,7 @@ export async function generateImages(
   body: LeonardoGenerationRequestBody
 ): Promise<LeonardoGenerationJobResponse | null> {
   if (!token) return handleNoToken();
+  await checkUserAuthorization();
   const options = { ...getHeaders("POST"), body: JSON.stringify(body) };
   try {
     const response = await fetch(`${API_URL}/generations`, options);
@@ -217,6 +244,7 @@ export async function generateImages(
 
 export async function generateRandomPrompt(): Promise<string | null> {
   if (!token) return handleNoToken();
+  await checkUserAuthorization();
   const options = getHeaders("POST");
   try {
     const response = await fetch(`${API_URL}/prompt/random`, options);
@@ -229,6 +257,7 @@ export async function generateRandomPrompt(): Promise<string | null> {
 
 export async function improvePrompt(prompt: string): Promise<string | null> {
   if (!token) return handleNoToken();
+  await checkUserAuthorization();
   const options = { ...getHeaders("POST"), body: JSON.stringify({ prompt }) };
   try {
     const response = await fetch(`${API_URL}/prompt/improve`, options);
@@ -241,6 +270,7 @@ export async function improvePrompt(prompt: string): Promise<string | null> {
 
 export async function getPresignedUrl(): Promise<LeonardoPresignedDetails | null> {
   if (!token) return handleNoToken();
+  await checkUserAuthorization();
   const options = {
     ...getHeaders("POST"),
     body: JSON.stringify({ extension: "jpg" }),
@@ -258,6 +288,7 @@ export async function uploadImageViaPresignedURL(
   formData: FormData,
   url: string
 ) {
+  await checkUserAuthorization();
   const response = await fetch(url, {
     method: "POST",
     body: formData,
