@@ -24,6 +24,7 @@ export const POST = async (req: NextRequest) => {
 
     const apiKey = authorizationHeader.slice(7);
     if (apiKey !== WEBHOOK_API_KEY) {
+      console.log(apiKey)
       console.log("Unauthorized request: Invalid API key");
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
