@@ -12,7 +12,7 @@
 ### Ongoing Work
 
 - Implement Universal Upscaler feature
-- Configure Vercel environment variables to support production deployment
+- Implement social authentication (Apple, Google etc.)
 
 ### Screenshots
 
