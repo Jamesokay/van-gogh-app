@@ -1,8 +1,8 @@
 "use client";
 
 import { signup } from "@/app/lib/actions";
-import { Spinner } from "@chakra-ui/react";
-import { useState } from "react";
+import { Collapse, Spinner, useDisclosure } from "@chakra-ui/react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
 const SignUpButton = () => {
@@ -22,6 +22,7 @@ const SignUpButton = () => {
 };
 
 const SignUpForm = () => {
+  const { isOpen, onToggle } = useDisclosure();
   const [fields, setFields] = useState<{ email: string; password: string }>({
     email: "",
     password: "",
@@ -30,6 +31,19 @@ const SignUpForm = () => {
     success: false,
     message: "",
   });
+
+  useEffect(() => {
+    if (formState?.message) onToggle();
+  }, [formState]);
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    field: "email" | "password"
+  ) => {
+    if (isOpen) onToggle();
+    setFields((prev) => ({ ...prev, [field]: e.target.value }));
+  };
+
   return (
     <form action={dispatch}>
       <div className="flex flex-col w-full items-start gap-3 pb-1.5">
@@ -47,9 +61,7 @@ const SignUpForm = () => {
             required
             aria-required="true"
             value={fields.email}
-            onChange={(e) =>
-              setFields((prev) => ({ ...prev, email: e.target.value }))
-            }
+            onChange={(e) => handleInputChange(e, "email")}
           />
         </div>
         <div className="flex flex-col w-full gap-2">
@@ -69,18 +81,21 @@ const SignUpForm = () => {
             required
             aria-required="true"
             value={fields.password}
-            onChange={(e) =>
-              setFields((prev) => ({ ...prev, password: e.target.value }))
-            }
+            onChange={(e) => handleInputChange(e, "password")}
           />
         </div>
+        <Collapse in={isOpen} className="self-center">
+          <div
+            className={`h-4 text-van-gogh-xs ${
+              formState?.success === true
+                ? "text-van-gogh-border-green"
+                : "text-red-500 "
+            }`}
+          >
+            {formState.message}
+          </div>
+        </Collapse>
         <SignUpButton />
-        {formState?.success === true && formState?.message && (
-          <div className="self-center text-van-gogh-border-green">{formState.message}</div>
-        )}
-        {formState?.success === false && formState?.message && (
-          <div className="self-center text-red-500">{formState.message}</div>
-        )}
       </div>
     </form>
   );
