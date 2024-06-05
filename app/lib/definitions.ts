@@ -433,6 +433,12 @@ export type AspectRatioKey = keyof typeof defaultAspectRatioConversion;
 
 export type InputDimension = "height" | "width";
 
+export type HeroImage = {
+  title: string;
+  src: string;
+  creator: string;
+};
+
 // Custom Error classes
 
 export class NetworkError extends Error {

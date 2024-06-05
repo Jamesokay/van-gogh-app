@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`${inter.className} antialiased`}>
         <Suspense
           fallback={
             <div className="flex w-full h-full justify-center items-center">

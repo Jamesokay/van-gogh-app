@@ -48,7 +48,7 @@ const SignUpForm = () => {
     <form action={dispatch}>
       <div className="flex flex-col w-full items-start gap-3 pb-1.5">
         <div className="flex flex-col w-full gap-2">
-          <label className="text-van-gogh-md font-extralight" htmlFor="email">
+          <label className="text-van-gogh-md font-light" htmlFor="email">
             Email
           </label>
           <input
@@ -57,7 +57,7 @@ const SignUpForm = () => {
             name="email"
             type="email"
             autoComplete="username"
-            className="h-10 w-full bg-van-gogh-input-black rounded-lg px-3 py-[0.375rem] outline-none transition-all border border-transparent focus:border-van-gogh-purple-400 font-extralight text-van-gogh-md text-van-gogh-input-text-grey"
+            className="h-10 w-full bg-van-gogh-input-black rounded-lg px-3 py-[0.375rem] outline-none transition-all border border-transparent focus:border-van-gogh-purple-400 font-light text-van-gogh-md text-van-gogh-input-text-grey"
             required
             aria-required="true"
             value={fields.email}
@@ -66,7 +66,7 @@ const SignUpForm = () => {
         </div>
         <div className="flex flex-col w-full gap-2">
           <label
-            className="text-van-gogh-md font-extralight"
+            className="text-van-gogh-md font-light"
             htmlFor="password"
           >
             Password
@@ -76,7 +76,7 @@ const SignUpForm = () => {
             name="password"
             type="password"
             autoComplete="new-password"
-            className="h-10 w-full bg-van-gogh-input-black rounded-lg px-3 py-[0.375rem] outline-none transition-all border border-transparent focus:border-van-gogh-purple-400 font-extralight text-van-gogh-md text-van-gogh-input-text-grey"
+            className="h-10 w-full bg-van-gogh-input-black rounded-lg px-3 py-[0.375rem] outline-none transition-all border border-transparent focus:border-van-gogh-purple-400 font-light text-van-gogh-md text-van-gogh-input-text-grey"
             placeholder="Password"
             required
             aria-required="true"

@@ -54,7 +54,7 @@ const AuthPanel = () => {
             className={
               createAccount
                 ? "hidden"
-                : "text-van-gogh-sm font-extralight leading-4"
+                : "text-van-gogh-sm font-light leading-4"
             }
             onClick={() => setCreateAccount(true)}
           >
@@ -65,7 +65,7 @@ const AuthPanel = () => {
             role="button"
             className={
               createAccount
-                ? "text-van-gogh-sm font-extralight leading-4"
+                ? "text-van-gogh-sm font-light leading-4"
                 : "hidden"
             }
             onClick={() => setCreateAccount(false)}

@@ -1,8 +1,8 @@
 "use client";
 
 import { login } from "@/app/lib/actions";
-import { Spinner } from "@chakra-ui/react";
-import { useState } from "react";
+import { Collapse, Spinner, useDisclosure } from "@chakra-ui/react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 
 const SignInButton = () => {
@@ -22,16 +22,30 @@ const SignInButton = () => {
 };
 
 const SignInForm = () => {
+  const { isOpen, onToggle } = useDisclosure();
   const [fields, setFields] = useState<{ email: string; password: string }>({
     email: "",
     password: "",
   });
   const [errorMessage, dispatch] = useFormState(login, null);
+
+  useEffect(() => {
+    if (errorMessage) onToggle();
+  }, [errorMessage]);
+
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    field: "email" | "password"
+  ) => {
+    if (isOpen) onToggle();
+    setFields((prev) => ({ ...prev, [field]: e.target.value }));
+  };
+
   return (
     <form action={dispatch}>
       <div className="flex flex-col w-full items-start gap-3 pb-1.5">
         <div className="flex flex-col w-full gap-2">
-          <label className="text-van-gogh-md font-extralight" htmlFor="email">
+          <label className="text-van-gogh-md font-light" htmlFor="email">
             Email
           </label>
           <input
@@ -40,20 +54,15 @@ const SignInForm = () => {
             name="email"
             type="email"
             autoComplete="username"
-            className="h-10 w-full bg-van-gogh-input-black rounded-lg px-3 py-[0.375rem] outline-none transition-all border border-transparent focus:border-van-gogh-purple-400 font-extralight text-van-gogh-md text-van-gogh-input-text-grey"
+            className="h-10 w-full bg-van-gogh-input-black rounded-lg px-3 py-[0.375rem] outline-none transition-all border border-transparent focus:border-van-gogh-purple-400 font-light text-van-gogh-md text-van-gogh-input-text-grey"
             required
             aria-required="true"
             value={fields.email}
-            onChange={(e) =>
-              setFields((prev) => ({ ...prev, email: e.target.value }))
-            }
+            onChange={(e) => handleInputChange(e, "email")}
           />
         </div>
         <div className="flex flex-col w-full gap-2">
-          <label
-            className="text-van-gogh-md font-extralight"
-            htmlFor="password"
-          >
+          <label className="text-van-gogh-md font-light" htmlFor="password">
             Password
           </label>
           <input
@@ -61,20 +70,18 @@ const SignInForm = () => {
             name="password"
             type="password"
             autoComplete="current-password"
-            className="h-10 w-full bg-van-gogh-input-black rounded-lg px-3 py-[0.375rem] outline-none transition-all border border-transparent focus:border-van-gogh-purple-400 font-extralight text-van-gogh-md text-van-gogh-input-text-grey"
+            className="h-10 w-full bg-van-gogh-input-black rounded-lg px-3 py-[0.375rem] outline-none transition-all border border-transparent focus:border-van-gogh-purple-400 font-light text-van-gogh-md text-van-gogh-input-text-grey"
             placeholder="Password"
             required
             aria-required="true"
             value={fields.password}
-            onChange={(e) =>
-              setFields((prev) => ({ ...prev, password: e.target.value }))
-            }
+            onChange={(e) => handleInputChange(e, "password")}
           />
         </div>
+        <Collapse in={isOpen} className="self-center">
+          <div className="h-4 text-van-gogh-xs text-red-500">{errorMessage || ""}</div>
+        </Collapse>
         <SignInButton />
-        {errorMessage && (
-          <div className="self-center text-red-500">{errorMessage}</div>
-        )}
       </div>
     </form>
   );
