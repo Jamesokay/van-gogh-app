@@ -9,14 +9,13 @@
 - Supabase Authentication
 - Server actions for both database and calls to Leonardo.Ai API
 
-### Ongoing Work
-
-- Implement Universal Upscaler feature
-- Implement social authentication (Apple, Google etc.)
-
 ### Screenshots
 
-<img width="1920" alt="Screenshot 2024-06-02 at 11 21 46 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/dab3f132-7dd6-4d21-bf24-f33dc04c434b">
+<img width="1920" alt="Screenshot 2024-06-05 at 9 13 46 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/8e5f7d7c-9c3c-45fe-9d46-b1d7f0930b61">
+<br/><br/>
+<img width="1920" alt="Screenshot 2024-06-05 at 9 13 30 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/5957a857-6ac3-4449-9e0a-36f036490462">
+<br/><br/>
+<img width="1920" alt="Screenshot 2024-06-05 at 9 13 10 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/aeb64e9e-d91e-4523-82e0-63f1ff0037b3">
 <br/><br/>
 <img width="1919" alt="Screenshot 2024-06-02 at 11 18 37 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/b34f7dd9-b093-40a3-b3d1-8e3874e1d149">
 <br/><br/>
