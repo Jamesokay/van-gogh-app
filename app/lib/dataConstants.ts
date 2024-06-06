@@ -1,4 +1,4 @@
-import { ImageGenModel, NonNullGenerationRow } from "./definitions";
+import { HeroImage, ImageGenModel, NonNullGenerationRow } from "./definitions";
 
 export const routes = [
   { title: "Generation History", path: "/ai-generations" },
@@ -199,31 +199,47 @@ export const imageInputTabs = [
   "Follower Feed",
 ];
 
+export const heroImagesArray: HeroImage[] = [
+  {
+    title: "The Vanguard of the Whispering Woods",
+    src: "/login-hero-image-1.webp",
+    creator: "@Leonardo",
+  },
+  {
+    title: "Cosmic Oracle",
+    src: "/login-hero-image-2.webp",
+    creator: "@Leonardo",
+  },
+  {
+    title: "Machined Seraphim",
+    src: "/login-hero-image-3.webp",
+    creator: "@Leonardo",
+  },
+];
 
 // Enforce non-null values for the purposes of rendering panels
-export const defaultGenerationRow: NonNullGenerationRow =
-  {
-    createdAt: '',
-    generated_images: [],
-    generation_elements: [],
-    guidanceScale: 7,
-    id: "",
-    imageHeight: 1,
-    imageWidth: 1,
-    inferenceSteps: 1,
-    initStrength: 1,
-    modelId: "",
-    negativePrompt: "",
-    photoReal: false,
-    photoRealStrength: 0.55,
-    presetStyle: "NONE",
-    prompt: "",
-    promptMagic: false,
-    promptMagicStrength: 0.5,
-    promptMagicVersion: "v2",
-    public: false,
-    scheduler: "EULER_DISCRETE",
-    sdVersion: "v1_5",
-    seed: 0,
-    status: "PENDING",
-  };
+export const defaultGenerationRow: NonNullGenerationRow = {
+  createdAt: "",
+  generated_images: [],
+  generation_elements: [],
+  guidanceScale: 7,
+  id: "",
+  imageHeight: 1,
+  imageWidth: 1,
+  inferenceSteps: 1,
+  initStrength: 1,
+  modelId: "",
+  negativePrompt: "",
+  photoReal: false,
+  photoRealStrength: 0.55,
+  presetStyle: "NONE",
+  prompt: "",
+  promptMagic: false,
+  promptMagicStrength: 0.5,
+  promptMagicVersion: "v2",
+  public: false,
+  scheduler: "EULER_DISCRETE",
+  sdVersion: "v1_5",
+  seed: 0,
+  status: "PENDING",
+};

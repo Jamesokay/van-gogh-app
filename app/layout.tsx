@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Suspense } from "react";
-import LoadingSpinner from "./ui/components/LoadingSpinner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,15 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <Suspense
-          fallback={
-            <div className="flex w-full h-full justify-center items-center">
-              <LoadingSpinner />
-            </div>
-          }
-        >
           {children}
-        </Suspense>
       </body>
     </html>
   );

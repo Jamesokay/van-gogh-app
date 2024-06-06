@@ -1,31 +1,21 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { HeroImage } from "../lib/definitions";
 import AuthPanel from "../ui/auth/AuthPanel";
+import { heroImagesArray } from "../lib/dataConstants";
 
-const Page = async () => {
-  const heroImagesArray: HeroImage[] = [
-    {
-      title: "The Vanguard of the Whispering Woods",
-      src: "/login-hero-image-1.webp",
-      creator: "@Leonardo"
-    },
-    {
-      title: "Cosmic Oracle",
-      src: "/login-hero-image-2.webp",
-      creator: "@Leonardo"
-    },
-    {
-      title: "Machined Seraphim",
-      src: "/login-hero-image-3.webp",
-      creator: "@Leonardo"
+const Page = () => {
+  const [heroImage, setHeroImage] = useState<HeroImage | null>(null);
+
+  useEffect(() => {
+    function getRandomImage(arr: HeroImage[]): HeroImage {
+      const randomIndex = Math.floor(Math.random() * arr.length);
+      return arr[randomIndex];
     }
-  ]
-
-  function getRandomImage(arr: HeroImage[]): HeroImage {
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    return arr[randomIndex];
-  }
-
-  const heroImage = getRandomImage(heroImagesArray);
+    const image = getRandomImage(heroImagesArray);
+    setHeroImage(image);
+  }, []);
 
   return (
     <div className="bg-black">
@@ -35,7 +25,9 @@ const Page = async () => {
         width="4096"
         height="2304"
         src={heroImage?.src}
-        className="absolute opacity-25"
+        className={`absolute transition-all duration-300 ${
+          heroImage?.src ? "opacity-25" : "opacity-0"
+        }`}
         alt={heroImage?.title}
       />
       <div className="flex relative min-h-screen p-14 md:p-20">
@@ -48,11 +40,19 @@ const Page = async () => {
               height="2304"
               src={heroImage?.src}
               alt={heroImage?.title}
-              className="absolute w-full h-full object-cover"
+              className={`absolute w-full h-full object-cover transition-all duration-300 ${
+                heroImage?.src ? "opacity-100" : "opacity-0"
+              }`}
             />
-            <div className="relative bg-van-gogh-black-opal-300 text-van-gogh-xs lg:text-van-gogh-sm py-3.5 px-4 mb-[7.5px] mr-[7.5px] rounded-[48px] font-light select-none">
+            <div
+              className={`relative bg-van-gogh-black-opal-300 text-van-gogh-xs lg:text-van-gogh-sm py-3.5 px-4 mb-[7.5px] mr-[7.5px] rounded-[48px] font-light select-none transition-all ${
+                heroImage?.title ? "opacity-100" : "opacity-0"
+              }`}
+            >
               {`'${heroImage?.title}' by `}
-              <span className="van-gogh-gradient-text">{heroImage?.creator}</span>
+              <span className="van-gogh-gradient-text">
+                {heroImage?.creator}
+              </span>
             </div>
           </div>
         </div>
