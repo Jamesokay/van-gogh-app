@@ -2,7 +2,7 @@
 
 ### Current Features
 
-- Users are able to generate images using various different models, preset styles and settings
+- User is able to generate images using various different models, preset styles and settings (restricted access to admin account only)
 - Implementation of Image to Image Guidance feature
 - Integration of Leonardo.Ai API webhook and Supabase Realtime to display new image generations
 - Implementation of Supabase with Row Level Security policy
