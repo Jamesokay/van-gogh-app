@@ -420,6 +420,25 @@ export type BadgeWrapperProps = {
   label: string;
 };
 
+export type ImageInputGridProps = {
+  selected: { id: string; url: string };
+  columns: number;
+  columnImages: GeneratedImage[][];
+  handleSelect: (currentId: string, newImage: GeneratedImage) => void;
+  mobile: boolean;
+};
+
+export type GridToggleProps = {
+  view: "mobile" | "web";
+  columns: number;
+  setColumns: (value: number) => void;
+  handleToggle: (
+    current: number,
+    dir: "plus" | "minus",
+    view: "mobile" | "web"
+  ) => void;
+};
+
 // Miscellaneous type definitions
 
 export type Dimension = {

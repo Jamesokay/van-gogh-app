@@ -20,6 +20,8 @@ import { GeneratedImage } from "@/app/lib/definitions";
 import TickIcon from "../../svg/TickIcon";
 import { useSettings } from "@/app/context/SettingsContext";
 import { imageInputTabs } from "@/app/lib/dataConstants";
+import ImageInputGrid from "./ImageInputGrid";
+import GridToggle from "./GridToggle";
 
 const ImageInputModal: FC<{
   isOpen: boolean;
@@ -31,10 +33,14 @@ const ImageInputModal: FC<{
   const [selectedFilter, setSelectedFilter] = useState<"All" | "Upscaled">(
     "All"
   );
-  const [columnImages, setColumnImages] = useState<GeneratedImage[][]>(
+  const [webColumnImages, setWebColumnImages] = useState<GeneratedImage[][]>(
     []
   );
-  const [columns, setColumns] = useState(4);
+  const [webColumns, setWebColumns] = useState(4);
+  const [mobileColumnImages, setMobileColumnImages] = useState<
+    GeneratedImage[][]
+  >([]);
+  const [mobileColumns, setMobileColumns] = useState(2);
   const [selected, setSelected] = useState<{ id: string; url: string }>({
     id: "",
     url: "",
@@ -42,29 +48,51 @@ const ImageInputModal: FC<{
 
   useEffect(() => {
     const array: GeneratedImage[][] = Array.from(
-      { length: columns },
+      { length: webColumns },
       () => []
     );
     images.forEach((image, index) => {
-      array[index % columns]?.push(image);
+      array[index % webColumns]?.push(image);
     });
-    setColumnImages(array);
-  }, [columns]);
+    setWebColumnImages(array);
+  }, [webColumns]);
 
-  const handleToggle = (current: number, dir: "plus" | "minus") => {
-    if (dir === "minus") {
-      if (current === 1) return;
-      setColumns(current - 1);
+  useEffect(() => {
+    const array: GeneratedImage[][] = Array.from(
+      { length: mobileColumns },
+      () => []
+    );
+    images.forEach((image, index) => {
+      array[index % mobileColumns]?.push(image);
+    });
+    setMobileColumnImages(array);
+  }, [mobileColumns]);
+
+  const handleToggle = (
+    current: number,
+    dir: "plus" | "minus",
+    view: "mobile" | "web"
+  ) => {
+    if (view === "web") {
+      if (dir === "minus") {
+        if (current === 1) return;
+        setWebColumns(current - 1);
+      } else {
+        if (current === 5) return;
+        setWebColumns(current + 1);
+      }
     } else {
-      if (current === 5) return; // To-do: prop in max
-      setColumns(current + 1);
+      if (dir === "minus") {
+        if (current === 1) return;
+        setMobileColumns(current - 1);
+      } else {
+        if (current === 5) return;
+        setMobileColumns(current + 1);
+      }
     }
   };
 
-  const handleSelect = (
-    currentId: string,
-    newImage: GeneratedImage
-  ) => {
+  const handleSelect = (currentId: string, newImage: GeneratedImage) => {
     if (currentId !== newImage.id)
       setSelected({ id: newImage.id, url: newImage.url });
     else setSelected({ id: "", url: "" });
@@ -105,8 +133,8 @@ const ImageInputModal: FC<{
             </div>
           </div>
           <div className="flex flex-col gap-3 p-6">
-            <div className="flex justify-between items-stretch gap-3">
-              <div className="flex items-center gap-7">
+            <div className="flex justify-between items-stretch gap-3 flex-wrap">
+              <div className="flex items-center gap-7 flex-wrap">
                 <div className="flex gap-3 items-stretch min-w-96">
                   <InputGroup>
                     <InputLeftElement pointerEvents="none">
@@ -124,7 +152,7 @@ const ImageInputModal: FC<{
                     </button>
                   </div>
                 </div>
-                <div className="flex min-w-60 border border-van-gogh-white-opal-200 rounded-md">
+                <div className="w-full md:w-auto flex min-w-60 border border-van-gogh-white-opal-200 rounded-md">
                   <button
                     className={`flex-1 flex justify-center items-center px-5 h-10 rounded-l-md text-van-gogh-sm transition-all ${
                       selectedFilter === "All"
@@ -149,77 +177,36 @@ const ImageInputModal: FC<{
                   </button>
                 </div>
               </div>
-              <div className="flex gap-3 items-center">
-                <GridIcon />
-                <button
-                  className="w-10"
-                  onClick={() => handleToggle(columns, "minus")}
-                >
-                  <MinusIcon w={3} />
-                </button>
-                <div className="w-36">
-                  {/* To-do: seperate version for mobile view with max of 2 */}
-                  <RangeSlider
-                    value={columns}
-                    min={1}
-                    max={5}
-                    setValue={(x) => setColumns(x)}
-                    purple
-                  />
-                </div>
-                <button
-                  className="w-10"
-                  onClick={() => handleToggle(columns, "plus")}
-                >
-                  <AddIcon w={3} />
-                </button>
-              </div>
+              <GridToggle
+                view="web"
+                columns={webColumns}
+                setColumns={setWebColumns}
+                handleToggle={handleToggle}
+              />
+              <GridToggle
+                view="mobile"
+                columns={mobileColumns}
+                setColumns={setMobileColumns}
+                handleToggle={handleToggle}
+              />
             </div>
           </div>
         </ModalHeader>
         <ModalBody>
-          <div
-            className="grid gap-4"
-            style={{
-              gridTemplateColumns: `repeat(${columns}, minmax(0px, 1fr))`,
-            }}
-          >
-            {columnImages.map((col, colIndex) => (
-              <div key={colIndex} className="flex flex-col items-center">
-                {col.map((image, imgIndex) => (
-                  <div
-                    key={imgIndex}
-                    role="button"
-                    className={`${
-                      selected.id === image.id
-                        ? "selected-image-with-border"
-                        : "image-with-border"
-                    } relative border-transparent border-4 flex justify-center mb-4 w-full rounded-2xl`}
-                    onClick={() => handleSelect(selected.id, image)}
-                  >
-                    <div className="absolute w-full h-full bg-van-gogh-black-opal-600 z-10 rounded-2xl"></div>
-                    <div
-                      className={`image-interior transition-all z-20 rounded-2xl w-full ${
-                        columns === 1 ? "max-w-[512px]" : ""
-                      }`}
-                    >
-                      <img
-                        src={image.url}
-                        alt="Generated image"
-                        className="rounded-2xl"
-                      />
-                    </div>
-                    <div
-                      className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-14 w-14 bg-van-gogh-purple-gradient rounded-full z-50 flex justify-center items-center transition-all
-                    ${selected.id === image.id ? "opacity-100" : "opacity-0"}`}
-                    >
-                      <TickIcon fill={"#fff"} className="h-10 w-10" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
+          <ImageInputGrid
+            selected={selected}
+            columns={webColumns}
+            columnImages={webColumnImages}
+            handleSelect={handleSelect}
+            mobile={false}
+          />
+          <ImageInputGrid
+            selected={selected}
+            columns={mobileColumns}
+            columnImages={mobileColumnImages}
+            handleSelect={handleSelect}
+            mobile={true}
+          />
         </ModalBody>
         <ModalFooter>
           <button
