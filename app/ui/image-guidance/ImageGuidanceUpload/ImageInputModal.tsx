@@ -1,6 +1,6 @@
 "use client";
 
-import { AddIcon, MinusIcon, SearchIcon } from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons";
 import {
   Input,
   InputGroup,
@@ -14,14 +14,12 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
-import RangeSlider from "../../components/RangeSlider";
-import GridIcon from "../../svg/GridIcon";
 import { GeneratedImage } from "@/app/lib/definitions";
-import TickIcon from "../../svg/TickIcon";
 import { useSettings } from "@/app/context/SettingsContext";
 import { imageInputTabs } from "@/app/lib/dataConstants";
 import ImageInputGrid from "./ImageInputGrid";
 import GridToggle from "./GridToggle";
+import { imageInputModalStrings } from "@/app/lib/stringConstants";
 
 const ImageInputModal: FC<{
   isOpen: boolean;
@@ -45,6 +43,7 @@ const ImageInputModal: FC<{
     id: "",
     url: "",
   });
+  const modalText = imageInputModalStrings;
 
   useEffect(() => {
     const array: GeneratedImage[][] = Array.from(
@@ -112,7 +111,7 @@ const ImageInputModal: FC<{
       <ModalContent>
         <ModalHeader>
           <div className="flex items-center justify-between mb-4 pt-7 px-6">
-            <p className="font-bold text-van-gogh-2xl">Select Image Input</p>
+            <p className="font-bold text-van-gogh-2xl">{modalText.title}</p>
             <ModalCloseButton />
           </div>
           <div className="flex border-b border-van-gogh-border-grey-300 px-6">
@@ -143,12 +142,12 @@ const ImageInputModal: FC<{
                     <Input
                       variant="imageInputSearch"
                       type="text"
-                      placeholder="Search Prompts"
+                      placeholder={modalText.searchPlaceholder}
                     />
                   </InputGroup>
                   <div className="relative flex text-van-gogh-sm h-10 bg-van-gogh-pink-gradient p-[1px] rounded-lg hover:shadow-van-gogh-purple-glow">
                     <button className="flex gap-1 bg-van-gogh-grey-50 h-full w-full flex items-center justify-center px-4 rounded-lg text-van-gogh-sm">
-                      Search
+                      {modalText.search}
                     </button>
                   </div>
                 </div>
@@ -161,7 +160,7 @@ const ImageInputModal: FC<{
                     }`}
                     onClick={() => setSelectedFilter("All")}
                   >
-                    All
+                    {modalText.all}
                   </button>
                   <button
                     className={`flex-1 flex justify-center items-center px-5 h-10  rounded-r-md text-van-gogh-sm transition-all
@@ -173,7 +172,7 @@ const ImageInputModal: FC<{
                   `}
                     onClick={() => setSelectedFilter("Upscaled")}
                   >
-                    Upscaled
+                    {modalText.upscaled}
                   </button>
                 </div>
               </div>
@@ -213,7 +212,7 @@ const ImageInputModal: FC<{
             className="font-semibold w-80 h-12 border border border-van-gogh-white-opal-200 rounded-md transition-all hover:bg-van-gogh-grey-500"
             onClick={onClose}
           >
-            Cancel
+            {modalText.cancel}
           </button>
           <button
             disabled={!selected.id}
@@ -222,7 +221,7 @@ const ImageInputModal: FC<{
             }`}
             onClick={() => handleConfirm()}
           >
-            Confirm
+            {modalText.confirm}
           </button>
         </ModalFooter>
       </ModalContent>

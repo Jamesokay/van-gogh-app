@@ -25,7 +25,7 @@ export const imageGenerationHeaderStrings = {
   addNegPrompt: "Add negative prompt",
   addElements: "Add Elements",
   buttonText: "Generate",
-  finetunedModel: "Finetuned Model"
+  finetunedModel: "Finetuned Model",
 };
 
 export const generationHistoryStrings = {
@@ -63,9 +63,21 @@ export const promptGenerationStrings = {
   buttonText: "Ideate",
 };
 
+export const imageInputModalStrings = {
+  title: "Select Image Input",
+  all: "All",
+  upscaled: "Upscaled",
+  search: "Search",
+  searchPlaceholder: "Search Prompts",
+  cancel: "Cancel",
+  confirm: "Confirm",
+};
+
 export const tooltipText = {
-  photoReal: "Enhanced photorealism. Requires Leonardo Kino XL, Leonardo Diffusion XL or Leonardo Vision XL to be selected.",
-  alchemy: "Powerful new image generation pipeline. Requires an XL model to be selected.",
+  photoReal:
+    "Enhanced photorealism. Requires Leonardo Kino XL, Leonardo Diffusion XL or Leonardo Vision XL to be selected.",
+  alchemy:
+    "Powerful new image generation pipeline. Requires an XL model to be selected.",
   promptMagic: "Prompt Magic tooltip text",
   transparency: "Adds transparency to the generated images.",
   publicImages: "Send your generations to the community feed.",
@@ -89,10 +101,9 @@ export const tooltipText = {
   motionVideo: "Generate a Motion video",
   imageGuidance: "Use as Image Guidance input",
   editCanvas: "Edit in canvas",
-  publicImage:
-    "The image is public.",
+  publicImage: "The image is public.",
   privateImage: "This image is private.",
-  randomPrompt: 'Generate a random prompt'
+  randomPrompt: "Generate a random prompt",
 };
 
 export const badgeText = {
