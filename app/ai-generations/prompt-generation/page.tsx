@@ -2,6 +2,7 @@
 
 import { numberOfPromptsOptions } from "@/app/lib/dataConstants";
 import { promptGenerationStrings } from "@/app/lib/stringConstants";
+import GradientBorderButton from "@/app/ui/components/GradientBorderButton";
 import LightBulbIcon from "@/app/ui/svg/LightBulbIcon";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import { useState } from "react";
@@ -44,14 +45,13 @@ const Page = () => {
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
         />
-        <div className="relative flex text-van-gogh-sm h-10 bg-van-gogh-pink-gradient p-[1px] rounded-lg hover:shadow-van-gogh-purple-glow">
-          <p className="hidden md:block absolute text-center w-full pb-1 bottom-full text-van-gogh-2xs text-van-gogh-text-grey-600">
-            {`${remainingPrompts} ${text.promptsRemaining}`}
-          </p>
-          <button className="flex gap-1 bg-van-gogh-input-grey-700 h-full w-full flex items-center justify-center px-14 rounded-lg">
-            <LightBulbIcon />
-            {text.buttonText}
-          </button>
+        <div className="flex h-10">
+          <GradientBorderButton
+            text={text.buttonText}
+            icon={<LightBulbIcon />}
+            upperText={`${remainingPrompts} ${text.promptsRemaining}`}
+            classname="px-14"
+          />
         </div>
       </div>
     </div>

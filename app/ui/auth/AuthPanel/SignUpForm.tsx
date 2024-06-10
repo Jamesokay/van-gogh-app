@@ -11,7 +11,7 @@ const SignUpButton = () => {
     <button
       disabled={pending}
       aria-disabled={pending}
-      className="self-center flex justify-center items-center relative h-10 w-[95%] bg-van-gogh-purple-gradient px-12 rounded-lg text-van-gogh-sm font-light py-6 mt-2 hover:shadow-van-gogh-purple-glow"
+      className="self-center flex justify-center items-center relative h-10 w-[95%] bg-van-gogh-purple-gradient px-12 rounded-lg text-van-gogh-sm font-medium py-6 mt-2 hover:shadow-van-gogh-purple-glow"
     >
       <div className={pending ? "flex" : "hidden"}>
         <Spinner w={14} h={14} />

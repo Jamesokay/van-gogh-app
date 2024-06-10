@@ -439,6 +439,15 @@ export type GridToggleProps = {
   ) => void;
 };
 
+export type SliderOptionProps = {
+  title: string;
+  tooltipText: string;
+  value: number;
+  setValue: (balue: number) => void;
+  min: number;
+  max: number;
+};
+
 // Miscellaneous type definitions
 
 export type Dimension = {

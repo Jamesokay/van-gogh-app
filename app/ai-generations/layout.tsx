@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { SettingsProvider } from "../context/SettingsContext";
-import { Providers } from "../providers";
 import ImageGenerationHeader from "../ui/ai-generations/ImageGenerationHeader";
 import SideBar from "../ui/ai-generations/SideBar";
 import LoadingSpinner from "../ui/components/LoadingSpinner";
@@ -11,7 +10,6 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <Providers>
       <SettingsProvider>
         <Suspense
           fallback={
@@ -31,6 +29,5 @@ export default async function Layout({
           </main>
         </Suspense>
       </SettingsProvider>
-    </Providers>
   );
 }
