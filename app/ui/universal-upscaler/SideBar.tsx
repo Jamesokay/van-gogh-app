@@ -4,7 +4,7 @@ import { Input, Tooltip } from "@chakra-ui/react";
 import RecentImagesDropdown from "../image-guidance/ImageGuidanceUpload/RecentImagesDropdown";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import SliderOption from "../components/SliderOption";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import AddImageIcon from "../svg/AddImageIcon";
 import GradientBorderButton from "../components/GradientBorderButton";
 import ResetIcon from "../svg/ResetIcon";
@@ -12,44 +12,146 @@ import CoinsIcon from "../svg/CoinsIcon";
 import DropdownMenu from "../components/DropdownMenu";
 import DimensionLinkIcon from "../svg/DimensionLinkIcon";
 import TitleWithTooltip from "../svg/TitleWithTooltip";
+import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
+
+type LeonardoUpscalerStyle =
+  | "GENERAL"
+  | "2D ART & ILLUSTRATION"
+  | "CINEMATIC"
+  | "CG ART & GAME ASSETS";
+
+type LeonardoUpscalerRequest = {
+  initImageId: string | null;
+  upscalerStyle: LeonardoUpscalerStyle;
+  creativityStrength: number;
+  upscaleMultiplier: number;
+  generatedImageId: string | null;
+  prompt: string | null;
+};
+
+type UploadedImage = {
+  src: string;
+  height: number;
+  width: number;
+}
 
 const SideBar = () => {
-  const upscalerStyles = [
+  const upscalerStyles: LeonardoUpscalerStyle[] = [
     "GENERAL",
     "2D ART & ILLUSTRATION",
     "CINEMATIC",
     "CG ART & GAME ASSETS",
   ];
   // To-do: extract this to upscaler context
-  const [upscalerRequest, setUpscalerRequest] = useState({
-    // To-do: initImageId
-    // To-do: variationId
-    upscalerStyle: "GENERAL",
-    creativityStrength: 8,
-    upscaleMultiplier: 1.5,
-    generatedImageId: "",
-    prompt: "",
+  const [upscalerRequest, setUpscalerRequest] =
+    useState<LeonardoUpscalerRequest>({
+      initImageId: null,
+      // To-do: variationId
+      upscalerStyle: "GENERAL",
+      creativityStrength: 8,
+      upscaleMultiplier: 1.5,
+      generatedImageId: null,
+      prompt: null,
+    });
+  const [img, setImg] = useState<UploadedImage>({
+    src: "",
+    height: 0,
+    width: 0
   });
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const readFileToLocalState = (file: File) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        setImg(prev => ({ ...prev, src: reader.result as string }));
+      }
+    };
+    reader.onerror = (error) => {
+      console.error("Error reading file:", error);
+    };
+  };
+
+  const uploadFileToAPI = async (file: File) => {
+    console.log("upload to API")
+    // try {
+    //   const details = await getPresignedUrl();
+    //   if (!details?.url || !details?.fields) return;
+    //   const { url, fields, id } = details;
+    //   const parsedFields = JSON.parse(fields);
+    //   const formData = new FormData();
+    //   for (const key in parsedFields) {
+    //     formData.append(key, parsedFields[key]);
+    //   }
+    //   formData.append("file", file);
+
+    //   await uploadImageViaPresignedURL(formData, url);
+    //   setUpscalerRequest((prev) => ({
+    //     ...prev,
+    //     initImageId: id,
+    //     generatedImageId: null,
+    //   }));
+    // } catch (err) {
+    //   console.error("Error during upload process:", err);
+    // }
+  };
+
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      readFileToLocalState(file);
+      uploadFileToAPI(file);
+    }
+  };
+
+  const openFileSystem = () => {
+    if (!inputRef.current) return;
+    inputRef.current.click();
+  };
+
+  const handleImageLoaded = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
+    const { naturalWidth, naturalHeight } = event.currentTarget;
+    console.log(event.currentTarget)
+    setImg( prev => ({ ...prev, width: naturalWidth, height: naturalHeight }));
+  };
+
+
   return (
     <div className="relative flex h-full bg-van-gogh-dark-blue-gradient">
       <div className="flex">
         <div className="relative ml-2.5 min-w-[21rem]">
-          <form className="absolute top-0 left-0 w-full">
+          <div className="absolute top-0 left-0 w-full">
             <div className="flex flex-col w-full h-full pt-2.5 pb-6 px-2">
               <div className="flex flex-col gap-2 pb-4">
                 <TitleWithTooltip
                   title="Source Image"
                   tooltip="The original image to be upscaled. Click to upload or drag and drop your file."
                 />
-                <div className="relative flex flex-col gap-1 justify-center items-center w-full h-full min-h-[9.75rem] rounded-lg border border-van-gogh-grey-100 bg-van-gogh-blue-200">
+                <input
+                  ref={inputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+                <button
+                  className={img.src ? "hidden" : "relative flex flex-col gap-1 justify-center items-center w-full h-full min-h-[9.75rem] rounded-lg border border-van-gogh-grey-100 bg-van-gogh-blue-200"}
+                  onClick={() => openFileSystem()}
+                >
                   <AddImageIcon />
                   <span className="text-van-gogh-sm font-medium">
                     Add Image
                   </span>
-                </div>
-                <div className="h-10 w-full">
+                </button>
+                <img src={img.src} alt="Image to be upscaled" className={img.src ? "" : "hidden"} onLoad={handleImageLoaded}/>
+                {/* <div className="h-10 w-full">
                   <RecentImagesDropdown setValue={() => {}} images={[]} />
-                </div>
+                </div> */}
                 <button
                   className={`flex justify-center items-center relative h-10 w-full text-van-gogh-sm bg-van-gogh-purple-gradient px-12 rounded-lg 
               }`}
@@ -87,10 +189,10 @@ const SideBar = () => {
                   />
                   <div className="h-10 mb-4">
                     <DropdownMenu
-                      value="General"
+                      value={upscalerRequest.upscalerStyle}
                       options={[]}
-                      setValue={() => {}}
-                      isDisabled={true}
+                      setValue={(x) => setUpscalerRequest(prev => ({ ...prev, upscalerStyle: x }))}
+                      isDisabled={!img.src}
                       headerTheme={false}
                       large={false}
                     />
@@ -135,7 +237,7 @@ const SideBar = () => {
                             W
                           </p>
                           <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2">
-                            1536
+                            {img.width * upscalerRequest.upscaleMultiplier}
                           </p>
                           <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
                             px
@@ -149,7 +251,7 @@ const SideBar = () => {
                             H
                           </p>
                           <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2">
-                            2048
+                            {img.height * upscalerRequest.upscaleMultiplier}
                           </p>
                           <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
                             px
@@ -176,7 +278,7 @@ const SideBar = () => {
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
