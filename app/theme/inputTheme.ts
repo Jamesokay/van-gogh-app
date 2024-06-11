@@ -16,6 +16,18 @@ const imageInputSearch = definePartsStyle({
   },
 })
 
+const promptGuidanceInput = definePartsStyle({
+  field: {
+    border: "1px solid",
+    borderColor: "transparent",
+    fontWeight: 400,
+    background: "#101622",
+    _focus: {
+      borderColor: "vanGoghPurple.400"
+    }
+  },
+})
+
 const authInput = definePartsStyle({
   field: {
     border: "1px solid",
@@ -28,4 +40,4 @@ const authInput = definePartsStyle({
   },
 })
 
-export const inputTheme = defineMultiStyleConfig({ variants: { imageInputSearch, authInput } })
+export const inputTheme = defineMultiStyleConfig({ variants: { imageInputSearch, promptGuidanceInput, authInput } })

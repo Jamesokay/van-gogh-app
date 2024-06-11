@@ -211,7 +211,7 @@ export interface WebhookGenerationData {
   inferenceSteps: number | null;
   initGeneratedImageId: string | null;
   initImageId: string | null;
-  initStrength: number | null;
+  initStrength: string | null;
   initType: string | null;
   initUpscaledImageId: string | null;
   modelId: string | null;

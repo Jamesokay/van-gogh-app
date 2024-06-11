@@ -80,7 +80,7 @@ function transformWebhookData(generation: WebhookGenerationData) {
     imageHeight: generation.imageHeight,
     imageWidth: generation.imageWidth,
     inferenceSteps: generation.inferenceSteps,
-    initStrength: generation.initStrength,
+    initStrength: generation.initStrength ? parseInt(generation.initStrength) : null ,
     modelId: generation.modelId,
     negativePrompt: generation.negativePrompt,
     photoReal: generation.photoReal,

@@ -1,6 +1,6 @@
 "use client";
 
-import { Tooltip } from "@chakra-ui/react";
+import { Input, Tooltip } from "@chakra-ui/react";
 import RecentImagesDropdown from "../image-guidance/ImageGuidanceUpload/RecentImagesDropdown";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import SliderOption from "../components/SliderOption";
@@ -10,6 +10,8 @@ import GradientBorderButton from "../components/GradientBorderButton";
 import ResetIcon from "../svg/ResetIcon";
 import CoinsIcon from "../svg/CoinsIcon";
 import DropdownMenu from "../components/DropdownMenu";
+import DimensionLinkIcon from "../svg/DimensionLinkIcon";
+import TitleWithTooltip from "../svg/TitleWithTooltip";
 
 const SideBar = () => {
   const upscalerStyles = [
@@ -35,17 +37,15 @@ const SideBar = () => {
           <form className="absolute top-0 left-0 w-full">
             <div className="flex flex-col w-full h-full pt-2.5 pb-6 px-2">
               <div className="flex flex-col gap-2 pb-4">
-                <div className="flex items-center gap-2">
-                  <p className="text-van-gogh-sm font-semibold">Source Image</p>
-                  <Tooltip label="The original image to be upscaled. Click to upload or drag and drop your file.">
-                    <span>
-                      <QuestionMarkIcon />
-                    </span>
-                  </Tooltip>
-                </div>
+                <TitleWithTooltip
+                  title="Source Image"
+                  tooltip="The original image to be upscaled. Click to upload or drag and drop your file."
+                />
                 <div className="relative flex flex-col gap-1 justify-center items-center w-full h-full min-h-[9.75rem] rounded-lg border border-van-gogh-grey-100 bg-van-gogh-blue-200">
                   <AddImageIcon />
-                  <span className="text-van-gogh-sm font-medium">Add Image</span>
+                  <span className="text-van-gogh-sm font-medium">
+                    Add Image
+                  </span>
                 </div>
                 <div className="h-10 w-full">
                   <RecentImagesDropdown setValue={() => {}} images={[]} />
@@ -81,16 +81,10 @@ const SideBar = () => {
               <div className="pt-4">
                 <hr className="w-full border border-t-0 border-r-0 border-b border-l-0 border-van-gogh-grey-800 opacity-60 mb-5" />
                 <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-2">
-                    <p className="text-van-gogh-sm font-medium">
-                      Upscaler Style
-                    </p>
-                    <Tooltip label="Choose the preferred style for image enhancement. Different options can influence the final look and detail of the upscale.">
-                      <span>
-                        <QuestionMarkIcon />
-                      </span>
-                    </Tooltip>
-                  </div>
+                  <TitleWithTooltip
+                    title="Upscaler Style"
+                    tooltip="Choose the preferred style for image enhancement. Different options can influence the final look and detail of the upscale."
+                  />
                   <div className="h-10 mb-4">
                     <DropdownMenu
                       value="General"
@@ -122,22 +116,62 @@ const SideBar = () => {
                     setValue={(x) =>
                       setUpscalerRequest((prev) => ({
                         ...prev,
-                        creativityStrength: x,
+                        upscaleMultiplier: x,
                       }))
                     }
-                    value={upscalerRequest.creativityStrength}
+                    value={upscalerRequest.upscaleMultiplier}
                     min={1}
                     max={2}
                   />
-                  <div className="flex items-center gap-2">
-                    <p className="text-van-gogh-sm font-medium">
-                      Upscale Dimensions
-                    </p>
-                    <Tooltip label="Set the desired size for the output, based on the original image's aspect ratio.">
-                      <span>
-                        <QuestionMarkIcon />
-                      </span>
-                    </Tooltip>
+                  <TitleWithTooltip
+                    title="Upscale Dimensions"
+                    tooltip="Set the desired size for the output, based on the original image's aspect ratio."
+                  />
+                  <div className="flex items-center justify-between px-2">
+                    <div className="flex items-center">
+                      <div className="flex pr-2">
+                        <div className="flex h-10 w-full relative select-none">
+                          <p className="h-10 mr-4 flex items-center justify-center text-van-gogh-sm font-medium">
+                            W
+                          </p>
+                          <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2">
+                            1536
+                          </p>
+                          <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
+                            px
+                          </p>
+                        </div>
+                      </div>
+                      <DimensionLinkIcon />
+                      <div className="flex pl-2">
+                        <div className="flex h-10 w-full relative select-none">
+                          <p className="h-10 mr-4 flex items-center justify-center text-van-gogh-sm font-medium">
+                            H
+                          </p>
+                          <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2">
+                            2048
+                          </p>
+                          <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
+                            px
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex">
+                      <p className="text-van-gogh-xs font-medium mr-4">3.15</p>
+                      <p className="text-van-gogh-xs font-medium pr-2">MP</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <TitleWithTooltip
+                      title="Prompt Guidance (Optional)"
+                      tooltip="Optionally add a short prompt describing the image to help guide the upscaler. At higher creativity strengths, this may have undesirable effects and cause more hallucinations."
+                    />
+                    <Input
+                      variant="promptGuidanceInput"
+                      type="text"
+                      placeholder="Type a prompt..."
+                    />
                   </div>
                 </div>
               </div>
