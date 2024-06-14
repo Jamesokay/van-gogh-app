@@ -1,4 +1,8 @@
-import { defaultAspectRatioConversion, defaultGenerationRow } from "./dataConstants";
+import {
+  defaultAspectRatioConversion,
+  defaultGenerationRow,
+  defaultUpscalerRequest,
+} from "./dataConstants";
 import {
   Dimension,
   GenerationRequestState,
@@ -6,7 +10,9 @@ import {
   LeonardoGenerationRequestBody,
   NonNullGenerationRow,
   GenerationRow,
-  LeonardoPresetStyle
+  LeonardoPresetStyle,
+  LeonardoUpscalerRequest,
+  LeonardoUpscalerStyle,
 } from "./definitions";
 
 export const uniqueId = () => {
@@ -155,7 +161,9 @@ export function convertStringToPresetStyle(style: string): LeonardoPresetStyle {
   }
 }
 
-export function convertPresetStyleToString(presetStyle: LeonardoPresetStyle): string {
+export function convertPresetStyleToString(
+  presetStyle: LeonardoPresetStyle
+): string {
   switch (presetStyle) {
     case "ANIME":
       return "Anime";
@@ -223,56 +231,71 @@ export function convertPresetStyleToString(presetStyle: LeonardoPresetStyle): st
   }
 }
 
+export function convertUpscalerStyleToString(
+  upscalerStyle: LeonardoUpscalerStyle
+): string {
+  switch (upscalerStyle) {
+    case "GENERAL":
+      return "General";
+    case "2D ART & ILLUSTRATION":
+      return "2D Art & Illustration";
+    case "CINEMATIC":
+      return "Cinematic";
+    case "CG ART & GAME ASSETS":
+      return "CG Art & Game Assets";
+    default:
+      return "General";
+  }
+}
+
+export function convertStringToUpscalerStyle(
+  string: string
+): LeonardoUpscalerStyle {
+  switch (string) {
+    case "General":
+      return "GENERAL";
+    case "2D Art & Illustration":
+      return "2D ART & ILLUSTRATION";
+    case "Cinematic":
+      return "CINEMATIC";
+    case "CG Art & Game Assets":
+      return "CG ART & GAME ASSETS";
+    default:
+      return "GENERAL";
+  }
+}
+
 // Fill in all potential null values
-export function fillDefaults(
-  response: GenerationRow
-): NonNullGenerationRow {
+export function fillDefaults(response: GenerationRow): NonNullGenerationRow {
   return {
-    createdAt:
-      response.createdAt ?? defaultGenerationRow.createdAt,
+    createdAt: response.createdAt ?? defaultGenerationRow.createdAt,
     generated_images:
-      response.generated_images ??
-      defaultGenerationRow.generated_images,
+      response.generated_images ?? defaultGenerationRow.generated_images,
     generation_elements:
-      response.generation_elements ??
-      defaultGenerationRow.generation_elements,
-    guidanceScale:
-      response.guidanceScale ?? defaultGenerationRow.guidanceScale,
+      response.generation_elements ?? defaultGenerationRow.generation_elements,
+    guidanceScale: response.guidanceScale ?? defaultGenerationRow.guidanceScale,
     id: response.id ?? defaultGenerationRow.id,
-    imageHeight:
-      response.imageHeight ?? defaultGenerationRow.imageHeight,
-    imageWidth:
-      response.imageWidth ?? defaultGenerationRow.imageWidth,
+    imageHeight: response.imageHeight ?? defaultGenerationRow.imageHeight,
+    imageWidth: response.imageWidth ?? defaultGenerationRow.imageWidth,
     inferenceSteps:
-      response.inferenceSteps ??
-      defaultGenerationRow.inferenceSteps,
-    initStrength:
-      response.initStrength ?? defaultGenerationRow.initStrength,
+      response.inferenceSteps ?? defaultGenerationRow.inferenceSteps,
+    initStrength: response.initStrength ?? defaultGenerationRow.initStrength,
     modelId: response.modelId ?? defaultGenerationRow.modelId,
     negativePrompt:
-      response.negativePrompt ??
-      defaultGenerationRow.negativePrompt,
-    photoReal:
-      response.photoReal ?? defaultGenerationRow.photoReal,
+      response.negativePrompt ?? defaultGenerationRow.negativePrompt,
+    photoReal: response.photoReal ?? defaultGenerationRow.photoReal,
     photoRealStrength:
-      response.photoRealStrength ??
-      defaultGenerationRow.photoRealStrength,
-    presetStyle:
-      response.presetStyle ?? defaultGenerationRow.presetStyle,
+      response.photoRealStrength ?? defaultGenerationRow.photoRealStrength,
+    presetStyle: response.presetStyle ?? defaultGenerationRow.presetStyle,
     prompt: response.prompt ?? defaultGenerationRow.prompt,
-    promptMagic:
-      response.promptMagic ?? defaultGenerationRow.promptMagic,
+    promptMagic: response.promptMagic ?? defaultGenerationRow.promptMagic,
     promptMagicStrength:
-      response.promptMagicStrength ??
-      defaultGenerationRow.promptMagicStrength,
+      response.promptMagicStrength ?? defaultGenerationRow.promptMagicStrength,
     promptMagicVersion:
-      response.promptMagicVersion ??
-      defaultGenerationRow.promptMagicVersion,
+      response.promptMagicVersion ?? defaultGenerationRow.promptMagicVersion,
     public: response.public ?? defaultGenerationRow.public,
-    scheduler:
-      response.scheduler ?? defaultGenerationRow.scheduler,
-    sdVersion:
-      response.sdVersion ?? defaultGenerationRow.sdVersion,
+    scheduler: response.scheduler ?? defaultGenerationRow.scheduler,
+    sdVersion: response.sdVersion ?? defaultGenerationRow.sdVersion,
     seed: response.seed ?? defaultGenerationRow.seed,
     status: response.status ?? defaultGenerationRow.status,
   };
@@ -332,3 +355,14 @@ export function extractRequestBodyFromPrevGeneration(
     width: state.imageWidth,
   };
 }
+
+export const isDefaultUpscalerRequest = (
+  request: LeonardoUpscalerRequest
+): boolean => {
+  return (
+    request.upscalerStyle === defaultUpscalerRequest.upscalerStyle &&
+    request.creativityStrength === defaultUpscalerRequest.creativityStrength &&
+    request.upscaleMultiplier === defaultUpscalerRequest.upscaleMultiplier &&
+    request.prompt === defaultUpscalerRequest.prompt
+  );
+};

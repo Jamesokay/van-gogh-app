@@ -14,7 +14,7 @@ const SignInButton = () => {
       className="self-center flex justify-center items-center relative h-10 w-[95%] bg-van-gogh-purple-gradient px-12 rounded-lg text-van-gogh-sm font-medium py-6 mt-2 hover:shadow-van-gogh-purple-glow"
     >
       <div className={pending ? "flex" : "hidden"}>
-        <Spinner w={14} h={14} />
+        <Spinner w={6} h={6} />
       </div>
       <span className={pending ? "hidden" : "flex"}>Sign in</span>
     </button>

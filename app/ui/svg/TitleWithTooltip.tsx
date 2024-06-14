@@ -9,7 +9,7 @@ const TitleWithTooltip: FC<{ title: string; tooltip: string }> = ({
   return (
     <div className="flex items-center gap-2">
       <p className="text-van-gogh-sm font-medium">{title}</p>
-      <Tooltip label={tooltip}>
+      <Tooltip label={tooltip} placement="right-end">
         <span>
           <QuestionMarkIcon />
         </span>

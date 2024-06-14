@@ -296,7 +296,7 @@ export const defaultUpscalerRequest: LeonardoUpscalerRequest = {
   creativityStrength: 8,
   upscaleMultiplier: 1.5,
   generatedImageId: null,
-  prompt: null,
+  prompt: "",
 };
 
 export const defaultSelectedImage: LocalUpscalerImage = {

@@ -112,8 +112,18 @@ const recentImagesMenu = definePartsStyle({
 });
 
 const upscalerRecentImagesMenu = definePartsStyle({
+  button: {
+    _hover: {
+      borderColor: "vanGoghGrey.400",
+      bg: "rgb(22, 29, 45)"
+    },
+    _active: {
+      borderColor: "vanGoghGrey.400",
+      bg: "rgb(22, 29, 45)"
+    },
+  },
   list: {
-    w: "260px",
+    w: "265px",
     bg: "rgb(11, 15, 23)"
   },
   item: {

@@ -20,6 +20,11 @@ import {
   defaultSelectedImage,
   defaultUpscalerRequest,
 } from "@/app/lib/dataConstants";
+import {
+  convertStringToUpscalerStyle,
+  convertUpscalerStyleToString,
+  isDefaultUpscalerRequest,
+} from "@/app/lib/helpers";
 
 const SideBar = () => {
   const {
@@ -28,6 +33,9 @@ const SideBar = () => {
     selectedImage,
     setSelectedImage,
   } = useUpscaler();
+  const disabled =
+    !upscalerRequest.generatedImageId && !upscalerRequest.initImageId;
+  const disableReset = isDefaultUpscalerRequest(upscalerRequest);
   const upscalerStyles: LeonardoUpscalerStyle[] = [
     "GENERAL",
     "2D ART & ILLUSTRATION",
@@ -124,7 +132,7 @@ const SideBar = () => {
         <div className="relative ml-2.5 min-w-[21rem] overflow-y-auto overflow-x-hidden">
           <div className="absolute top-0 left-0 w-full">
             <div className="flex flex-col w-full h-full pt-2.5 pb-6 px-2">
-              <div className="flex flex-col gap-2 pb-4">
+              <div className="flex flex-col gap-2.5 pb-4">
                 <div className="flex justify-between items-center">
                   <TitleWithTooltip
                     title="Source Image"
@@ -179,7 +187,9 @@ const SideBar = () => {
                   />
                 </div>
                 <button
-                  className={`flex justify-center items-center relative h-10 w-full text-van-gogh-sm bg-van-gogh-purple-gradient px-12 rounded-lg transition-all hover:shadow-van-gogh-purple-glow`}
+                  className={`flex justify-center items-center relative h-10 w-full text-van-gogh-sm bg-van-gogh-purple-gradient px-12 rounded-lg transition-all hover:shadow-van-gogh-purple-glow ${
+                    disabled ? "grayscale opacity-30 cursor-not-allowed" : ""
+                  }`}
                 >
                   <p className="font-semibold mr-2">Upscale</p>
                   <div className="flex">
@@ -203,6 +213,7 @@ const SideBar = () => {
                     classname="px-2.5"
                     icon={<ResetIcon />}
                     onClick={() => handleReset()}
+                    disabled={disableReset}
                   />
                 </div>
               </div>
@@ -215,15 +226,19 @@ const SideBar = () => {
                   />
                   <div className="h-10 mb-4">
                     <DropdownMenu
-                      value={upscalerRequest.upscalerStyle}
-                      options={upscalerStyles}
+                      value={convertUpscalerStyleToString(
+                        upscalerRequest.upscalerStyle
+                      )}
+                      options={upscalerStyles.map((style) =>
+                        convertUpscalerStyleToString(style)
+                      )}
                       setValue={(x) =>
                         setUpscalerRequest((prev) => ({
                           ...prev,
-                          upscalerStyle: x,
+                          upscalerStyle: convertStringToUpscalerStyle(x),
                         }))
                       }
-                      isDisabled={!selectedImage.src}
+                      isDisabled={disabled}
                       headerTheme={false}
                       large={true}
                     />
@@ -233,28 +248,31 @@ const SideBar = () => {
                   <SliderOption
                     title="Creativity Strength"
                     tooltipText="Drag to slider to control the artistic intensity. Higher values yield more creativity, lower values keep closer to the source image."
-                    setValue={(x) =>
+                    setValue={(x) => {
                       setUpscalerRequest((prev) => ({
                         ...prev,
                         creativityStrength: x,
-                      }))
-                    }
+                      }));
+                    }}
                     value={upscalerRequest.creativityStrength}
                     min={1}
                     max={10}
+                    disabled={disabled}
                   />
                   <SliderOption
                     title="Upscale Multiplier"
                     tooltipText="Drag to slider to determine the final image size. A higher multiplier results in a larger, more detailed output."
-                    setValue={(x) =>
+                    setValue={(x) => {
                       setUpscalerRequest((prev) => ({
                         ...prev,
                         upscaleMultiplier: x,
-                      }))
-                    }
+                      }));
+                    }}
                     value={upscalerRequest.upscaleMultiplier}
                     min={1}
                     max={2}
+                    disabled={disabled}
+                    enhanceGranularity
                   />
                   <TitleWithTooltip
                     title="Upscale Dimensions"
@@ -267,9 +285,11 @@ const SideBar = () => {
                           <p className="h-10 mr-4 flex items-center justify-center text-van-gogh-sm font-medium">
                             W
                           </p>
-                          <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2">
-                            {selectedImage.width *
-                              upscalerRequest.upscaleMultiplier}
+                          <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2 min-w-8">
+                            {Math.round(
+                              selectedImage.width *
+                                upscalerRequest.upscaleMultiplier
+                            )}
                           </p>
                           <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
                             px
@@ -282,9 +302,11 @@ const SideBar = () => {
                           <p className="h-10 mr-4 flex items-center justify-center text-van-gogh-sm font-medium">
                             H
                           </p>
-                          <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2">
-                            {selectedImage.height *
-                              upscalerRequest.upscaleMultiplier}
+                          <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2 min-w-8">
+                            {Math.round(
+                              selectedImage.height *
+                                upscalerRequest.upscaleMultiplier
+                            )}
                           </p>
                           <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
                             px
@@ -306,6 +328,14 @@ const SideBar = () => {
                       variant="promptGuidanceInput"
                       type="text"
                       placeholder="Type a prompt..."
+                      value={upscalerRequest.prompt || ""}
+                      onChange={(e) => {
+                        setUpscalerRequest((prev) => ({
+                          ...prev,
+                          prompt: e.target.value,
+                        }));
+                      }}
+                      disabled={disabled}
                     />
                   </div>
                 </div>

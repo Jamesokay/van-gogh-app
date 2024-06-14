@@ -476,6 +476,8 @@ export type SliderOptionProps = {
   setValue: (balue: number) => void;
   min: number;
   max: number;
+  disabled: boolean;
+  enhanceGranularity?: boolean;
 };
 
 // Miscellaneous type definitions
