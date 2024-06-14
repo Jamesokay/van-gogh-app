@@ -5,12 +5,10 @@ import UploadIcon from "../../svg/UploadIcon";
 import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import RecentImagesDropdown from "./RecentImagesDropdown";
-import { GeneratedImage } from "@/app/lib/definitions";
 
 const ImageUploadInput: FC<{
-  recentImages: GeneratedImage[];
   openFileSystem: () => void;
-}> = ({ recentImages, openFileSystem }) => {
+}> = ({ openFileSystem }) => {
   const {
     interfaceState,
     setKeyOfGenerationRequest,
@@ -39,12 +37,12 @@ const ImageUploadInput: FC<{
       </button>
       <div className="h-10 w-full">
         <RecentImagesDropdown
-          images={recentImages}
           setValue={(img) => {
             setKeyOfInterfaceState("enableImageGuidance", true);
             setKeyOfInterfaceState("imageGuidanceSrc", img.url)
             setKeyOfGenerationRequest("init_generation_image_id", img.id);
           }}
+          variant="recentImagesMenu"
         />
       </div>
     </div>

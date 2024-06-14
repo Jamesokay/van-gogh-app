@@ -4,8 +4,9 @@ const GradientBorderButton: FC<{
   text: string;
   upperText?: string;
   icon?: ReactNode;
-  classname?: string
-}> = ({ text, upperText, icon, classname }) => {
+  classname?: string;
+  onClick?: () => void;
+}> = ({ text, upperText, icon, classname, onClick = () => {} }) => {
   return (
     <div className="relative flex text-van-gogh-sm h-full bg-van-gogh-pink-gradient p-[1px] rounded-lg hover:shadow-van-gogh-purple-glow">
       {upperText && (
@@ -13,7 +14,10 @@ const GradientBorderButton: FC<{
           {upperText}
         </p>
       )}
-      <button className={`${classname} flex gap-1 bg-van-gogh-input-grey-700 h-full w-full flex items-center justify-center rounded-lg`}>
+      <button
+        className={`${classname} flex gap-1 bg-van-gogh-input-grey-700 h-full w-full flex items-center justify-center rounded-lg`}
+        onClick={onClick}
+      >
         {icon && icon}
         {text}
       </button>

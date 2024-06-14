@@ -1,4 +1,12 @@
-import { HeroImage, ImageGenModel, NonNullGenerationRow } from "./definitions";
+import {
+  GenerationRequestState,
+  HeroImage,
+  ImageGenModel,
+  InterfaceState,
+  LeonardoUpscalerRequest,
+  LocalUpscalerImage,
+  NonNullGenerationRow,
+} from "./definitions";
 
 export const routes = [
   { title: "Generation History", path: "/ai-generations" },
@@ -242,4 +250,57 @@ export const defaultGenerationRow: NonNullGenerationRow = {
   sdVersion: "v1_5",
   seed: 0,
   status: "PENDING",
+};
+
+export const defaultGenerationRequest: GenerationRequestState = {
+  alchemy: false,
+  controlNet: null,
+  controlNetType: null,
+  guidance_scale: 7,
+  init_generation_image_id: null,
+  init_image_id: null,
+  init_strength: null,
+  num_images: 4,
+  photoReal: false,
+  photoRealVersion: "v2",
+  promptMagic: false,
+  transparency: false,
+  public: false,
+  height: 1024,
+  width: 768,
+  tiling: false,
+  prompt: "",
+  negative_prompt: "",
+  presetStyle: "LEONARDO",
+  modelId: "b24e16ff-06e3-43eb-8d33-4416c2d75876",
+};
+
+export const defaultInterfaceState: InterfaceState = {
+  aspectRatioLocked: false,
+  aspectRatio: "3:2",
+  mobileSideBarExpanded: false,
+  enableNegativePrompt: false,
+  enableImageGuidance: false,
+  enableSeed: false,
+  generating: false,
+  newGenerationId: "",
+  deletedGenerationIds: [],
+  tokens: 0,
+  imageGuidanceType: "Image to Image",
+  imageGuidanceSrc: "",
+};
+
+export const defaultUpscalerRequest: LeonardoUpscalerRequest = {
+  initImageId: null,
+  upscalerStyle: "GENERAL",
+  creativityStrength: 8,
+  upscaleMultiplier: 1.5,
+  generatedImageId: null,
+  prompt: null,
+};
+
+export const defaultSelectedImage: LocalUpscalerImage = {
+  src: "",
+  height: 0,
+  width: 0,
 };

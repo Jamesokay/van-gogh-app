@@ -20,12 +20,14 @@ import { imageInputTabs } from "@/app/lib/dataConstants";
 import ImageInputGrid from "./ImageInputGrid";
 import GridToggle from "./GridToggle";
 import { imageInputModalStrings } from "@/app/lib/stringConstants";
+import { createBrowserClient } from "@/app/utils/supabase/client";
+import { fetchGenerationsByUserId } from "@/app/lib/actions";
 
 const ImageInputModal: FC<{
   isOpen: boolean;
   onClose: () => void;
-  images: GeneratedImage[];
-}> = ({ isOpen, onClose, images }) => {
+  setValue: (value: GeneratedImage) => void;
+}> = ({ isOpen, onClose, setValue }) => {
   const { setKeyOfGenerationRequest, setKeyOfInterfaceState } = useSettings();
   const [selectedTab, setSelectedTab] = useState("Your Generations");
   const [selectedFilter, setSelectedFilter] = useState<"All" | "Upscaled">(
@@ -39,11 +41,31 @@ const ImageInputModal: FC<{
     GeneratedImage[][]
   >([]);
   const [mobileColumns, setMobileColumns] = useState(2);
-  const [selected, setSelected] = useState<{ id: string; url: string }>({
-    id: "",
-    url: "",
-  });
+  const [selected, setSelected] = useState<GeneratedImage | null>(null);
   const modalText = imageInputModalStrings;
+
+  const [images, setImages] = useState<GeneratedImage[]>([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const supabase = createBrowserClient();
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (!user) throw new Error("Error fetching user data");
+        const generations = await fetchGenerationsByUserId(user.id);
+        if (!generations) throw new Error("Error fetching generations");
+        const recentImages = generations.flatMap(
+          (generation) => generation.generated_images || []
+        );
+        setImages(recentImages);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchImages();
+  }, []);
 
   useEffect(() => {
     const array: GeneratedImage[][] = Array.from(
@@ -54,7 +76,7 @@ const ImageInputModal: FC<{
       array[index % webColumns]?.push(image);
     });
     setWebColumnImages(array);
-  }, [webColumns]);
+  }, [webColumns, images]);
 
   useEffect(() => {
     const array: GeneratedImage[][] = Array.from(
@@ -65,7 +87,7 @@ const ImageInputModal: FC<{
       array[index % mobileColumns]?.push(image);
     });
     setMobileColumnImages(array);
-  }, [mobileColumns]);
+  }, [mobileColumns, images]);
 
   const handleToggle = (
     current: number,
@@ -91,17 +113,16 @@ const ImageInputModal: FC<{
     }
   };
 
-  const handleSelect = (currentId: string, newImage: GeneratedImage) => {
+  const handleSelect = (currentId: string | undefined, newImage: GeneratedImage) => {
     if (currentId !== newImage.id)
-      setSelected({ id: newImage.id, url: newImage.url });
-    else setSelected({ id: "", url: "" });
+      setSelected(newImage);
+    else setSelected(null);
   };
 
   const handleConfirm = () => {
-    setKeyOfInterfaceState("enableImageGuidance", true);
-    setKeyOfInterfaceState("imageGuidanceSrc", selected.url);
-    setKeyOfGenerationRequest("init_generation_image_id", selected.url);
-    setSelected({ id: "", url: "" });
+    if (!selected) return;
+    setValue(selected)
+    setSelected(null);
     onClose();
   };
 
@@ -215,9 +236,9 @@ const ImageInputModal: FC<{
             {modalText.cancel}
           </button>
           <button
-            disabled={!selected.id}
+            disabled={!selected?.id}
             className={`font-semibold w-80 h-12 bg-van-gogh-purple-gradient rounded-md hover:shadow-van-gogh-purple-glow transition-all ${
-              !selected.id ? "grayscale cursor-not-allowed opacity-40" : ""
+              !selected?.id ? "grayscale cursor-not-allowed opacity-40" : ""
             }`}
             onClick={() => handleConfirm()}
           >

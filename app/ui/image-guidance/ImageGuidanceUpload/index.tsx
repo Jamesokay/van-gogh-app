@@ -5,30 +5,22 @@ import { imageGuidanceStrings } from "@/app/lib/stringConstants";
 import { useSettings } from "@/app/context/SettingsContext";
 import UploadedImageComponent from "./UploadedImageComponent";
 import ImageUploadInput from "./ImageUploadInput";
-import { FC, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Tooltip } from "@chakra-ui/react";
-import { GeneratedImage } from "@/app/lib/definitions";
 import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
 
-const ImageGuidanceUpload: FC<{ recentImages: GeneratedImage[] }> = ({
-  recentImages,
-}) => {
+const ImageGuidanceUpload = () => {
   const {
     generationRequest,
     setKeyOfGenerationRequest,
     interfaceState,
     setKeyOfInterfaceState,
   } = useSettings();
-  const [images, setImages] = useState<GeneratedImage[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const text = imageGuidanceStrings.uploadStrings;
   const noImageProvided =
     !generationRequest.init_generation_image_id &&
     !generationRequest.init_image_id;
-
-  useEffect(() => {
-    setImages(recentImages);
-  }, []);
 
   const readFileToLocalState = (file: File) => {
     const reader = new FileReader();
@@ -121,12 +113,7 @@ const ImageGuidanceUpload: FC<{ recentImages: GeneratedImage[] }> = ({
         className="hidden"
         onChange={handleFileChange}
       ></input>
-      {images.length > 0 && (
-        <ImageUploadInput
-          recentImages={images}
-          openFileSystem={openFileSystem}
-        />
-      )}
+      <ImageUploadInput openFileSystem={openFileSystem} />
       {!!interfaceState.imageGuidanceSrc && (
         <UploadedImageComponent openFileSystem={openFileSystem} />
       )}

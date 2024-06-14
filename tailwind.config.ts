@@ -71,6 +71,7 @@ const config: Config = {
         "van-gogh-purple-300": "#807cff",
         "van-gogh-purple-400": "rgb(114, 88, 242)",
         "van-gogh-blue-200": "#101622",
+        "van-gogh-blue-300": "#0c1622",
         "van-gogh-blue-500": "rgb(16, 22, 34)",
         "van-gogh-blue-700": "#0B0F17",
         "van-gogh-blue-800": "rgb(22, 29, 45)",

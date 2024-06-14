@@ -3,55 +3,19 @@
 import { createContext, useContext, useState } from "react";
 import {
   AspectRatioKey,
+  ContextProviderProps,
   GenerationRequestState,
   ImageGuidanceType,
   InputDimension,
   InterfaceState,
   SettingsContextProps,
-  SettingsProviderProps,
 } from "../lib/definitions";
 import { calculateProportionalHeight, parseDimension } from "../lib/helpers";
-import { defaultAspectRatioConversion } from "../lib/dataConstants";
-
-// State for the API request
-const defaultGenerationRequest: GenerationRequestState = {
-  alchemy: false,
-  controlNet: null,
-  controlNetType: null,
-  guidance_scale: 7,
-  init_generation_image_id: null,
-  init_image_id: null,
-  init_strength: null,
-  num_images: 4,
-  photoReal: false,
-  photoRealVersion: "v2",
-  promptMagic: false,
-  transparency: false,
-  public: false,
-  height: 1024,
-  width: 768,
-  tiling: false,
-  prompt: "",
-  negative_prompt: "",
-  presetStyle: "LEONARDO",
-  modelId: "b24e16ff-06e3-43eb-8d33-4416c2d75876",
-};
-
-// State for user interface
-const defaultInterfaceState: InterfaceState = {
-  aspectRatioLocked: false,
-  aspectRatio: "3:2",
-  mobileSideBarExpanded: false,
-  enableNegativePrompt: false,
-  enableImageGuidance: false,
-  enableSeed: false,
-  generating: false,
-  newGenerationId: "",
-  deletedGenerationIds: [],
-  tokens: 0,
-  imageGuidanceType: "Image to Image",
-  imageGuidanceSrc: "",
-};
+import {
+  defaultAspectRatioConversion,
+  defaultGenerationRequest,
+  defaultInterfaceState,
+} from "../lib/dataConstants";
 
 const SettingsContext = createContext<SettingsContextProps>({
   generationRequest: defaultGenerationRequest,
@@ -70,7 +34,7 @@ const SettingsContext = createContext<SettingsContextProps>({
 
 export const useSettings = () => useContext(SettingsContext);
 
-export const SettingsProvider: React.FC<SettingsProviderProps> = ({
+export const SettingsProvider: React.FC<ContextProviderProps> = ({
   children,
 }) => {
   const [generationRequest, setGenerationRequest] =
@@ -185,7 +149,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       setKeyOfGenerationRequest("presetStyle", "CINEMATIC");
     } else {
       setKeyOfGenerationRequest("photoReal", false);
-      if (generationRequest.alchemy) setKeyOfGenerationRequest("presetStyle", "DYNAMIC");
+      if (generationRequest.alchemy)
+        setKeyOfGenerationRequest("presetStyle", "DYNAMIC");
       else setKeyOfGenerationRequest("presetStyle", "LEONARDO");
     }
   };

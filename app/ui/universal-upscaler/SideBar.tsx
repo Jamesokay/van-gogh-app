@@ -4,7 +4,7 @@ import { Input, Tooltip } from "@chakra-ui/react";
 import RecentImagesDropdown from "../image-guidance/ImageGuidanceUpload/RecentImagesDropdown";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import SliderOption from "../components/SliderOption";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import AddImageIcon from "../svg/AddImageIcon";
 import GradientBorderButton from "../components/GradientBorderButton";
 import ResetIcon from "../svg/ResetIcon";
@@ -12,52 +12,29 @@ import CoinsIcon from "../svg/CoinsIcon";
 import DropdownMenu from "../components/DropdownMenu";
 import DimensionLinkIcon from "../svg/DimensionLinkIcon";
 import TitleWithTooltip from "../svg/TitleWithTooltip";
-import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
-
-type LeonardoUpscalerStyle =
-  | "GENERAL"
-  | "2D ART & ILLUSTRATION"
-  | "CINEMATIC"
-  | "CG ART & GAME ASSETS";
-
-type LeonardoUpscalerRequest = {
-  initImageId: string | null;
-  upscalerStyle: LeonardoUpscalerStyle;
-  creativityStrength: number;
-  upscaleMultiplier: number;
-  generatedImageId: string | null;
-  prompt: string | null;
-};
-
-type UploadedImage = {
-  src: string;
-  height: number;
-  width: number;
-}
+// import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
+import { CloseIcon } from "@chakra-ui/icons";
+import { GeneratedImage, LeonardoUpscalerStyle } from "@/app/lib/definitions";
+import { useUpscaler } from "@/app/context/UpscalerContext";
+import {
+  defaultSelectedImage,
+  defaultUpscalerRequest,
+} from "@/app/lib/dataConstants";
 
 const SideBar = () => {
+  const {
+    upscalerRequest,
+    setUpscalerRequest,
+    selectedImage,
+    setSelectedImage,
+  } = useUpscaler();
   const upscalerStyles: LeonardoUpscalerStyle[] = [
     "GENERAL",
     "2D ART & ILLUSTRATION",
     "CINEMATIC",
     "CG ART & GAME ASSETS",
   ];
-  // To-do: extract this to upscaler context
-  const [upscalerRequest, setUpscalerRequest] =
-    useState<LeonardoUpscalerRequest>({
-      initImageId: null,
-      // To-do: variationId
-      upscalerStyle: "GENERAL",
-      creativityStrength: 8,
-      upscaleMultiplier: 1.5,
-      generatedImageId: null,
-      prompt: null,
-    });
-  const [img, setImg] = useState<UploadedImage>({
-    src: "",
-    height: 0,
-    width: 0
-  });
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const readFileToLocalState = (file: File) => {
@@ -65,7 +42,7 @@ const SideBar = () => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       if (typeof reader.result === "string") {
-        setImg(prev => ({ ...prev, src: reader.result as string }));
+        setSelectedImage((prev) => ({ ...prev, src: reader.result as string }));
       }
     };
     reader.onerror = (error) => {
@@ -73,8 +50,21 @@ const SideBar = () => {
     };
   };
 
+  const handleReset = () => {
+    setUpscalerRequest((prev) => ({
+      ...defaultUpscalerRequest,
+      initImageId: prev.initImageId,
+      generatedImageId: prev.generatedImageId,
+    }));
+  };
+
+  const handleClearImage = () => {
+    setSelectedImage(defaultSelectedImage);
+    setUpscalerRequest(defaultUpscalerRequest);
+  };
+
   const uploadFileToAPI = async (file: File) => {
-    console.log("upload to API")
+    console.log("upload to API");
     // try {
     //   const details = await getPresignedUrl();
     //   if (!details?.url || !details?.fields) return;
@@ -116,22 +106,38 @@ const SideBar = () => {
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     const { naturalWidth, naturalHeight } = event.currentTarget;
-    console.log(event.currentTarget)
-    setImg( prev => ({ ...prev, width: naturalWidth, height: naturalHeight }));
+    setSelectedImage((prev) => ({
+      ...prev,
+      width: naturalWidth,
+      height: naturalHeight,
+    }));
   };
 
+  const handleRecentImageSelect = (image: GeneratedImage) => {
+    setSelectedImage((prev) => ({ ...prev, src: image.url }));
+    setUpscalerRequest((prev) => ({ ...prev, generatedImageId: image.id }));
+  };
 
   return (
     <div className="relative flex h-full bg-van-gogh-dark-blue-gradient">
       <div className="flex">
-        <div className="relative ml-2.5 min-w-[21rem]">
+        <div className="relative ml-2.5 min-w-[21rem] overflow-y-auto overflow-x-hidden">
           <div className="absolute top-0 left-0 w-full">
             <div className="flex flex-col w-full h-full pt-2.5 pb-6 px-2">
               <div className="flex flex-col gap-2 pb-4">
-                <TitleWithTooltip
-                  title="Source Image"
-                  tooltip="The original image to be upscaled. Click to upload or drag and drop your file."
-                />
+                <div className="flex justify-between items-center">
+                  <TitleWithTooltip
+                    title="Source Image"
+                    tooltip="The original image to be upscaled. Click to upload or drag and drop your file."
+                  />
+                  <p
+                    className={
+                      selectedImage.src
+                        ? "text-van-gogh-xs text-van-gogh-grey-700"
+                        : "hidden"
+                    }
+                  >{`${selectedImage.width}x${selectedImage.height}`}</p>
+                </div>
                 <input
                   ref={inputRef}
                   type="file"
@@ -140,21 +146,40 @@ const SideBar = () => {
                   onChange={handleFileChange}
                 />
                 <button
-                  className={img.src ? "hidden" : "relative flex flex-col gap-1 justify-center items-center w-full h-full min-h-[9.75rem] rounded-lg border border-van-gogh-grey-100 bg-van-gogh-blue-200"}
+                  className={
+                    selectedImage.src
+                      ? "hidden"
+                      : "relative flex flex-col gap-1 justify-center items-center w-full h-full min-h-[9.75rem] rounded-lg border border-van-gogh-grey-100 bg-van-gogh-blue-200 transition-all hover:bg-van-gogh-blue-800"
+                  }
                   onClick={() => openFileSystem()}
                 >
-                  <AddImageIcon />
+                  <AddImageIcon className="w-10 h-10" />
                   <span className="text-van-gogh-sm font-medium">
                     Add Image
                   </span>
                 </button>
-                <img src={img.src} alt="Image to be upscaled" className={img.src ? "" : "hidden"} onLoad={handleImageLoaded}/>
-                {/* <div className="h-10 w-full">
-                  <RecentImagesDropdown setValue={() => {}} images={[]} />
-                </div> */}
+                <div className={selectedImage.src ? "relative flex" : "hidden"}>
+                  <button
+                    className="absolute right-2 top-2 rounded-full flex items-center p-2.5 bg-van-gogh-black-opal-400 transition-all hover:bg-van-gogh-black-opal-600"
+                    onClick={() => handleClearImage()}
+                  >
+                    <CloseIcon w={3} h={3.5} />
+                  </button>
+                  <img
+                    src={selectedImage.src}
+                    alt="Image to be upscaled"
+                    onLoad={handleImageLoaded}
+                  />
+                </div>
+                <div className="flex h-10 w-full gap-2">
+                  <RecentImagesDropdown
+                    setValue={(x) => handleRecentImageSelect(x)}
+                    variant="upscalerRecentImagesMenu"
+                    showReplaceButton={!!selectedImage.src}
+                  />
+                </div>
                 <button
-                  className={`flex justify-center items-center relative h-10 w-full text-van-gogh-sm bg-van-gogh-purple-gradient px-12 rounded-lg 
-              }`}
+                  className={`flex justify-center items-center relative h-10 w-full text-van-gogh-sm bg-van-gogh-purple-gradient px-12 rounded-lg transition-all hover:shadow-van-gogh-purple-glow`}
                 >
                   <p className="font-semibold mr-2">Upscale</p>
                   <div className="flex">
@@ -177,6 +202,7 @@ const SideBar = () => {
                     text="Reset"
                     classname="px-2.5"
                     icon={<ResetIcon />}
+                    onClick={() => handleReset()}
                   />
                 </div>
               </div>
@@ -190,11 +216,16 @@ const SideBar = () => {
                   <div className="h-10 mb-4">
                     <DropdownMenu
                       value={upscalerRequest.upscalerStyle}
-                      options={[]}
-                      setValue={(x) => setUpscalerRequest(prev => ({ ...prev, upscalerStyle: x }))}
-                      isDisabled={!img.src}
+                      options={upscalerStyles}
+                      setValue={(x) =>
+                        setUpscalerRequest((prev) => ({
+                          ...prev,
+                          upscalerStyle: x,
+                        }))
+                      }
+                      isDisabled={!selectedImage.src}
                       headerTheme={false}
-                      large={false}
+                      large={true}
                     />
                   </div>
                 </div>
@@ -237,7 +268,8 @@ const SideBar = () => {
                             W
                           </p>
                           <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2">
-                            {img.width * upscalerRequest.upscaleMultiplier}
+                            {selectedImage.width *
+                              upscalerRequest.upscaleMultiplier}
                           </p>
                           <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
                             px
@@ -251,7 +283,8 @@ const SideBar = () => {
                             H
                           </p>
                           <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2">
-                            {img.height * upscalerRequest.upscaleMultiplier}
+                            {selectedImage.height *
+                              upscalerRequest.upscaleMultiplier}
                           </p>
                           <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
                             px

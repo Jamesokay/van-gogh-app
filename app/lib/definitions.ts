@@ -7,7 +7,7 @@ import { Database } from "./supabase";
 
 // Context type definitions
 
-export type SettingsProviderProps = {
+export type ContextProviderProps = {
   children: ReactNode;
 };
 
@@ -70,6 +70,36 @@ export type InterfaceState = {
   imageGuidanceType: ImageGuidanceType;
   imageGuidanceSrc: string;
 };
+
+export type LeonardoUpscalerRequest = {
+  initImageId: string | null;
+  upscalerStyle: LeonardoUpscalerStyle;
+  creativityStrength: number;
+  upscaleMultiplier: number;
+  generatedImageId: string | null;
+  prompt: string | null;
+};
+
+export type UpscalerContextProps = {
+  upscalerRequest: LeonardoUpscalerRequest;
+  selectedImage: LocalUpscalerImage;
+  setSelectedImage: (value: React.SetStateAction<LocalUpscalerImage>) => void;
+  setUpscalerRequest: (
+    value: React.SetStateAction<LeonardoUpscalerRequest>
+  ) => void;
+};
+
+export type LocalUpscalerImage = {
+  src: string;
+  height: number;
+  width: number;
+};
+
+export type LeonardoUpscalerStyle =
+  | "GENERAL"
+  | "2D ART & ILLUSTRATION"
+  | "CINEMATIC"
+  | "CG ART & GAME ASSETS";
 
 // Leonardo API type definitions
 
@@ -421,10 +451,10 @@ export type BadgeWrapperProps = {
 };
 
 export type ImageInputGridProps = {
-  selected: { id: string; url: string };
+  selected: GeneratedImage | null;
   columns: number;
   columnImages: GeneratedImage[][];
-  handleSelect: (currentId: string, newImage: GeneratedImage) => void;
+  handleSelect: (currentId: string | undefined, newImage: GeneratedImage) => void;
   mobile: boolean;
 };
 

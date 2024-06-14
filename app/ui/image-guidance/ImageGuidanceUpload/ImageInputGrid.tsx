@@ -23,11 +23,11 @@ const ImageInputGrid: FC<ImageInputGridProps> = ({
               key={imgIndex}
               role="button"
               className={`${
-                selected.id === image.id
+                selected?.id === image.id
                   ? "selected-image-with-border"
                   : "image-with-border"
               } relative border-transparent border-4 flex justify-center mb-4 w-full rounded-2xl`}
-              onClick={() => handleSelect(selected.id, image)}
+              onClick={() => handleSelect(selected?.id, image)}
             >
               <div className="absolute w-full h-full bg-van-gogh-black-opal-600 z-10 rounded-2xl"></div>
               <div
@@ -43,7 +43,7 @@ const ImageInputGrid: FC<ImageInputGridProps> = ({
               </div>
               <div
                 className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-14 w-14 bg-van-gogh-purple-gradient rounded-full z-50 flex justify-center items-center transition-all
-                ${selected.id === image.id ? "opacity-100" : "opacity-0"}`}
+                ${selected?.id === image.id ? "opacity-100" : "opacity-0"}`}
               >
                 <TickIcon fill={"#fff"} className="h-10 w-10" />
               </div>

@@ -111,6 +111,19 @@ const recentImagesMenu = definePartsStyle({
   },
 });
 
+const upscalerRecentImagesMenu = definePartsStyle({
+  list: {
+    w: "260px",
+    bg: "rgb(11, 15, 23)"
+  },
+  item: {
+    h: "75px",
+    minW: "75px",
+    w: "100%",
+    p: 0,
+  },
+});
+
 const lg = defineStyle({
   fontSize: "0.875rem",
   minH: "2.5rem",
@@ -127,6 +140,6 @@ const sizes = {
 
 export const menuTheme = defineMultiStyleConfig({
   baseStyle: baseMenuStyle,
-  variants: { headerMenu, threeDotsMenu, recentImagesMenu },
+  variants: { headerMenu, threeDotsMenu, recentImagesMenu, upscalerRecentImagesMenu },
   sizes: sizes,
 });
