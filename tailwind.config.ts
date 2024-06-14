@@ -42,6 +42,7 @@ const config: Config = {
           "linear-gradient(rgba(18, 19, 21, 0) -2.43%, rgb(18, 19, 21) 97.57%)",
         "van-gogh-loading-spinner-gradient":
           "conic-gradient(rgb(23, 38, 44), rgb(250, 85, 96), rgb(177, 75, 244), rgb(23, 38, 44), rgb(23, 38, 44), rgb(177, 75, 244), rgb(77, 145, 255), rgb(23, 38, 44), rgb(23, 38, 44))",
+        "van-gogh-header-gradient": "linear-gradient(90deg, rgb(6, 8, 13), rgb(13, 18, 28))"
       },
       boxShadow: {
         "van-gogh-purple-glow":
@@ -87,6 +88,7 @@ const config: Config = {
         "van-gogh-input-text-grey": "#BDBDBD",
         "van-gogh-policy-text-grey": "#A7B2C1",
         "van-gogh-border-green": "rgb(104, 211, 145)",
+        "van-gogh-border-dark-blue": "#171B29"
       },
       flex: {
         "van-gogh-1-1-0": "1 1 0%",

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import LoadingSpinner from "../ui/components/LoadingSpinner";
 import { UpscalerProvider } from "../context/UpscalerContext";
 import SideBar from "../ui/universal-upscaler/SideBar";
+import Header from "../ui/universal-upscaler/Header";
 
 export default async function Layout({
   children,
@@ -17,9 +18,12 @@ export default async function Layout({
           </div>
         }
       >
-        <main className="flex h-full w-full">
+        <main className="flex flex-col h-full w-full">
+          <Header />
+          <div className="flex h-full w-full">
             <SideBar />
             {children}
+          </div>
         </main>
       </Suspense>
     </UpscalerProvider>
