@@ -1,4 +1,6 @@
-const DownloadIcon = () => {
+import { FC } from "react";
+
+const DownloadIcon:FC<{ white?: boolean }> = ({ white = false }) => {
   return (
     <svg
       viewBox="0 0 14 18"
@@ -21,8 +23,8 @@ const DownloadIcon = () => {
         </linearGradient>
       </defs>
       <path
-        fill="url(#arrow-down-to-line-icon-linear-gradient-:r2cq:)"
-        stroke="url(#arrow-down-to-line-icon-linear-gradient-:r2cq:)"
+        fill={white ? "#fff" : "url(#arrow-down-to-line-icon-linear-gradient-:r2cq:)"}
+        stroke={white ? "#fff" : "url(#arrow-down-to-line-icon-linear-gradient-:r2cq:)"}
         d="M1.9308 9.4859a.6877.6877 0 1 1 .9726-.9727l3.41 3.41V.75c0-.3795.308-.6875.6875-.6875s.6875.308.6875.6875v11.1732l3.41-3.41a.6877.6877 0 1 1 .9726.9727l-4.5833 4.5833a.6937.6937 0 0 1-.2227.1484.6858.6858 0 0 1-.2632.0532.6882.6882 0 0 1-.263-.0532.6849.6849 0 0 1-.2229-.1484L1.931 9.4859ZM12.5 16.5625h-11a.6878.6878 0 0 0-.6875.6875c0 .3795.308.6875.6875.6875h11a.6878.6878 0 0 0 .6875-.6875.6878.6878 0 0 0-.6875-.6875Z"
       ></path>
     </svg>
