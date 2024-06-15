@@ -87,6 +87,8 @@ export type UpscalerContextProps = {
   setUpscalerRequest: (
     value: React.SetStateAction<LeonardoUpscalerRequest>
   ) => void;
+  upscalerView: UpscalerView;
+  setUpscalerView: (value: UpscalerView) => void;
 };
 
 export type LocalUpscalerImage = {
@@ -100,6 +102,8 @@ export type LeonardoUpscalerStyle =
   | "2D ART & ILLUSTRATION"
   | "CINEMATIC"
   | "CG ART & GAME ASSETS";
+
+export type UpscalerView = "slider" | "variation" | "sideBySide";
 
 // Leonardo API type definitions
 
@@ -454,7 +458,10 @@ export type ImageInputGridProps = {
   selected: GeneratedImage | null;
   columns: number;
   columnImages: GeneratedImage[][];
-  handleSelect: (currentId: string | undefined, newImage: GeneratedImage) => void;
+  handleSelect: (
+    currentId: string | undefined,
+    newImage: GeneratedImage
+  ) => void;
   mobile: boolean;
 };
 

@@ -1,5 +1,5 @@
 const Page = () => {
-  return <div className="flex h-full w-full"></div>;
+  return <div className="flex flex-auto"></div>;
 };
 
 export default Page;

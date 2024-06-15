@@ -88,7 +88,10 @@ const config: Config = {
         "van-gogh-input-text-grey": "#BDBDBD",
         "van-gogh-policy-text-grey": "#A7B2C1",
         "van-gogh-border-green": "rgb(104, 211, 145)",
-        "van-gogh-border-dark-blue": "#171B29"
+        "van-gogh-border-dark-blue": "#171B29",
+        "van-gogh-outline-button-grey": "rgb(19, 19, 19)",
+        "van-gogh-outline-button-hover-grey": "rgb(57, 59, 69)",
+        "van-gogh-icon-grey-extra-light": "rgb(205, 207, 215)"
       },
       flex: {
         "van-gogh-1-1-0": "1 1 0%",
@@ -103,6 +106,7 @@ const config: Config = {
         "van-gogh-auto-fit-minmax-24":
           "repeat(auto-fit, minmax(calc(24rem), 1fr))",
         "van-gogh-auto-fit-minmax-75px": "repeat(auto-fill, minmax(75px, 1fr))",
+        "van-gogh-auto-1.25": "auto 1fr 1.25rem"
       },
       maxHeight: {
         "van-gogh-modal-height": "calc(-10rem + 100vh)",

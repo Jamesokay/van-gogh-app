@@ -6,14 +6,20 @@ import {
   LeonardoUpscalerRequest,
   LocalUpscalerImage,
   UpscalerContextProps,
+  UpscalerView,
 } from "../lib/definitions";
-import { defaultSelectedImage, defaultUpscalerRequest } from "../lib/dataConstants";
+import {
+  defaultSelectedImage,
+  defaultUpscalerRequest,
+} from "../lib/dataConstants";
 
 const UpscalerContext = createContext<UpscalerContextProps>({
   upscalerRequest: defaultUpscalerRequest,
   selectedImage: defaultSelectedImage,
   setSelectedImage: () => {},
   setUpscalerRequest: () => {},
+  upscalerView: "slider",
+  setUpscalerView: () => {},
 });
 
 export const useUpscaler = () => useContext(UpscalerContext);
@@ -23,13 +29,17 @@ export const UpscalerProvider: React.FC<ContextProviderProps> = ({
 }) => {
   const [upscalerRequest, setUpscalerRequest] =
     useState<LeonardoUpscalerRequest>(defaultUpscalerRequest);
-  const [selectedImage, setSelectedImage] = useState<LocalUpscalerImage>(defaultSelectedImage);
+  const [selectedImage, setSelectedImage] =
+    useState<LocalUpscalerImage>(defaultSelectedImage);
+  const [upscalerView, setUpscalerView] = useState<UpscalerView>("slider");
 
   const context = {
     upscalerRequest,
     setUpscalerRequest,
     selectedImage,
-    setSelectedImage
+    setSelectedImage,
+    upscalerView,
+    setUpscalerView,
   };
 
   return (

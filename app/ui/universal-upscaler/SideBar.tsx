@@ -127,7 +127,7 @@ const SideBar = () => {
   };
 
   return (
-    <div className="relative flex h-full bg-van-gogh-dark-blue-gradient">
+    <div className="relative flex h-full bg-van-gogh-dark-blue-gradient border-r border-van-gogh-grey-100">
       <div className="flex">
         <div className="relative ml-2.5 min-w-[21rem] overflow-y-auto overflow-x-hidden">
           <div className="absolute top-0 left-0 w-full">
