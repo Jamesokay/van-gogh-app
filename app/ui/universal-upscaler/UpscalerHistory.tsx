@@ -13,7 +13,7 @@ const UpscalerHistory = () => {
   const { upscalerView, setUpscalerView } = useUpscaler();
 
   return (
-    <div className="max-h-[5.625rem] grid grid-cols-van-gogh-auto-1.25 gap-2 flex-auto p-2 border border-van-gogh-grey-800 rounded-t-lg bg-van-gogh-blue-200">
+    <div className="sticky bottom-0 max-h-[5.625rem] grid grid-cols-van-gogh-auto-1.25 gap-2 flex-auto p-2 border border-van-gogh-grey-800 rounded-t-lg bg-van-gogh-blue-200">
       <div className="flex flex-col gap-1">
         <Tooltip label="Select images" placement="right-end">
           <span>
