@@ -1,13 +1,19 @@
 # Clone of Leonardo.Ai Image Generation Interface (Next.js 14, Supabase, Tailwind)
 
+Practically speaking, I undertook this project in order to learn the latest version of Next.js and familiarise myself with Supabase. On a personal level, I am extremely interested in artificial intelligence, most specifically as an augmenation to the creative process, and was eager to build something within that domain. Thus far I have been able to replicate most of the image generation functionality provided by the Leonardo.Ai web application. I am now in the process of implementing the Universal Upscaler feature. While I have a version of the project deployed on Vercel, only the admin account (i.e. me) has access to image generation functionality, since this requires a Leonardo.Ai API key and tokens (i.e. it costs money).
+
 ### Current Features
 
 - User is able to generate images using various different models, preset styles and settings (restricted access to admin account only)
 - Implementation of Image to Image Guidance feature
 - Integration of Leonardo.Ai API webhook and Supabase Realtime to display new image generations
-- Implementation of Supabase with Row Level Security policy
+- Implementation of Supabase with Realtime and Row Level Security policy
 - Supabase Authentication
 - Server actions for both database and calls to Leonardo.Ai API
+
+### In Progress
+
+- Universal Upscaler
 
 ### Screenshots
 
