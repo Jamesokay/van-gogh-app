@@ -8,7 +8,7 @@ Practically speaking, I undertook this project in order to learn the latest vers
 - Implementation of Image to Image Guidance feature
 - Integration of Leonardo.Ai API webhook and Supabase Realtime to display new image generations
 - Implementation of Supabase with Realtime and Row Level Security policy
-- Supabase Authentication
+- Supabase Auth authentication and session management
 - Server actions for both database and calls to Leonardo.Ai API
 
 ### In Progress
