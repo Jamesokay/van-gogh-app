@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useUpscaler } from "@/app/context/UpscalerContext";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const ImageContainer = () => {
   const { upscalerView } = useUpscaler();
@@ -37,34 +38,45 @@ const ImageContainer = () => {
 
   if (upscalerView === "slider")
     return (
-      <div className="flex h-full w-full justify-center">
-        <div
-          ref={specialDivRef}
-          className="relative flex h-full cursor-ew-resize"
-          style={{ maxHeight: "calc(-9.792rem + 100dvh)" }}
-        >
-          <img
-            src="https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/ee3f536c-9b89-4d5d-b2a1-def003e457f8/Default_A_vividly_sparkling_digital_avatar_its_pixelated_form_2.jpg"
-            alt=""
-            className="h-full w-auto object-contain"
-          />
-          <div
-            className="absolute w-full h-full left-0 top-0 z-10"
-            style={{ clipPath: `inset(0px 0px 0px ${percentage}%)` }}
-          >
-            <img
-              src="https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/6010529c-f5cf-4b14-a80f-a61318b0738f/variations/UniversalUpscaler_6010529c-f5cf-4b14-a80f-a61318b0738f.jpg"
-              alt=""
-              className="h-full w-auto object-contain"
-            />
-          </div>
-          <div
-            className="absolute h-full top-0 bg-white w-[0.125rem] z-50"
-            style={{ left: `${percentage}%` }}
-          ></div>
-        </div>
+      <div className="flex h-full w-full">
+        <TransformWrapper limitToBounds={false} centerOnInit panning={{ velocityDisabled: true }} wheel={{ smoothStep: 0.002 }}>
+          <TransformComponent wrapperStyle={{ width: "100%", height: "100%" }}>
+            <div
+              ref={specialDivRef}
+              className="relative flex h-full cursor-ew-resize select-none"
+              style={{
+                maxHeight: "calc(-9.792rem + 100dvh)",
+              }}
+            >
+              <img
+                src="https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/ee3f536c-9b89-4d5d-b2a1-def003e457f8/Default_A_vividly_sparkling_digital_avatar_its_pixelated_form_2.jpg"
+                alt=""
+                className="h-full w-auto object-contain"
+                style={{
+                  maxHeight: "calc(-9.792rem + 100dvh)",
+                }}
+              />
+              <div
+                className="absolute w-full h-full left-0 top-0 z-10"
+                style={{ clipPath: `inset(0px 0px 0px ${percentage}%)` }}
+              >
+                <img
+                  src="https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/6010529c-f5cf-4b14-a80f-a61318b0738f/variations/UniversalUpscaler_6010529c-f5cf-4b14-a80f-a61318b0738f.jpg"
+                  alt=""
+                  className="h-full w-auto object-contain"
+                />
+              </div>
+              <div
+                className="absolute h-full top-0 bg-white w-[0.125rem] z-50"
+                style={{ left: `${percentage}%` }}
+              ></div>
+            </div>
+          </TransformComponent>
+        </TransformWrapper>
       </div>
     );
+
+  // To-do: Transform container for drag and zoom
 
   return (
     <div className="flex h-full w-full justify-center gap-1.5">
