@@ -42,7 +42,8 @@ const config: Config = {
           "linear-gradient(rgba(18, 19, 21, 0) -2.43%, rgb(18, 19, 21) 97.57%)",
         "van-gogh-loading-spinner-gradient":
           "conic-gradient(rgb(23, 38, 44), rgb(250, 85, 96), rgb(177, 75, 244), rgb(23, 38, 44), rgb(23, 38, 44), rgb(177, 75, 244), rgb(77, 145, 255), rgb(23, 38, 44), rgb(23, 38, 44))",
-        "van-gogh-header-gradient": "linear-gradient(90deg, rgb(6, 8, 13), rgb(13, 18, 28))"
+        "van-gogh-header-gradient":
+          "linear-gradient(90deg, rgb(6, 8, 13), rgb(13, 18, 28))",
       },
       boxShadow: {
         "van-gogh-purple-glow":
@@ -91,7 +92,8 @@ const config: Config = {
         "van-gogh-border-dark-blue": "#171B29",
         "van-gogh-outline-button-grey": "rgb(19, 19, 19)",
         "van-gogh-outline-button-hover-grey": "rgb(57, 59, 69)",
-        "van-gogh-icon-grey-extra-light": "rgb(205, 207, 215)"
+        "van-gogh-icon-grey-extra-light": "rgb(205, 207, 215)",
+        "van-gogh-slider-purple": "rgb(224, 176, 232)"
       },
       flex: {
         "van-gogh-1-1-0": "1 1 0%",
@@ -106,7 +108,7 @@ const config: Config = {
         "van-gogh-auto-fit-minmax-24":
           "repeat(auto-fit, minmax(calc(24rem), 1fr))",
         "van-gogh-auto-fit-minmax-75px": "repeat(auto-fill, minmax(75px, 1fr))",
-        "van-gogh-auto-1.25": "auto 1fr 1.25rem"
+        "van-gogh-auto-1.25": "auto 1fr 1.25rem",
       },
       maxHeight: {
         "van-gogh-modal-height": "calc(-10rem + 100vh)",
@@ -158,6 +160,16 @@ const config: Config = {
         "van-gogh-switch-track-x-enable":
           "calc(1rem * 2.625 - 1rem * 1.25 - 0.125rem)",
         "van-gogh-switch-track-x-disable": "0.125rem",
+      },
+      animation: {
+        fade: "fadeIn .7s ease",
+      },
+
+      keyframes: {
+        fadeIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
       },
     },
   },
