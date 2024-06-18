@@ -14,6 +14,7 @@ const TransformContainer: FC<{ children: ReactNode }> = ({ children }) => {
   const handleTransform = (ref: ReactZoomPanPinchRef) => {
     setZoomValue(ref.state.scale * 100);
   };
+
   return (
     <div className="flex w-full h-full">
       <TransformWrapper

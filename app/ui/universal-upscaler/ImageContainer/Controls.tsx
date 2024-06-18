@@ -1,11 +1,15 @@
 "use client";
 
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useControls } from "react-zoom-pan-pinch";
 
 const Controls: FC<{ zoomValue: number }> = ({ zoomValue }) => {
-  const { zoomIn, zoomOut } = useControls();
+  const { zoomIn, zoomOut, centerView } = useControls();
+
+  useEffect(() => {
+    if (zoomValue === 100) centerView();
+  }, [zoomValue]);
 
   return (
     <div className="flex items-center h-10 absolute bottom-24 right-3 z-50 bg-van-gogh-blue-700 rounded-md">
@@ -21,7 +25,9 @@ const Controls: FC<{ zoomValue: number }> = ({ zoomValue }) => {
       >
         <MinusIcon w={3} h={3} />
       </button>
-      <p className="text-van-gogh-sm px-2 font-medium">{`${zoomValue.toFixed(1)}%`}</p>
+      <p className="text-van-gogh-sm px-2 font-medium">{`${zoomValue.toFixed(
+        1
+      )}%`}</p>
     </div>
   );
 };
