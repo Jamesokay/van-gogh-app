@@ -299,8 +299,29 @@ export const defaultUpscalerRequest: LeonardoUpscalerRequest = {
   prompt: "",
 };
 
-export const defaultSelectedImage: LocalUpscalerImage = {
+export const defaultSourceImage: LocalUpscalerImage = {
   src: "",
   height: 0,
   width: 0,
 };
+
+const sampleUpscale = {
+  id: "xyz1289",
+  sourceImage: {
+    url: "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/ee3f536c-9b89-4d5d-b2a1-def003e457f8/Default_A_vividly_sparkling_digital_avatar_its_pixelated_form_2.jpg",
+    height: 1024,
+    width: 768,
+  },
+  upscaledImage: {
+    url: "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/6010529c-f5cf-4b14-a80f-a61318b0738f/variations/UniversalUpscaler_6010529c-f5cf-4b14-a80f-a61318b0738f.jpg",
+    height: 2048,
+    width: 1536,
+  },
+  details: {
+    creativityStrength: 5,
+    upscaleMultiplier: 2.0,
+    upscalerStyle: "GENERAL",
+    prompt: null,
+  },
+};
+export const sampleUpscalesArray = [sampleUpscale];

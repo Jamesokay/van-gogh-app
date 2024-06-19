@@ -5,18 +5,18 @@ import {
   ContextProviderProps,
   LeonardoUpscalerRequest,
   LocalUpscalerImage,
+  UpscaledImage,
   UpscalerContextProps,
   UpscalerView,
 } from "../lib/definitions";
-import {
-  defaultSelectedImage,
-  defaultUpscalerRequest,
-} from "../lib/dataConstants";
+import { defaultSourceImage, defaultUpscalerRequest } from "../lib/dataConstants";
 
 const UpscalerContext = createContext<UpscalerContextProps>({
   upscalerRequest: defaultUpscalerRequest,
-  selectedImage: defaultSelectedImage,
-  setSelectedImage: () => {},
+  selectedUpscaleHistoryItem: null,
+  setSelectedUpscaleHistoryItem: () => {},
+  newUpscaleSourceImage: defaultSourceImage,
+  setNewUpscaleSourceImage: () => {},
   setUpscalerRequest: () => {},
   upscalerView: "slider",
   setUpscalerView: () => {},
@@ -29,15 +29,19 @@ export const UpscalerProvider: React.FC<ContextProviderProps> = ({
 }) => {
   const [upscalerRequest, setUpscalerRequest] =
     useState<LeonardoUpscalerRequest>(defaultUpscalerRequest);
-  const [selectedImage, setSelectedImage] =
-    useState<LocalUpscalerImage>(defaultSelectedImage);
+  const [selectedUpscaleHistoryItem, setSelectedUpscaleHistoryItem] = useState<UpscaledImage | null>(
+    null
+  );
+  const [newUpscaleSourceImage, setNewUpscaleSourceImage] = useState<LocalUpscalerImage>(defaultSourceImage);
   const [upscalerView, setUpscalerView] = useState<UpscalerView>("slider");
 
   const context = {
     upscalerRequest,
     setUpscalerRequest,
-    selectedImage,
-    setSelectedImage,
+    selectedUpscaleHistoryItem,
+    setSelectedUpscaleHistoryItem,
+    newUpscaleSourceImage,
+    setNewUpscaleSourceImage,
     upscalerView,
     setUpscalerView,
   };

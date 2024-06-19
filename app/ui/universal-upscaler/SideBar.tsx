@@ -17,7 +17,7 @@ import { CloseIcon } from "@chakra-ui/icons";
 import { GeneratedImage, LeonardoUpscalerStyle } from "@/app/lib/definitions";
 import { useUpscaler } from "@/app/context/UpscalerContext";
 import {
-  defaultSelectedImage,
+  defaultSourceImage,
   defaultUpscalerRequest,
 } from "@/app/lib/dataConstants";
 import {
@@ -29,9 +29,11 @@ import {
 const SideBar = () => {
   const {
     upscalerRequest,
+    selectedUpscaleHistoryItem,
+    newUpscaleSourceImage,
     setUpscalerRequest,
-    selectedImage,
-    setSelectedImage,
+    setSelectedUpscaleHistoryItem,
+    setNewUpscaleSourceImage,
   } = useUpscaler();
   const disabled =
     !upscalerRequest.generatedImageId && !upscalerRequest.initImageId;
@@ -50,7 +52,10 @@ const SideBar = () => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       if (typeof reader.result === "string") {
-        setSelectedImage((prev) => ({ ...prev, src: reader.result as string }));
+        setNewUpscaleSourceImage((prev) => ({
+          ...prev,
+          src: reader.result as string,
+        }));
       }
     };
     reader.onerror = (error) => {
@@ -67,7 +72,8 @@ const SideBar = () => {
   };
 
   const handleClearImage = () => {
-    setSelectedImage(defaultSelectedImage);
+    if (selectedUpscaleHistoryItem) setSelectedUpscaleHistoryItem(null);
+    setNewUpscaleSourceImage(defaultSourceImage);
     setUpscalerRequest(defaultUpscalerRequest);
   };
 
@@ -114,7 +120,7 @@ const SideBar = () => {
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
     const { naturalWidth, naturalHeight } = event.currentTarget;
-    setSelectedImage((prev) => ({
+    setNewUpscaleSourceImage((prev) => ({
       ...prev,
       width: naturalWidth,
       height: naturalHeight,
@@ -122,7 +128,8 @@ const SideBar = () => {
   };
 
   const handleRecentImageSelect = (image: GeneratedImage) => {
-    setSelectedImage((prev) => ({ ...prev, src: image.url }));
+    if (selectedUpscaleHistoryItem) setSelectedUpscaleHistoryItem(null);
+    setNewUpscaleSourceImage((prev) => ({ ...prev, src: image.url }));
     setUpscalerRequest((prev) => ({ ...prev, generatedImageId: image.id }));
   };
 
@@ -140,11 +147,11 @@ const SideBar = () => {
                   />
                   <p
                     className={
-                      selectedImage.src
+                      newUpscaleSourceImage.src
                         ? "text-van-gogh-xs text-van-gogh-grey-700"
                         : "hidden"
                     }
-                  >{`${selectedImage.width}x${selectedImage.height}`}</p>
+                  >{`${newUpscaleSourceImage.width}x${newUpscaleSourceImage.height}`}</p>
                 </div>
                 <input
                   ref={inputRef}
@@ -155,7 +162,7 @@ const SideBar = () => {
                 />
                 <button
                   className={
-                    selectedImage.src
+                    newUpscaleSourceImage.src
                       ? "hidden"
                       : "relative flex flex-col gap-1 justify-center items-center w-full h-full min-h-[9.75rem] rounded-lg border border-van-gogh-grey-100 bg-van-gogh-blue-200 transition-all hover:bg-van-gogh-blue-800"
                   }
@@ -166,7 +173,11 @@ const SideBar = () => {
                     Add Image
                   </span>
                 </button>
-                <div className={selectedImage.src ? "relative flex" : "hidden"}>
+                <div
+                  className={
+                    newUpscaleSourceImage.src ? "relative flex" : "hidden"
+                  }
+                >
                   <button
                     className="absolute right-2 top-2 rounded-full flex items-center p-2.5 bg-van-gogh-black-opal-400 transition-all hover:bg-van-gogh-black-opal-600"
                     onClick={() => handleClearImage()}
@@ -174,7 +185,7 @@ const SideBar = () => {
                     <CloseIcon w={3} h={3.5} />
                   </button>
                   <img
-                    src={selectedImage.src}
+                    src={newUpscaleSourceImage.src}
                     alt="Image to be upscaled"
                     onLoad={handleImageLoaded}
                   />
@@ -183,7 +194,7 @@ const SideBar = () => {
                   <RecentImagesDropdown
                     setValue={(x) => handleRecentImageSelect(x)}
                     variant="upscalerRecentImagesMenu"
-                    showReplaceButton={!!selectedImage.src}
+                    showReplaceButton={!!newUpscaleSourceImage.src}
                   />
                 </div>
                 <button
@@ -287,7 +298,7 @@ const SideBar = () => {
                           </p>
                           <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2 min-w-8">
                             {Math.round(
-                              selectedImage.width *
+                              newUpscaleSourceImage.width *
                                 upscalerRequest.upscaleMultiplier
                             )}
                           </p>
@@ -304,7 +315,7 @@ const SideBar = () => {
                           </p>
                           <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2 min-w-8">
                             {Math.round(
-                              selectedImage.height *
+                              newUpscaleSourceImage.height *
                                 upscalerRequest.upscaleMultiplier
                             )}
                           </p>

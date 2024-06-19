@@ -82,13 +82,35 @@ export type LeonardoUpscalerRequest = {
 
 export type UpscalerContextProps = {
   upscalerRequest: LeonardoUpscalerRequest;
-  selectedImage: LocalUpscalerImage;
-  setSelectedImage: (value: React.SetStateAction<LocalUpscalerImage>) => void;
+  selectedUpscaleHistoryItem: UpscaledImage | null;
+  setSelectedUpscaleHistoryItem: (value: React.SetStateAction<UpscaledImage | null>) => void;
+  newUpscaleSourceImage: LocalUpscalerImage;
+  setNewUpscaleSourceImage: (value: React.SetStateAction<LocalUpscalerImage>) => void;
   setUpscalerRequest: (
     value: React.SetStateAction<LeonardoUpscalerRequest>
   ) => void;
   upscalerView: UpscalerView;
   setUpscalerView: (value: UpscalerView) => void;
+};
+
+export type UpscaledImage = {
+  id: string;
+  sourceImage: {
+    url: string;
+    height: number;
+    width: number;
+  };
+  upscaledImage: {
+    url: string;
+    height: number;
+    width: number;
+  };
+  details: {
+    creativityStrength: number;
+    upscaleMultiplier: number;
+    upscalerStyle: string;
+    prompt: string | null;
+  };
 };
 
 export type LocalUpscalerImage = {
