@@ -23,7 +23,7 @@ export default async function Layout({
           <Header />
           <div className="flex h-full w-full">
             <SideBar />
-            <div className="flex flex-col h-full w-full px-2.5 bg-van-gogh-input-black">
+            <div className="flex flex-col h-full w-full px-2.5">
               {children}
               <UpscalerHistory />
             </div>

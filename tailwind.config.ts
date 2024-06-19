@@ -24,6 +24,7 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
+        "van-gogh-extra-dark-blue-gradient": "linear-gradient(112deg, rgb(2, 3, 5) 0%, rgb(7, 10, 15) 100%)",
         "van-gogh-dark-blue-gradient":
           "linear-gradient(90deg, rgb(6, 8, 13) 0%, rgb(13, 18, 28) 100%)",
         "van-gogh-blue-to-purple-gradient":

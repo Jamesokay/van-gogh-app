@@ -16,7 +16,7 @@ const TransformContainer: FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   return (
-    <div className="flex w-full h-full">
+    <div className="flex w-full h-full bg-van-gogh-input-black">
       <TransformWrapper
         limitToBounds={false}
         centerOnInit

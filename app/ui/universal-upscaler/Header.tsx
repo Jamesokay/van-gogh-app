@@ -12,9 +12,7 @@ import { useUpscaler } from "@/app/context/UpscalerContext";
 import { Tooltip } from "@chakra-ui/react";
 
 const Header = () => {
-  const { upscalerRequest } = useUpscaler();
-  const disabled =
-    !upscalerRequest.generatedImageId && !upscalerRequest.initImageId;
+  const { selectedUpscaleHistoryItem } = useUpscaler();
 
   return (
     <div className="sticky flex items-center justify-between top-0 left-0 z-50 bg-van-gogh-header-gradient px-3 py-1.5 w-full border border-bottom border-van-gogh-border-dark-blue">
@@ -45,31 +43,31 @@ const Header = () => {
       </div>
       <div
         className={`flex gap-2 transition-all ${
-          disabled ? "opacity-50" : "opacity-100"
+          !selectedUpscaleHistoryItem ? "opacity-50" : "opacity-100"
         }`}
       >
         <Tooltip label="Create Motion video from this upscale">
           <span>
-            <OutlineButton disabled={disabled}>
+            <OutlineButton disabled={!selectedUpscaleHistoryItem}>
               <MotionVideoIcon />
             </OutlineButton>
           </span>
         </Tooltip>
         <Tooltip label="Download the selected upscaled image">
           <span>
-            <OutlineButton disabled={disabled}>
+            <OutlineButton disabled={!selectedUpscaleHistoryItem}>
               <DownloadIcon white />
             </OutlineButton>
           </span>
         </Tooltip>
         <Tooltip label="Delete the selected upscaled image">
           <span>
-            <OutlineButton disabled={disabled}>
+            <OutlineButton disabled={!selectedUpscaleHistoryItem}>
               <DeleteFilledIcon white />
             </OutlineButton>
           </span>
         </Tooltip>
-        <OutlineButton disabled={disabled}>
+        <OutlineButton disabled={!selectedUpscaleHistoryItem}>
           <div className="flex items-center gap-2">
             <UpscaleDetailsIcon />
             <p className="text-van-gogh-sm">Upscale Details</p>
