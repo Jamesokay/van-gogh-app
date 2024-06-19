@@ -140,6 +140,7 @@ const SideBar = () => {
           <div className="absolute top-0 left-0 w-full">
             <div className="flex flex-col w-full h-full pt-2.5 pb-6 px-2">
               <div className="flex flex-col gap-2.5 pb-4">
+                {/* To-do: dropdown if selectedUpscaleHistoryItem */}
                 <div className="flex justify-between items-center">
                   <TitleWithTooltip
                     title="Source Image"

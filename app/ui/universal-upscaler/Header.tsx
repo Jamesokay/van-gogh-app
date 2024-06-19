@@ -12,7 +12,7 @@ import { useUpscaler } from "@/app/context/UpscalerContext";
 import { Tooltip } from "@chakra-ui/react";
 
 const Header = () => {
-  const { upscalerRequest, selectedImage } = useUpscaler();
+  const { upscalerRequest } = useUpscaler();
   const disabled =
     !upscalerRequest.generatedImageId && !upscalerRequest.initImageId;
 
