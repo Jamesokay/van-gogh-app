@@ -1,6 +1,6 @@
 # Clone of Leonardo.Ai Image Generation Interface (Next.js 14, Supabase, Chakra UI, Tailwind)
 
-Practically speaking, I undertook this project in order to learn the latest version of Next.js and familiarise myself with Supabase. On a personal level, I am extremely interested in artificial intelligence, most specifically as an augmenation to the creative process, and was eager to build something within that domain. Thus far I have been able to replicate most of the image generation functionality provided by the Leonardo.Ai web application. I am now in the process of implementing the Universal Upscaler feature. While I have a version of the project deployed on Vercel, only the admin account (i.e. me) has access to image generation functionality, since this requires a Leonardo.Ai API key and tokens (i.e. it costs money).
+Practically speaking, I undertook this project in order to learn the latest version of Next.js and familiarise myself with Supabase. On a personal level, I am extremely interested in artificial intelligence, most specifically as an augmenation to the creative process, and was eager to build something within that domain.
 
 ### Current Features
 
@@ -14,6 +14,11 @@ Practically speaking, I undertook this project in order to learn the latest vers
 ### In Progress
 
 - Universal Upscaler
+
+### Further Work
+
+- Refine implementation of Chakra UI
+- General clean up
 
 ### Gallery
 
