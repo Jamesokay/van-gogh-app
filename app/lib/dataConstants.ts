@@ -6,6 +6,7 @@ import {
   LeonardoUpscalerRequest,
   LocalUpscalerImage,
   NonNullGenerationRow,
+  UpscaledImage,
 } from "./definitions";
 
 export const routes = [
@@ -305,14 +306,16 @@ export const defaultSourceImage: LocalUpscalerImage = {
   width: 0,
 };
 
-const sampleUpscale = {
+const sampleUpscale: UpscaledImage = {
   id: "xyz1289",
   sourceImage: {
+    id: "abc123",
     url: "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/ee3f536c-9b89-4d5d-b2a1-def003e457f8/Default_A_vividly_sparkling_digital_avatar_its_pixelated_form_2.jpg",
     height: 1024,
     width: 768,
   },
   upscaledImage: {
+    id: "def456",
     url: "https://cdn.leonardo.ai/users/4cf1507b-af9b-476f-8640-4454bd8ef91b/generations/6010529c-f5cf-4b14-a80f-a61318b0738f/variations/UniversalUpscaler_6010529c-f5cf-4b14-a80f-a61318b0738f.jpg",
     height: 2048,
     width: 1536,
@@ -324,4 +327,4 @@ const sampleUpscale = {
     prompt: null,
   },
 };
-export const sampleUpscalesArray = [sampleUpscale];
+export const sampleUpscalesArray: UpscaledImage[] = [sampleUpscale];

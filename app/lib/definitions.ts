@@ -96,11 +96,13 @@ export type UpscalerContextProps = {
 export type UpscaledImage = {
   id: string;
   sourceImage: {
+    id: string;
     url: string;
     height: number;
     width: number;
   };
   upscaledImage: {
+    id: string;
     url: string;
     height: number;
     width: number;

@@ -98,6 +98,41 @@ const headerMenu = definePartsStyle({
   },
 });
 
+const newMenu = definePartsStyle({
+  button: {
+    maxH: "3.5rem",
+    maxW: "20rem",
+    bg: "vanGoghBlue.900",
+    border: "1px",
+    borderColor: "vanGoghGrey.400",
+    borderRadius: "0.375rem",
+    fontWeight: 500,
+    fontSize: "0.875rem",
+    paddingRight: "0.75rem",
+    paddingLeft: "0.75rem",
+    color: "white",
+    _active: {
+      borderColor: "vanGoghGrey.400",
+      bg: "vanGoghBlue.900"
+    },
+    _hover: {
+      borderColor: "vanGoghGrey.400",
+      bg: "rgb(22, 29, 45)"
+    }
+  },
+  item: {
+    fontSize: "0.875rem",
+    borderBottom: "0.03rem solid",
+    borderColor: "rgb(36, 44, 62)",
+    bg: "rgb(11, 15, 23)",
+    height: "2.5rem",
+    width: "100%",
+    _hover: {
+      bg: "vanGoghBlue.900"
+    },
+  },
+});
+
 const recentImagesMenu = definePartsStyle({
   list: {
     w: "584px", // need mobile responsiveness
@@ -150,6 +185,6 @@ const sizes = {
 
 export const menuTheme = defineMultiStyleConfig({
   baseStyle: baseMenuStyle,
-  variants: { headerMenu, threeDotsMenu, recentImagesMenu, upscalerRecentImagesMenu },
+  variants: { headerMenu, threeDotsMenu, recentImagesMenu, upscalerRecentImagesMenu, newMenu },
   sizes: sizes,
 });

@@ -1,10 +1,17 @@
 "use client";
 
-import { Input, Tooltip } from "@chakra-ui/react";
+import {
+  Input,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Tooltip,
+} from "@chakra-ui/react";
 import RecentImagesDropdown from "../image-guidance/ImageGuidanceUpload/RecentImagesDropdown";
 import QuestionMarkIcon from "../svg/QuestionMarkIcon";
 import SliderOption from "../components/SliderOption";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import AddImageIcon from "../svg/AddImageIcon";
 import GradientBorderButton from "../components/GradientBorderButton";
 import ResetIcon from "../svg/ResetIcon";
@@ -13,8 +20,12 @@ import DropdownMenu from "../components/DropdownMenu";
 import DimensionLinkIcon from "../svg/DimensionLinkIcon";
 import TitleWithTooltip from "../svg/TitleWithTooltip";
 // import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
-import { CloseIcon } from "@chakra-ui/icons";
-import { GeneratedImage, LeonardoUpscalerStyle } from "@/app/lib/definitions";
+import { CloseIcon, TriangleDownIcon } from "@chakra-ui/icons";
+import {
+  GeneratedImage,
+  LeonardoUpscalerStyle,
+  UpscaledImage,
+} from "@/app/lib/definitions";
 import { useUpscaler } from "@/app/context/UpscalerContext";
 import {
   defaultSourceImage,
@@ -44,6 +55,9 @@ const SideBar = () => {
     "CINEMATIC",
     "CG ART & GAME ASSETS",
   ];
+  const [selectedVariant, setSelectedVariant] = useState<
+    "originalImage" | "upscaledImage"
+  >("originalImage");
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -133,6 +147,20 @@ const SideBar = () => {
     setUpscalerRequest((prev) => ({ ...prev, generatedImageId: image.id }));
   };
 
+  const handleVariantSelect = (variant: "original" | "upscaled") => {
+    const imageId =
+      variant === "original"
+        ? selectedUpscaleHistoryItem?.sourceImage?.id
+        : selectedUpscaleHistoryItem?.upscaledImage?.id;
+    const src =
+      variant === "original"
+        ? selectedUpscaleHistoryItem?.sourceImage?.url
+        : selectedUpscaleHistoryItem?.upscaledImage?.url;
+    if (!src || !imageId) return;
+    setNewUpscaleSourceImage((prev) => ({ ...prev, src: src }));
+    setUpscalerRequest((prev) => ({ ...prev, generatedImageId: imageId }));
+  };
+
   return (
     <div className="relative flex h-full bg-van-gogh-dark-blue-gradient border-r border-van-gogh-grey-100">
       <div className="flex">
@@ -140,7 +168,6 @@ const SideBar = () => {
           <div className="absolute top-0 left-0 w-full">
             <div className="flex flex-col w-full h-full pt-2.5 pb-6 px-2">
               <div className="flex flex-col gap-2.5 pb-4">
-                {/* To-do: dropdown if selectedUpscaleHistoryItem */}
                 <div className="flex justify-between items-center">
                   <TitleWithTooltip
                     title="Source Image"
@@ -148,11 +175,46 @@ const SideBar = () => {
                   />
                   <p
                     className={
-                      newUpscaleSourceImage.src
+                      newUpscaleSourceImage.src && !selectedUpscaleHistoryItem
                         ? "text-van-gogh-xs text-van-gogh-grey-700"
                         : "hidden"
                     }
                   >{`${newUpscaleSourceImage.width}x${newUpscaleSourceImage.height}`}</p>
+                </div>
+                <div className={selectedUpscaleHistoryItem ? "flex" : "hidden"}>
+                  <Menu variant="newMenu" size="lg" matchWidth>
+                    <MenuButton>
+                      <div className="flex items-center justify-between text-van-gogh-xs">
+                        <span className="font-medium">
+                          {selectedVariant === "originalImage"
+                            ? "Original Image"
+                            : "Upscaled Image"}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          <span className="text-van-gogh-grey-700">
+                            {selectedVariant === "originalImage"
+                              ? `${selectedUpscaleHistoryItem?.sourceImage?.width}x${selectedUpscaleHistoryItem?.sourceImage?.height}`
+                              : `${selectedUpscaleHistoryItem?.upscaledImage?.width}x${selectedUpscaleHistoryItem?.upscaledImage?.height}`}
+                          </span>
+                          <TriangleDownIcon w={2.5} />
+                        </div>
+                      </div>
+                    </MenuButton>
+                    <MenuList>
+                      <MenuItem onClick={() => handleVariantSelect("original")}>
+                        <div className="flex w-full justify-between text-van-gogh-xs">
+                          <span className="font-medium">Original Image</span>
+                          <span className="text-van-gogh-grey-700">{`${selectedUpscaleHistoryItem?.sourceImage?.width}x${selectedUpscaleHistoryItem?.sourceImage?.height}`}</span>
+                        </div>
+                      </MenuItem>
+                      <MenuItem onClick={() => handleVariantSelect("upscaled")}>
+                        <div className="flex w-full justify-between text-van-gogh-xs">
+                          <span className="font-medium">Upscaled Image</span>
+                          <span className="text-van-gogh-grey-700">{`${selectedUpscaleHistoryItem?.upscaledImage?.width}x${selectedUpscaleHistoryItem?.upscaledImage?.height}`}</span>
+                        </div>
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
                 </div>
                 <input
                   ref={inputRef}
