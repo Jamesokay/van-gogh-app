@@ -1,4 +1,4 @@
-# Clone of Leonardo.Ai Image Generation Interface (Next.js 14, Supabase, Tailwind)
+# Clone of Leonardo.Ai Image Generation Interface (Next.js 14, Supabase, Chakra UI, Tailwind)
 
 Practically speaking, I undertook this project in order to learn the latest version of Next.js and familiarise myself with Supabase. On a personal level, I am extremely interested in artificial intelligence, most specifically as an augmenation to the creative process, and was eager to build something within that domain. Thus far I have been able to replicate most of the image generation functionality provided by the Leonardo.Ai web application. I am now in the process of implementing the Universal Upscaler feature. While I have a version of the project deployed on Vercel, only the admin account (i.e. me) has access to image generation functionality, since this requires a Leonardo.Ai API key and tokens (i.e. it costs money).
 
@@ -15,7 +15,7 @@ Practically speaking, I undertook this project in order to learn the latest vers
 
 - Universal Upscaler
 
-### Screenshots
+### Gallery
 
 <img width="1920" alt="Screenshot 2024-06-05 at 9 13 46 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/8e5f7d7c-9c3c-45fe-9d46-b1d7f0930b61">
 <br/><br/>
@@ -28,6 +28,10 @@ Practically speaking, I undertook this project in order to learn the latest vers
 <img width="1920" alt="Screenshot 2024-06-02 at 11 19 47 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/11384569-851e-4a0b-9eb7-c09bd446ead1">
 <br/><br/> 
 <img width="1920" alt="Screenshot 2024-06-02 at 11 20 06 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/19a48b51-c437-4b20-92f0-3b8787922047">
+<br/><br/>
+<img width="1918" alt="Screenshot 2024-06-20 at 8 31 23 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/33c3be37-77b9-4cba-a2db-05eb56f1829b">
+<br/><br/>
+<img width="1919" alt="Screenshot 2024-06-20 at 8 31 54 AM" src="https://github.com/Jamesokay/van-gogh-app/assets/78640728/42f2dec8-2906-4a88-b745-9a19dd4d7372">
 
 
 
