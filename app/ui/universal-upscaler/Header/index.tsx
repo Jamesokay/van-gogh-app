@@ -1,17 +1,24 @@
 "use client";
 
 import { signOut } from "@/app/lib/actions";
-import BackArrowIcon from "../svg/BackArrowIcon";
+import BackArrowIcon from "../../svg/BackArrowIcon";
 import Image from "next/image";
-import OutlineButton from "../components/OutlineButton";
-import MotionVideoIcon from "../svg/MotionVideoIcon";
-import DownloadIcon from "../svg/DownloadIcon";
-import DeleteFilledIcon from "../svg/DeleteFilledIcon";
-import UpscaleDetailsIcon from "../svg/UpscaleDetailsIcon";
+import OutlineButton from "../../components/OutlineButton";
+import MotionVideoIcon from "../../svg/MotionVideoIcon";
+import DownloadIcon from "../../svg/DownloadIcon";
+import DeleteFilledIcon from "../../svg/DeleteFilledIcon";
+import UpscaleDetailsIcon from "../../svg/UpscaleDetailsIcon";
 import { useUpscaler } from "@/app/context/UpscalerContext";
-import { Popover, PopoverBody, PopoverContent, PopoverTrigger, Tooltip } from "@chakra-ui/react";
+import {
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Tooltip,
+} from "@chakra-ui/react";
 import { convertUpscalerStyleToString } from "@/app/lib/helpers";
 import { LeonardoUpscalerStyle } from "@/app/lib/definitions";
+import UpscaleDetails from "./UpscaleDetails";
 
 const Header = () => {
   const { selectedUpscaleHistoryItem } = useUpscaler();
@@ -72,34 +79,17 @@ const Header = () => {
         <Popover placement="bottom-end">
           <PopoverTrigger>
             <span>
-            <OutlineButton disabled={!selectedUpscaleHistoryItem}>
-              <div className="flex items-center gap-2">
-                <UpscaleDetailsIcon />
-                <p className="text-van-gogh-sm">Upscale Details</p>
-              </div>
-            </OutlineButton>
+              <OutlineButton disabled={!selectedUpscaleHistoryItem}>
+                <div className="flex items-center gap-2">
+                  <UpscaleDetailsIcon />
+                  <p className="text-van-gogh-sm">Upscale Details</p>
+                </div>
+              </OutlineButton>
             </span>
           </PopoverTrigger>
           <PopoverContent>
             <PopoverBody>
-              <div className="flex flex-col gap-2.5 w-80 text-van-gogh-sm px-4 py-2.5 border-w-[1px] border-van-gogh-grey-100 bg-van-gogh-outline-button-grey rounded-md">
-                <div className="flex justify-between">
-                  <span className="font-medium">Creativity Strength</span>
-                  <span className="px-2.5 py-1 rounded-md bg-van-gogh-grey-400 text-van-gogh-grey-700 text-van-gogh-xs">{selectedUpscaleHistoryItem?.details?.creativityStrength}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Upscale Multiplier</span>
-                  <span className="px-2.5 py-1 rounded-md bg-van-gogh-grey-400 text-van-gogh-grey-700 text-van-gogh-xs">{selectedUpscaleHistoryItem?.details?.upscaleMultiplier}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Dimensions</span>
-                  <span className="px-2.5 py-1 rounded-md bg-van-gogh-grey-400 text-van-gogh-grey-700 text-van-gogh-xs">{selectedUpscaleHistoryItem?.upscaledImage?.width} x {selectedUpscaleHistoryItem?.upscaledImage?.height}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Upscaler Style</span>
-                  <span className="px-2.5 py-1 rounded-md bg-van-gogh-grey-400 text-van-gogh-grey-700 text-van-gogh-xs">{convertUpscalerStyleToString(selectedUpscaleHistoryItem?.details?.upscalerStyle as LeonardoUpscalerStyle)}</span>
-                </div>
-              </div>
+              <UpscaleDetails />
             </PopoverBody>
           </PopoverContent>
         </Popover>

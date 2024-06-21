@@ -17,15 +17,10 @@ import GradientBorderButton from "../components/GradientBorderButton";
 import ResetIcon from "../svg/ResetIcon";
 import CoinsIcon from "../svg/CoinsIcon";
 import DropdownMenu from "../components/DropdownMenu";
-import DimensionLinkIcon from "../svg/DimensionLinkIcon";
 import TitleWithTooltip from "../svg/TitleWithTooltip";
 // import { getPresignedUrl, uploadImageViaPresignedURL } from "@/app/lib/actions";
 import { CloseIcon, TriangleDownIcon } from "@chakra-ui/icons";
-import {
-  GeneratedImage,
-  LeonardoUpscalerStyle,
-  UpscaledImage,
-} from "@/app/lib/definitions";
+import { GeneratedImage, LeonardoUpscalerStyle } from "@/app/lib/definitions";
 import { useUpscaler } from "@/app/context/UpscalerContext";
 import {
   defaultSourceImage,
@@ -36,6 +31,7 @@ import {
   convertUpscalerStyleToString,
   isDefaultUpscalerRequest,
 } from "@/app/lib/helpers";
+import DimensionDisplay from "../components/DimensionDisplay";
 
 const SideBar = () => {
   const {
@@ -353,41 +349,16 @@ const SideBar = () => {
                     tooltip="Set the desired size for the output, based on the original image's aspect ratio."
                   />
                   <div className="flex items-center justify-between px-2">
-                    <div className="flex items-center">
-                      <div className="flex pr-2">
-                        <div className="flex h-10 w-full relative select-none">
-                          <p className="h-10 mr-4 flex items-center justify-center text-van-gogh-sm font-medium">
-                            W
-                          </p>
-                          <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2 min-w-8">
-                            {Math.round(
-                              newUpscaleSourceImage.width *
-                                upscalerRequest.upscaleMultiplier
-                            )}
-                          </p>
-                          <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
-                            px
-                          </p>
-                        </div>
-                      </div>
-                      <DimensionLinkIcon />
-                      <div className="flex pl-2">
-                        <div className="flex h-10 w-full relative select-none">
-                          <p className="h-10 mr-4 flex items-center justify-center text-van-gogh-sm font-medium">
-                            H
-                          </p>
-                          <p className="flex items-center justify-center text-center font-semibold h-full text-van-gogh-xs py-4 mr-2 min-w-8">
-                            {Math.round(
-                              newUpscaleSourceImage.height *
-                                upscalerRequest.upscaleMultiplier
-                            )}
-                          </p>
-                          <p className="h-10 flex items-center justify-center font-medium text-van-gogh-xs">
-                            px
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                    <DimensionDisplay
+                      height={Math.round(
+                        newUpscaleSourceImage.height *
+                          upscalerRequest.upscaleMultiplier
+                      )}
+                      width={Math.round(
+                        newUpscaleSourceImage.width *
+                          upscalerRequest.upscaleMultiplier
+                      )}
+                    />
                     <div className="flex">
                       <p className="text-van-gogh-xs font-medium mr-4">3.15</p>
                       <p className="text-van-gogh-xs font-medium pr-2">MP</p>
