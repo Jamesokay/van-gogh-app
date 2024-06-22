@@ -4,6 +4,7 @@ import {
   ImageGenModel,
   InterfaceState,
   LeonardoUpscalerRequest,
+  LeonardoUpscalerStyle,
   LocalUpscalerImage,
   NonNullGenerationRow,
   UpscaledImage,
@@ -328,3 +329,10 @@ const sampleUpscale: UpscaledImage = {
   },
 };
 export const sampleUpscalesArray: UpscaledImage[] = [sampleUpscale];
+
+export const upscalerStyles: LeonardoUpscalerStyle[] = [
+  "GENERAL",
+  "2D ART & ILLUSTRATION",
+  "CINEMATIC",
+  "CG ART & GAME ASSETS",
+];
